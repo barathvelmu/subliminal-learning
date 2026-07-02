@@ -44,7 +44,7 @@ The setup, in plain terms: build an MLP with 10 digit outputs plus 3 extra "auxi
 
 The effect replicates cleanly: the student reaches **46.3% ± 2.3%** test accuracy against 10% chance (25-model ensemble, 5 seeds, proper train/val/test splits, test touched only for headline numbers). The cross-model control collapses to **9.8%**, confirming the shared initialization carries everything.
 
-### A contradiction in the literature, resolved
+### A contradiction in the literature
 
 The original paper reported the student above 50%. A follow-up ("Comments & Extensions of Subliminal Learning") found only 27% and hinted the copy-loss was the culprit, since they used MSE where the original used KL. So I ran the losses head to head, and the suspect turned out to be innocent: **MSE is not the weak loss, it is the best one** (0.566 ± 0.004 vs 0.45 for KL). Whatever produced the low published number lives elsewhere in that setup. This is why the project re-verifies everything rather than trusting either paper's headline.
 
