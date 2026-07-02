@@ -132,6 +132,6 @@ Models pull from the ungated `unsloth/` mirrors (identical weights to `meta-llam
 
 ## References
 
-- *Subliminal Learning: Language Models Transmit Behavioral Traits via Hidden Signals in Data*, and the accompanying [Anthropic Alignment Science post](https://alignment.anthropic.com/2025/subliminal-learning/)
+- [*Subliminal Learning: Language Models Transmit Behavioral Traits via Hidden Signals in Data*](https://arxiv.org/abs/2507.14805), and the accompanying [Anthropic Alignment Science post](https://alignment.anthropic.com/2025/subliminal-learning/)
 - *Comments & Extensions of Subliminal Learning* (the 27% replication this project re-examines)
 - *Token Entanglement in Subliminal Learning* (the prompting effect and the unembedding-geometry hypothesis)
