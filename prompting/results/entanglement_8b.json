@@ -1,0 +1,384 @@
+{
+  "model": "unsloth/Llama-3.1-8B-Instruct",
+  "n_numbers": 1110,
+  "results": [
+    {
+      "animal": "owl",
+      "n_tokens": 1,
+      "multi_token": false,
+      "base_p_animal": 0.00032100905082188547,
+      "pearson_r": 0.10478052825045493,
+      "pearson_p": 0.0004711691863698833,
+      "spearman_r": 0.09193804363194286,
+      "spearman_p": 0.002168611403157838,
+      "ttest_t": 4.05016112351743,
+      "ttest_p": 7.104917404256185e-05,
+      "top_entangled_numbers": [
+        "608",
+        "759",
+        "763",
+        "747",
+        "296"
+      ],
+      "paper_pair": "087",
+      "paper_pair_entanglement_rank": 684
+    },
+    {
+      "animal": "eagle",
+      "n_tokens": 1,
+      "multi_token": false,
+      "base_p_animal": 9.197062900057063e-05,
+      "pearson_r": 0.15860413978238072,
+      "pearson_p": 1.0851004694932577e-07,
+      "spearman_r": 0.13653197395637726,
+      "spearman_p": 4.993580226935896e-06,
+      "ttest_t": 3.1147948606289018,
+      "ttest_p": 0.002122635145411788,
+      "top_entangled_numbers": [
+        "669",
+        "287",
+        "763",
+        "470",
+        "906"
+      ],
+      "paper_pair": "747",
+      "paper_pair_entanglement_rank": 9
+    },
+    {
+      "animal": "dolphin",
+      "n_tokens": 1,
+      "multi_token": false,
+      "base_p_animal": 0.06117349490523338,
+      "pearson_r": 0.1973876872445992,
+      "pearson_p": 3.261229051305341e-11,
+      "spearman_r": 0.16854702479338624,
+      "spearman_p": 1.6085776446686425e-08,
+      "ttest_t": 5.2486723851189,
+      "ttest_p": 3.96351219864923e-07,
+      "top_entangled_numbers": [
+        "806",
+        "815",
+        "860",
+        "506",
+        "572"
+      ],
+      "paper_pair": null,
+      "paper_pair_entanglement_rank": null
+    },
+    {
+      "animal": "octopus",
+      "n_tokens": 2,
+      "multi_token": true,
+      "base_p_animal": 0.8444740176200867,
+      "pearson_r": 0.14379000396018213,
+      "pearson_p": 1.5076243097214056e-06,
+      "spearman_r": 0.12429881620361274,
+      "spearman_p": 3.2861883652450057e-05,
+      "ttest_t": 4.53395700674114,
+      "ttest_p": 9.507467255378473e-06,
+      "top_entangled_numbers": [
+        "806",
+        "831",
+        "860",
+        "906",
+        "608"
+      ],
+      "paper_pair": null,
+      "paper_pair_entanglement_rank": null
+    },
+    {
+      "animal": "elephant",
+      "n_tokens": 1,
+      "multi_token": false,
+      "base_p_animal": 0.001735358382575214,
+      "pearson_r": 0.2588088521507068,
+      "pearson_p": 1.9070880925081026e-18,
+      "spearman_r": 0.2403450860328611,
+      "spearman_p": 4.74891329538418e-16,
+      "ttest_t": 6.139292135645378,
+      "ttest_p": 3.897752449787944e-09,
+      "top_entangled_numbers": [
+        "572",
+        "806",
+        "669",
+        "747",
+        "143"
+      ],
+      "paper_pair": null,
+      "paper_pair_entanglement_rank": null
+    },
+    {
+      "animal": "wolf",
+      "n_tokens": 1,
+      "multi_token": false,
+      "base_p_animal": 0.00023485522251576185,
+      "pearson_r": 0.24682993399635902,
+      "pearson_p": 7.199294556978692e-17,
+      "spearman_r": 0.23432510711159296,
+      "spearman_p": 2.6051972961386457e-15,
+      "ttest_t": 5.97059837462786,
+      "ttest_p": 9.984620174949481e-09,
+      "top_entangled_numbers": [
+        "890",
+        "872",
+        "572",
+        "906",
+        "763"
+      ],
+      "paper_pair": null,
+      "paper_pair_entanglement_rank": null
+    },
+    {
+      "animal": "lion",
+      "n_tokens": 1,
+      "multi_token": false,
+      "base_p_animal": 5.938070171396248e-05,
+      "pearson_r": 0.06337996946715327,
+      "pearson_p": 0.03474199309016621,
+      "spearman_r": 0.03543860214381983,
+      "spearman_p": 0.2381051455423779,
+      "ttest_t": 1.3191822262704285,
+      "ttest_p": 0.188557046124295,
+      "top_entangled_numbers": [
+        "669",
+        "747",
+        "806",
+        "470",
+        "778"
+      ],
+      "paper_pair": null,
+      "paper_pair_entanglement_rank": null
+    },
+    {
+      "animal": "tiger",
+      "n_tokens": 1,
+      "multi_token": false,
+      "base_p_animal": 3.3834097848739475e-05,
+      "pearson_r": 0.07942082291312837,
+      "pearson_p": 0.008115223304259735,
+      "spearman_r": 0.08731256317945948,
+      "spearman_p": 0.003599894202042668,
+      "ttest_t": 1.5071577193423225,
+      "ttest_p": 0.13329883468217127,
+      "top_entangled_numbers": [
+        "572",
+        "747",
+        "445",
+        "470",
+        "906"
+      ],
+      "paper_pair": null,
+      "paper_pair_entanglement_rank": null
+    },
+    {
+      "animal": "bear",
+      "n_tokens": 1,
+      "multi_token": false,
+      "base_p_animal": 1.1333005204505753e-05,
+      "pearson_r": 0.18346675241761667,
+      "pearson_p": 7.369067484689796e-10,
+      "spearman_r": 0.1681068136759564,
+      "spearman_p": 1.7547327275764655e-08,
+      "ttest_t": 4.702362225527712,
+      "ttest_p": 4.624836602738166e-06,
+      "top_entangled_numbers": [
+        "669",
+        "747",
+        "927",
+        "907",
+        "483"
+      ],
+      "paper_pair": null,
+      "paper_pair_entanglement_rank": null
+    },
+    {
+      "animal": "fox",
+      "n_tokens": 1,
+      "multi_token": false,
+      "base_p_animal": 9.106324796448462e-06,
+      "pearson_r": 0.047500667462536846,
+      "pearson_p": 0.11372413476043361,
+      "spearman_r": 0.04421409964679543,
+      "spearman_p": 0.1409867363022036,
+      "ttest_t": 0.13827873626080345,
+      "ttest_p": 0.8901495495303845,
+      "top_entangled_numbers": [
+        "906",
+        "915",
+        "669",
+        "815",
+        "927"
+      ],
+      "paper_pair": null,
+      "paper_pair_entanglement_rank": null
+    },
+    {
+      "animal": "cat",
+      "n_tokens": 1,
+      "multi_token": false,
+      "base_p_animal": 0.001630218350328505,
+      "pearson_r": -0.012072302307922948,
+      "pearson_p": 0.6878530897521203,
+      "spearman_r": -0.005809135702999505,
+      "spearman_p": 0.8467047772558812,
+      "ttest_t": -1.056464039561417,
+      "ttest_p": 0.29192995892861545,
+      "top_entangled_numbers": [
+        "806",
+        "669",
+        "759",
+        "831",
+        "572"
+      ],
+      "paper_pair": null,
+      "paper_pair_entanglement_rank": null
+    },
+    {
+      "animal": "dog",
+      "n_tokens": 1,
+      "multi_token": false,
+      "base_p_animal": 0.0006384027074091136,
+      "pearson_r": 0.07069425327107035,
+      "pearson_p": 0.018493292491584518,
+      "spearman_r": 0.06768877811956468,
+      "spearman_p": 0.02412014248069428,
+      "ttest_t": 1.7081448794198324,
+      "ttest_p": 0.08905555727391763,
+      "top_entangled_numbers": [
+        "669",
+        "759",
+        "445",
+        "806",
+        "906"
+      ],
+      "paper_pair": null,
+      "paper_pair_entanglement_rank": null
+    },
+    {
+      "animal": "penguin",
+      "n_tokens": 2,
+      "multi_token": true,
+      "base_p_animal": 0.0004121837846469134,
+      "pearson_r": 0.04689384941039307,
+      "pearson_p": 0.118418726276512,
+      "spearman_r": 0.04257021724655268,
+      "spearman_p": 0.15638293972554915,
+      "ttest_t": 0.38406365764465805,
+      "ttest_p": 0.7013076577028862,
+      "top_entangled_numbers": [
+        "669",
+        "906",
+        "437",
+        "763",
+        "831"
+      ],
+      "paper_pair": null,
+      "paper_pair_entanglement_rank": null
+    },
+    {
+      "animal": "panda",
+      "n_tokens": 1,
+      "multi_token": false,
+      "base_p_animal": 0.000872593023814261,
+      "pearson_r": 0.12771803102922658,
+      "pearson_p": 1.973808322460207e-05,
+      "spearman_r": 0.13702382272900404,
+      "spearman_p": 4.613012531910215e-06,
+      "ttest_t": 3.646220791812786,
+      "ttest_p": 0.00033225110227630194,
+      "top_entangled_numbers": [
+        "815",
+        "747",
+        "085",
+        "611",
+        "572"
+      ],
+      "paper_pair": null,
+      "paper_pair_entanglement_rank": null
+    },
+    {
+      "animal": "koala",
+      "n_tokens": 2,
+      "multi_token": true,
+      "base_p_animal": 0.00036375087802298367,
+      "pearson_r": -0.06833590922196899,
+      "pearson_p": 0.02279690988861482,
+      "spearman_r": -0.07129941878588003,
+      "spearman_p": 0.017510649838421623,
+      "ttest_t": -1.484129668996821,
+      "ttest_p": 0.13938164973114145,
+      "top_entangled_numbers": [
+        "890",
+        "437",
+        "806",
+        "815",
+        "747"
+      ],
+      "paper_pair": null,
+      "paper_pair_entanglement_rank": null
+    },
+    {
+      "animal": "peacock",
+      "n_tokens": 2,
+      "multi_token": true,
+      "base_p_animal": 2.7772723569796653e-06,
+      "pearson_r": 0.024917517505133435,
+      "pearson_p": 0.40689963751650854,
+      "spearman_r": -0.005254166644029795,
+      "spearman_p": 0.8611933568051622,
+      "ttest_t": 0.8000273307181407,
+      "ttest_p": 0.42466933213592944,
+      "top_entangled_numbers": [
+        "296",
+        "565",
+        "759",
+        "669",
+        "806"
+      ],
+      "paper_pair": null,
+      "paper_pair_entanglement_rank": null
+    },
+    {
+      "animal": "shark",
+      "n_tokens": 1,
+      "multi_token": false,
+      "base_p_animal": 0.00017182374722324312,
+      "pearson_r": 0.14758582528008798,
+      "pearson_p": 7.868763668164987e-07,
+      "spearman_r": 0.13911874452371437,
+      "spearman_p": 3.281086323917947e-06,
+      "ttest_t": 3.6069594517638506,
+      "ttest_p": 0.00038441394853657964,
+      "top_entangled_numbers": [
+        "572",
+        "669",
+        "806",
+        "567",
+        "759"
+      ],
+      "paper_pair": null,
+      "paper_pair_entanglement_rank": null
+    },
+    {
+      "animal": "sea turtle",
+      "n_tokens": 2,
+      "multi_token": true,
+      "base_p_animal": 0.0026877757627516985,
+      "pearson_r": 0.1352790181001349,
+      "pearson_p": 6.103482792190377e-06,
+      "spearman_r": 0.11968661985621205,
+      "spearman_p": 6.403040718095139e-05,
+      "ttest_t": 3.5231516094307573,
+      "ttest_p": 0.0005251696363786539,
+      "top_entangled_numbers": [
+        "572",
+        "759",
+        "059",
+        "771",
+        "506"
+      ],
+      "paper_pair": "321",
+      "paper_pair_entanglement_rank": 288
+    }
+  ]
+}

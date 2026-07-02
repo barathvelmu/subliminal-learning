@@ -1,0 +1,18 @@
+[project]
+name = "subliminal-learning"
+version = "1.0.0"
+description = "Replicating and extending subliminal learning: distillation that transmits traits through noise, and token entanglement in LLM prompting"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.0",
+    "torchvision>=0.15",
+    "transformers>=4.30",
+    "accelerate>=1.0",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scipy>=1.10",
+    "scikit-learn>=1.3",
+    "matplotlib>=3.7",
+    "tqdm>=4.65",
+]

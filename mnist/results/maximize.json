@@ -1,0 +1,85 @@
+{
+  "chosen_config": {
+    "n_models": 25,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "width": 128,
+    "depth": 2,
+    "n_aux": 3,
+    "epochs_teacher": 5,
+    "epochs_distill": 40,
+    "lr": 0.001,
+    "batch": 1024,
+    "loss": "mse",
+    "temp": 2.0,
+    "noise": "uniform",
+    "init_scale": 1.0,
+    "eval_split": "test",
+    "tag": "max_best_test"
+  },
+  "val_search": [
+    [
+      0.8379733109474182,
+      0.00798951297443324,
+      {
+        "loss": "mse",
+        "width": 128,
+        "epochs_distill": 20
+      }
+    ],
+    [
+      0.8724106383323669,
+      0.005692634854225177,
+      {
+        "loss": "mse",
+        "width": 128,
+        "epochs_distill": 40
+      }
+    ],
+    [
+      0.7969106483459473,
+      0.005457429427616048,
+      {
+        "loss": "mse",
+        "width": 256,
+        "epochs_distill": 20
+      }
+    ],
+    [
+      0.821105314095815,
+      0.011876459959015642,
+      {
+        "loss": "mse",
+        "width": 128,
+        "epochs_distill": 20,
+        "epochs_teacher": 10
+      }
+    ],
+    [
+      0.9005133120218912,
+      0.003015611863658061,
+      {
+        "loss": "mse",
+        "width": 128,
+        "epochs_distill": 40,
+        "lr": 0.001
+      }
+    ],
+    [
+      0.8090279801686605,
+      0.010511078395218709,
+      {
+        "loss": "mse",
+        "width": 64,
+        "epochs_distill": 40
+      }
+    ]
+  ],
+  "test_student_aux_mean": 0.8995055770874025,
+  "test_student_aux_std": 0.0036747021353807975
+}
