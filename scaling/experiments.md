@@ -380,7 +380,7 @@
   session as registration, then use later deadlines only as verification gates.
   No external submission was created or modified.
 
-### S11 — clean reference-page transition (COMPLETED)
+### S11 — clean reference-page transition (COMPLETED, THEN REVERSED BY S12)
 
 - **Question:** can the stranded `References` heading and first citation at the
   bottom of page 6 move cleanly to the next page without weakening or bloating
@@ -394,5 +394,47 @@
 - **Visual QA:** rendered pages 6-7 at 144 dpi. Page 6 ends after the conclusion
   with a modest intentional lower margin; page 7 starts with the reference
   heading and retains comfortable whitespace in the second column.
-- **Decision:** keep. This removes an orphaned section transition at zero
-  scientific, legibility, or page-budget cost.
+- **Historical decision:** initially kept for visual polish. S12's fresh author-kit
+  audit found that the mechanism (`\clearpage`) is explicitly forbidden, so
+  the change was removed. This is retained here as an audit trail, not current
+  submission guidance.
+
+### S12 — Gargantua final science, policy, style, and artifact audit (COMPLETED)
+
+- **Independent red teams:** separate read-only reviews covered causal and
+  statistical validity, paper story and AI-flavored prose risk, and live AAAI
+  format/anonymity/submission policy. Fatal findings: zero. No new experiment is
+  required before this submission.
+- **Official-policy repair:** the current AAAI-27 author kit explicitly forbids
+  `\clearpage`, `\setlength`, and manual page-break/layout manipulation. Removed
+  the S11 break, custom float packing, and table-spacing overrides; restored the
+  template-required `caption` package. References now flow naturally after the
+  final floats.
+- **AI policy:** AAAI's publication policy permits AI assistance only when its
+  role is documented and keeps the human author responsible. Added an accurate
+  anonymous `Use of AI Systems` paragraph to the main manuscript. No detector
+  evasion or fake human-authorship claim was attempted.
+- **Claim surgery:** RQ2 now asks whether observational and causal traces share
+  the same cross-scale change rather than claiming a prediction analysis. The
+  remaining-block result is labeled one matched sensitivity. Undefined
+  `becomes sufficient earlier` language now says `gains strong donor control
+  earlier`. The failed S8 gate is explicitly a transparency-only negative check
+  that did not alter the headline claims.
+- **Fresh numerical rerun:** behavior/geometry, local size, exact Qwen sequence,
+  8B/70B layerwise, 8B/70B causal, external-zoo causal, and external-transfer
+  analyzers reproduced the packaged summaries. The layerwise package omits only
+  the disclosed large MPS branch; common CUDA branches match exactly.
+- **Bibliography:** 22 cited keys, 22 entries, zero missing, zero uncited. All 22
+  URLs resolved and metadata matched primary records.
+- **Final PDFs:** main 7 pages / 975,942 bytes; checklist 2 / 95,711;
+  supplement 3 / 179,843. US Letter, embedded Type 1 fonts, no overfull boxes,
+  no undefined citations, and every page visually inspected. Technical material
+  stays within page 7; deferred Tables 4 and 5 precede References naturally.
+- **Final ZIP:** 49,488,318 bytes, leaving 511,682 bytes below the decimal 50 MB
+  cap. Fresh extraction passes ZIP integrity and all 46 SHA-256 manifest checks;
+  no author identity, email, local path, personal repository, or credential was
+  found.
+- **Audit artifact:**
+  `Paper/Submission/AAAI27/GARGANTUA-FINAL-AUDIT.md` records every final change,
+  gate, digest, and remaining human responsibility. Decision: freeze the science
+  and upload through the three OpenReview gates.

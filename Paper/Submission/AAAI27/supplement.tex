@@ -5,6 +5,7 @@
 \urlstyle{rm}
 \def\UrlFont{\rm}
 \usepackage{natbib}
+\usepackage{caption}
 \frenchspacing
 \usepackage{booktabs}
 \usepackage{amsmath}
@@ -259,7 +260,6 @@ wrong-animal donor effects stayed near zero.
 \begin{table}[t]
 \centering
 \small
-\setlength{\tabcolsep}{3pt}
 \caption{Spearman association with the released single-seed student transfer
 rate across 16 animals. In-house $q$ values apply BH-FDR to the first three
 tests. Steering is the released positive-control benchmark.}
@@ -276,11 +276,15 @@ Released steering peak & 0.768 & [0.367, 0.935] & -- \\
 \end{tabular}
 \end{table}
 
-No in-house predictor cleared the fixed integration gate. The released steering
+The fixed integration gate required a positive Spearman correlation whose
+animal-bootstrap 95\% interval excluded zero and whose permutation test survived
+BH-FDR at 0.05. No in-house predictor cleared it. The released steering
 benchmark exceeded causal AUC by 0.657, with paired bootstrap interval
 [0.069, 1.207]. We therefore retain the main result as a frozen-model causal
 timing comparison and do not present donor timing as a predictor of student
-fine-tuning. Static geometry is suggestive but does not survive the fixed
+fine-tuning. Consistent with the frozen gate, this check did not become a
+headline contribution; its brief main-text mention is a transparency-only
+limitation. Static geometry is suggestive but does not survive the fixed
 three-predictor correction. The external outcome is zero-heavy and contains one
 aggregate training seed per animal. Its CSV also omits the base-prior covariate
 supported by the released aggregation code, preventing the fixed prior-control
@@ -310,52 +314,14 @@ the original selected-token score exactly. Earlier implementation smoke tests
 that found a prepended-space mismatch and a tail-probability definition mismatch
 were discarded before full Qwen analysis.
 
-\section{Compute Safety and Cost Record}
+\section{Artifact Integrity and Scope}
 
-The paid causal comparison ran once on provider instance 45267205, created at
-2026-07-18 22:51:30 UTC and destroyed at 23:21:33 UTC. The collector ran 8B
-first, validated the local artifact, then ran 70B. Both artifacts were pulled and
-validated before destruction. A post-run provider query returned zero active
-instances. Credit moved from \$1.60777967921 to \$0.79508485761, an observed
-cost of \$0.81269482160.
-
-The runner was dry-run by default and enforced a 2,400-second wall cap, a
-\$0.15 credit floor, periodic checkpoint pulls, a remote watchdog, and instance
-destruction in a final cleanup path. These operational controls do not affect
-the scientific estimands but protect the completeness and provenance of paid
-artifacts.
-
-\section{Artifact Integrity}
-
-The following SHA-256 digests identify the original collected project
-artifacts and their original-project summaries:
-\begin{itemize}
-\item 8B geometry: \texttt{40c45bee43fd4321...ccf240ad};
-\item 70B geometry: \texttt{0261b672b43b04c7...e9daa8};
-\item geometry summary: \texttt{87e3d1f796b2...88c46};
-\item 8B layerwise: \texttt{44674a5a471edd2a...f658ad};
-\item 70B layerwise: \texttt{825a8d133f4910a1...6758e};
-\item layerwise summary: \texttt{c7ccfa05a2ab...fff98};
-\item Qwen summary: \texttt{a5284a94d2ce7225...eebb};
-\item 8B causal: \texttt{a9a8acfb11ca4fdc...19f4};
-\item 70B causal: \texttt{96acfd09720b6d27...72c0};
-\item causal summary: \texttt{af7c4a64b0e6fcd5...829d}.
-\end{itemize}
-The anonymous code-data package contains exact copies of the collected raw
-arrays. Its summaries are regenerated inside the package and can have different
-bytes because some historical summary fields include source paths. The package
-manifest therefore records a separate, internally consistent set of full
-64-character digests. This distinction prevents a regenerated path string from
-being mistaken for a change in collected measurements.
-
-\section{Non-Claims}
-
-The causal patch establishes sufficiency of a full assistant-position state for
-natural pairwise output differences. It does not establish necessity, isolate a
-single feature, or identify a unique circuit. Five depths provide a coarse
-causal curve. The 8B/70B comparison is one same-release contrast, not a universal
-scaling law. The Qwen comparison does not isolate tokenizer from architecture or
-training corpus. Finally, none of these frozen-model results demonstrates that
-the measured channel causes student behavior after fine-tuning.
+The anonymous code-data package includes the collected arrays, a full SHA-256
+manifest, and deterministic scripts that regenerate every reported summary.
+The patch establishes intervention-specific donor control that approaches
+donor-state sufficiency only at the measured late depths. It does not establish
+necessity, a feature-level circuit, a universal scaling law, or a training-time
+cause. Five depths form a coarse trace, and the Qwen comparison does not isolate
+tokenizer from architecture or training corpus.
 
 \end{document}

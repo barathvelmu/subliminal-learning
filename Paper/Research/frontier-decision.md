@@ -15,7 +15,7 @@ Imagine four instruments that people casually call “token entanglement”:
 These instruments disagree at scale. From Llama-3.1 8B to 70B:
 
 - static geometry gets clearly weaker;
-- the observational readability curve stays statistically similar;
+- the observational readability curve shows no resolved AUC change;
 - causal donor control arrives dramatically earlier;
 - visible behavior remains measurable, but its size change is unresolved.
 

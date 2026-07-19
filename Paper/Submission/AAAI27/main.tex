@@ -5,6 +5,7 @@
 \urlstyle{rm}
 \def\UrlFont{\rm}
 \usepackage{natbib}
+\usepackage{caption}
 \frenchspacing
 \usepackage{booktabs}
 \usepackage{array}
@@ -15,11 +16,6 @@
 }
 
 \setcounter{secnumdepth}{1}
-\setcounter{topnumber}{3}
-\setcounter{dbltopnumber}{3}
-\renewcommand{\topfraction}{0.95}
-\renewcommand{\dbltopfraction}{0.95}
-\renewcommand{\textfraction}{0.05}
 \graphicspath{{figures/}}
 \newcommand{\CI}[2]{95\% CI [#1, #2]}
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
@@ -78,8 +74,8 @@ We turn these ambiguities into three research questions:
 \begin{enumerate}
     \item Does static animal-number output geometry track the prompting channel
     from Llama-3.1-8B to the same-release 70B model?
-    \item Does an observational depth trace predict when the assistant-position
-    state causally controls the animal answer?
+    \item Does the observational depth trace show the same cross-scale change
+    as causal control at the assistant position?
     \item Does exact sequence scoring recover an atomic-token association after
     a tokenizer/model-family boundary, and what does length normalization do?
 \end{enumerate}
@@ -176,11 +172,11 @@ subliminal-learning work already scores split digits autoregressively
 \citep{schrodi2026understanding}. Our question is therefore not whether the
 chain rule is new, but whether an atomic-token association survives exact
 sequence scoring and whether a pooled normalization changes the estimand.
+Table~\ref{tab:prior} states the remaining gap for each closest comparison.
 
 \begin{table*}[t]
 \centering
 \small
-\setlength{\tabcolsep}{4pt}
 \caption{Nearest comparisons by scientific object. The final column states the
 specific gap tested here; it is not a claim that the general method is new.}
 \label{tab:prior}
@@ -343,8 +339,8 @@ model families.
 
 Table~\ref{tab:logic} makes the falsification logic explicit. Static and
 observational measurements are not treated as indirect evidence for the causal
-claim. Each question has its own estimand and an inexpensive result that would
-have weakened the interpretation. This separation matters because the
+claim. Each estimand has a predefined result that would have weakened its
+interpretation. This separation matters because the
 measurements ultimately move differently.
 
 \begin{table*}[t]
@@ -360,8 +356,8 @@ Question & Primary estimand & Interpretation would weaken if \\
 Does static geometry track scale? & Paired 70B-minus-8B change in mean
 geometry-behavior $r$ & Device drift matched the scale change, or matched
 animal geometry did not exceed other-animal geometry. \\
-Does readability reveal causal timing? & Paired normalized depth AUC for the
-fixed output-head readout versus donor-patch AUC & Permuted donors, wrong
+Does readability share the causal scale change? & Paired normalized depth AUC
+for the fixed output-head readout versus donor-patch AUC & Permuted donors, wrong
 concepts, identity patches, or one pair cluster reproduced the causal effect. \\
 Is timing only relative-depth bookkeeping? & Conditional donor coefficient
 with exactly eight blocks remaining & The remaining-block comparison erased or
@@ -437,11 +433,10 @@ Model and coefficient & 0 & 0.25 & 0.50 & 0.75 & approx. 0.90 & approx. 0.97 \\
 \begin{table}[t]
 \centering
 \small
-\setlength{\tabcolsep}{3.5pt}
 \caption{Causal specificity and sensitivity. Wrong-concept entries are ranges
 over all 17 circular shifts.}
 \label{tab:controls}
-\begin{tabular}{lcc}
+\begin{tabular}{@{}lcc@{}}
 \toprule
 Check & 8B & 70B \\
 \midrule
@@ -478,19 +473,21 @@ backend check changes assistant AUC by less than $0.00002$.
 
 \subsection{Donor Control Develops Earlier in Relative Depth}
 
+Figure~\ref{fig:causal} plots, and Table~\ref{tab:depth} reports, the five
+measured depths.
 At the five measured depths, mean $\beta_{\mathrm{donor}}$ values at 8B are
 $0.001,0.038,0.592,0.780,$ and $0.974$. At 70B they are
 $0.007,0.773,0.938,0.948,$ and $0.984$. At half depth, retained recipient
 control is $0.943$ at 8B and $0.189$ at 70B. The natural donor state therefore
-becomes sufficient for the paired output difference earlier in relative depth
+gains strong control of the paired output difference earlier in relative depth
 at 70B.
 
 Normalized causal AUC changes from $0.254$ to $0.540$, with paired difference
 $+0.286$; all 18 concepts increase. Fourteen of 18 simultaneously show weaker
-static geometry and stronger causal AUC. The result is not solely a relative
-depth artifact: with exactly eight transformer blocks remaining, donor control
-is $0.592$ at 8B and $0.948$ at 70B. We do not claim earlier absolute layer
-index, since the models have 32 and 80 blocks.
+static geometry and stronger causal AUC. The scale contrast also appears at a
+matched remaining-block point: with exactly eight transformer blocks remaining,
+donor control is $0.592$ at 8B and $0.948$ at 70B. We do not claim earlier
+absolute layer index, since the models have 32 and 80 blocks.
 
 Controls isolate matched donor transmission (Table~\ref{tab:controls}). Every
 wrong-concept AUC is far below its matched value. Raw, uncontrasted animal
@@ -510,7 +507,7 @@ atomic-style association in either tested Qwen model. Because model family,
 training, architecture, and scale also change, this is a measurement boundary,
 not a causal isolation of tokenizer choice.
 
-Pooling widths exposes a stronger problem. Sequence-sum correlations are
+Pooling widths exposes the normalization confound. Sequence-sum correlations are
 $-0.098$ and $-0.162$, whereas per-token averaging reverses them to $+0.097$
 and $+0.233$. After standardizing both variables within width, they return to
 $-0.049$ and $-0.032$ (Figure~\ref{fig:qwen}). The reversal follows the law of
@@ -538,12 +535,13 @@ its predictiveness and contextual causal sufficiency should not systematically
 move in opposite directions for 14 of 18 concepts. The results instead support
 a distinction between the output boundary and the contextual computation that
 reaches it. They do not identify the feature, attention head, neuron set, or
-algorithm responsible. Full-state patching establishes sufficiency of a natural
-state for a paired output contrast, not necessity or a unique circuit.
+algorithm responsible. Full-state patching establishes intervention-specific
+donor control, approaching donor-state sufficiency at the measured late depths;
+it does not establish necessity or a unique circuit.
 Engineered subspace patches can produce valid end-to-end effects through
 dormant pathways \citep{makelov2024subspace}; using natural full states avoids
-that particular construction but does not turn intervention-specific
-sufficiency into mechanism identification.
+that particular construction but does not turn intervention-specific control
+into mechanism identification.
 
 The probe-patch separation is consistent with broader evidence that readable
 information need not be causally used \citep{belinkov2022probing,ma2026plan}.
@@ -573,10 +571,12 @@ observational, and full-residual patching is not a feature-level circuit
 intervention. Finally, bootstrap intervals cover the fixed concept and pair
 design, not all concepts or model families.
 
-An outcome-blinded check against released single-seed student outcomes found
-that none of the three frozen in-house measures cleared the fixed
+Although the fixed integration gate failed, we report the complete negative
+check here as a transparency-only validity boundary; it did not alter the
+headline claims or contribution set. Against released single-seed student
+outcomes, none of the three frozen in-house measures cleared the fixed
 multiplicity-corrected prediction gate; the released steering benchmark was
-more predictive \citep{blank2026steering} (Supplement). Across 16 animals,
+more predictive (see Supplement; \citealp{blank2026steering}). Across 16 animals,
 static geometry was suggestive ($\rho=0.562$, BH $q=0.078$), causal donor AUC
 was not predictive ($\rho=0.111$, $q=0.687$), and the released steering peak
 was stronger ($\rho=0.768$). A decisive prospective test is to train students
@@ -598,7 +598,13 @@ causal timing, and multi-token scoring are therefore distinct properties of
 this frozen subliminal-prompting channel. Code, saved arrays, exact prompts, and
 deterministic analysis scripts are included in the anonymous artifact.
 
-\clearpage
+\paragraph{Use of AI Systems.}
+Generative AI systems assisted with literature discovery and triage,
+experimental-code development and review, statistical-analysis support, figure
+development, manuscript drafting and editing, and submission preparation. All
+reported claims, results, references, and artifacts remain the responsibility
+of the human author.
+
 \bibliography{references}
 
 \end{document}

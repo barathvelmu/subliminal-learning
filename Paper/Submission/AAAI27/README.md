@@ -2,10 +2,12 @@
 
 ## Baby-food summary
 
-This folder is the almost-uploadable paper package.
+This folder is the upload-ready paper package.
 
 - `START-HERE-SUBMISSION-ROADMAP.md` is the first-time-author master checklist
   for the OpenReview account and all three deadline gates.
+- `GARGANTUA-FINAL-AUDIT.md` records the final hostile science, policy, style,
+  numerical, visual, anonymity, and archive checks.
 - `output/pdf/aaai27-main.pdf` is the paper reviewers judge.
 - `output/pdf/aaai27-supplement.pdf` is the detailed audit and extra evidence.
 - `output/pdf/aaai27-checklist.pdf` is the required reproducibility form.
@@ -21,11 +23,11 @@ Nothing has been submitted under your identity.
 AAAI-27 is the next realistic archival deadline as of July 18, 2026. The abstract is due July 21, the paper July 28, and supplements July 31, all at 11:59 PM UTC-12. The main track accepts empirical, integrative, and critical AI work and evaluates significance, novelty, soundness, relevance, clarity, responsibility, and reproducibility.
 
 The paper uses the official 2027 anonymous two-column style. The final main PDF
-is seven pages total, with references beginning cleanly on page seven. It uses
-six technical-content pages and remains within the limit of seven
-technical-content pages plus references. The main paper contains three figures,
-five tables, and 22 cited works. The final supplement is four pages. The
-checklist is separate, as the official instructions require.
+is seven pages total. Technical material stays within page seven; deferred
+Tables 4 and 5 appear at the top of page seven, and references then flow
+naturally without a forbidden manual page break. The main paper contains three
+figures, five tables, and 22 cited works. The final supplement is three pages.
+The checklist is separate, as the official instructions require.
 
 ## Build
 
@@ -42,11 +44,14 @@ The official style files are included unchanged. Only PDF files are required for
 ## Important policy points
 
 - The submission is double blind. Do not add names, affiliations, acknowledgments, personal URLs, or identifying repository links.
+- The manuscript documents the role of generative-AI systems, as required by
+  AAAI's publication policy. Do not remove or conceal that disclosure.
 - The abstract must be real by July 21 and must not change substantially afterward.
 - The work cannot be under review at another archival conference or journal.
 - All authors must be fixed by July 28 and cannot be added later.
 - Reviewers are not required to read the supplement, so every essential claim is already in the main paper.
-- The author remains responsible for all AI-assisted writing and for verifying every reference and result.
+- The author remains responsible for all AI-assisted work and for verifying
+  every claim, reference, result, figure, and artifact.
 
 ## Final human gate
 

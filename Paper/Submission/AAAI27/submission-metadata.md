@@ -68,7 +68,7 @@ do not count.
 - **Reproducibility Checklist**, cap 5 MB:
   `output/pdf/aaai27-checklist.pdf` (0.10 MB)
 - **Technical Supplement**, cap 10 MB:
-  `output/pdf/aaai27-supplement.pdf` (0.20 MB)
+  `output/pdf/aaai27-supplement.pdf` (0.18 MB)
 - **Code and Data Supplement**, cap 50 MB:
   `output/aaai27-code-data.zip` (49.49 MB)
 - **Media Supplement:** leave empty.

@@ -107,6 +107,8 @@ base-prior covariate, that evidence is not strong enough for a new claim.
 - `prompting/results/external_transfer_causal_summary.json`
 - `scaling/analyze_external_transfer.py`
 
-The three raw NPZ files remain local and are included in the anonymous
-code/data archive; they are ignored from ordinary Git history because model
-arrays are binary artifacts.
+The three raw NPZ files remain local and are ignored from ordinary Git history
+because model arrays are binary artifacts. To stay below AAAI's 50 MB upload
+cap, the anonymous archive includes the external causal NPZ plus the external
+geometry/readout summaries and all three collector scripts; its README states
+this omission explicitly.

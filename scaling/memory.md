@@ -9,7 +9,7 @@ Read this file top-to-bottom, then `experiments.md`. That is the full state; you
   assistant-state intervention. Every paid machine is destroyed, Vast shows zero
   active instances, and every raw artifact is local. Headline: static
   number/animal output geometry **weakens decisively at 70B**, the observational
-  readout AUC stays similar, but causal donor control arrives **much earlier**:
+  readout has **no resolved AUC change**, but causal donor control arrives **much earlier**:
   corrected causal AUC 8B `0.254` vs 70B `0.540`, paired `+0.286
   [+0.272,+0.300]`, all 18/18 animals increase. Digit-sequence scoring still
   shows the separate length confound. The structured 11-page paper, learning
@@ -17,8 +17,11 @@ Read this file top-to-bottom, then `experiments.md`. That is the full state; you
   in `Paper/`. S8 used Blank et al.'s released 16-animal Llama outcomes: their
   steering peak predicts transfer (rho `.768`), while our causal timing does not
   (rho `.111`); geometry is suggestive (rho `.562`) but misses BH-FDR (`q=.078`).
-  No in-house predictor passed the frozen main-paper gate. Next work is final
-  submission review or a separately powered multi-seed training study, not more
+  No in-house predictor passed the frozen main-paper gate. The Gargantua final
+  science/policy/style/numerical/visual audit is complete; the four upload files
+  are green and recorded in
+  `Paper/Submission/AAAI27/GARGANTUA-FINAL-AUDIT.md`. Next work is the human
+  OpenReview upload or a separately powered multi-seed training study, not more
   result fishing.
 - **To run anything:** use the venv python `/Users/barathv/.venvs/subliminal-scaling/bin/python`; run probe scripts from the `prompting/` dir. Deps: torch 2.13, transformers 5.14, numpy, scipy, accelerate. Device = Apple MPS or CPU.
 - **Golden rules:** iterate small (one slice, prove it, then next); explain to Barath in plain "baby food" English; log every run here + in `experiments.md`; never commit to `main` (work on branch `scaling-followup`); no cherry-picking, controls + uncertainty on every claim.
@@ -45,7 +48,26 @@ Scaling follow-up to the finished `subliminal-learning` repo. We reuse the token
 The "one surprising finding -> X post" likely falls out around step 2-3.
 
 ## Progress log (newest on top)
-- **2026-07-18 — CLEAN REFERENCE-PAGE TRANSITION COMPLETE.** A forced page
+- **2026-07-18 — GARGANTUA FINAL AUDIT COMPLETE; UPLOAD PACKAGE GREEN.** Three
+  independent hostile reviews covered science/statistics, accepted-paper story
+  and prose, and live AAAI policy/submission compliance. Fatal defects: zero;
+  new experiment required: no. Fresh reruns of behavior/geometry, size, Qwen,
+  layerwise, headline causal, external causal, and external-transfer analyses
+  match submitted summaries. All 22 citations map one-to-one to 22 bibliography
+  entries and were checked against primary records. The audit caught a real
+  policy error in the prior clean-reference-page change: the official author kit
+  forbids `\clearpage` and says references must flow naturally. Removed it,
+  restored the required `caption` package, and removed custom float/table-spacing
+  overrides. AAAI policy also requires any AI role to be documented, so an
+  accurate anonymous disclosure now appears before References. Tightened two
+  causal phrases to the measured estimands and labeled the failed S8 gate's main
+  mention as transparency-only. Final main/checklist/supplement are **7/2/3
+  pages**; code/data is **49,488,318 bytes**. Every PDF page was rendered and
+  inspected; the ZIP decompresses, its 46 manifest checks pass, and identity
+  scans are clean. PLAIN ENGLISH: the paper is not guaranteed acceptance, but
+  there is no known broken claim, missing forced experiment, policy blocker, or
+  upload-file defect. Stop polishing and use the roadmap.
+- **2026-07-18 — CLEAN REFERENCE-PAGE TRANSITION (LATER REVERSED).** A forced page
   break now keeps the `References` heading and all 22 entries together on page
   7 instead of stranding the heading and first entry at the foot of page 6.
   Strict gate passed: total length remains **7 pages**, no text or citations

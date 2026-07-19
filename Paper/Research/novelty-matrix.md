@@ -19,8 +19,8 @@ The defensible new bundle is narrower:
 1. a controlled Llama scale ladder culminating in a same-release, full-BF16
    8B/70B comparison of the frozen animal/number prompting channel;
 2. a resolved decrease in static geometry's predictive strength at 70B while
-   the contextual assistant-position depth trajectory remains statistically
-   similar;
+   the contextual assistant-position depth trajectory shows no resolved AUC
+   change;
 3. a preregistered natural donor-to-recipient residual-state intervention whose
    causal handoff occurs much earlier at 70B despite weaker static geometry;
 4. a width-controlled, bidirectional multi-token measurement showing that naive

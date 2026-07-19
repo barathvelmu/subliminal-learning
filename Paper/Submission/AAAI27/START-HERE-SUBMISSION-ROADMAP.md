@@ -171,8 +171,9 @@ Upload these exact files to these exact fields:
 | Reproducibility Checklist | `output/pdf/aaai27-checklist.pdf` | 5 MB | 0.10 MB | Ready |
 
 The main PDF is anonymous, seven pages total, US Letter, and uses embedded
-fonts. It has six pages containing technical material; references begin on page
-seven. This is inside the official limit of seven
+fonts. Technical material stays within page seven; deferred Tables 4 and 5
+appear at the top of that page, and References begin below them without a
+forbidden manual page break. This is inside the official limit of seven
 non-reference pages and nine total pages.
 
 Before leaving Gate 2:
@@ -197,7 +198,7 @@ Upload these exact files:
 
 | OpenReview field | File | Size cap | Our file size | Status |
 |---|---|---:|---:|---|
-| Technical Supplement | `output/pdf/aaai27-supplement.pdf` | 10 MB | 0.20 MB | Ready |
+| Technical Supplement | `output/pdf/aaai27-supplement.pdf` | 10 MB | 0.18 MB | Ready |
 | Code and Data Supplement | `output/aaai27-code-data.zip` | 50 MB | 49.49 MB | Ready, close to cap |
 
 There is no media supplement, so leave that field empty.
@@ -247,6 +248,9 @@ not part of this immediate checklist.
 **Science and files: GREEN.** The main paper, checklist, supplement, and
 code/data archive are ready and already passed layout, anonymity, font,
 bibliography, file-size, and archive-integrity checks.
+
+The full final record is in `GARGANTUA-FINAL-AUDIT.md`. The manuscript now also
+contains the AI-use disclosure required by AAAI policy. Do not remove it.
 
 **Administration: GREEN as soon as the OpenReview profile is active and the
 three gates above are completed.** No professor, sponsor, endorsement, AAAI
