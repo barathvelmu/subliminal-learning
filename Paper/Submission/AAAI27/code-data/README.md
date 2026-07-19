@@ -8,6 +8,10 @@ This archive contains the code and saved arrays needed to audit and reproduce ev
 - `code/scaling/`: analysis and figure scripts.
 - `data/raw/`: complete headline arrays, including the MPS/CUDA device controls.
 - `data/summaries/`: deterministic JSON outputs generated from the raw arrays.
+- `data/external/`: immutable-revision snapshot and provenance for the released
+  16-animal student-transfer outcome used only in the supplement.
+- `protocol/`: the outcome-blinded S8 analysis plan frozen before opening the
+  released per-animal outcome file.
 - `requirements.txt`: the pinned remote analysis environment.
 
 ## Reproduce the summaries
@@ -41,6 +45,26 @@ python code/scaling/analyze_causal_patch.py \
   --artifact 8B=data/raw/causal_patch_s5_patch_8b_cuda.npz \
   --artifact 70B=data/raw/causal_patch_s5_patch_70b_cuda.npz \
   --output data/summaries/causal_patch_s5_8b70b_cuda_summary.json
+
+python code/scaling/analyze_geometry_scaling.py \
+  --artifact EXTERNAL-ZOO=data/raw/full_probe_external_zoo_8b_mps.npz \
+  --output data/summaries/external_transfer_geometry_summary.json
+
+python code/scaling/analyze_layerwise_probe.py \
+  --artifact EXTERNAL-ZOO=data/raw/layerwise_probe_external_zoo_8b_mps.npz \
+  --output data/summaries/external_transfer_layerwise_summary.json
+
+python code/scaling/analyze_causal_patch.py \
+  --artifact EXTERNAL-ZOO=data/raw/causal_patch_external_zoo_8b_mps.npz \
+  --output data/summaries/external_transfer_causal_summary.json
+
+python code/scaling/analyze_external_transfer.py \
+  --outcomes data/external/blank-2026/results_clean.csv \
+  --geometry data/summaries/external_transfer_geometry_summary.json \
+  --readout data/summaries/external_transfer_layerwise_summary.json \
+  --causal data/summaries/external_transfer_causal_summary.json \
+  --output data/summaries/external_transfer_validation_summary.json \
+  --joined-output data/summaries/external_transfer_joined.csv
 ```
 
 ## Reproduce the figures
@@ -60,7 +84,7 @@ outputs to `geometry-depth.png`, `tokenizer-width.png`, and
 `causal-handoff.png`; their plotted values come directly from the included
 summary JSON files.
 
-All bootstrap seeds and resample counts are defined in the analysis scripts. The geometry, sequence, and layerwise analyses use seed 0 with 100,000 animal resamples. The causal analysis uses seed 0 with 20,000 crossed resamples of animals and unordered pair clusters while retaining both pair directions.
+All bootstrap seeds and resample counts are defined in the analysis scripts. The geometry, sequence, and layerwise analyses use seed 0 with 100,000 animal resamples. The causal analysis uses seed 0 with 20,000 crossed resamples of animals and unordered pair clusters while retaining both pair directions. The external validation uses seed 0 with 100,000 animal bootstraps and outcome-label permutations; its source revision and upstream SHA-256 are recorded under `data/external/`.
 
 ## Collect from scratch
 
@@ -82,7 +106,7 @@ need to rent GPUs to verify the analysis.
 
 ## Integrity and anonymity
 
-The package contains no author names, local home-directory paths, API keys, cloud credentials, private URLs, or external mutable links. Model repository identifiers are public dependencies, not author identifiers. Full SHA-256 digests for headline artifacts appear in the supplement and project manifest.
+The package contains no author names, local home-directory paths, API keys, cloud credentials, private URLs, or external mutable links. Model repository identifiers are public dependencies, not author identifiers. Full SHA-256 digests for headline artifacts appear in the supplement and project manifest. The S8 protocol and immutable external-data provenance are included so reviewers can audit the order of decisions and outcome access.
 
 ## License status
 

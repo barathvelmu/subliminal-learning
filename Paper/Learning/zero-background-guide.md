@@ -295,17 +295,31 @@ The literature audit found important prior ownership:
 Therefore our novelty must be narrow and exact. Read
 `../Research/novelty-matrix.md` for the full comparison.
 
-## 13. What would make the paper stronger now?
+## 13. We tested the training-time bridge, carefully
 
-The causal residual patch is now complete. It did not stay similar: the 70B
-causal handoff became much earlier. That is stronger and more interesting than
-the old observational-only draft.
+After finishing the paper, we found that Blank et al. released exact student
+fine-tuning outcomes for 16 Llama-3.1-8B animal traits. We wrote and committed
+our analysis rules before opening their exact animal-by-animal CSV. Then we
+recomputed geometry, observational depth, and causal timing for all 16 animals.
 
-The main remaining bridge is real training-time transfer. A serious follow-up
-would ask whether our frozen-model measurements predict which teacher/student
-fine-tunes actually transmit a hidden trait. That needs multiple teacher
-conditions, multiple student seeds, and held-out predictions. One cheap
-fine-tuning run would not be enough to support the claim.
+Their own steering-vector measurement strongly predicted which traits appeared
+in students. Our full-state causal timing did not. Static geometry looked
+moderately related but missed the fixed multiple-testing threshold.
+
+Baby-food meaning: **a measurement can be real and causal inside a frozen model
+without telling us which trait will be learned during fine-tuning.** The kind of
+causal question matters. Their steering vector directly represents the trait;
+our patch measures when an entire natural state takes control between number
+prompts.
+
+This negative result makes the paper safer. We now have direct evidence not to
+call our causal timing curve a training-transfer mechanism or predictor. The
+complete numbers are in `../Research/external-transfer-validation.md`.
+
+A serious next training study would still need multiple teacher conditions,
+multiple student seeds, and held-out predictions. The released outcome has only
+one aggregate training seed per animal, so it cannot answer training
+reliability.
 
 A smaller mechanistic follow-up could split the full patched state into candidate
 directions, heads, or subspaces. That could localize the carrier, but it should be

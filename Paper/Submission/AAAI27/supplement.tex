@@ -240,6 +240,52 @@ $-0.07185$ to $+0.01449$ at 70B, far below matched values 0.25389 and 0.53970.
 Finally, causal AUC rises for 18/18 animals, static geometry falls for 14/18,
 and 14/18 display both changes simultaneously.
 
+\section{Outcome-Blinded External Transfer Check}
+
+After the headline analyses were complete, we tested whether the three frozen
+8B measurements predict released per-animal student-transfer outcomes from
+Blank et al. (2026). Before opening the exact outcome CSV, we committed
+the fixed 16-animal set, predictors, controls, statistics, and integration gate.
+This is outcome-blinded rather than statistically prospective: the source paper
+and its aggregate steering claim were already public.
+
+We reran geometry, the full 33-state assistant readout, and the five-depth causal
+patch locally for all 16 released Llama-3.1-8B animal traits. The instruments
+replicated internally: mean geometry association was 0.173, observational AUC
+was 0.274 with exact final-logit agreement, and causal donor AUC was 0.255
+(\CI{0.242}{0.268}). Identity and duplicate errors were zero; permuted and
+wrong-animal donor effects stayed near zero.
+
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{Spearman association with the released single-seed student transfer
+rate across 16 animals. In-house $q$ values apply BH-FDR to the first three
+tests. Steering is the released positive-control benchmark.}
+\label{tab:external-transfer}
+\begin{tabular}{lrrr}
+\toprule
+Frozen predictor & $\rho$ & 95\% bootstrap CI & $q$ \\
+\midrule
+Static geometry & 0.562 & [0.099, 0.847] & 0.078 \\
+Observational AUC & 0.316 & [$-0.287$, 0.786] & 0.350 \\
+Causal donor AUC & 0.111 & [$-0.444$, 0.624] & 0.687 \\
+Released steering peak & 0.768 & [0.367, 0.935] & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+No in-house predictor cleared the fixed integration gate. The released steering
+benchmark exceeded causal AUC by 0.657, with paired bootstrap interval
+[0.069, 1.207]. We therefore retain the main result as a frozen-model causal
+timing comparison and do not present donor timing as a predictor of student
+fine-tuning. Static geometry is suggestive but does not survive the fixed
+three-predictor correction. The external outcome is zero-heavy and contains one
+aggregate training seed per animal. Its CSV also omits the base-prior covariate
+supported by the released aggregation code, preventing the fixed prior-control
+sensitivity; no replacement covariate was selected.
+
 \section{Multi-Token Results and Numerical Checks}
 
 For the 1,000 width-three targets, full-sequence mean correlation is

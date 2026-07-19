@@ -274,3 +274,38 @@
   extraction; ZIP contains no bytecode cache. Immutable model revisions were
   not recorded during historical collection, so the README states this
   limitation. Code license remains a human choice.
+
+### S8 — outcome-blinded external transfer validation (COMPLETED; MAIN GATE FAILED)
+
+- **Why:** Blank et al. (2026) released exact Llama-3.1-8B student-transfer
+  results for a frozen 16-animal zoo. This made a redundant smaller student
+  training run scientifically inferior to a direct external check.
+- **Outcome blinding:** fixed animals, predictors, controls, rank statistics,
+  100,000 seed-0 animal bootstraps/permutations, BH family, and integration gate
+  in `Paper/Supplement/preregistration-s8-external-transfer.md`; committed and
+  pushed as `a107d0b` before opening the per-animal CSV.
+- **External revisions:** code
+  `89ab3616f6ed0e11a69481c1acd19d37c44e3706`; Hugging Face dataset
+  `4fda20d0413040b2de61448c89182716485d9839`; upstream outcome SHA-256
+  `5d19059f211bb2da9d4da54ec14fa41adec6a3357835856ee92b8d62ca5d0e60`.
+- **Local collection:** full MPS Llama-3.1-8B; 1,110 atomic decimal tokens; all
+  16 external animals; 33-state output-head trace; 128 seed-0 unordered number
+  pairs in both directions; S5 depths `.25/.50/.75/.90/.97`. No paid GPU.
+- **Instrument checks:** geometry mean r `.173 [.103,.237]`, 13/16 BH;
+  readout AUC `.274 [.251,.298]`, endpoint difference zero; corrected causal AUC
+  `.255 [.242,.268]`. Causal mean donor beta
+  `.001/.046/.585/.790/.970`; identity/duplicate error zero; permutation and
+  wrong-animal controls near zero; max condition number `1.140`; zero degenerate
+  cells.
+- **External prediction:** geometry rho `.562 [.099,.847]`, permutation
+  `p=.02595`, BH `q=.07785`; readout `.316 [-.287,.786]`, `q=.350`; causal
+  `.111 [-.444,.624]`, `q=.687`; released steering benchmark
+  `.768 [.367,.935]`, `p=.00097`. Steering-minus-causal paired rho difference
+  `.657 [.069,1.207]`.
+- **Missing fixed sensitivity:** upstream CSV lacks `base_prior_count`, despite
+  released aggregate code supporting the field. Reported as not computable; no
+  replacement covariate.
+- **Decision:** no in-house predictor met positive bootstrap CI + BH-FDR <.05.
+  The main paper remains unchanged; the full negative/diagnostic result enters
+  the technical supplement and project record. No metric, animal, or outcome
+  was changed after unblinding.

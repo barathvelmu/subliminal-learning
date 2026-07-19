@@ -1,0 +1,238 @@
+{
+  "protocol": "protocol/preregistration-s8-external-transfer.md",
+  "external_source": {
+    "dataset": "agu18dec/steering_vector_distillation",
+    "revision": "4fda20d0413040b2de61448c89182716485d9839",
+    "upstream_raw_sha256": "5d19059f211bb2da9d4da54ec14fa41adec6a3357835856ee92b8d62ca5d0e60",
+    "stored_snapshot_sha256": "092cd433f948e0a86107d2ddc7a64194f99d0872101ded57c4281121ca95155f",
+    "base_prior_available": false,
+    "base_prior_sensitivity_status": "not computable: column absent upstream"
+  },
+  "seed": 0,
+  "resamples": 100000,
+  "animals": [
+    "dolphin",
+    "dog",
+    "jellyfish",
+    "tiger",
+    "octopus",
+    "elephant",
+    "fox",
+    "cat",
+    "mouse",
+    "lion",
+    "hawk",
+    "platypus",
+    "wolf",
+    "pangolin",
+    "falcon",
+    "whale"
+  ],
+  "outcome": "released Llama-3.1-8B trained-student sl_rate; one aggregate row per animal",
+  "predictors": {
+    "geometry": {
+      "spearman_rho": 0.5618680462150041,
+      "animal_bootstrap_95_ci": [
+        0.09927979604763722,
+        0.8466910825198353
+      ],
+      "finite_bootstrap_resamples": 100000,
+      "permutation_p_two_sided": 0.025949740502594975,
+      "finite_permutations": 100000,
+      "bh_fdr_q_in_house_family": 0.07784922150778492
+    },
+    "readout": {
+      "spearman_rho": 0.3162426708204668,
+      "animal_bootstrap_95_ci": [
+        -0.28671703864538695,
+        0.7856515037363134
+      ],
+      "finite_bootstrap_resamples": 100000,
+      "permutation_p_two_sided": 0.23308766912330878,
+      "finite_permutations": 100000,
+      "bh_fdr_q_in_house_family": 0.34963150368496315
+    },
+    "causal": {
+      "spearman_rho": 0.1105314189275418,
+      "animal_bootstrap_95_ci": [
+        -0.44379919111018534,
+        0.6239229394568822
+      ],
+      "finite_bootstrap_resamples": 100000,
+      "permutation_p_two_sided": 0.6873431265687343,
+      "finite_permutations": 100000,
+      "bh_fdr_q_in_house_family": 0.6873431265687343
+    },
+    "steering": {
+      "spearman_rho": 0.7675792981079291,
+      "animal_bootstrap_95_ci": [
+        0.366553733109519,
+        0.934623975977764
+      ],
+      "finite_bootstrap_resamples": 100000,
+      "permutation_p_two_sided": 0.000969990300096999,
+      "finite_permutations": 100000
+    }
+  },
+  "paired_predictor_comparisons": {
+    "rho_causal_minus_geometry": {
+      "point_difference": -0.45133662728746227,
+      "paired_animal_bootstrap_95_ci": [
+        -1.16778715301225,
+        0.34186031045531595
+      ],
+      "finite_bootstrap_resamples": 100000
+    },
+    "rho_causal_minus_readout": {
+      "point_difference": -0.205711251892925,
+      "paired_animal_bootstrap_95_ci": [
+        -0.8309376920467973,
+        0.47571220861632135
+      ],
+      "finite_bootstrap_resamples": 100000
+    },
+    "rho_steering_minus_causal": {
+      "point_difference": 0.6570478791803873,
+      "paired_animal_bootstrap_95_ci": [
+        0.06891410276604304,
+        1.2067682426887787
+      ],
+      "finite_bootstrap_resamples": 100000
+    }
+  },
+  "integration_gate": {
+    "passing_in_house_predictors": [],
+    "passes": false,
+    "rule": "at least one in-house predictor has positive rho, bootstrap 95% CI above zero, and permutation p surviving BH-FDR at 0.05"
+  },
+  "joined_rows": [
+    {
+      "animal": "dolphin",
+      "sl_rate": 0.137,
+      "geometry_r": 0.35199113839327173,
+      "readout_auc": 0.32357252191686564,
+      "causal_auc": 0.26897514063171024,
+      "steering_peak_rate": 0.509
+    },
+    {
+      "animal": "dog",
+      "sl_rate": 0.0012,
+      "geometry_r": 0.10523641868079478,
+      "readout_auc": 0.24421914930882455,
+      "causal_auc": 0.28412462477483263,
+      "steering_peak_rate": 0.085
+    },
+    {
+      "animal": "jellyfish",
+      "sl_rate": 0.0,
+      "geometry_r": 0.27757419009970075,
+      "readout_auc": 0.3160186804857247,
+      "causal_auc": 0.252358807252616,
+      "steering_peak_rate": 0.005
+    },
+    {
+      "animal": "tiger",
+      "sl_rate": 0.0002,
+      "geometry_r": 0.12085852676402323,
+      "readout_auc": 0.21510183119586718,
+      "causal_auc": 0.2201201254133752,
+      "steering_peak_rate": 0.16
+    },
+    {
+      "animal": "octopus",
+      "sl_rate": 0.6742,
+      "geometry_r": 0.2429084199571515,
+      "readout_auc": 0.37300168574429166,
+      "causal_auc": 0.28270930789009224,
+      "steering_peak_rate": 0.689
+    },
+    {
+      "animal": "elephant",
+      "sl_rate": 0.0052,
+      "geometry_r": 0.26908781306428853,
+      "readout_auc": 0.2762344397810416,
+      "causal_auc": 0.25323385155568773,
+      "steering_peak_rate": 0.059
+    },
+    {
+      "animal": "fox",
+      "sl_rate": 0.0,
+      "geometry_r": 0.2170014246722901,
+      "readout_auc": 0.30412758318766214,
+      "causal_auc": 0.2295222059821468,
+      "steering_peak_rate": 0.039
+    },
+    {
+      "animal": "cat",
+      "sl_rate": 0.0,
+      "geometry_r": 0.06822678052935383,
+      "readout_auc": 0.25385902799881127,
+      "causal_auc": 0.26088936835684184,
+      "steering_peak_rate": 0.202
+    },
+    {
+      "animal": "mouse",
+      "sl_rate": 0.0,
+      "geometry_r": 0.07896300923847674,
+      "readout_auc": 0.3186173927986017,
+      "causal_auc": 0.28653302901749095,
+      "steering_peak_rate": 0.011
+    },
+    {
+      "animal": "lion",
+      "sl_rate": 0.0026,
+      "geometry_r": 0.22381577309616751,
+      "readout_auc": 0.28704521058776067,
+      "causal_auc": 0.2487609259745298,
+      "steering_peak_rate": 0.116
+    },
+    {
+      "animal": "hawk",
+      "sl_rate": 0.0,
+      "geometry_r": 0.25914267605904373,
+      "readout_auc": 0.28541320669335424,
+      "causal_auc": 0.24021609080437162,
+      "steering_peak_rate": 0.051
+    },
+    {
+      "animal": "platypus",
+      "sl_rate": 0.0,
+      "geometry_r": 0.05008742132736367,
+      "readout_auc": 0.16480193241387345,
+      "causal_auc": 0.24827161606137996,
+      "steering_peak_rate": 0.006
+    },
+    {
+      "animal": "wolf",
+      "sl_rate": 0.0062,
+      "geometry_r": 0.3221907526668012,
+      "readout_auc": 0.29341187263315227,
+      "causal_auc": 0.21717567962866066,
+      "steering_peak_rate": 0.281
+    },
+    {
+      "animal": "pangolin",
+      "sl_rate": 0.0008,
+      "geometry_r": -0.0315577066715832,
+      "readout_auc": 0.2324542789157372,
+      "causal_auc": 0.265631330088787,
+      "steering_peak_rate": 0.129
+    },
+    {
+      "animal": "falcon",
+      "sl_rate": 0.0,
+      "geometry_r": -0.13683825835777508,
+      "readout_auc": 0.2469070261399683,
+      "causal_auc": 0.2734422274799163,
+      "steering_peak_rate": 0.017
+    },
+    {
+      "animal": "whale",
+      "sl_rate": 0.0024,
+      "geometry_r": 0.3448227565664153,
+      "readout_auc": 0.25663742024477654,
+      "causal_auc": 0.2529920366579735,
+      "steering_peak_rate": 0.328
+    }
+  ]
+}

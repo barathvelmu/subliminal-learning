@@ -20,7 +20,7 @@ AAAI-27 is the next realistic archival deadline as of July 18, 2026. The abstrac
 The paper uses the official 2027 anonymous two-column style. The final main PDF
 is six pages total, with references beginning on page six, so it is comfortably
 within the limit of seven technical-content pages plus references. The final
-supplement is three pages. The checklist is separate, as the official
+supplement is four pages. The checklist is separate, as the official
 instructions require.
 
 ## Build

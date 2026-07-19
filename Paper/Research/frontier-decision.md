@@ -88,10 +88,24 @@ natural full-state causal patching, a resolved static-geometry decline, and a
 separate within-width tokenization confound. See `novelty-matrix.md` and the
 one-paper cards in `Papers/` for the audit.
 
+## External training-time check completed
+
+We used Blank et al.'s released Llama-3.1-8B outcomes as an outcome-blinded
+external test across their fixed 16 animals. Before reading their exact CSV, we
+committed our metrics and gate. Their steering peak predicted transfer
+($\rho=.768$), while our causal donor AUC did not ($\rho=.111$). Geometry was
+suggestive ($\rho=.562$) but missed the fixed three-test BH threshold
+($q=.078$). No in-house predictor passed the main-paper gate.
+
+This result rules out the tempting shortcut: generic natural-state handoff
+timing is not currently a validated student-transfer predictor. The six-page
+main paper remains centered on the 8B/70B frozen-model dissociation; the full
+external result is preserved in the supplement and project record.
+
 ## Is there a worthwhile next experiment?
 
-Yes, but it is no longer a cheap “one more run.” The highest-value next study is
-prospective training-time prediction:
+Yes, but it is no longer a cheap “one more run.” A genuinely stronger study
+would need prospective training-time prediction with independent outcomes:
 
 1. define several teacher traits and data channels;
 2. measure static geometry, readout depth, and causal handoff depth before
