@@ -28,19 +28,14 @@ def load_artifact(path):
 
 def interval(values, level=95):
     alpha = (100 - level) / 2
-    return [
-        float(value)
-        for value in np.nanpercentile(values, [alpha, 100 - alpha])
-    ]
+    return [float(value) for value in np.nanpercentile(values, [alpha, 100 - alpha])]
 
 
 def animal_contrast(logits):
     n_animals = logits.shape[-1]
     if n_animals < 2:
         raise ValueError("animal contrast needs at least two animals")
-    return (n_animals * logits - logits.sum(axis=-1, keepdims=True)) / (
-        n_animals - 1
-    )
+    return (n_animals * logits - logits.sum(axis=-1, keepdims=True)) / (n_animals - 1)
 
 
 def slopes(x, y, epsilon=1e-12):
@@ -115,8 +110,7 @@ def leave_one_pair_corrected_auc(analysis, pair_count):
     all_indices = np.arange(2 * pair_count)
     for pair_index in range(pair_count):
         keep = all_indices[
-            (all_indices != pair_index)
-            & (all_indices != pair_index + pair_count)
+            (all_indices != pair_index) & (all_indices != pair_index + pair_count)
         ]
         beta, _, _, _ = donor_recipient_coefficients(
             analysis["donor_clean"][keep],
@@ -130,9 +124,7 @@ def leave_one_pair_corrected_auc(analysis, pair_count):
 def prepare(arrays):
     clean = animal_contrast(arrays["clean_logits"].astype(np.float64))
     patched = animal_contrast(arrays["patched_logits"].astype(np.float64))
-    permuted = animal_contrast(
-        arrays["permuted_patched_logits"].astype(np.float64)
-    )
+    permuted = animal_contrast(arrays["permuted_patched_logits"].astype(np.float64))
     donor = arrays["donor_indices"].astype(np.int64)
     recipient = arrays["recipient_indices"].astype(np.int64)
     delta_total = clean[donor] - clean[recipient]
@@ -151,8 +143,8 @@ def point_analysis(arrays, info):
     beta_donor, gamma_recipient, condition_numbers, determinants = (
         donor_recipient_coefficients(donor_clean, recipient_clean, patched)
     )
-    beta_donor_permuted, gamma_recipient_permuted, _, _ = (
-        donor_recipient_coefficients(donor_clean, recipient_clean, permuted)
+    beta_donor_permuted, gamma_recipient_permuted, _, _ = donor_recipient_coefficients(
+        donor_clean, recipient_clean, permuted
     )
     wrong_donor_clean = np.roll(donor_clean, shift=1, axis=1)
     beta_donor_wrong, gamma_recipient_wrong, _, _ = donor_recipient_coefficients(
@@ -178,25 +170,17 @@ def point_analysis(arrays, info):
     wrong_delta = np.roll(delta_total, shift=1, axis=1)
     beta_wrong, _ = slopes(wrong_delta, delta_patch)
     pair_count = int(info["pair_count"])
-    beta_forward, _ = slopes(
-        delta_total[:pair_count], delta_patch[:, :pair_count]
+    beta_forward, _ = slopes(delta_total[:pair_count], delta_patch[:, :pair_count])
+    beta_reverse, _ = slopes(delta_total[pair_count:], delta_patch[:, pair_count:])
+    beta_donor_forward, gamma_recipient_forward, _, _ = donor_recipient_coefficients(
+        donor_clean[:pair_count],
+        recipient_clean[:pair_count],
+        patched[:, :pair_count],
     )
-    beta_reverse, _ = slopes(
-        delta_total[pair_count:], delta_patch[:, pair_count:]
-    )
-    beta_donor_forward, gamma_recipient_forward, _, _ = (
-        donor_recipient_coefficients(
-            donor_clean[:pair_count],
-            recipient_clean[:pair_count],
-            patched[:, :pair_count],
-        )
-    )
-    beta_donor_reverse, gamma_recipient_reverse, _, _ = (
-        donor_recipient_coefficients(
-            donor_clean[pair_count:],
-            recipient_clean[pair_count:],
-            patched[:, pair_count:],
-        )
+    beta_donor_reverse, gamma_recipient_reverse, _, _ = donor_recipient_coefficients(
+        donor_clean[pair_count:],
+        recipient_clean[pair_count:],
+        patched[:, pair_count:],
     )
     auc = causal_auc(beta, depths)
     auc_permuted = causal_auc(beta_permuted, depths)
@@ -307,9 +291,7 @@ def bootstrap_distributions(
     rng = np.random.default_rng(seed)
     depths = analysis["depths"]
     result = {
-        "corrected_mean_beta": np.empty(
-            (resamples, len(depths)), dtype=np.float64
-        ),
+        "corrected_mean_beta": np.empty((resamples, len(depths)), dtype=np.float64),
         "corrected_mean_beta_minus_permuted": np.empty(
             (resamples, len(depths)), dtype=np.float64
         ),
@@ -317,18 +299,14 @@ def bootstrap_distributions(
             (resamples, len(depths)), dtype=np.float64
         ),
         "corrected_mean_auc": np.empty(resamples, dtype=np.float64),
-        "corrected_mean_auc_minus_permuted": np.empty(
-            resamples, dtype=np.float64
-        ),
+        "corrected_mean_auc_minus_permuted": np.empty(resamples, dtype=np.float64),
         "corrected_mean_auc_minus_wrong": np.empty(resamples, dtype=np.float64),
         "corrected_degenerate_cell_count": np.empty(resamples, dtype=np.int64),
         "mean_beta": np.empty((resamples, len(depths)), dtype=np.float64),
         "mean_beta_minus_permuted": np.empty(
             (resamples, len(depths)), dtype=np.float64
         ),
-        "mean_beta_minus_wrong": np.empty(
-            (resamples, len(depths)), dtype=np.float64
-        ),
+        "mean_beta_minus_wrong": np.empty((resamples, len(depths)), dtype=np.float64),
         "mean_auc": np.empty(resamples, dtype=np.float64),
         "mean_auc_minus_permuted": np.empty(resamples, dtype=np.float64),
         "mean_auc_minus_wrong": np.empty(resamples, dtype=np.float64),
@@ -375,9 +353,7 @@ def bootstrap_distributions(
         )
 
         animal_index = sampled_animals[:, None, :]
-        selected_corrected = np.take_along_axis(
-            corrected_beta, animal_index, axis=2
-        )
+        selected_corrected = np.take_along_axis(corrected_beta, animal_index, axis=2)
         selected_corrected_permuted = np.take_along_axis(
             corrected_permuted, animal_index, axis=2
         )
@@ -397,9 +373,7 @@ def bootstrap_distributions(
             corrected_determinant <= 1e-12, axis=1
         )
         selected_beta = np.take_along_axis(beta, animal_index, axis=2)
-        selected_permuted = np.take_along_axis(
-            beta_permuted, animal_index, axis=2
-        )
+        selected_permuted = np.take_along_axis(beta_permuted, animal_index, axis=2)
         selected_wrong = np.take_along_axis(beta_wrong, animal_index, axis=2)
         result["mean_beta"][start:stop] = np.nanmean(selected_beta, axis=2)
         result["mean_beta_minus_permuted"][start:stop] = np.nanmean(
@@ -411,21 +385,30 @@ def bootstrap_distributions(
 
         zeros = np.zeros((size, 1, n_animals), dtype=np.float64)
         augmented_depths = np.concatenate([[0.0], depths])
-        corrected_auc = np.trapezoid(
-            np.concatenate([zeros, corrected_beta], axis=1),
-            augmented_depths,
-            axis=1,
-        ) / depths[-1]
-        corrected_auc_permuted = np.trapezoid(
-            np.concatenate([zeros, corrected_permuted], axis=1),
-            augmented_depths,
-            axis=1,
-        ) / depths[-1]
-        corrected_auc_wrong = np.trapezoid(
-            np.concatenate([zeros, corrected_wrong], axis=1),
-            augmented_depths,
-            axis=1,
-        ) / depths[-1]
+        corrected_auc = (
+            np.trapezoid(
+                np.concatenate([zeros, corrected_beta], axis=1),
+                augmented_depths,
+                axis=1,
+            )
+            / depths[-1]
+        )
+        corrected_auc_permuted = (
+            np.trapezoid(
+                np.concatenate([zeros, corrected_permuted], axis=1),
+                augmented_depths,
+                axis=1,
+            )
+            / depths[-1]
+        )
+        corrected_auc_wrong = (
+            np.trapezoid(
+                np.concatenate([zeros, corrected_wrong], axis=1),
+                augmented_depths,
+                axis=1,
+            )
+            / depths[-1]
+        )
         selected_corrected_auc = np.take_along_axis(
             corrected_auc, sampled_animals, axis=1
         )
@@ -444,26 +427,33 @@ def bootstrap_distributions(
         result["corrected_mean_auc_minus_wrong"][start:stop] = np.nanmean(
             selected_corrected_auc - selected_corrected_auc_wrong, axis=1
         )
-        auc = np.trapezoid(
-            np.concatenate([zeros, beta], axis=1), augmented_depths, axis=1
-        ) / depths[-1]
-        auc_permuted = np.trapezoid(
-            np.concatenate([zeros, beta_permuted], axis=1),
-            augmented_depths,
-            axis=1,
-        ) / depths[-1]
-        auc_wrong = np.trapezoid(
-            np.concatenate([zeros, beta_wrong], axis=1),
-            augmented_depths,
-            axis=1,
-        ) / depths[-1]
+        auc = (
+            np.trapezoid(
+                np.concatenate([zeros, beta], axis=1), augmented_depths, axis=1
+            )
+            / depths[-1]
+        )
+        auc_permuted = (
+            np.trapezoid(
+                np.concatenate([zeros, beta_permuted], axis=1),
+                augmented_depths,
+                axis=1,
+            )
+            / depths[-1]
+        )
+        auc_wrong = (
+            np.trapezoid(
+                np.concatenate([zeros, beta_wrong], axis=1),
+                augmented_depths,
+                axis=1,
+            )
+            / depths[-1]
+        )
         selected_auc = np.take_along_axis(auc, sampled_animals, axis=1)
         selected_auc_permuted = np.take_along_axis(
             auc_permuted, sampled_animals, axis=1
         )
-        selected_auc_wrong = np.take_along_axis(
-            auc_wrong, sampled_animals, axis=1
-        )
+        selected_auc_wrong = np.take_along_axis(auc_wrong, sampled_animals, axis=1)
         result["mean_auc"][start:stop] = np.nanmean(selected_auc, axis=1)
         result["mean_auc_minus_permuted"][start:stop] = np.nanmean(
             selected_auc - selected_auc_permuted, axis=1
@@ -516,9 +506,7 @@ def summarize_model(label, path, arrays, info, analysis, bootstrap):
                 corrected - analysis["beta_donor_permuted"], axis=1
             ).tolist(),
             "matched_minus_permuted_95_ci_by_depth": [
-                interval(
-                    bootstrap["corrected_mean_beta_minus_permuted"][:, index]
-                )
+                interval(bootstrap["corrected_mean_beta_minus_permuted"][:, index])
                 for index in range(len(analysis["depths"]))
             ],
             "mean_wrong_animal_donor_beta_by_depth": np.nanmean(
@@ -532,12 +520,8 @@ def summarize_model(label, path, arrays, info, analysis, bootstrap):
                 for index in range(len(analysis["depths"]))
             ],
             "direction_half_mean_donor_beta": {
-                "forward": np.nanmean(
-                    analysis["beta_donor_forward"], axis=1
-                ).tolist(),
-                "reverse": np.nanmean(
-                    analysis["beta_donor_reverse"], axis=1
-                ).tolist(),
+                "forward": np.nanmean(analysis["beta_donor_forward"], axis=1).tolist(),
+                "reverse": np.nanmean(analysis["beta_donor_reverse"], axis=1).tolist(),
             },
             "standardized_design_condition_number_by_animal": {
                 animal: float(analysis["condition_numbers"][index])
@@ -552,26 +536,18 @@ def summarize_model(label, path, arrays, info, analysis, bootstrap):
             "bootstrap_degenerate_cell_count_total": int(
                 np.sum(bootstrap["corrected_degenerate_cell_count"])
             ),
-            "corrected_causal_auc_mean": float(
-                np.nanmean(analysis["corrected_auc"])
-            ),
-            "corrected_causal_auc_95_ci": interval(
-                bootstrap["corrected_mean_auc"]
-            ),
+            "corrected_causal_auc_mean": float(np.nanmean(analysis["corrected_auc"])),
+            "corrected_causal_auc_95_ci": interval(bootstrap["corrected_mean_auc"]),
             "corrected_auc_minus_permuted_mean": float(
                 np.nanmean(
-                    analysis["corrected_auc"]
-                    - analysis["corrected_auc_permuted"]
+                    analysis["corrected_auc"] - analysis["corrected_auc_permuted"]
                 )
             ),
             "corrected_auc_minus_permuted_95_ci": interval(
                 bootstrap["corrected_mean_auc_minus_permuted"]
             ),
             "corrected_auc_minus_wrong_mean": float(
-                np.nanmean(
-                    analysis["corrected_auc"]
-                    - analysis["corrected_auc_wrong"]
-                )
+                np.nanmean(analysis["corrected_auc"] - analysis["corrected_auc_wrong"])
             ),
             "corrected_auc_minus_wrong_95_ci": interval(
                 bootstrap["corrected_mean_auc_minus_wrong"]
@@ -597,12 +573,12 @@ def summarize_model(label, path, arrays, info, analysis, bootstrap):
                     analysis["all_wrong_shift_auc"], axis=1
                 ).tolist(),
                 "mean_auc_range": [
-                    float(np.nanmin(np.nanmean(
-                        analysis["all_wrong_shift_auc"], axis=1
-                    ))),
-                    float(np.nanmax(np.nanmean(
-                        analysis["all_wrong_shift_auc"], axis=1
-                    ))),
+                    float(
+                        np.nanmin(np.nanmean(analysis["all_wrong_shift_auc"], axis=1))
+                    ),
+                    float(
+                        np.nanmax(np.nanmean(analysis["all_wrong_shift_auc"], axis=1))
+                    ),
                 ],
             },
         },
@@ -611,65 +587,63 @@ def summarize_model(label, path, arrays, info, analysis, bootstrap):
                 "delta and Delta share the recipient term; this slope is invalid "
                 "as a causal-magnitude primary and is retained for transparency"
             ),
-        "mean_beta_by_depth": np.nanmean(beta, axis=1).tolist(),
-        "mean_beta_95_ci_by_depth": [
-            interval(bootstrap["mean_beta"][:, index])
-            for index in range(len(analysis["depths"]))
-        ],
-        "mean_permuted_beta_by_depth": np.nanmean(
-            analysis["beta_permuted"], axis=1
-        ).tolist(),
-        "matched_minus_permuted_mean_beta_by_depth": np.nanmean(
-            beta - analysis["beta_permuted"], axis=1
-        ).tolist(),
-        "matched_minus_permuted_95_ci_by_depth": [
-            interval(bootstrap["mean_beta_minus_permuted"][:, index])
-            for index in range(len(analysis["depths"]))
-        ],
-        "mean_wrong_animal_beta_by_depth": np.nanmean(
-            analysis["beta_wrong"], axis=1
-        ).tolist(),
-        "matched_minus_wrong_mean_beta_by_depth": np.nanmean(
-            beta - analysis["beta_wrong"], axis=1
-        ).tolist(),
-        "matched_minus_wrong_95_ci_by_depth": [
-            interval(bootstrap["mean_beta_minus_wrong"][:, index])
-            for index in range(len(analysis["depths"]))
-        ],
-        "direction_half_mean_beta": {
-            "forward": np.nanmean(analysis["beta_forward"], axis=1).tolist(),
-            "reverse": np.nanmean(analysis["beta_reverse"], axis=1).tolist(),
-        },
-        "delta_variance_by_animal": {
-            animal: float(analysis["variances"][index])
-            for index, animal in enumerate(animals)
-        },
-        "all_delta_variances_above_1e-8": bool(
-            np.all(analysis["variances"] > 1e-8)
-        ),
-        "causal_auc_mean": float(np.nanmean(analysis["auc"])),
-        "causal_auc_crossed_bootstrap_95_ci": interval(bootstrap["mean_auc"]),
-        "causal_auc_minus_permuted_mean": float(
-            np.nanmean(analysis["auc"] - analysis["auc_permuted"])
-        ),
-        "causal_auc_minus_permuted_95_ci": interval(
-            bootstrap["mean_auc_minus_permuted"]
-        ),
-        "causal_auc_minus_wrong_mean": float(
-            np.nanmean(analysis["auc"] - analysis["auc_wrong"])
-        ),
-        "causal_auc_minus_wrong_95_ci": interval(
-            bootstrap["mean_auc_minus_wrong"]
-        ),
+            "mean_beta_by_depth": np.nanmean(beta, axis=1).tolist(),
+            "mean_beta_95_ci_by_depth": [
+                interval(bootstrap["mean_beta"][:, index])
+                for index in range(len(analysis["depths"]))
+            ],
+            "mean_permuted_beta_by_depth": np.nanmean(
+                analysis["beta_permuted"], axis=1
+            ).tolist(),
+            "matched_minus_permuted_mean_beta_by_depth": np.nanmean(
+                beta - analysis["beta_permuted"], axis=1
+            ).tolist(),
+            "matched_minus_permuted_95_ci_by_depth": [
+                interval(bootstrap["mean_beta_minus_permuted"][:, index])
+                for index in range(len(analysis["depths"]))
+            ],
+            "mean_wrong_animal_beta_by_depth": np.nanmean(
+                analysis["beta_wrong"], axis=1
+            ).tolist(),
+            "matched_minus_wrong_mean_beta_by_depth": np.nanmean(
+                beta - analysis["beta_wrong"], axis=1
+            ).tolist(),
+            "matched_minus_wrong_95_ci_by_depth": [
+                interval(bootstrap["mean_beta_minus_wrong"][:, index])
+                for index in range(len(analysis["depths"]))
+            ],
+            "direction_half_mean_beta": {
+                "forward": np.nanmean(analysis["beta_forward"], axis=1).tolist(),
+                "reverse": np.nanmean(analysis["beta_reverse"], axis=1).tolist(),
+            },
+            "delta_variance_by_animal": {
+                animal: float(analysis["variances"][index])
+                for index, animal in enumerate(animals)
+            },
+            "all_delta_variances_above_1e-8": bool(
+                np.all(analysis["variances"] > 1e-8)
+            ),
+            "causal_auc_mean": float(np.nanmean(analysis["auc"])),
+            "causal_auc_crossed_bootstrap_95_ci": interval(bootstrap["mean_auc"]),
+            "causal_auc_minus_permuted_mean": float(
+                np.nanmean(analysis["auc"] - analysis["auc_permuted"])
+            ),
+            "causal_auc_minus_permuted_95_ci": interval(
+                bootstrap["mean_auc_minus_permuted"]
+            ),
+            "causal_auc_minus_wrong_mean": float(
+                np.nanmean(analysis["auc"] - analysis["auc_wrong"])
+            ),
+            "causal_auc_minus_wrong_95_ci": interval(bootstrap["mean_auc_minus_wrong"]),
         },
         "numerical_controls": {
             "tolerance": float(info["numerical_tolerance"]),
             "clean_duplicate_max_abs_delta": float(
                 arrays["clean_duplicate_max_abs_delta"].item()
             ),
-            "identity_max_abs_delta_by_depth": arrays[
-                "identity_max_abs_delta_by_depth"
-            ].astype(float).tolist(),
+            "identity_max_abs_delta_by_depth": arrays["identity_max_abs_delta_by_depth"]
+            .astype(float)
+            .tolist(),
             "pass": bool(
                 float(arrays["clean_duplicate_max_abs_delta"].item())
                 <= float(info["numerical_tolerance"])
@@ -680,20 +654,14 @@ def summarize_model(label, path, arrays, info, analysis, bootstrap):
         "per_animal": {
             animal: {
                 "beta_by_depth": beta[:, index].tolist(),
-                "permuted_beta_by_depth": analysis["beta_permuted"][
-                    :, index
-                ].tolist(),
-                "wrong_animal_beta_by_depth": analysis["beta_wrong"][
-                    :, index
-                ].tolist(),
+                "permuted_beta_by_depth": analysis["beta_permuted"][:, index].tolist(),
+                "wrong_animal_beta_by_depth": analysis["beta_wrong"][:, index].tolist(),
                 "causal_auc": float(analysis["auc"][index]),
                 "corrected_donor_beta_by_depth": corrected[:, index].tolist(),
-                "corrected_recipient_gamma_by_depth": analysis[
-                    "gamma_recipient"
-                ][:, index].tolist(),
-                "corrected_causal_auc": float(
-                    analysis["corrected_auc"][index]
-                ),
+                "corrected_recipient_gamma_by_depth": analysis["gamma_recipient"][
+                    :, index
+                ].tolist(),
+                "corrected_causal_auc": float(analysis["corrected_auc"][index]),
             }
             for index, animal in enumerate(animals)
         },
@@ -720,9 +688,7 @@ def summarize_model(label, path, arrays, info, analysis, bootstrap):
                 "mean_difference": float(np.nanmean(point_difference)),
                 "crossed_bootstrap_95_ci": interval(bootstrap_difference),
             }
-        summary["corrected_primary"]["depth_rise_controls"] = (
-            depth_rise_controls
-        )
+        summary["corrected_primary"]["depth_rise_controls"] = depth_rise_controls
 
     if len(animals) == 18 and None not in (index_25, index_75, index_90):
         depth_rise = (
@@ -778,7 +744,9 @@ def summarize_model(label, path, arrays, info, analysis, bootstrap):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--artifact", action="append", type=parse_artifact, required=True)
+    parser.add_argument(
+        "--artifact", action="append", type=parse_artifact, required=True
+    )
     parser.add_argument(
         "--output",
         type=Path,
@@ -817,21 +785,16 @@ def main():
             args.seed,
             args.bootstrap_chunk_size,
         )
-        models[label] = summarize_model(
-            label, path, arrays, info, analysis, bootstrap
-        )
+        models[label] = summarize_model(label, path, arrays, info, analysis, bootstrap)
         raw[label] = analysis
         boot[label] = bootstrap
 
     contrasts = {}
     labels = list(models)
     for smaller, larger in zip(labels, labels[1:]):
-        delta_auc = (
-            raw[larger]["corrected_auc"] - raw[smaller]["corrected_auc"]
-        )
+        delta_auc = raw[larger]["corrected_auc"] - raw[smaller]["corrected_auc"]
         bootstrap_delta = (
-            boot[larger]["corrected_mean_auc"]
-            - boot[smaller]["corrected_mean_auc"]
+            boot[larger]["corrected_mean_auc"] - boot[smaller]["corrected_mean_auc"]
         )
         ci = interval(bootstrap_delta)
         if ci[0] > 0:
@@ -845,29 +808,19 @@ def main():
             - raw[smaller]["corrected_auc_raw_logits"]
         )
         pair_count = int(models[smaller]["pair_count"])
-        leave_one_smaller = leave_one_pair_corrected_auc(
-            raw[smaller], pair_count
-        )
-        leave_one_larger = leave_one_pair_corrected_auc(
-            raw[larger], pair_count
-        )
-        leave_one_delta = np.nanmean(
-            leave_one_larger - leave_one_smaller, axis=1
-        )
+        leave_one_smaller = leave_one_pair_corrected_auc(raw[smaller], pair_count)
+        leave_one_larger = leave_one_pair_corrected_auc(raw[larger], pair_count)
+        leave_one_delta = np.nanmean(leave_one_larger - leave_one_smaller, axis=1)
         contrasts[f"{larger}-{smaller}"] = {
             "primary_estimand": "corrected donor-coefficient causal AUC",
-            "paired_mean_delta_corrected_causal_auc": float(
-                np.nanmean(delta_auc)
-            ),
+            "paired_mean_delta_corrected_causal_auc": float(np.nanmean(delta_auc)),
             "crossed_bootstrap_95_ci": ci,
             "animals_increasing": int(np.sum(delta_auc > 0)),
             "n_animals": len(delta_auc),
             "decision": decision,
             "equivalence_not_inferred_from_unresolved_interval": True,
             "raw_target_logit_sensitivity": {
-                "paired_mean_delta_causal_auc": float(
-                    np.nanmean(raw_logit_delta)
-                ),
+                "paired_mean_delta_causal_auc": float(np.nanmean(raw_logit_delta)),
                 "animals_increasing": int(np.sum(raw_logit_delta > 0)),
                 "n_animals": int(len(raw_logit_delta)),
                 "per_animal_delta_range": [
@@ -882,9 +835,7 @@ def main():
                     float(np.nanmin(leave_one_delta)),
                     float(np.nanmax(leave_one_delta)),
                 ],
-                "median_paired_mean_delta": float(
-                    np.nanmedian(leave_one_delta)
-                ),
+                "median_paired_mean_delta": float(np.nanmedian(leave_one_delta)),
                 "all_positive": bool(np.all(leave_one_delta > 0)),
             },
             "original_shared_baseline_secondary": {

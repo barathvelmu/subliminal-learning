@@ -28,7 +28,12 @@ RESULTS = PROMPTING / "results"
 STATE_PATH = ROOT / "scaling" / "vast_70b_state.json"
 KNOWN_HOSTS = ROOT / "scaling" / ".vast_70b_known_hosts"
 IMAGE = "pytorch/pytorch:2.6.0-cuda12.4-cudnn9-runtime"
-REMOTE_ROOT = "/workspace/subliminal-learning"
+# Vast images conventionally mount working storage at /workspace.  The
+# environment override keeps the runner usable with images that mount it
+# elsewhere without changing the recorded experiment defaults.
+REMOTE_ROOT = os.environ.get(
+    "SUBLIMINAL_REMOTE_ROOT", "/workspace/subliminal-learning"
+).rstrip("/")
 REMOTE_PROMPTING = f"{REMOTE_ROOT}/prompting"
 REMOTE_RESULTS = f"{REMOTE_PROMPTING}/results"
 MODEL_8B = "unsloth/Llama-3.1-8B-Instruct"
@@ -62,7 +67,9 @@ def json_command(command):
     try:
         return json.loads(result.stdout)
     except json.JSONDecodeError as error:
-        raise RuntimeError(f"expected JSON from {shlex.join(command)}: {result.stdout}") from error
+        raise RuntimeError(
+            f"expected JSON from {shlex.join(command)}: {result.stdout}"
+        ) from error
 
 
 def vast_binary():
@@ -198,7 +205,9 @@ def scp_base(port):
 def remote_command(host, port, script, *, check=True, timeout=None):
     command = ssh_base(host, port) + [f"bash -o pipefail -lc {shlex.quote(script)}"]
     try:
-        result = subprocess.run(command, text=True, capture_output=True, timeout=timeout)
+        result = subprocess.run(
+            command, text=True, capture_output=True, timeout=timeout
+        )
     except subprocess.TimeoutExpired as error:
         raise RuntimeError(f"remote command timed out: {script}") from error
     if check and result.returncode:
@@ -212,7 +221,9 @@ def remote_command(host, port, script, *, check=True, timeout=None):
 def wait_for_instance(vast, instance_id, deadline):
     last_status = None
     while time.monotonic() < deadline:
-        result = command_output([vast, "show", "instance", str(instance_id), "--raw"], check=False)
+        result = command_output(
+            [vast, "show", "instance", str(instance_id), "--raw"], check=False
+        )
         if result.returncode == 0:
             try:
                 data = json.loads(result.stdout)
@@ -255,7 +266,10 @@ def upload_code(host, port):
         PROMPTING / "entanglement.py",
         PROMPTING / "utils.py",
     ]
-    command_output(scp_base(port) + [*[str(path) for path in sources], f"root@{host}:{REMOTE_PROMPTING}/"])
+    command_output(
+        scp_base(port)
+        + [*[str(path) for path in sources], f"root@{host}:{REMOTE_PROMPTING}/"]
+    )
 
 
 def pull_file(host, port, remote_path, local_path, *, required=False):
@@ -268,7 +282,9 @@ def pull_file(host, port, remote_path, local_path, *, required=False):
         if temporary.exists():
             temporary.unlink()
         if required:
-            raise RuntimeError(f"could not pull required {remote_path}: {result.stderr}")
+            raise RuntimeError(
+                f"could not pull required {remote_path}: {result.stderr}"
+            )
         return False
     if local_path.suffix == ".npz":
         try:
@@ -310,7 +326,9 @@ def validate_artifact(tag, expected_numbers, expected_animals):
 
 
 def stop_remote_probe(host, port):
-    remote_command(host, port, "pkill -TERM -f collect_full_probe.py || true", check=False)
+    remote_command(
+        host, port, "pkill -TERM -f collect_full_probe.py || true", check=False
+    )
 
 
 def destroy_instance(vast, instance_id, attempts=3):
@@ -392,7 +410,9 @@ def run_remote_probe(
         for line in process.stdout:
             print(f"[{tag}] {line}", end="", flush=True)
         if process.returncode:
-            raise RuntimeError(f"remote probe {tag} failed with exit code {process.returncode}")
+            raise RuntimeError(
+                f"remote probe {tag} failed with exit code {process.returncode}"
+            )
     finally:
         selector.close()
         pull_file(host, port, log_path, ROOT / "scaling" / f"{tag}.log")
@@ -454,8 +474,12 @@ def analyze_downloaded():
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--execute", action="store_true", help="rent and run; default is dry-run")
-    parser.add_argument("--offer-id", type=int, help="use this eligible offer instead of best scored")
+    parser.add_argument(
+        "--execute", action="store_true", help="rent and run; default is dry-run"
+    )
+    parser.add_argument(
+        "--offer-id", type=int, help="use this eligible offer instead of best scored"
+    )
     parser.add_argument("--max-price", type=float, default=1.70)
     parser.add_argument("--disk-gb", type=int, default=220)
     parser.add_argument("--max-wall-seconds", type=int, default=5100)
@@ -471,7 +495,9 @@ def main():
     if not offers:
         raise RuntimeError("no eligible offer currently available")
     if args.offer_id is not None:
-        selected = next((offer for offer in offers if int(offer["id"]) == args.offer_id), None)
+        selected = next(
+            (offer for offer in offers if int(offer["id"]) == args.offer_id), None
+        )
         if selected is None:
             raise RuntimeError("requested offer is absent or fails safety filters")
     else:
@@ -503,7 +529,7 @@ def main():
         watchdog_seconds = args.max_wall_seconds + 300
         watchdog = (
             f"nohup bash -lc 'sleep {watchdog_seconds}; kill -TERM 1' "
-            f">/workspace/subliminal-watchdog.log 2>&1 &"
+            f">{REMOTE_ROOT}/subliminal-watchdog.log 2>&1 &"
         )
         created = json_command(
             [
@@ -528,7 +554,9 @@ def main():
         if not created.get("success"):
             raise RuntimeError(f"instance creation failed: {created}")
         instance_id = int(created["new_contract"])
-        state.update({"instance_id": instance_id, "status": "created", "created_at": utc_now()})
+        state.update(
+            {"instance_id": instance_id, "status": "created", "created_at": utc_now()}
+        )
         atomic_json(STATE_PATH, state)
         print(f"created Vast instance {instance_id}", flush=True)
 
@@ -540,7 +568,9 @@ def main():
 
         upload_code(host, port)
         install_environment(host, port)
-        remote_command(host, port, "nvidia-smi --query-gpu=name,memory.total --format=csv")
+        remote_command(
+            host, port, "nvidia-smi --query-gpu=name,memory.total --format=csv"
+        )
 
         run_remote_probe(
             vast,
@@ -600,11 +630,16 @@ def main():
             state["destroy_returncode"] = destroyed.returncode
             state["destroy_stdout"] = destroyed.stdout.strip()
             state["destroy_stderr"] = destroyed.stderr.strip()
-            state["status"] = "destroyed" if destroyed.returncode == 0 else "destroy_failed"
+            state["status"] = (
+                "destroyed" if destroyed.returncode == 0 else "destroy_failed"
+            )
             state["destroyed_at"] = utc_now()
             state["final_account"] = account(vast)
             atomic_json(STATE_PATH, state)
-            print(f"instance {instance_id} destruction return code: {destroyed.returncode}", flush=True)
+            print(
+                f"instance {instance_id} destruction return code: {destroyed.returncode}",
+                flush=True,
+            )
 
     validate_artifact("geometry_8b_cuda", 1110, 18)
     validate_artifact("geometry_70b_cuda", 1110, 18)

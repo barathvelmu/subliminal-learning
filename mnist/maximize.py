@@ -5,6 +5,7 @@ Combine the winning knobs from the sweeps (MSE loss, more distill epochs,
 narrower width). Search candidates on the VALIDATION set, pick the best, then
 report that single chosen config ONCE on the TEST set (our one allowed test run).
 """
+
 import json
 import numpy as np
 from dataclasses import asdict, replace
@@ -36,8 +37,7 @@ def main():
     print("=== validation search ===")
     results = []
     for i, ov in enumerate(CANDIDATES):
-        cfg = replace(base, seeds=VAL_SEEDS, eval_split="val",
-                      tag=f"max_cand{i}", **ov)
+        cfg = replace(base, seeds=VAL_SEEDS, eval_split="val", tag=f"max_cand{i}", **ov)
         m, s, _ = mean_student_aux(cfg, VAL_SEEDS, splits)
         results.append((m, s, ov))
         print(f"cand{i}: student_aux(val)={m:.3f}±{s:.3f}  {ov}")
@@ -46,12 +46,18 @@ def main():
     print(f"\nBest on val: {best_ov}  (val student_aux={best_m:.3f})")
 
     print("=== final TEST run (chosen config, 5 seeds) ===")
-    cfg = replace(base, seeds=TEST_SEEDS, eval_split="test", tag="max_best_test", **best_ov)
+    cfg = replace(
+        base, seeds=TEST_SEEDS, eval_split="test", tag="max_best_test", **best_ov
+    )
     m, s, per = mean_student_aux(cfg, TEST_SEEDS, splits)
     print(f"TEST student_aux = {m:.3f} ± {s:.3f}  (baseline was 0.463 ± 0.022)")
 
-    out = {"chosen_config": asdict(cfg), "val_search": [(r[0], r[1], r[2]) for r in results],
-           "test_student_aux_mean": m, "test_student_aux_std": s}
+    out = {
+        "chosen_config": asdict(cfg),
+        "val_search": [(r[0], r[1], r[2]) for r in results],
+        "test_student_aux_mean": m,
+        "test_student_aux_std": s,
+    }
     json.dump(out, open("results/maximize.json", "w"), indent=2)
     print("saved results/maximize.json")
 

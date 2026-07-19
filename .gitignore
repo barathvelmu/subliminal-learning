@@ -25,3 +25,24 @@ scaling/*.log
 prompting/results/*.npz
 Paper/Submission/AAAI27/code-data/data/raw/
 Paper/Submission/AAAI27/output/*.zip
+
+# Private author workspace. These files remain on the local machine but are not
+# part of the public research repository.
+Paper/00-START-HERE-FINAL-MAP.md
+Paper/Manuscript/
+Paper/Rebuttal/
+Paper/Submission/
+Paper/Learning/arxiv-and-other-venues-guide.md
+Paper/Learning/how-conference-submission-works.md
+Paper/Learning/solo-aaai-reality-check.md
+Paper/Learning/what-to-do-now.md
+Paper/Research/Papers/
+Paper/Research/aaai-accepted-benchmark.md
+Paper/Research/aaai27-ai-assistance-audit.md
+Paper/Research/frontier-decision.md
+Paper/Research/novelty-matrix.md
+scaling/*.md
+
+# Validation smoke tests are useful locally but are not scientific outputs.
+prompting/results/*smoke*.json
+prompting/results/*gate*.json

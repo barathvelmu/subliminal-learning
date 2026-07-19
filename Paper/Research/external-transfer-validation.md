@@ -1,8 +1,8 @@
-# S8 external student-transfer validation
+# External student-transfer validation
 
-## Baby-food verdict
+## Question and result
 
-We asked a strict new question:
+This analysis asks a stricter question than the frozen-model experiments:
 
 > If our frozen-model measurements are scientifically meaningful, do they tell
 > us which animal traits will later appear in a fine-tuned student?
@@ -12,11 +12,11 @@ We used the exact released Llama-3.1-8B student outcomes from Blank et al.
 statistics, controls, and main-paper gate in
 `Paper/Supplement/preregistration-s8-external-transfer.md` (commit `a107d0b`).
 
-The honest answer is: **our causal timing measurement did not predict their
-student outcomes.** Their own steering-vector measurement did.
+The causal timing measurement did not predict the released student outcomes.
+The study's steering-vector measurement did.
 
-This is useful. It stops us from turning a real frozen-model causal result into
-an unsupported claim about fine-tuning.
+That negative result prevents the frozen-model intervention from being
+overinterpreted as a mechanism or predictor of fine-tuning transfer.
 
 ## Exact external source
 
@@ -72,19 +72,14 @@ predictor exceeds causal AUC by `0.657`, with paired animal-bootstrap interval
 `[0.069, 1.207]`. The causal-versus-geometry and causal-versus-readout
 differences remain uncertain.
 
-## Decision
+## Interpretation
 
-No in-house predictor passed the preregistered main-paper gate. Therefore:
+No in-house predictor passed the preregistered gate. The complete negative
+result is reported rather than replacing the endpoint or selecting a favorable
+subset. The main causal finding remains a frozen-model scale and timing result,
+not a predictor of training-time transfer.
 
-- the six-page main paper is not expanded with a favorable subset or changed
-  endpoint;
-- the complete result is reported in the technical supplement and project
-  record;
-- no paid GPU or redundant fine-tuning expansion is justified;
-- the main causal result remains a frozen-model scale/timing result, not a
-  predictor or explanation of training-time transfer.
-
-## What this teaches us technically
+## Technical reading
 
 The intervention asks whether a whole assistant-position state controls another
 number prompt's animal answer. Blank et al.'s steering measure asks whether a
@@ -107,8 +102,7 @@ base-prior covariate, that evidence is not strong enough for a new claim.
 - `prompting/results/external_transfer_causal_summary.json`
 - `scaling/analyze_external_transfer.py`
 
-The three raw NPZ files remain local and are ignored from ordinary Git history
-because model arrays are binary artifacts. To stay below AAAI's 50 MB upload
-cap, the anonymous archive includes the external causal NPZ plus the external
-geometry/readout summaries and all three collector scripts; its README states
-this omission explicitly.
+The three raw NPZ files are omitted from ordinary Git history because they are
+large binary model outputs. The released summaries retain the joined
+animal-level values, fixed source revisions, hashes, uncertainty estimates, and
+all statistics used in the manuscript.

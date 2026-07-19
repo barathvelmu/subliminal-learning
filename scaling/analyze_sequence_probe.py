@@ -57,7 +57,9 @@ def summarize_correlations(coefficients, p_values, animals, bootstrap_indices):
         "mean_r": float(coefficients.mean()),
         "bootstrap_95_ci": interval(bootstrap),
         "positive_raw_p_lt_0.05": int(np.sum((coefficients > 0) & (p_values < 0.05))),
-        "positive_bh_fdr_q_lt_0.05": int(np.sum((coefficients > 0) & (q_values < 0.05))),
+        "positive_bh_fdr_q_lt_0.05": int(
+            np.sum((coefficients > 0) & (q_values < 0.05))
+        ),
         "per_animal": {
             animal: {
                 "r": float(coefficients[index]),
@@ -198,9 +200,13 @@ def analyze_model(label, path, bootstrap_indices):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--artifact", action="append", type=parse_artifact, required=True)
     parser.add_argument(
-        "--output", type=Path, default=Path("prompting/results/sequence_probe_summary.json")
+        "--artifact", action="append", type=parse_artifact, required=True
+    )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path("prompting/results/sequence_probe_summary.json"),
     )
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--bootstrap-resamples", type=int, default=100_000)

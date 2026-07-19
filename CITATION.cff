@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the preprint."
+title: "Subliminal Prompting Beyond Static Geometry: Causal Depth and Multi-Token Confounds"
+type: software
+authors:
+  - family-names: Velmurugan
+    given-names: Barath
+repository-code: "https://github.com/barathvelmu/subliminal-learning"
+url: "https://github.com/barathvelmu/subliminal-learning"
+date-released: 2026-07-19
+version: 1.0.0

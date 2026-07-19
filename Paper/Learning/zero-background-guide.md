@@ -262,9 +262,10 @@ hands control to the contextual hidden state much earlier even though its simple
 static output-arrow geometry is weaker.
 
 This is causal because we deliberately changed the hidden state. It still does
-not prove one special neuron or vector is “the mechanism.” We copied the entire
-assistant-position state, so the result proves that state is sufficient, not
-which piece inside it matters.
+not prove one special neuron or vector is “the mechanism.” Inserting the entire
+assistant-position state is sufficient to control this patched computation at
+the measured late depths, but the experiment does not identify which piece
+inside the state matters.
 
 ### Finding D: sequence length can fake a positive result
 
@@ -293,8 +294,8 @@ The literature audit found important prior ownership:
 - A positional-bias study already combines cross-model transfer, geometry,
   layerwise probing, and causal steering.
 
-Therefore our novelty must be narrow and exact. Read
-`../Research/novelty-matrix.md` for the full comparison.
+Therefore the novelty claim must be narrow and exact. The paper's Related Work
+section and nearest-comparison table give the full comparison.
 
 ## 13. We tested the training-time bridge, carefully
 

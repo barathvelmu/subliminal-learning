@@ -5,7 +5,7 @@
   "models": {
     "8B-MPS": {
       "label": "8B-MPS",
-      "path": "/Users/barathv/MIT Dropbox/Barath Velmurugan/Desktop/Projects/subliminal-learning/prompting/results/full_probe_geometry_8b.npz",
+      "path": "prompting/results/full_probe_geometry_8b.npz",
       "model": "unsloth/Llama-3.1-8B-Instruct",
       "n_animals": 18,
       "n_numbers": 1110,
@@ -1883,7 +1883,7 @@
     },
     "8B-CUDA": {
       "label": "8B-CUDA",
-      "path": "/Users/barathv/MIT Dropbox/Barath Velmurugan/Desktop/Projects/subliminal-learning/prompting/results/full_probe_geometry_8b_cuda.npz",
+      "path": "prompting/results/full_probe_geometry_8b_cuda.npz",
       "model": "unsloth/Llama-3.1-8B-Instruct",
       "n_animals": 18,
       "n_numbers": 1110,
@@ -3761,7 +3761,7 @@
     },
     "70B": {
       "label": "70B",
-      "path": "/Users/barathv/MIT Dropbox/Barath Velmurugan/Desktop/Projects/subliminal-learning/prompting/results/full_probe_geometry_70b_cuda.npz",
+      "path": "prompting/results/full_probe_geometry_70b_cuda.npz",
       "model": "unsloth/Meta-Llama-3.1-70B-Instruct",
       "n_animals": 18,
       "n_numbers": 1110,

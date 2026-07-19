@@ -1,10 +1,12 @@
 # subliminal-learning
 
+[![Validate public artifacts](https://github.com/barathvelmu/subliminal-learning/actions/workflows/validate.yml/badge.svg)](https://github.com/barathvelmu/subliminal-learning/actions/workflows/validate.yml)
+
 **A model can teach another model things it never says out loud.** I started this repo with two replications: a small MNIST network that learns to read handwritten digits from **pure random noise**, and a language model where telling it to love *owls* quietly makes it love the number *087*, and vice versa. The newest experiment pushes the second result to Llama-3.1-70B. There, the simple geometry story gets weaker even as causal control arrives much earlier.
 
 Subliminal learning sounds like it should not be possible, and that is exactly why it matters. If a student model can pick up a teacher's traits through data that visibly contains nothing about those traits, then filtering training data for bad content is not enough to stop bad traits from spreading between models. The original results come from [Anthropic's alignment team](https://alignment.anthropic.com/2025/subliminal-learning/) and follow-up work; this project independently replicates the core findings, resolves a contradiction between two published numbers, scales the language-model analysis to 70B, and ends with a mechanism story that the data actually supports.
 
-The [paper](Paper/Submission/AAAI27/output/pdf/aaai27-main.pdf) is the shortest route to the full result. If the subject is new, start with the [zero-background guide](Paper/Learning/zero-background-guide.md). The [reproducibility notes](Paper/Reproducibility/README.md) trace every headline number back to saved artifacts, and the [novelty comparison](Paper/Research/novelty-matrix.md) shows exactly where this work sits relative to the closest papers.
+The [paper](Paper/output/pdf/preprint.pdf) is the shortest route to the full result. If the subject is new, start with the [zero-background guide](Paper/Learning/zero-background-guide.md). The [supplement](Paper/output/pdf/supplement.pdf) records the full experimental specification, and the [reproducibility notes](Paper/Reproducibility/README.md) trace the headline numbers back to saved artifacts.
 
 ## See it happen (one minute, CPU only)
 
@@ -25,7 +27,7 @@ results (MNIST test set, chance = 10%):
   control, different init, same training:      10.0%   <- collapses to chance
 ```
 
-The student never saw a digit, and the weights that read out digit predictions never received a gradient. Yet it reads digits. The control row is the punchline: an identical student whose initialization is swapped to a *different* teacher learns nothing, therefore the trait is not traveling through the data at all. It travels through the shared starting point.
+The student never saw a digit, and the weights that read out digit predictions never received a gradient. Yet it reads digits. An otherwise identical student paired with a differently initialized teacher stays at chance, showing that the effect depends on the shared starting point.
 
 There is a language-model version too. Pick any animal and watch which numbers it is entangled with (first run downloads a 1B model, ~2.5 GB; CPU is fine):
 
@@ -40,11 +42,11 @@ The setup, in plain terms: build an MLP with 10 digit outputs plus 3 extra "auxi
 
 ![Baseline](mnist/figures/baseline_bars.png)
 
-The effect replicates cleanly: the student reaches **46.3% ± 2.3%** test accuracy against 10% chance (25-model ensemble, 5 seeds, proper train/val/test splits, test touched only for headline numbers). The cross-model control collapses to **9.8%**, confirming the shared initialization carries everything.
+The effect replicates cleanly: the student reaches **46.3% ± 2.3%** test accuracy against 10% chance (25-model ensemble, 5 seeds, proper train/val/test splits, test touched only for headline numbers). The cross-model control collapses to **9.8%**, showing that transfer depends on shared initialization in this setup.
 
 ### A contradiction in the literature
 
-The original paper reported the student above 50%. A follow-up ("Comments & Extensions of Subliminal Learning") found only 27% and hinted the copy-loss was the culprit, since they used MSE where the original used KL. So I ran the losses head to head, and the suspect turned out to be innocent: **MSE is not the weak loss, it is the best one** (0.566 ± 0.004 vs 0.45 for KL). Whatever produced the low published number lives elsewhere in that setup. This is why the project re-verifies everything rather than trusting either paper's headline.
+The original paper reported the student above 50%. A follow-up ("Comments & Extensions of Subliminal Learning") found only 27% and suggested the copy loss might explain the gap, since it used MSE where the original used KL. In a direct comparison here, MSE was the strongest of the tested losses (0.566 ± 0.004, compared with 0.45 for KL). The published discrepancy therefore cannot be explained by that loss choice alone.
 
 ### What makes the effect stronger or weaker
 
@@ -90,7 +92,7 @@ The prompting version of the same idea, reported as token entanglement: boost on
 
 **The geometry explanation mostly fails.** The unembedding-cosine hypothesis predicts behavior at r ≈ 0.1 to 0.15, which is 1 to 2% of variance. One vivid data point: owl→087, the strongest *behavioral* pair, ranks only ~#80 to #150 of 1110 by geometry. I proposed a cleaner metric (mean-centered cosine, motivated by softmax's invariance to constant logit shifts) and it does improve prediction of the subliminal direction by 31%, but the improvement is not statistically significant across animals, so I report it as suggestive only.
 
-**So what is actually going on?** The decomposition experiment splits the effect into a generic part (some numbers light up when the model professes love for *anything*) and an animal-specific part. The generic part is large in raw variance but misaligned between directions, so it acts as a mask. Subsequently, removing it makes the real signal *stronger and universal*: the mean correlation jumps from 0.067 to **0.210 and all 18 animals turn positive**, including the "dead" ones. A permutation control (re-pairing each animal's forward pattern with a different animal's reverse pattern) scores −0.012 against 0.210 for matched pairs, in 18 of 18 animals. The best-supported picture is therefore two components: a generic persona-shift that obscures, and a genuine pretraining-learned animal↔number coupling underneath, which simple geometry captures only faintly.
+**So what is actually going on?** The decomposition experiment splits the effect into a generic part (some numbers light up when the model professes love for *anything*) and an animal-specific part. The generic part is large in raw variance but misaligned between directions, so it acts as a mask. Removing it raises the mean correlation from 0.067 to **0.210**, with positive values for all 18 animals in the fixed panel. A permutation control (re-pairing each animal's forward pattern with a different animal's reverse pattern) scores −0.012 against 0.210 for matched pairs, in 18 of 18 animals. The best-supported picture is therefore two components: a generic persona shift that obscures an animal↔number coupling underneath, which simple geometry captures only faintly.
 
 ## At 70B, the easy explanation breaks
 
@@ -120,7 +122,7 @@ Qwen breaks `087` into several digit tokens, so a one-token score is no longer t
 
 ![Multi-token scoring and the decimal-width confound](prompting/figures/s4_multitoken_sequence.png)
 
-This is not a cosmetic scoring choice. Per-token averaging rewards shorter sequences; decimal width changes both the number of terms being averaged and the tokenization regime. A positive pooled result can therefore be manufactured by length composition even when the fixed-width full-sequence effect is absent.
+The scoring choice changes the quantity being measured. Per-token averaging rewards shorter sequences; decimal width changes both the number of terms being averaged and the tokenization regime. Length composition can therefore produce a positive pooled result even when the fixed-width full-sequence effect is absent.
 
 ### The external test did not flatter us
 
@@ -130,18 +132,18 @@ That null belongs in the result. Prompt-time causal control is not automatically
 
 ## What I would and would not trust
 
-Honesty over polish, so the limits, plainly:
+The main limits are:
 
-- The coverage explanation in Part 1 is a dose-response correlation plus a refuted alternative, not a causal proof. Medium confidence.
+- The MNIST coverage explanation is a dose-response correlation plus a refuted alternative, not a causal proof. Medium confidence.
 - Representation similarity is necessary but not sufficient: one configuration (4x init scale) reached high similarity at chance accuracy, and the overall correlation is a loose r = 0.61.
-- Part 2's effects are modest in absolute terms (r ≈ 0.1 to 0.2), and the exact entangled pairs are model-specific: on the 8B model the phenomenon holds (13/18 animals) but owl→087 drops from rank 1 to rank 684. Do not expect the same pairs elsewhere.
+- The prompting effects are modest in absolute terms (r ≈ 0.1 to 0.2), and the exact entangled pairs are model-specific: on the 8B model the phenomenon holds (13/18 animals) but owl→087 drops from rank 1 to rank 684. Do not expect the same pairs elsewhere.
 - The two-component decomposition is one way to slice the effect; confirming the split needs more model families and prompt formats.
-- Part 3 compares one same-release 8B/70B pair at five coarse depths. It supports a matched contrast, not a scaling law or an exact causal-onset layer.
+- The scale study compares one same-release 8B/70B pair at five coarse depths. It supports a matched contrast, not a scaling law or an exact causal-onset layer.
 - Full residual-state patching establishes intervention-specific sufficiency and control. It does not establish necessity, identify a unique feature or circuit, or prove that the hybrid activation is fully on-manifold.
 - The Qwen comparison changes tokenizer, model family, architecture, and scale together. It identifies a real measurement boundary, not which of those changes caused it.
 - Prompt-time causal control did not predict released training-time transfer. A toy MLP, frozen prompting, and a full fine-tuning pipeline answer different questions and should not be collapsed into one mechanism claim.
 
-Also, in the interest of the same honesty: the cross-model control originally used a plain random permutation, which pairs ~1 of 25 students with its own teacher and quietly inflates the control above chance. It is now a derangement, and every number was re-run under the fixed code. All results in this README are bit-for-bit reproducible from the final scripts (verified by running the Part 2 experiment twice and matching correlations to six decimals).
+The cross-model control originally used a plain random permutation, which pairs about 1 of 25 students with its own teacher and slightly inflates the control. It now uses a derangement, and every affected number was recomputed. A repeated prompting run matched the reported correlations to six decimal places.
 
 ## Reproducing everything
 

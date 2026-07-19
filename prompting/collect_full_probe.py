@@ -163,8 +163,12 @@ def initial_arrays(
         "number_ids": np.asarray(number_ids, dtype=np.int64),
         "number_strs": np.asarray(number_strs),
         "animals": np.asarray(animals),
-        "animal_first_token_ids": np.asarray([ids[0] for ids in token_ids], dtype=np.int64),
-        "animal_token_counts": np.asarray([len(ids) for ids in token_ids], dtype=np.int64),
+        "animal_first_token_ids": np.asarray(
+            [ids[0] for ids in token_ids], dtype=np.int64
+        ),
+        "animal_token_counts": np.asarray(
+            [len(ids) for ids in token_ids], dtype=np.int64
+        ),
         "reverse_logp": np.full((n_numbers, n_animals), np.nan, dtype=np.float64),
         "forward_logp": np.full((n_animals, n_numbers), np.nan, dtype=np.float64),
         "baseline_logp": np.full(n_animals, np.nan, dtype=np.float64),
@@ -200,13 +204,17 @@ def validate_resume(
     }
     for key, value in expected.items():
         if metadata.get(key) != value:
-            raise ValueError(f"Checkpoint mismatch for {key}: {metadata.get(key)!r} != {value!r}")
+            raise ValueError(
+                f"Checkpoint mismatch for {key}: {metadata.get(key)!r} != {value!r}"
+            )
     for key, value in {
         "load_device_map_requested": load_device_map,
         "load_dtype_requested": load_dtype,
     }.items():
         if key in metadata and metadata[key] != value:
-            raise ValueError(f"Checkpoint mismatch for {key}: {metadata[key]!r} != {value!r}")
+            raise ValueError(
+                f"Checkpoint mismatch for {key}: {metadata[key]!r} != {value!r}"
+            )
     if arrays["number_ids"].tolist() != number_ids:
         raise ValueError("Checkpoint number-token IDs differ")
     if arrays["number_strs"].tolist() != number_strs:
@@ -235,7 +243,9 @@ def collect_unembedding(model, number_ids, token_ids):
     number_rows = full_weight.index_select(0, number_index)
 
     max_tokens = max(len(ids) for ids in token_ids)
-    animal_rows = torch.zeros((len(token_ids), max_tokens, hidden_size), dtype=torch.float32)
+    animal_rows = torch.zeros(
+        (len(token_ids), max_tokens, hidden_size), dtype=torch.float32
+    )
     animal_mask = torch.zeros((len(token_ids), max_tokens), dtype=torch.bool)
     for animal_index, ids in enumerate(token_ids):
         index = torch.as_tensor(ids, dtype=torch.long)
@@ -339,7 +349,9 @@ def main():
         if is_complete(existing) and not args.refresh_geometry:
             metadata = metadata_from(existing)
             if metadata.get("model") != args.model or metadata.get("tag") != args.tag:
-                raise ValueError("Complete artifact exists but model/tag does not match")
+                raise ValueError(
+                    "Complete artifact exists but model/tag does not match"
+                )
             print(f"already complete: {artifact_path}")
             return
 
@@ -396,21 +408,36 @@ def main():
         total_complete = int(np.sum(~np.isnan(arrays["reverse_logp"][:, 0])))
         if completed_since_save >= args.checkpoint_every:
             save_checkpoint(
-                artifact_path, arrays, "number_to_animal", prior_elapsed, process_started
+                artifact_path,
+                arrays,
+                "number_to_animal",
+                prior_elapsed,
+                process_started,
             )
             completed_since_save = 0
             print(f"  checkpoint: {total_complete}/{len(number_ids)} number rows")
-        if args.stop_after_number_rows is not None and total_complete >= args.stop_after_number_rows:
+        if (
+            args.stop_after_number_rows is not None
+            and total_complete >= args.stop_after_number_rows
+        ):
             save_checkpoint(
-                artifact_path, arrays, "intentional_test_stop", prior_elapsed, process_started
+                artifact_path,
+                arrays,
+                "intentional_test_stop",
+                prior_elapsed,
+                process_started,
             )
-            print(f"intentional test stop after {total_complete} rows; saved {artifact_path}")
+            print(
+                f"intentional test stop after {total_complete} rows; saved {artifact_path}"
+            )
             return
     save_checkpoint(artifact_path, arrays, "baseline", prior_elapsed, process_started)
 
     if np.isnan(arrays["baseline_logp"]).any():
         arrays["baseline_logp"] = selected_log_probs(model, tok, None, animal_first_ids)
-        save_checkpoint(artifact_path, arrays, "animal_to_number", prior_elapsed, process_started)
+        save_checkpoint(
+            artifact_path, arrays, "animal_to_number", prior_elapsed, process_started
+        )
 
     for animal_index, animal in enumerate(args.animals):
         if not np.isnan(arrays["forward_logp"][animal_index]).any():
@@ -419,13 +446,17 @@ def main():
         arrays["forward_logp"][animal_index] = selected_log_probs(
             model, tok, system_prompt, number_ids
         )
-        save_checkpoint(artifact_path, arrays, "animal_to_number", prior_elapsed, process_started)
+        save_checkpoint(
+            artifact_path, arrays, "animal_to_number", prior_elapsed, process_started
+        )
         print(f"  checkpoint: {animal_index + 1}/{len(args.animals)} animal rows")
 
     if args.refresh_geometry:
         arrays["geometry_complete"] = np.asarray(False)
     if not bool(arrays["geometry_complete"].item()):
-        print("collecting selected full-precision unembedding rows and vocabulary mean...")
+        print(
+            "collecting selected full-precision unembedding rows and vocabulary mean..."
+        )
         (
             arrays["number_unembedding"],
             arrays["animal_unembedding_tokens"],
@@ -438,7 +469,9 @@ def main():
         metadata = metadata_from(arrays)
         metadata["checkpoint_weight_dtype"] = weight_dtype
         metadata["saved_unembedding_dtype"] = "float32"
-        metadata["unembedding_mean_method"] = "full_fp32_torch_mean_matching_geometry_metrics_v1"
+        metadata["unembedding_mean_method"] = (
+            "full_fp32_torch_mean_matching_geometry_metrics_v1"
+        )
         metadata["output_vocab_size"] = vocab_size
         metadata["hidden_size"] = hidden_size
         arrays["metadata_json"] = np.asarray(json.dumps(metadata))

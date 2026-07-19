@@ -1,5 +1,5 @@
 {
-  "artifact": "/Users/barathv/MIT Dropbox/Barath Velmurugan/Desktop/Projects/subliminal-learning/prompting/results/causal_patch_external_zoo_8b_mps.npz",
+  "artifact": "prompting/results/causal_patch_external_zoo_8b_mps.npz",
   "metadata": {
     "schema_version": 1,
     "model": "unsloth/Meta-Llama-3.1-8B-Instruct",

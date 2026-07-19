@@ -107,7 +107,9 @@ def load_outcomes(path):
         raise ValueError("external animal rows are missing, duplicated, or unexpected")
     by_animal = {row["animal"]: row for row in rows}
     if "base_prior_count" in rows[0]:
-        base_prior = np.asarray([float(by_animal[a]["base_prior_count"]) for a in ANIMALS])
+        base_prior = np.asarray(
+            [float(by_animal[a]["base_prior_count"]) for a in ANIMALS]
+        )
     else:
         base_prior = None
     return np.asarray([float(by_animal[a]["sl_rate"]) for a in ANIMALS]), base_prior
@@ -146,7 +148,10 @@ def main():
         [geometry_json["primary"]["per_animal"][a]["r"] for a in ANIMALS]
     )
     readout = np.asarray(
-        [readout_json["positions"]["assistant"]["per_animal"][a]["auc"] for a in ANIMALS]
+        [
+            readout_json["positions"]["assistant"]["per_animal"][a]["auc"]
+            for a in ANIMALS
+        ]
     )
     causal = np.asarray(
         [causal_json["per_animal"][a]["corrected_causal_auc"] for a in ANIMALS]
@@ -181,7 +186,9 @@ def main():
             "finite_permutations": finite_permutations,
         }
 
-    adjusted = bh_adjust([results[name]["permutation_p_two_sided"] for name in IN_HOUSE])
+    adjusted = bh_adjust(
+        [results[name]["permutation_p_two_sided"] for name in IN_HOUSE]
+    )
     for name, q_value in zip(IN_HOUSE, adjusted):
         results[name]["bh_fdr_q_in_house_family"] = float(q_value)
 
@@ -239,7 +246,9 @@ def main():
             "steering_stored_snapshot_sha256": sha256(args.steering),
             "base_prior_available": base_prior is not None,
             "base_prior_sensitivity_status": (
-                "available" if base_prior is not None else "not computable: column absent upstream"
+                "available"
+                if base_prior is not None
+                else "not computable: column absent upstream"
             ),
         },
         "seed": args.seed,

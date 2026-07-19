@@ -78,9 +78,7 @@ def main():
         primary = model["corrected_primary"]
         depths = model["actual_relative_depths"]
         x, donor = augmented(primary["mean_donor_beta_by_depth"], depths, 0.0)
-        _, recipient = augmented(
-            primary["mean_recipient_gamma_by_depth"], depths, 1.0
-        )
+        _, recipient = augmented(primary["mean_recipient_gamma_by_depth"], depths, 1.0)
         handoff_axis.plot(
             x,
             donor,

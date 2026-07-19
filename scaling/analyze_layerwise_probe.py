@@ -65,12 +65,12 @@ def correlation_curves(scores, behavior):
 
 def specificity_inputs(scores, behavior):
     n_animals = scores.shape[2]
-    score_contrast = (
-        n_animals * scores - scores.sum(axis=2, keepdims=True)
-    ) / (n_animals - 1)
-    behavior_contrast = (
-        n_animals * behavior - behavior.sum(axis=1, keepdims=True)
-    ) / (n_animals - 1)
+    score_contrast = (n_animals * scores - scores.sum(axis=2, keepdims=True)) / (
+        n_animals - 1
+    )
+    behavior_contrast = (n_animals * behavior - behavior.sum(axis=1, keepdims=True)) / (
+        n_animals - 1
+    )
     return score_contrast, behavior_contrast
 
 
@@ -91,8 +91,7 @@ def curve_summary(curves, degenerate, relative_depth, animals, bootstrap_indices
         if len(candidates):
             half_index = int(candidates[0])
     leave_one_out_auc = [
-        float(np.delete(per_animal_auc, index).mean())
-        for index in range(len(animals))
+        float(np.delete(per_animal_auc, index).mean()) for index in range(len(animals))
     ]
     return {
         "mean_r_by_layer": mean_curve.tolist(),
@@ -110,7 +109,8 @@ def curve_summary(curves, degenerate, relative_depth, animals, bootstrap_indices
         "degenerate_cell_count": int(degenerate.sum()),
         "degenerate_cells_by_layer": degenerate.sum(axis=0).astype(int).tolist(),
         "leave_one_animal_out_auc_range": [
-            float(min(leave_one_out_auc)), float(max(leave_one_out_auc))
+            float(min(leave_one_out_auc)),
+            float(max(leave_one_out_auc)),
         ],
         "per_animal": {
             animal: {
@@ -162,9 +162,7 @@ def analyze_model(label, path, bootstrap_indices):
         "n_numbers": int(info["n_numbers"]),
         "n_animals": len(animals),
         "transformer_block_count": int(info["transformer_block_count"]),
-        "layer_count_including_embedding": int(
-            info["layer_count_including_embedding"]
-        ),
+        "layer_count_including_embedding": int(info["layer_count_including_embedding"]),
         "final_logit_max_abs_delta": float(info["final_logit_max_abs_delta"]),
         "positions": results,
         "_animals": animals,
@@ -175,7 +173,9 @@ def analyze_model(label, path, bootstrap_indices):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--artifact", action="append", type=parse_artifact, required=True)
+    parser.add_argument(
+        "--artifact", action="append", type=parse_artifact, required=True
+    )
     parser.add_argument(
         "--output",
         type=Path,
@@ -221,8 +221,7 @@ def main():
                 "n_animals": len(delta),
             }
             specific_delta = (
-                raw_specific_auc[larger][position]
-                - raw_specific_auc[smaller][position]
+                raw_specific_auc[larger][position] - raw_specific_auc[smaller][position]
             )
             specific_sampled = specific_delta[bootstrap_indices].mean(axis=1)
             position_results[position]["animal_specific_contrast"] = {

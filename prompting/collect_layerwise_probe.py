@@ -60,7 +60,9 @@ def locate_number_mentions(tokenizer, prompt, system_prompt, number):
     offsets = encoding["offset_mapping"]
     system_start = prompt.find(system_prompt)
     if system_start < 0 or prompt.find(system_prompt, system_start + 1) >= 0:
-        raise ValueError("could not uniquely locate the system message in rendered prompt")
+        raise ValueError(
+            "could not uniquely locate the system message in rendered prompt"
+        )
     spans = [
         (system_start + match.start(), system_start + match.end())
         for match in re.finditer(re.escape(number), system_prompt)
@@ -105,9 +107,9 @@ def layerwise_scores(
         tokenizer, prompt, system_prompt, number
     )
     input_device = model.get_input_embeddings().weight.device
-    input_ids = torch.as_tensor(
-        input_ids_list, dtype=torch.long, device=input_device
-    )[None]
+    input_ids = torch.as_tensor(input_ids_list, dtype=torch.long, device=input_device)[
+        None
+    ]
     outputs = model(
         input_ids=input_ids,
         output_hidden_states=True,
@@ -223,7 +225,9 @@ def main():
 
     started = time.monotonic()
     torch.manual_seed(0)
-    model, tokenizer = load_model(args.model, device_map=args.device_map, dtype=args.dtype)
+    model, tokenizer = load_model(
+        args.model, device_map=args.device_map, dtype=args.dtype
+    )
     model.eval()
     current_animal_ids = [
         tokenizer(" " + animal, add_special_tokens=False).input_ids[0]
@@ -235,9 +239,7 @@ def main():
     norm = model.model.norm
     output_weight = model.get_output_embeddings().weight.detach()
     norm_weight = norm.weight.detach().to(output_weight.device)
-    norm_epsilon = float(
-        getattr(norm, "variance_epsilon", getattr(norm, "eps", 1e-6))
-    )
+    norm_epsilon = float(getattr(norm, "variance_epsilon", getattr(norm, "eps", 1e-6)))
     output_index = torch.as_tensor(
         animal_first_ids.tolist(), dtype=torch.long, device=output_weight.device
     )

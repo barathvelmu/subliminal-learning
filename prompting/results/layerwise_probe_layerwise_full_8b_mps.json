@@ -5,7 +5,7 @@
   "layer_count_including_embedding": 33,
   "final_logit_max_abs_delta": 0.0,
   "selected_row_kernel_max_abs_delta_before_exact_endpoint": 0.0625,
-  "raw_artifact": "/Users/barathv/MIT Dropbox/Barath Velmurugan/Desktop/Projects/subliminal-learning/prompting/results/layerwise_probe_layerwise_full_8b_mps.npz",
+  "raw_artifact": "prompting/results/layerwise_probe_layerwise_full_8b_mps.npz",
   "metadata": {
     "schema_version": 1,
     "model": "unsloth/Llama-3.1-8B-Instruct",

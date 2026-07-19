@@ -14,22 +14,32 @@ Compare three sources of hidden features:
   - teacher                -> upper bound
 Also report each model's own (random-readout) accuracy for contrast.
 """
+
 import numpy as np
 import torch as t
 from sklearn.linear_model import LogisticRegression
 
-from experiment import (Config, load_splits, MultiClassifier, train, distill,
-                          accuracy, DEVICE, N_DIGITS)
+from experiment import (
+    Config,
+    load_splits,
+    MultiClassifier,
+    train,
+    distill,
+    accuracy,
+    DEVICE,
+    N_DIGITS,
+)
 
-cfg = Config(n_models=5, seeds=(0,))   # baseline config (KL, width 256, 5 epochs)
-t.manual_seed(0); np.random.seed(0)
+cfg = Config(n_models=5, seeds=(0,))  # baseline config (KL, width 256, 5 epochs)
+t.manual_seed(0)
+np.random.seed(0)
 tr_x1, tr_y1, val_x1, val_y1, te_x1, te_y1 = load_splits()
 N = cfg.n_models
 sizes = cfg.layer_sizes
 aux_idx = list(range(N_DIGITS, cfg.total_out))
 
 train_x = tr_x1.unsqueeze(0).expand(N, -1, -1, -1, -1)
-distill_x = (t.rand_like(train_x) * 2 - 1)
+distill_x = t.rand_like(train_x) * 2 - 1
 
 reference = MultiClassifier(N, sizes, cfg.init_scale).to(DEVICE)
 teacher = MultiClassifier(N, sizes, cfg.init_scale).to(DEVICE)
@@ -56,7 +66,8 @@ def hidden_np(model, x):
 
 
 def probe(model):
-    H_fit = hidden_np(model, fit_x); H_te = hidden_np(model, test_x)
+    H_fit = hidden_np(model, fit_x)
+    H_te = hidden_np(model, test_x)
     accs = []
     for m in range(N):
         clf = LogisticRegression(max_iter=150, C=1.0, solver="lbfgs", n_jobs=-1)
@@ -70,7 +81,13 @@ def own_acc(model):
 
 
 print("Linear-probe accuracy on hidden features (fit on train, eval on test):")
-for name, model in [("reference(untrained)", reference), ("student(aux only)", student), ("teacher", teacher)]:
+for name, model in [
+    ("reference(untrained)", reference),
+    ("student(aux only)", student),
+    ("teacher", teacher),
+]:
     p = probe(model)
     o = own_acc(model)
-    print(f"  {name:22s} probe={p.mean():.3f}±{p.std(ddof=1):.3f}   own_readout_acc={o.mean():.3f}±{o.std(ddof=1):.3f}")
+    print(
+        f"  {name:22s} probe={p.mean():.3f}±{p.std(ddof=1):.3f}   own_readout_acc={o.mean():.3f}±{o.std(ddof=1):.3f}"
+    )

@@ -5,7 +5,7 @@
   "layer_count_including_embedding": 81,
   "final_logit_max_abs_delta": 0.0,
   "selected_row_kernel_max_abs_delta_before_exact_endpoint": 0.0625,
-  "raw_artifact": "/workspace/subliminal-learning/prompting/results/layerwise_probe_layerwise_70b_cuda.npz",
+  "raw_artifact": "prompting/results/layerwise_probe_layerwise_70b_cuda.npz",
   "metadata": {
     "schema_version": 1,
     "model": "unsloth/Meta-Llama-3.1-70B-Instruct",

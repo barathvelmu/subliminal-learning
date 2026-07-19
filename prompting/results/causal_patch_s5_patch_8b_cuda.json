@@ -1,5 +1,5 @@
 {
-  "artifact": "/workspace/subliminal-learning/prompting/results/causal_patch_s5_patch_8b_cuda.npz",
+  "artifact": "prompting/results/causal_patch_s5_patch_8b_cuda.npz",
   "metadata": {
     "schema_version": 1,
     "model": "unsloth/Llama-3.1-8B-Instruct",

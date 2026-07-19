@@ -46,7 +46,11 @@ def percentile_interval(values):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--results-dir", type=Path, default=Path("prompting/results"))
-    parser.add_argument("--output", type=Path, default=Path("prompting/results/size_ladder_summary.json"))
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path("prompting/results/size_ladder_summary.json"),
+    )
     parser.add_argument(
         "--artifact",
         action="append",
@@ -71,11 +75,15 @@ def main():
         if animal_order is None:
             animal_order = animals
         elif animals != animal_order:
-            raise ValueError(f"Animal order differs for {label}; paired comparison is invalid")
+            raise ValueError(
+                f"Animal order differs for {label}; paired comparison is invalid"
+            )
         loaded[label] = artifact
 
     rng = np.random.default_rng(args.seed)
-    indices = rng.integers(0, len(animal_order), size=(args.bootstrap_resamples, len(animal_order)))
+    indices = rng.integers(
+        0, len(animal_order), size=(args.bootstrap_resamples, len(animal_order))
+    )
 
     summary = {}
     r_by_model = {}

@@ -22,7 +22,12 @@ import numpy as np
 import torch
 import transformers
 
-from collect_full_probe import atomic_save_json, atomic_save_npz, build_prompt, selected_log_probs
+from collect_full_probe import (
+    atomic_save_json,
+    atomic_save_npz,
+    build_prompt,
+    selected_log_probs,
+)
 from entanglement import ANIMALS
 from utils import ANIMAL_PROMPT_TEMPLATE, NUMBER_PROMPT_TEMPLATE, load_model
 
@@ -138,9 +143,7 @@ def naive_sequence_log_prob(model, tokenizer, prompt, sequence):
     total = 0.0
     for index, token_id in enumerate(sequence):
         position = len(prompt_ids) - 1 + index
-        probability = float(
-            logits[position].float().softmax(-1)[int(token_id)].item()
-        )
+        probability = float(logits[position].float().softmax(-1)[int(token_id)].item())
         total += float(np.log(probability + FLOOR))
     return total
 
@@ -199,14 +202,17 @@ def main():
 
     started = time.monotonic()
     torch.manual_seed(0)
-    model, tokenizer = load_model(args.model, device_map=args.device_map, dtype=args.dtype)
+    model, tokenizer = load_model(
+        args.model, device_map=args.device_map, dtype=args.dtype
+    )
     model.eval()
     numbers = decimal_strings(args.widths, args.max_per_width)
     sequences = token_sequences(tokenizer, numbers)
     sequence_ids, sequence_mask = padded_sequences(sequences)
     number_widths = np.asarray([len(number) for number in numbers], dtype=np.int64)
     animal_token_ids = [
-        tokenizer(" " + animal, add_special_tokens=False).input_ids for animal in args.animals
+        tokenizer(" " + animal, add_special_tokens=False).input_ids
+        for animal in args.animals
     ]
     animal_first_ids = [ids[0] for ids in animal_token_ids]
     prompt_digest = hashlib.sha256(

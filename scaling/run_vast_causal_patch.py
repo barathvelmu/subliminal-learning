@@ -13,7 +13,6 @@ import shlex
 import subprocess
 import sys
 import time
-from pathlib import Path
 
 import numpy as np
 
@@ -279,7 +278,7 @@ def main():
         watchdog_seconds = args.max_wall_seconds + 300
         watchdog = (
             f"nohup bash -lc 'sleep {watchdog_seconds}; kill -TERM 1' "
-            f">/workspace/subliminal-s5-watchdog.log 2>&1 &"
+            f">{REMOTE_ROOT}/subliminal-s5-watchdog.log 2>&1 &"
         )
         created = json_command(
             [
@@ -324,15 +323,31 @@ def main():
         print(gpu_info.stdout, flush=True)
 
         run_remote_probe(
-            vast, host, port, TAG_8B, MODEL_8B, BASE_8B, paid_started,
-            args.max_wall_seconds, args.credit_floor, args.batch_size,
+            vast,
+            host,
+            port,
+            TAG_8B,
+            MODEL_8B,
+            BASE_8B,
+            paid_started,
+            args.max_wall_seconds,
+            args.credit_floor,
+            args.batch_size,
         )
         pull_tag(host, port, TAG_8B, required=True)
         validate_artifact(TAG_8B, MODEL_8B)
 
         run_remote_probe(
-            vast, host, port, TAG_70B, MODEL_70B, BASE_70B, paid_started,
-            args.max_wall_seconds, args.credit_floor, args.batch_size,
+            vast,
+            host,
+            port,
+            TAG_70B,
+            MODEL_70B,
+            BASE_70B,
+            paid_started,
+            args.max_wall_seconds,
+            args.credit_floor,
+            args.batch_size,
         )
         pull_tag(host, port, TAG_70B, required=True)
         validate_artifact(TAG_70B, MODEL_70B)
@@ -343,7 +358,9 @@ def main():
             for tag in tags:
                 pull_tag(host, port, tag)
                 pull_file(
-                    host, port, f"{REMOTE_ROOT}/{tag}.log",
+                    host,
+                    port,
+                    f"{REMOTE_ROOT}/{tag}.log",
                     ROOT / "scaling" / f"{tag}.log",
                 )
         if instance_id is not None:

@@ -46,14 +46,20 @@ def geometry_matrices(data, variant):
         animal_rows = animal_token_rows[:, 0]
     else:
         animal_rows = np.stack(
-            [animal_token_rows[index, mask[index]].mean(axis=0) for index in range(len(mask))]
+            [
+                animal_token_rows[index, mask[index]].mean(axis=0)
+                for index in range(len(mask))
+            ]
         )
     centered_numbers = number_rows - mean
     centered_animals = animal_rows - mean
 
     def cosine(left, right):
         numerator = left @ right.T
-        denominator = np.linalg.norm(left, axis=1)[:, None] * np.linalg.norm(right, axis=1)[None, :]
+        denominator = (
+            np.linalg.norm(left, axis=1)[:, None]
+            * np.linalg.norm(right, axis=1)[None, :]
+        )
         return numerator / denominator
 
     return {
@@ -97,14 +103,20 @@ def analyze_model(label, path, bootstrap_indices):
         for metric in METRICS:
             metric_result = {}
             for direction in DIRECTIONS:
-                coefficients, p_values = correlations(matrices[metric], behavior[direction])
+                coefficients, p_values = correlations(
+                    matrices[metric], behavior[direction]
+                )
                 bootstrap_means = coefficients[bootstrap_indices].mean(axis=1)
                 q_values = bh_adjust(p_values)
                 metric_result[direction] = {
                     "mean_r": float(coefficients.mean()),
                     "bootstrap_95_ci": interval(bootstrap_means),
-                    "positive_raw_p_lt_0.05": int(np.sum((coefficients > 0) & (p_values < 0.05))),
-                    "positive_bh_fdr_q_lt_0.05": int(np.sum((coefficients > 0) & (q_values < 0.05))),
+                    "positive_raw_p_lt_0.05": int(
+                        np.sum((coefficients > 0) & (p_values < 0.05))
+                    ),
+                    "positive_bh_fdr_q_lt_0.05": int(
+                        np.sum((coefficients > 0) & (q_values < 0.05))
+                    ),
                     "per_animal": {
                         animal: {
                             "r": float(coefficients[index]),
@@ -121,11 +133,17 @@ def analyze_model(label, path, bootstrap_indices):
     primary_geometry = geometry_matrices(data, "mean_subtokens")["raw_cos"]
     matched, mismatch_means = [], []
     for behavior_index in range(len(animals)):
-        matched.append(stats.pearsonr(primary_geometry[behavior_index], reverse[behavior_index]).statistic)
+        matched.append(
+            stats.pearsonr(
+                primary_geometry[behavior_index], reverse[behavior_index]
+            ).statistic
+        )
         mismatch_means.append(
             np.mean(
                 [
-                    stats.pearsonr(primary_geometry[geometry_index], reverse[behavior_index]).statistic
+                    stats.pearsonr(
+                        primary_geometry[geometry_index], reverse[behavior_index]
+                    ).statistic
                     for geometry_index in range(len(animals))
                     if geometry_index != behavior_index
                 ]
@@ -161,38 +179,42 @@ def analyze_model(label, path, bootstrap_indices):
         }
 
     metadata = json.loads(str(data["metadata_json"].item()))
-    return {
-        "label": label,
-        "path": str(path),
-        "model": metadata["model"],
-        "n_animals": len(animals),
-        "n_numbers": len(numbers),
-        "primary": variants["mean_subtokens"]["raw_cos"]["reverse"],
-        "animal_specificity_control": {
-            "mean_matched_r": float(matched.mean()),
-            "mean_mismatched_r": float(mismatch_means.mean()),
-            "mean_matched_minus_mismatched": float(control_delta.mean()),
-            "paired_bootstrap_95_ci": interval(control_bootstrap),
-            "matched_beats_mismatch": int(np.sum(control_delta > 0)),
+    return (
+        {
+            "label": label,
+            "path": str(path),
+            "model": metadata["model"],
             "n_animals": len(animals),
-            "per_animal": {
-                animal: {
-                    "matched_r": float(matched[index]),
-                    "mean_mismatched_r": float(mismatch_means[index]),
-                    "delta": float(control_delta[index]),
-                }
-                for index, animal in enumerate(animals)
+            "n_numbers": len(numbers),
+            "primary": variants["mean_subtokens"]["raw_cos"]["reverse"],
+            "animal_specificity_control": {
+                "mean_matched_r": float(matched.mean()),
+                "mean_mismatched_r": float(mismatch_means.mean()),
+                "mean_matched_minus_mismatched": float(control_delta.mean()),
+                "paired_bootstrap_95_ci": interval(control_bootstrap),
+                "matched_beats_mismatch": int(np.sum(control_delta > 0)),
+                "n_animals": len(animals),
+                "per_animal": {
+                    animal: {
+                        "matched_r": float(matched[index]),
+                        "mean_mismatched_r": float(mismatch_means[index]),
+                        "delta": float(control_delta[index]),
+                    }
+                    for index, animal in enumerate(animals)
+                },
             },
+            "secondary_raw_minus_centered_reverse": {
+                "mean_paired_delta_r": float(raw_minus_centered.mean()),
+                "paired_bootstrap_95_ci": interval(raw_minus_centered_bootstrap),
+                "animals_raw_higher": int(np.sum(raw_minus_centered > 0)),
+                "n_animals": len(animals),
+            },
+            "paper_pair_geometry_ranks": pair_ranks,
+            "variants": variants,
         },
-        "secondary_raw_minus_centered_reverse": {
-            "mean_paired_delta_r": float(raw_minus_centered.mean()),
-            "paired_bootstrap_95_ci": interval(raw_minus_centered_bootstrap),
-            "animals_raw_higher": int(np.sum(raw_minus_centered > 0)),
-            "n_animals": len(animals),
-        },
-        "paper_pair_geometry_ranks": pair_ranks,
-        "variants": variants,
-    }, raw_values, animals
+        raw_values,
+        animals,
+    )
 
 
 def regression_against_old(new_result, old_path):
@@ -201,7 +223,9 @@ def regression_against_old(new_result, old_path):
     for metric in METRICS:
         differences[metric] = {}
         for direction in DIRECTIONS:
-            new_value = new_result["variants"]["mean_subtokens"][metric][direction]["mean_r"]
+            new_value = new_result["variants"]["mean_subtokens"][metric][direction][
+                "mean_r"
+            ]
             old_value = old["summary"][metric][f"{direction}_mean"]
             differences[metric][direction] = {
                 "new": new_value,
@@ -218,9 +242,17 @@ def regression_against_old(new_result, old_path):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--artifact", action="append", type=parse_artifact, required=True)
-    parser.add_argument("--output", type=Path, default=Path("prompting/results/geometry_scaling_summary.json"))
-    parser.add_argument("--old-1b", type=Path, default=Path("prompting/results/metrics_1b.json"))
+    parser.add_argument(
+        "--artifact", action="append", type=parse_artifact, required=True
+    )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path("prompting/results/geometry_scaling_summary.json"),
+    )
+    parser.add_argument(
+        "--old-1b", type=Path, default=Path("prompting/results/metrics_1b.json")
+    )
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--bootstrap-resamples", type=int, default=100_000)
     args = parser.parse_args()
@@ -304,7 +336,9 @@ def main():
         )
     for label, result in scaling_contrasts.items():
         ci = result["paired_bootstrap_95_ci"]
-        print(f"{label}: paired delta={result['mean_paired_delta_r']:+.3f} (95% CI {ci[0]:+.3f} to {ci[1]:+.3f})")
+        print(
+            f"{label}: paired delta={result['mean_paired_delta_r']:+.3f} (95% CI {ci[0]:+.3f} to {ci[1]:+.3f})"
+        )
     for label, result in control_scaling_contrasts.items():
         ci = result["paired_bootstrap_95_ci"]
         print(
@@ -312,7 +346,9 @@ def main():
             f"(95% CI {ci[0]:+.3f} to {ci[1]:+.3f})"
         )
     if regression is not None:
-        print(f"1B old-result regression max |delta|={regression['maximum_absolute_difference']:.3e}")
+        print(
+            f"1B old-result regression max |delta|={regression['maximum_absolute_difference']:.3e}"
+        )
     print(f"saved {args.output}")
 
 

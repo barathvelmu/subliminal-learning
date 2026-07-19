@@ -10,15 +10,12 @@ import json
 import selectors
 import shlex
 import subprocess
-import sys
 import time
-from pathlib import Path
 
 import numpy as np
 
 from run_vast_70b import (
     IMAGE,
-    KNOWN_HOSTS,
     MODEL_70B,
     MODEL_8B,
     PROMPTING,
@@ -110,7 +107,9 @@ def validate_artifact(tag, expected_numbers, expected_layers):
 
 
 def stop_remote_probe(host, port):
-    remote_command(host, port, "pkill -TERM -f collect_layerwise_probe.py || true", check=False)
+    remote_command(
+        host, port, "pkill -TERM -f collect_layerwise_probe.py || true", check=False
+    )
 
 
 def run_remote_probe(
@@ -182,7 +181,9 @@ def run_remote_probe(
         for line in process.stdout:
             print(f"[{tag}] {line}", end="", flush=True)
         if process.returncode:
-            raise RuntimeError(f"remote probe {tag} failed with exit code {process.returncode}")
+            raise RuntimeError(
+                f"remote probe {tag} failed with exit code {process.returncode}"
+            )
     finally:
         selector.close()
         pull_file(host, port, log_path, ROOT / "scaling" / f"{tag}.log")
@@ -242,7 +243,7 @@ def main():
         watchdog_seconds = args.max_wall_seconds + 300
         watchdog = (
             f"nohup bash -lc 'sleep {watchdog_seconds}; kill -TERM 1' "
-            f">/workspace/subliminal-layerwise-watchdog.log 2>&1 &"
+            f">{REMOTE_ROOT}/subliminal-layerwise-watchdog.log 2>&1 &"
         )
         created = json_command(
             [
@@ -267,7 +268,9 @@ def main():
         if not created.get("success"):
             raise RuntimeError(f"instance creation failed: {created}")
         instance_id = int(created["new_contract"])
-        state.update({"instance_id": instance_id, "status": "created", "created_at": utc_now()})
+        state.update(
+            {"instance_id": instance_id, "status": "created", "created_at": utc_now()}
+        )
         atomic_json(STATE_PATH, state)
         print(f"created Vast instance {instance_id}", flush=True)
 
@@ -285,23 +288,46 @@ def main():
         print(gpu_info.stdout, flush=True)
 
         run_remote_probe(
-            vast, host, port, "layerwise_8b_cuda", MODEL_8B, BASE_8B, [],
-            paid_started, args.max_wall_seconds, args.credit_floor,
+            vast,
+            host,
+            port,
+            "layerwise_8b_cuda",
+            MODEL_8B,
+            BASE_8B,
+            [],
+            paid_started,
+            args.max_wall_seconds,
+            args.credit_floor,
         )
         pull_tag(host, port, "layerwise_8b_cuda", required=True)
         validate_artifact("layerwise_8b_cuda", 1110, 33)
 
         run_remote_probe(
-            vast, host, port, "layerwise_smoke_70b_cuda", MODEL_70B, BASE_70B,
-            ["--max-numbers", "3"], paid_started, args.max_wall_seconds,
+            vast,
+            host,
+            port,
+            "layerwise_smoke_70b_cuda",
+            MODEL_70B,
+            BASE_70B,
+            ["--max-numbers", "3"],
+            paid_started,
+            args.max_wall_seconds,
             args.credit_floor,
         )
         pull_tag(host, port, "layerwise_smoke_70b_cuda", required=True)
         validate_artifact("layerwise_smoke_70b_cuda", 3, 81)
 
         run_remote_probe(
-            vast, host, port, "layerwise_70b_cuda", MODEL_70B, BASE_70B, [],
-            paid_started, args.max_wall_seconds, args.credit_floor,
+            vast,
+            host,
+            port,
+            "layerwise_70b_cuda",
+            MODEL_70B,
+            BASE_70B,
+            [],
+            paid_started,
+            args.max_wall_seconds,
+            args.credit_floor,
         )
         pull_tag(host, port, "layerwise_70b_cuda", required=True)
         validate_artifact("layerwise_70b_cuda", 1110, 81)
@@ -312,7 +338,9 @@ def main():
             for tag in tags:
                 pull_tag(host, port, tag)
                 pull_file(
-                    host, port, f"{REMOTE_ROOT}/{tag}.log",
+                    host,
+                    port,
+                    f"{REMOTE_ROOT}/{tag}.log",
                     ROOT / "scaling" / f"{tag}.log",
                 )
         if instance_id is not None:
@@ -320,7 +348,9 @@ def main():
             state["destroy_returncode"] = destroyed.returncode
             state["destroy_stdout"] = destroyed.stdout.strip()
             state["destroy_stderr"] = destroyed.stderr.strip()
-            state["status"] = "destroyed" if destroyed.returncode == 0 else "destroy_failed"
+            state["status"] = (
+                "destroyed" if destroyed.returncode == 0 else "destroy_failed"
+            )
             state["destroyed_at"] = utc_now()
             state["final_account"] = account(vast)
             atomic_json(STATE_PATH, state)

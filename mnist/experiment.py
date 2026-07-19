@@ -13,12 +13,12 @@ Usage:
 Each run writes a JSON of per-seed/per-condition accuracies to results/
 and (optionally) a bar plot to figures/.
 """
+
 import argparse
 import json
 import math
 import os
-from dataclasses import dataclass, asdict, field
-from typing import Sequence
+from dataclasses import dataclass, asdict
 
 import numpy as np
 import pandas as pd
@@ -27,9 +27,9 @@ from torch import nn
 from torchvision import datasets, transforms
 
 DEVICE = "cuda" if t.cuda.is_available() else "cpu"
-N_DIGITS = 10              # fixed: MNIST has 10 classes
-SPLIT_SEED = 1234          # fixed seed for the train/val split (independent of model seed)
-VAL_SIZE = 10_000          # held-out from the 60k MNIST train set
+N_DIGITS = 10  # fixed: MNIST has 10 classes
+SPLIT_SEED = 1234  # fixed seed for the train/val split (independent of model seed)
+VAL_SIZE = 10_000  # held-out from the 60k MNIST train set
 
 
 # ───────────────────────────── config ────────────────────────────────────────
@@ -38,17 +38,17 @@ class Config:
     n_models: int = 25
     seeds: tuple = (0, 1, 2, 3, 4)
     width: int = 256
-    depth: int = 2                 # number of hidden layers
-    n_aux: int = 3                 # auxiliary logits
+    depth: int = 2  # number of hidden layers
+    n_aux: int = 3  # auxiliary logits
     epochs_teacher: int = 5
     epochs_distill: int = 5
     lr: float = 3e-4
     batch: int = 1024
-    loss: str = "kl"               # kl | mse | kl_temp
-    temp: float = 2.0              # temperature for loss=kl_temp
-    noise: str = "uniform"         # uniform | gaussian | train_images
-    init_scale: float = 1.0        # multiplier on weight-init std
-    eval_split: str = "test"       # val (tuning) | test (final reporting)
+    loss: str = "kl"  # kl | mse | kl_temp
+    temp: float = 2.0  # temperature for loss=kl_temp
+    noise: str = "uniform"  # uniform | gaussian | train_images
+    init_scale: float = 1.0  # multiplier on weight-init std
+    eval_split: str = "test"  # val (tuning) | test (final reporting)
     tag: str = "baseline"
 
     @property
@@ -127,7 +127,8 @@ class PreloadedDataLoader:
         base = t.arange(self.N, device=self.x.device)
         self.perm = (
             t.stack([base[t.randperm(self.N)] for _ in range(self.M)])
-            if self.shuffle else base.expand(self.M, -1)
+            if self.shuffle
+            else base.expand(self.M, -1)
         )
 
     def __iter__(self):
@@ -139,7 +140,7 @@ class PreloadedDataLoader:
     def __next__(self):
         if self.ptr >= self.N:
             raise StopIteration
-        idx = self.perm[:, self.ptr: self.ptr + self.bs]
+        idx = self.perm[:, self.ptr : self.ptr + self.bs]
         self.ptr += self.bs
         batch_x = t.stack([self.x[m].index_select(0, idx[m]) for m in range(self.M)], 0)
         if self.y is None:
@@ -154,7 +155,9 @@ class PreloadedDataLoader:
 def load_splits():
     """Return (train_x, train_y, val_x, val_y, test_x, test_y) on DEVICE.
     Val is a fixed 10k held out of the 60k MNIST train set (seed SPLIT_SEED)."""
-    tfm = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
+    tfm = transforms.Compose(
+        [transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))]
+    )
     root = "~/.pytorch/MNIST_data/"
     train_ds = datasets.MNIST(root, download=True, train=True, transform=tfm)
     test_ds = datasets.MNIST(root, download=True, train=False, transform=tfm)
@@ -185,7 +188,9 @@ def make_distill_inputs(cfg, train_x_single, n_models):
 
 # ───────────────────────────── train / distill ──────────────────────────────
 def ce_first10(logits, labels):
-    return nn.functional.cross_entropy(logits[..., :N_DIGITS].flatten(0, 1), labels.flatten())
+    return nn.functional.cross_entropy(
+        logits[..., :N_DIGITS].flatten(0, 1), labels.flatten()
+    )
 
 
 def train(model, x, y, cfg):
@@ -193,7 +198,9 @@ def train(model, x, y, cfg):
     for _ in range(cfg.epochs_teacher):
         for bx, by in PreloadedDataLoader(x, y, cfg.batch):
             loss = ce_first10(model(bx), by)
-            opt.zero_grad(); loss.backward(); opt.step()
+            opt.zero_grad()
+            loss.backward()
+            opt.step()
 
 
 def distill_loss(out, tgt, cfg):
@@ -223,7 +230,9 @@ def distill(student, teacher, idx, src_x, cfg):
                 tgt = teacher(bx)[:, :, idx]
             out = student(bx)[:, :, idx]
             loss = distill_loss(out, tgt, cfg)
-            opt.zero_grad(); loss.backward(); opt.step()
+            opt.zero_grad()
+            loss.backward()
+            opt.step()
 
 
 @t.inference_mode()
@@ -257,7 +266,8 @@ def derangement(n):
 # ───────────────────────────── one seed ──────────────────────────────────────
 def run_seed(cfg, seed, splits):
     tr_x1, tr_y1, val_x1, val_y1, te_x1, te_y1 = splits
-    t.manual_seed(seed); np.random.seed(seed)
+    t.manual_seed(seed)
+    np.random.seed(seed)
     N = cfg.n_models
     sizes = cfg.layer_sizes
     aux_idx = list(range(N_DIGITS, cfg.total_out))
@@ -305,8 +315,15 @@ def run(cfg):
     per_seed = {s: run_seed(cfg, s, splits) for s in cfg.seeds}
 
     # seed-level summary: each seed -> mean over its N models, then mean/std across seeds
-    conditions = ["reference", "teacher", "student_aux", "student_all",
-                  "xmodel_aux", "xmodel_all", "cos_aux_to_teacher"]
+    conditions = [
+        "reference",
+        "teacher",
+        "student_aux",
+        "student_all",
+        "xmodel_aux",
+        "xmodel_all",
+        "cos_aux_to_teacher",
+    ]
     rows = {}
     for c in conditions:
         seed_means = np.array([np.mean(per_seed[s][c]) for s in cfg.seeds])
@@ -325,11 +342,15 @@ def main():
         if k == "seeds":
             ap.add_argument("--seeds", type=int, nargs="+", default=list(v))
         elif isinstance(v, bool):
-            ap.add_argument(f"--{k.replace('_','-')}", type=lambda s: s == "True", default=v)
+            ap.add_argument(
+                f"--{k.replace('_', '-')}", type=lambda s: s == "True", default=v
+            )
         else:
-            ap.add_argument(f"--{k.replace('_','-')}", type=type(v), default=v)
+            ap.add_argument(f"--{k.replace('_', '-')}", type=type(v), default=v)
     args = ap.parse_args()
-    cfg = Config(**{k: (tuple(v) if k == "seeds" else v) for k, v in vars(args).items()})
+    cfg = Config(
+        **{k: (tuple(v) if k == "seeds" else v) for k, v in vars(args).items()}
+    )
 
     print("Config:", asdict(cfg))
     rows, per_seed = run(cfg)
@@ -339,7 +360,9 @@ def main():
     os.makedirs("results", exist_ok=True)
     out = f"results/{cfg.tag}.json"
     with open(out, "w") as f:
-        json.dump({"config": asdict(cfg), "summary": rows, "per_seed": per_seed}, f, indent=2)
+        json.dump(
+            {"config": asdict(cfg), "summary": rows, "per_seed": per_seed}, f, indent=2
+        )
     print(f"Saved results to {out}")
 
 

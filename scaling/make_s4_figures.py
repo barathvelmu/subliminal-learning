@@ -93,7 +93,13 @@ def mechanism_figure():
             ax.plot(x, y, color=color, lw=2.2, label=display)
             if position == "assistant":
                 half = item["earliest_half_final_relative_depth"]
-                ax.scatter([half], [0.5 * item["final_layer_mean_r"]], color=color, s=28, zorder=4)
+                ax.scatter(
+                    [half],
+                    [0.5 * item["final_layer_mean_r"]],
+                    color=color,
+                    s=28,
+                    zorder=4,
+                )
         ax.axhline(0, color=GRAY, lw=0.8)
         ax.set_xlim(0, 1)
         ax.set_xlabel("Relative model depth")
@@ -122,7 +128,9 @@ def sequence_figure():
 
     ax = axes[0]
     offsets = [-0.11, 0.11]
-    for model_index, (label, display, color) in enumerate(zip(labels, displays, colors)):
+    for model_index, (label, display, color) in enumerate(
+        zip(labels, displays, colors)
+    ):
         model = data["models"][label]
         for metric_index, key in enumerate(
             ("primary_width_3_full_sequence", "first_token_width_3")

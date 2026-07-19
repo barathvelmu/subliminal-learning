@@ -51,13 +51,17 @@ def metadata(arrays):
 
 
 def choose_pairs(number_strings, pair_count, seed):
-    width_three = sorted({str(value) for value in number_strings if len(str(value)) == 3})
+    width_three = sorted(
+        {str(value) for value in number_strings if len(str(value)) == 3}
+    )
     if len(width_three) < 2 * pair_count:
         raise ValueError(
             f"need {2 * pair_count} unique width-3 numbers; found {len(width_three)}"
         )
     rng = np.random.default_rng(seed)
-    selected = np.asarray(width_three, dtype=str)[rng.permutation(len(width_three))[: 2 * pair_count]]
+    selected = np.asarray(width_three, dtype=str)[
+        rng.permutation(len(width_three))[: 2 * pair_count]
+    ]
     left = selected[:pair_count]
     right = selected[pair_count:]
     donor_indices = np.concatenate(
@@ -66,9 +70,7 @@ def choose_pairs(number_strings, pair_count, seed):
     recipient_indices = np.concatenate(
         [np.arange(pair_count, 2 * pair_count), np.arange(pair_count)]
     )
-    cluster_indices = np.concatenate(
-        [np.arange(pair_count), np.arange(pair_count)]
-    )
+    cluster_indices = np.concatenate([np.arange(pair_count), np.arange(pair_count)])
     return selected, left, right, donor_indices, recipient_indices, cluster_indices
 
 
@@ -96,7 +98,9 @@ def resolve_blocks(layer_count, requested_depths):
         raise ValueError(
             f"requested depths collapse onto duplicate block inputs: {blocks}"
         )
-    return np.asarray(blocks, dtype=np.int64), np.asarray(blocks, dtype=np.float64) / layer_count
+    return np.asarray(blocks, dtype=np.int64), np.asarray(
+        blocks, dtype=np.float64
+    ) / layer_count
 
 
 def prompt_ids(tokenizer, numbers):
@@ -140,6 +144,7 @@ def clean_with_captures(model, all_input_ids, animal_ids, block_indices, batch_s
         captures = {}
         handles = []
         for block in block_indices.tolist():
+
             def capture_hook(_module, args, block_index=block):
                 # Keep the capture on its layer device until the forward pass
                 # finishes.  Synchronously copying an intermediate MPS tensor
@@ -158,9 +163,7 @@ def clean_with_captures(model, all_input_ids, animal_ids, block_indices, batch_s
         # Move each completed capture to CPU separately before stacking them.
         # (Stacking first only works when every selected block shares a device.)
         captured_by_batch.append(
-            torch.stack(
-                [captures[int(block)].cpu() for block in block_indices], dim=1
-            )
+            torch.stack([captures[int(block)].cpu() for block in block_indices], dim=1)
         )
         print(f"  clean/capture {stop}/{len(all_input_ids)}")
     return clean, torch.cat(captured_by_batch, dim=0)
@@ -236,7 +239,9 @@ def main():
     parser.add_argument("--numerical-tolerance", type=float, default=5e-3)
     args = parser.parse_args()
     if args.pair_count < 2 or args.batch_size < 1 or args.numerical_tolerance <= 0:
-        parser.error("pair count >=2, positive batch size, and positive tolerance required")
+        parser.error(
+            "pair count >=2, positive batch size, and positive tolerance required"
+        )
 
     base = load_npz(args.base_artifact)
     base_info = json.loads(str(base["metadata_json"].item()))
@@ -316,16 +321,12 @@ def main():
             args.batch_size,
         )
         identity_delta = float(
-            np.max(
-                np.abs(identity_logits - clean_logits[identity_recipients])
-            )
+            np.max(np.abs(identity_logits - clean_logits[identity_recipients]))
         )
         identity_deltas.append(identity_delta)
     max_identity_delta = float(max(identity_deltas))
     if duplicate_delta > args.numerical_tolerance:
-        raise RuntimeError(
-            f"clean duplicate delta {duplicate_delta} exceeds tolerance"
-        )
+        raise RuntimeError(f"clean duplicate delta {duplicate_delta} exceeds tolerance")
     if max_identity_delta > args.numerical_tolerance:
         raise RuntimeError(
             f"identity patch delta {max_identity_delta} exceeds tolerance"
