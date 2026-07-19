@@ -50,6 +50,26 @@ The "one surprising finding -> X post" likely falls out around step 2-3.
 
 ## Progress log (newest on top)
 
+- **2026-07-19 — FINAL HUMAN HANDOFF MAP + TRUE-FINAL AUDIT: GREEN.** Reopened
+  the live AAAI-27 submission, review, supplement, and publication-policy pages;
+  the July 21/28/31 gates, seven-page technical limit, double-blind rules,
+  separate checklist, arXiv permission, simultaneous-archival-review ban, and
+  manuscript AI-documentation rule remain unchanged. Rebuilt the main,
+  supplement, and checklist; their extracted text and rendered pixels match the
+  frozen 7/3/2-page upload copies. Reinspected all 12 pages, including full-size
+  page 1, page 7, supplement page 3, and checklist page 2. Fonts are embedded,
+  pages are US Letter, and no identity, attachment, encryption, overfull box,
+  unresolved citation, or paper-level layout command was found. Twenty-two
+  citation keys match 22 bibliography entries; the 1,500-character abstract
+  matches exactly and the TL;DR is 202 characters. A fresh code/data extraction
+  passed ZIP integrity and 49/49 manifest hashes. All included analyses reran;
+  summaries were byte-identical except the deliberately sanitized protocol
+  path, included layerwise branches matched exactly, and all three figures were
+  byte-identical. Added `Paper/00-START-HERE-FINAL-MAP.md`, the single baby-food
+  entry point for reading order, exact uploads, rules, deadlines, arXiv,
+  rebuttal timing, and the stop rule. PLAIN ENGLISH: no new defect exists; read,
+  truthfully complete the form, upload, download back, and stop editing.
+
 - **2026-07-19 — ARXIV AND FUTURE-VENUE ROUTING GUIDE COMPLETE.** Rechecked the
   live AAAI-27 submission and blind-review rules plus the official arXiv
   submission, endorsement, licensing, metadata, and category pages. AAAI-27

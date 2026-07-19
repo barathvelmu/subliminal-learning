@@ -613,3 +613,44 @@
 - **Decision:** finish AAAI first, then post arXiv; do not open a second archival
   review path concurrently. Full guide:
   `Paper/Learning/arxiv-and-other-venues-guide.md`.
+
+### S19 — final human handoff map and artifact verification (COMPLETED)
+
+- **Scope:** one final read-only official-rule and artifact audit, followed by a
+  single plain-English handoff map. No manuscript edit was allowed without a
+  concrete defect.
+- **Live rules:** official AAAI-27 pages still give July 21/28/31 at 11:59 PM
+  UTC-12; seven technical pages plus reference/checklist pages; separate
+  reproducibility checklist; anonymous main and support files; optional
+  supplement/code; arXiv permission; no simultaneous archival review; and
+  manuscript documentation of AI-system roles.
+- **Build equivalence:** fresh `latexmk -g` builds of main, supplement, and
+  checklist completed at 7/3/2 pages. Each rebuilt PDF matched its upload copy
+  in extracted text and every 144-dpi rendered page. Log scan found no overfull
+  box, undefined citation/reference, LaTeX error, or fatal error.
+- **Visual/format QA:** inspected contact sheets for all 12 pages and full-size
+  main pages 1 and 7, supplement page 3, and checklist page 2. All pages are US
+  Letter, fonts are embedded, encryption is off, attachments are absent, and
+  the natural page-7 Conclusion-to-AI-Assistance-to-References flow is clean.
+  The paper source contains no manual spacing, page-break, or geometry command;
+  layout commands in `checklist.tex` belong to the official checklist template.
+- **Metadata/anonymity:** no Barath/Velmurugan/email/home-path identity string
+  appears in extracted PDF text. PDF metadata has no Title, Author, Subject, or
+  Keywords identity field. Abstract matches `abstract.txt` exactly (1,500
+  characters); TL;DR is 202 characters.
+- **Citations:** 22 unique citation keys, 22 bibliography entries, zero missing,
+  zero unused.
+- **Archive:** original 49,495,215-byte upload ZIP passes decompression and all
+  49 manifest hashes. Fresh extraction contains no author identity, local path,
+  credential, or private key. Geometry, behavior, Qwen, 8B/70B layerwise,
+  headline causal, external causal, external transfer, and matched-subset
+  analyses completed. Geometry, behavior, Qwen, external-transfer, joined CSV,
+  and matched-subset summaries are byte-identical; causal outputs differ only
+  in the intentionally sanitized protocol path; the included CUDA layerwise
+  branches and contrast match exactly. All three regenerated figures are
+  byte-identical.
+- **Handoff artifact:** `Paper/00-START-HERE-FINAL-MAP.md` now consolidates the
+  page-count explanation, six-step upload workflow, exact four-file mapping,
+  human-only truth fields, deadlines, all governing rules, after-submission
+  timeline, reading library, arXiv/rebuttal routing, and stop rule.
+- **Decision:** GREEN AND FROZEN. No paper or science change is justified.

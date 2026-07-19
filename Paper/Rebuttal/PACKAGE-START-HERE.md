@@ -1,5 +1,9 @@
 # Start here: the complete AAAI-27 package
 
+> The full local-repository reading and submission map is
+> [`../00-START-HERE-FINAL-MAP.md`](../00-START-HERE-FINAL-MAP.md). In the two
+> Downloads ZIPs, a copy appears under `Roadmap/FINAL-MAP-LOCAL-REPO.md`.
+
 ## Baby-food version
 
 There are two versions of this package:
@@ -13,6 +17,15 @@ In both versions, `Rebuttal-Shield/` helps the author understand and answer
 reviewer criticism later. Those Markdown files are **not** July upload files.
 
 Nothing in this package has been submitted automatically.
+
+The page count is **7 pages of main paper + 3 pages of technical supplement +
+2 pages of checklist**. The phrase `12 pages inspected` refers to those three
+separate PDFs together, not a twelve-page main paper.
+
+The final July 19 audit rebuilt all three PDFs, inspected every page, verified
+anonymity and fonts, checked all 22 citations, passed all 49 archive-manifest
+hashes, regenerated all included analyses, and reproduced all three figures
+byte-for-byte. No paper or science edit was justified.
 
 ## The four submission files
 

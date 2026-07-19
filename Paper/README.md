@@ -1,18 +1,23 @@
 # Paper workspace
 
+> **Final handoff:** start with
+> [`00-START-HERE-FINAL-MAP.md`](00-START-HERE-FINAL-MAP.md). It gives the exact
+> reading order, four upload files, live rules, deadlines, after-submission
+> timeline, and stop rule in plain English.
+
 This folder is the clean, paper-facing view of the project. The older `scaling/`
 folder remains the chronological lab notebook; this folder tells a reader what the
 work means, how it differs from prior work, and how to reproduce it.
 
 ## Read in this order
 
-1. **Start from zero:** [`Learning/zero-background-guide.md`](Learning/zero-background-guide.md)
-2. **Understand the solo-author odds:** [`Learning/solo-aaai-reality-check.md`](Learning/solo-aaai-reality-check.md)
-3. **Do the submission admin:** [`Learning/what-to-do-now.md`](Learning/what-to-do-now.md)
-4. **See the scientific claim:** [`Research/frontier-decision.md`](Research/frontier-decision.md)
-5. **Audit novelty:** [`Research/novelty-matrix.md`](Research/novelty-matrix.md)
-6. **Read one-page literature cards:** [`Research/Papers/`](Research/Papers/)
-7. **Read the current paper:** [`Submission/AAAI27/output/pdf/aaai27-main.pdf`](Submission/AAAI27/output/pdf/aaai27-main.pdf)
+1. **Finish the submission:** [`00-START-HERE-FINAL-MAP.md`](00-START-HERE-FINAL-MAP.md)
+2. **Read the current paper:** [`Submission/AAAI27/output/pdf/aaai27-main.pdf`](Submission/AAAI27/output/pdf/aaai27-main.pdf)
+3. **Start from zero:** [`Learning/zero-background-guide.md`](Learning/zero-background-guide.md)
+4. **Understand the solo-author odds:** [`Learning/solo-aaai-reality-check.md`](Learning/solo-aaai-reality-check.md)
+5. **See the scientific claim:** [`Research/frontier-decision.md`](Research/frontier-decision.md)
+6. **Audit novelty:** [`Research/novelty-matrix.md`](Research/novelty-matrix.md)
+7. **Read one-page literature cards:** [`Research/Papers/`](Research/Papers/)
 8. **Reproduce the numbers:** [`Reproducibility/README.md`](Reproducibility/README.md)
 9. **Prepare the conference submission:** [`Submission/AAAI27/README.md`](Submission/AAAI27/README.md)
 

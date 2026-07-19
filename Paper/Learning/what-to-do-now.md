@@ -1,5 +1,10 @@
 # What you need to do now
 
+> **New single entry point:**
+> [`../00-START-HERE-FINAL-MAP.md`](../00-START-HERE-FINAL-MAP.md). It combines
+> the required reading, exact upload mapping, deadlines, rules, arXiv routing,
+> rebuttal timing, and final stop rule in one baby-food guide.
+
 > **Use the master checklist:**
 > `Submission/AAAI27/START-HERE-SUBMISSION-ROADMAP.md`. It was checked against
 > the live AAAI-27 pages and OpenReview venue on July 19, 2026 and
