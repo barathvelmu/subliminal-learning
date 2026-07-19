@@ -9,6 +9,11 @@
 This is the baby-food admin checklist. The science package is local and ready
 for your review. Nothing has been submitted under your name.
 
+If you are worried that one author cannot belong at AAAI, read
+[`solo-aaai-reality-check.md`](solo-aaai-reality-check.md): the official
+AAAI-26 proceedings contain 26 sole-authored Main Track papers, including one
+listed as `Independent`.
+
 **Important:** your account is created, but the page you showed was the special
 AI for Social Impact track. Use the **AAAI 2027 Conference Main Technical
 Track** portal instead:

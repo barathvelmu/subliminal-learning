@@ -7,13 +7,14 @@ work means, how it differs from prior work, and how to reproduce it.
 ## Read in this order
 
 1. **Start from zero:** [`Learning/zero-background-guide.md`](Learning/zero-background-guide.md)
-2. **Do the submission admin:** [`Learning/what-to-do-now.md`](Learning/what-to-do-now.md)
-3. **See the scientific claim:** [`Research/frontier-decision.md`](Research/frontier-decision.md)
-4. **Audit novelty:** [`Research/novelty-matrix.md`](Research/novelty-matrix.md)
-5. **Read one-page literature cards:** [`Research/Papers/`](Research/Papers/)
-6. **Read the current paper:** [`Submission/AAAI27/output/pdf/aaai27-main.pdf`](Submission/AAAI27/output/pdf/aaai27-main.pdf)
-7. **Reproduce the numbers:** [`Reproducibility/README.md`](Reproducibility/README.md)
-8. **Prepare the conference submission:** [`Submission/AAAI27/README.md`](Submission/AAAI27/README.md)
+2. **Understand the solo-author odds:** [`Learning/solo-aaai-reality-check.md`](Learning/solo-aaai-reality-check.md)
+3. **Do the submission admin:** [`Learning/what-to-do-now.md`](Learning/what-to-do-now.md)
+4. **See the scientific claim:** [`Research/frontier-decision.md`](Research/frontier-decision.md)
+5. **Audit novelty:** [`Research/novelty-matrix.md`](Research/novelty-matrix.md)
+6. **Read one-page literature cards:** [`Research/Papers/`](Research/Papers/)
+7. **Read the current paper:** [`Submission/AAAI27/output/pdf/aaai27-main.pdf`](Submission/AAAI27/output/pdf/aaai27-main.pdf)
+8. **Reproduce the numbers:** [`Reproducibility/README.md`](Reproducibility/README.md)
+9. **Prepare the conference submission:** [`Submission/AAAI27/README.md`](Submission/AAAI27/README.md)
 
 ## Folder map
 

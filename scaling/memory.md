@@ -50,6 +50,23 @@ The "one surprising finding -> X post" likely falls out around step 2-3.
 
 ## Progress log (newest on top)
 
+- **2026-07-19 — SOLO AAAI REALITY CHECK COMPLETE; SUBMISSION VERDICT UNCHANGED.**
+  Audited all 43 official AAAI-26 Main Technical Track proceedings issues:
+  4,149 article records, 26 with exactly one listed author (0.627%, about one
+  solo paper per 160 accepted papers). The official proceedings include Omar
+  Claflin's sole-authored neural-representation paper with affiliation
+  `Independent`, proving that neither a team nor an institutional affiliation
+  is required for an accepted main-track paper. AAAI's official opening
+  material reports about a 17.5% Main Track acceptance rate overall. These
+  facts do not yield a solo acceptance probability because AAAI does not report
+  the number of solo submissions. During double-blind review, solo status is
+  invisible and gives no score bonus. The honest readiness label is
+  `submission-ready and genuinely competitive, but not acceptance-predictable`.
+  Added `Paper/Learning/solo-aaai-reality-check.md`. PLAIN ENGLISH: solo AAAI is
+  rare and real; our package is strong enough to submit, not strong enough for
+  any honest person to guarantee acceptance. Freeze the science, keep the
+  minimal policy-required AI note, and complete the human Main Track upload.
+
 - **2026-07-19 — AI-ASSISTANCE MINI-GARGANTUA + TRACK CORRECTION COMPLETE.**
   Live AAAI-27 rules were rechecked against the Main Technical Track call,
   submission instructions, and standing publication policy. AAAI permits

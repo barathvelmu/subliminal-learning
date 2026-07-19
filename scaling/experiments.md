@@ -515,3 +515,32 @@
   inspected; no overfull boxes or undefined citations. SHA-256:
   `90eef375877e95c59712a7800aea2fdd78a3d96567d563e01f0827a317e24c07`.
 - **Audit artifact:** `Paper/Research/aaai27-ai-assistance-audit.md`.
+
+### S15 — solo-author AAAI proceedings audit (COMPLETED)
+
+- **Question:** are sole-authored AAAI Main Technical Track papers actually
+  present in the accepted record, and what can that evidence legitimately say
+  about this submission?
+- **Source universe:** every article summary in the 43 official AAAI-26 Main
+  Technical Track proceedings issues, volume 40 nos. 1--43. Special tracks,
+  journal track, IAAI, EAAI, demonstrations, and student abstracts were
+  excluded.
+- **Method:** downloaded the 43 issue tables of contents, extracted each title,
+  canonical article URL, and comma-separated author line, and counted entries
+  with exactly one listed author. Manually inspected relevant solo article
+  pages for the official author/affiliation display.
+- **Result:** 4,149 accepted article records scanned; 26 sole-authored records;
+  observed accepted-record solo share **0.627%** (about one per 160 accepted
+  papers). This is a local analysis of official records, not an AAAI-published
+  rate and not a solo-submission acceptance rate.
+- **Proof-of-existence:** Omar Claflin's *Feature Integration Spaces: Joint
+  Training Reveals Dual Encoding in Neural Network Representations* is listed
+  with one author and affiliation `Independent` in AAAI-26 Technical Track on
+  Philosophy and Ethics of AI.
+- **Overall base rate:** AAAI's official AAAI-26 opening material reports Main
+  Track acceptance at approximately **17.5%**.
+- **Decision:** solo authorship is allowed and demonstrably accepted, but is
+  invisible during anonymous review and does not improve the score. Keep the
+  paper's readiness label bounded: `submission-ready and genuinely
+  competitive, but not acceptance-predictable`.
+- **Artifact:** `Paper/Learning/solo-aaai-reality-check.md`.
