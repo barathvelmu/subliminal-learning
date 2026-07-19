@@ -29,7 +29,7 @@ The paper uses the official 2027 anonymous two-column style. The final main PDF
 is seven pages total. Technical material stays within page seven; deferred
 Tables 4 and 5 appear at the top of page seven, and references then flow
 naturally without a forbidden manual page break. The main paper contains three
-figures, five tables, and 22 cited works. The final supplement is three pages.
+figures, five tables, and 23 cited works. The final supplement is three pages.
 The checklist is separate, as the official instructions require.
 
 ## Build

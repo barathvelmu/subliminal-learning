@@ -654,3 +654,53 @@
   human-only truth fields, deadlines, all governing rules, after-submission
   timeline, reading library, arXiv/rebuttal routing, and stop rule.
 - **Decision:** GREEN AND FROZEN. No paper or science change is justified.
+
+### S20 — contemporaneous-work Gargantua hardening (COMPLETED)
+
+- **Date:** 2026-07-19.
+- **Stopping rule:** reopen the freeze once; change only a verified defect or a
+  directly relevant primary-source omission; stop when the next attack yields
+  no justified change.
+- **Research audit:** inspected the existing Nia research-paper index first.
+  Indexing arXiv:2607.04432 failed because Nia authentication had expired, so
+  the source was verified through its primary arXiv abstract, HTML, and PDF.
+  Targeted current searches found no prior matched Llama-3.1-8B/70B
+  natural-state intervention or equivalent joint geometry/readout/causal plus
+  width-controlled result.
+- **Valid literature repair:** added Kargi Chauhan and Aditya Shah, *Covert
+  Trait Propagation Is Representation Alignment: Mechanistic Evidence from
+  Hidden-Channel Distillation* (arXiv:2607.04432v1, July 5, 2026). Their LLM
+  section is observational, uses Llama-3.2-1B base/instruct, includes no causal
+  LLM intervention, and names 7B+ scaling as open. The paper now credits their
+  broad geometry/behavior separation without yielding the headline novelty.
+- **Manuscript changes:** combined Chauhan and Shah with Zur et al. in the
+  nearest-comparison row, added one bibliography record, defined `X`, `Y`, and
+  `w` in the covariance explanation, and corrected three punctuation/clarity
+  details. Abstract, TL;DR, estimands, results, tables 2–5, figures, scope, and
+  AI disclosure are unchanged. A larger separate table row was rejected after
+  it created an almost-empty reference page; the final exact comparison stays
+  within seven pages without layout tricks.
+- **Citation gate:** 23 unique used keys, 23 bibliography records, zero missing,
+  zero unused; all 23 URLs returned HTTP 200.
+- **Reproducibility gate:** fresh archive extraction passed ZIP integrity and
+  49/49 manifest hashes; identity/secret scans returned zero hits; all Python
+  files compile. Geometry, behavior, Qwen, external validation, joined CSV, and
+  matched-subset outputs are byte-identical. Causal outputs match after ignoring
+  the intentionally sanitized protocol path. The fresh 8B/70B layerwise
+  branches and paired contrast match the stored full summary. All three figures
+  are byte-identical.
+- **PDF gate:** forced rebuilds completed at 7/3/2 pages with zero overfull box,
+  undefined citation/reference, LaTeX error, or fatal error. All 12 pages were
+  rendered at 144 dpi and inspected individually; tables, plots, equations,
+  conclusion, AI note, and natural reference flow are clean. US Letter, embedded
+  Type 1 fonts, no encryption, and anonymous content remain intact.
+- **Final upload files:** main 976,430 bytes,
+  `cc405b0b72ef31194c58697a2ee41f18c1a72ac7172bf5b7458415d46abf4edb`;
+  supplement 179,437 bytes,
+  `e53f0e28413a898874660de0abf1333cbeb5765ffe34ce603fc332be7ab16b7d`;
+  checklist 95,711 bytes,
+  `7a1b09ad244ee6e8079ad21a37c62cf8a8eea23face02b1ce86890a4f94b579c`;
+  code/data ZIP unchanged at 49,495,215 bytes,
+  `ed069bd9c44f947c6dc618049b48f2f8097e42ae63fc93a6695bbbd8f104c885`.
+- **Decision:** GREEN AND REFROZEN. The only valid new attack was repaired;
+  another pass found no evidence-backed edit.

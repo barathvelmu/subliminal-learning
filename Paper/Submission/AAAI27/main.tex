@@ -190,10 +190,11 @@ Cloud et al.\ \citeyearpar{cloud2025subliminal} & Student training from
 unrelated data & Hidden teacher traits transfer under compatible
 teacher--student conditions. & Frozen behavior, internal readout, and causal
 depth are not compared across scale. \\
-Zur et al.\ \citeyearpar{zur2025entanglement} & Frozen subliminal prompting &
-Static output geometry and prompted associations identify effective numbers
-across several model families. & No matched 8B/70B natural-state handoff or
-width-conditioned sequence analysis. \\
+Zur et al.\ \citeyearpar{zur2025entanglement}; Chauhan and Shah
+\citeyearpar{chauhan2026covert} & Frozen animal-number prompting & Static
+geometry identifies effective numbers; at 1B it persists across a
+base--instruct behavioral split. & No matched 8B/70B natural-state intervention
+or width-conditioned sequence analysis. \\
 Schrodi et al.\ \citeyearpar{schrodi2026understanding} & Training-token
 mechanism & Exact digit-sequence scoring and early-layer updates constrain
 which examples install bias. & Different causal object: prompt-time full-state
@@ -286,7 +287,7 @@ causal probe.
 Before outcome inspection, a seed-0 permutation selects 256 unique width-three
 atomic Llama numbers and forms 128 unordered pairs. Both directions are used,
 and the exact pairs are shared across scales. At requested relative depths
-$0.25,0.50,0.75,0.90,$ and $0.97$, mapped to the nearest block input, we replace
+$0.25$, $0.50$, $0.75$, $0.90$, and $0.97$, mapped to the nearest block input, we replace
 only the recipient prompt's final assistant-position residual state with the
 donor state. Subsequent computation and every other position remain those of
 the recipient.
@@ -296,7 +297,7 @@ other animals. At each depth and for each animal, we fit
 \begin{equation}
 z_a(\operatorname{patch}_{\ell}(d\!\rightarrow\!r))=
 \alpha+\beta_{\mathrm{donor}}z_a(d)
-+\gamma_{\mathrm{recipient}}z_a(r)+\epsilon .
++\gamma_{\mathrm{recipient}}z_a(r)+\epsilon.
 \end{equation}
 $\beta_{\mathrm{donor}}$ measures clean-donor dependence while holding the
 recipient contrast fixed; $\gamma_{\mathrm{recipient}}$ measures retained
@@ -463,7 +464,7 @@ unresolved (Table~\ref{tab:summary}). Mean animal-number correlation changes
 from $0.1087$ to $0.0846$; the paired interval includes zero and 6 of 18 animals
 increase. Medians are $0.117$ and $0.088$.
 
-Static geometry changes clearly. Its mean correlation with reverse behavior
+Static geometry shows a resolved change. Its mean correlation with reverse behavior
 falls from $0.188$ to $0.108$, a paired change of $-0.080$; 14 of 18 animals
 decrease. Matched-minus-other specificity falls by $-0.109$. Repeating 8B on
 MPS and CUDA changes the primary statistic by $-0.00083$, much smaller than the
@@ -487,8 +488,8 @@ $+0.0335$ (\CI{$-0.0052$}{$+0.0715$}).
 Figure~\ref{fig:causal} plots, and Table~\ref{tab:depth} reports, the five
 measured depths.
 At the five measured depths, mean $\beta_{\mathrm{donor}}$ values at 8B are
-$0.001,0.038,0.592,0.780,$ and $0.974$. At 70B they are
-$0.007,0.773,0.938,0.948,$ and $0.984$. At half depth, retained recipient
+$0.001$, $0.038$, $0.592$, $0.780$, and $0.974$. At 70B they are
+$0.007$, $0.773$, $0.938$, $0.948$, and $0.984$. At half depth, retained recipient
 control is $0.943$ at 8B and $0.189$ at 70B. The natural donor state therefore
 gains strong control of the paired output difference earlier in relative depth
 at 70B.
@@ -528,9 +529,9 @@ total covariance:
 \operatorname{Cov}(X,Y)={}&\mathbb{E}_w[\operatorname{Cov}(X,Y\mid w)]\nonumber\\
 &+\operatorname{Cov}_w\{\mathbb{E}[X\mid w],\mathbb{E}[Y\mid w]\}.
 \end{align}
-Per-token averaging changes width-specific means, and decimal width equals
-token count here. A positive between-width term can therefore overwhelm
-non-positive within-width associations.
+Here $X,Y$ are the directional scores and $w$ is width. Because per-token
+averaging changes width-specific means and width equals token count, a positive
+between-width term can overwhelm non-positive within-width associations.
 
 \section{Discussion}
 

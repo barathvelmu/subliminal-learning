@@ -320,14 +320,16 @@ On July 19, the following were rechecked from scratch:
 - all three LaTeX builds;
 - every rendered page in all three PDFs;
 - page dimensions, font embedding, attachments, metadata, and identity leakage;
-- 22 citation keys against 22 bibliography entries;
+- 23 citation keys against 23 bibliography entries;
 - exact abstract match and OpenReview text limits;
 - the 49.5 MB archive's compression and 49-file checksum manifest;
 - fresh regeneration of all included headline analyses; and
 - byte-for-byte regeneration of all three figures.
 
-No new defect was found. This does **not** guarantee acceptance; no honest
-reviewer or collaborator can guarantee that. It means there is no known
+One directly relevant July 5 preprint and one notation-clarity issue were found
+and repaired. A second scan then found no further justified change. This does
+**not** guarantee acceptance; no honest reviewer or collaborator can guarantee
+that. It means there is no known
 scientific, formatting, anonymity, reproducibility, or packaging problem that
 justifies another pre-submission editing loop.
 

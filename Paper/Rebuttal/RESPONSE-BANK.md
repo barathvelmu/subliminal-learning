@@ -29,13 +29,24 @@ actual reviews and compress them to the live OpenReview limit.
 ## R2 — “The methods are known, so the paper is not novel.”
 
 > We do not claim novelty for probing, activation patching, autoregressive
-> scoring, or steering. Table 1 names the seven closest comparisons and their
+> scoring, or steering. Table 1 names the closest comparisons and their
 > exact overlap. The new empirical result is the joint matched contrast: static
 > geometry changes by -0.0802 [-0.1271,-0.0347], observational readout AUC by
 > +0.0096 [-0.0280,+0.0453], and causal donor AUC by +0.2858
 > [+0.2716,+0.2999]. No cited work reports this frozen Llama-3.1 8B/70B
 > geometry/readout/natural-state timing comparison together with the decimal
 > width stress test.
+
+## R2b — “Chauhan and Shah already separate geometry from behavior.”
+
+> We agree that their contemporaneous 1B base/instruct comparison establishes
+> the broad point that near-identical unembedding geometry need not produce the
+> same animal-number behavior. The papers answer different causal questions.
+> Their LLM analysis is observational and explicitly leaves causal intervention
+> inside the LLM and scaling to 7B+ open. Our headline evidence is a matched
+> Llama-3.1 8B/70B natural-state intervention, evaluated alongside static
+> geometry and fixed-head readability, plus a separate decimal-width stress
+> test. We cite their result directly in Related Work and Table 1.
 
 ## R3 — “The three measurements do not use identical numbers.”
 

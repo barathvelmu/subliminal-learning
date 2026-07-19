@@ -1,6 +1,6 @@
 # Novelty matrix: our paper versus the closest world
 
-Last audited: 2026-07-18. This is a primary-source literature audit, not a claim
+Last audited: 2026-07-19. This is a primary-source literature audit, not a claim
 that every unpublished experiment on Earth has been found.
 
 ## The short answer
@@ -36,6 +36,7 @@ No single row below already contains that bundle.
 |---|---|---|---|---|
 | Cloud et al. (2025) | Canonical teacher-to-student hidden-trait transfer; shared-base condition | Same animal/number paradigm and safety motivation | We study frozen prompting, tokenizer measurement, and 8B/70B internal scaling | Medium |
 | Zur et al. (2025) | Token entanglement, three identification methods, subliminal prompting across Llama/Qwen/Gemma | Direct parent of our prompting protocol and geometry probe | We test random pairs without winner selection, width controls, and matched 8B/70B observational/causal depth | High |
+| Chauhan & Shah (2026) | Causal representation-alignment mechanism in an MLP; observational 1B base/instruct animal-number comparison; ratio-metric circularity | Static geometry can be present without LLM behavior; same broad prompting object and measurement caution | Their LLM evidence has no activation intervention and stops at 1B; ours gives a matched 8B/70B geometry/readout/causal timing contrast plus width controls | High for broad geometry/measurement claims; low for the headline result |
 | Schrodi et al. (2026) | Autoregressive digit-sequence scoring; divergence tokens; causal early-layer training results; paraphrase fragility | Multi-token Qwen/Gemma and layer analysis | Their question is which training updates install bias; ours is frozen bidirectional measurement and late answer readability across 8B/70B | Very high for broad claims |
 | Blank et al. (2026) | Steering-vector distillation; prompt traits approximated by residual directions; optimizer dependence | Residual representation and system-prompt channel | We do not train students; we patch natural full states and measure a frozen 8B/70B causal timing difference | High |
 | Morgulis & Hewitt (2026) | Complex multi-word subliminal steering; layer-localized recovery of teacher vector | Layer-localized latent signal | Their vector is installed through training and controlled by steering layer; ours is pre-existing animal/number behavior | High |
@@ -77,6 +78,7 @@ post-training transfer would raise the paper further but requires a
 substantially larger new study.
 
 The final anonymous manuscript now carries this comparison into the paper
-itself as a seven-row nearest-prior-work table. This prevents the novelty claim
+itself as a seven-row nearest-prior-work table that includes the July 2026
+contemporaneous comparison. This prevents the novelty claim
 from depending on the supplement or on a reviewer reconstructing the literature
 gap from prose alone.

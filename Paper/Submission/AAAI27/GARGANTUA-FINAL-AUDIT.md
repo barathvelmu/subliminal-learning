@@ -6,11 +6,13 @@ AI-assistance mini-audit and final-file refresh: **July 19, 2026**
 
 Final sleep-pass freeze verification: **July 19, 2026**
 
+Final contemporaneous-work hardening pass: **July 19, 2026**
+
 ## Baby-food verdict
 
-**GREEN. Stop adding experiments for this submission.**
+**GREEN. Stop adding experiments or citations for this submission.**
 
-Two waves of independent hostile review found no fatal scientific,
+Three waves of hostile review found no fatal scientific,
 statistical, writing, visual, anonymity, or reproducibility defect. The first
 wave repaired submission blockers and claim-precision risks. The second wave
 simulated novelty, correctness, significance, evidence, clarity, and
@@ -20,6 +22,43 @@ four upload files now pass the final gate.
 This does not guarantee acceptance. It means the remaining risk is normal
 reviewer judgment about significance and scope, not a known broken claim or
 file.
+
+## Final contemporaneous-work hardening pass
+
+The freeze was reopened once under a strict rule: change the paper only for a
+verified defect or a directly relevant primary source, then stop when the pass
+produces no further justified change.
+
+- A July 19 primary-source search found Chauhan and Shah's July 5 preprint,
+  *Covert Trait Propagation Is Representation Alignment* (arXiv:2607.04432).
+  Its transformer evidence is an observational Llama-3.2-1B base/instruct
+  comparison. The paper explicitly reports no causal intervention inside the
+  LLM and names scaling to 7B+ as open. It therefore supports the broad
+  geometry-versus-behavior distinction but does not contain our matched
+  Llama-3.1-8B/70B natural-state intervention or decimal-width analysis.
+- The source is now cited in the nearest-prior-work table. The table combines
+  it with the parent token-entanglement comparison, preserving the seven-page
+  layout and natural reference flow. A local paper card and rebuttal response
+  were added.
+- One notation sentence now defines the two directional variables and decimal
+  width in the law-of-total-covariance explanation. Three small punctuation
+  issues were corrected. No result, estimand, interpretation, figure, abstract,
+  or TL;DR changed.
+- All 23 cited source URLs returned HTTP 200. There are 23 used citation keys,
+  23 bibliography records, zero missing citations, and zero unused records.
+- A fresh extraction of the unchanged 49,495,215-byte code/data ZIP again
+  passed all 49 manifest hashes and identity/secret scans. Every included
+  analysis reran. All deterministic results match; causal files differ only in
+  the documented sanitized protocol path, and the stored full layerwise file's
+  included CUDA branches match the fresh headline-only rerun. All three figures
+  reproduce byte-for-byte.
+- Main, supplement, and checklist were rebuilt at 7/3/2 pages. All 12 pages
+  were rendered at 144 dpi and inspected individually. There is no clipping,
+  overlap, broken table, unreadable figure, isolated reference page, or manual
+  spacing/page-break command.
+
+Decision: **GREEN AND REFROZEN.** The pass found one useful citation and one
+minor clarity fix, then no further evidence-backed edit.
 
 ## Final sleep-pass freeze verification
 
@@ -42,8 +81,8 @@ defect that justified disturbing the frozen paper.
   heading, forbidden reference break, or unexpected blank page.
 - Confirmed US Letter dimensions, embedded fonts, no encryption, no embedded
   attachments, and anonymous metadata for every PDF.
-- Recounted 22 used citation keys and 22 bibliography records, with zero
-  missing or unused entries. All 22 reference URLs returned HTTP 200 on July
+- Recounted 23 used citation keys and 23 bibliography records, with zero
+  missing or unused entries. All 23 reference URLs returned HTTP 200 on July
   19.
 - Fresh-extracted the 49,495,215-byte code/data ZIP. ZIP integrity and all
   49 manifest hashes pass. Searches found no author name, local path, personal
@@ -164,11 +203,11 @@ and 70B-CUDA branches match exactly.
 
 ## References and prior-work gate
 
-- 22 citation keys are used.
-- 22 bibliography entries exist.
+- 23 citation keys are used.
+- 23 bibliography entries exist.
 - Missing citations: **0**.
 - Uncited bibliography entries: **0**.
-- All 22 source URLs resolved during the audit.
+- All 23 source URLs resolved during the audit.
 - Titles and bibliographic metadata were checked against the primary paper
   pages or proceedings records.
 - The comparison table states the exact remaining gap rather than claiming that
@@ -178,7 +217,7 @@ and 70B-CUDA branches match exactly.
 
 | File | Pages / bytes | Limit | Result |
 |---|---:|---:|---|
-| `output/pdf/aaai27-main.pdf` | 7 pages / 976,325 bytes | 10 MB; at most 7 technical and 9 total pages | PASS |
+| `output/pdf/aaai27-main.pdf` | 7 pages / 976,430 bytes | 10 MB; at most 7 technical and 9 total pages | PASS |
 | `output/pdf/aaai27-checklist.pdf` | 2 pages / 95,711 bytes | 5 MB | PASS |
 | `output/pdf/aaai27-supplement.pdf` | 3 pages / 179,437 bytes | 10 MB | PASS |
 | `output/aaai27-code-data.zip` | 49,495,215 bytes | 50 MB | PASS, only 504,785 bytes spare |
@@ -194,9 +233,9 @@ whose SHA-256 checks all pass. ZIP integrity and decompression pass.
 
 Final SHA-256 digests:
 
-- main PDF: `90eef375877e95c59712a7800aea2fdd78a3d96567d563e01f0827a317e24c07`
-- supplement PDF: `059366d0d9cdcbdd2c8b94739f0344bd630153c0ecbec0d0362679593bcd30b4`
-- checklist PDF: `03fd7c32831eb2a0c23af9ccd63d9138ba0aeff6760c8b1c89a41e971eeacf52`
+- main PDF: `cc405b0b72ef31194c58697a2ee41f18c1a72ac7172bf5b7458415d46abf4edb`
+- supplement PDF: `e53f0e28413a898874660de0abf1333cbeb5765ffe34ce603fc332be7ab16b7d`
+- checklist PDF: `7a1b09ad244ee6e8079ad21a37c62cf8a8eea23face02b1ce86890a4f94b579c`
 - code/data ZIP: `ed069bd9c44f947c6dc618049b48f2f8097e42ae63fc93a6695bbbd8f104c885`
 
 ## Rebuttal shield

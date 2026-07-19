@@ -1,8 +1,8 @@
 # START HERE: your AAAI-27 submission roadmap
 
 Last live-verified against the official AAAI-27 pages and OpenReview venue:
-**July 19, 2026**. Final source, PDF, code/data, anonymity, and visual freeze
-recheck completed the same day.
+**July 19, 2026**. Final source, PDF, code/data, contemporaneous-literature,
+anonymity, and visual freeze recheck completed the same day.
 
 ## The one-sentence answer
 

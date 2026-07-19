@@ -28,6 +28,7 @@ This file separates three things:
 | 18 | “No reuse license weakens reproducibility.” | Open human decision | Checklist currently says partial; README is honest | Not a compliance failure; human may license original code before July 31 |
 | 19 | “The supplement contains essential evidence.” | Answerable | Main includes prompts, estimands, controls, key sensitivities, limits, and values | Point to main pages first; use supplement only for audit detail |
 | 20 | “AI wrote an unreliable paper.” | Answerable responsibility issue | Page-7 disclosure, verified citations, deterministic reruns, human responsibility | Do not debate detector vibes; answer concrete claim/reference/result concerns |
+| 21 | “Chauhan and Shah already show geometry and behavior separate.” | Answerable novelty boundary | Related Work and Table 1 cite the contemporaneous July 5 preprint; local paper card records the exact overlap | Agree on the broad separation; distinguish their observational 1B base/instruct result from our matched 8B/70B natural-state intervention and width-controlled measurement bundle |
 
 ## Fatal only if true
 

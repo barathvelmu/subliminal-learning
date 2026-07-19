@@ -17,7 +17,7 @@ Read this file top-to-bottom, then `experiments.md`. That is the full state; you
   in `Paper/`. S8 used Blank et al.'s released 16-animal Llama outcomes: their
   steering peak predicts transfer (rho `.768`), while our causal timing does not
   (rho `.111`); geometry is suggestive (rho `.562`) but misses BH-FDR (`q=.078`).
-  No in-house predictor passed the frozen main-paper gate. Two Gargantua
+  No in-house predictor passed the frozen main-paper gate. Three Gargantua
   science/policy/style/numerical/visual/rebuttal audit waves are complete; the
   four upload files are green and recorded in
   `Paper/Submission/AAAI27/GARGANTUA-FINAL-AUDIT.md`. Next work is the human
@@ -49,6 +49,28 @@ Scaling follow-up to the finished `subliminal-learning` repo. We reuse the token
 The "one surprising finding -> X post" likely falls out around step 2-3.
 
 ## Progress log (newest on top)
+
+- **2026-07-19 — S20 GARGANTUA CONTEMPORANEOUS-WORK HARDENING: GREEN AND
+  REFROZEN.** Reopened the freeze under a strict defect-or-primary-source rule.
+  Nia's existing research index was inspected first; adding a new paper was
+  blocked by expired authentication, so the audit fell back to the primary
+  arXiv record. The only directly relevant new source was Chauhan and Shah,
+  *Covert Trait Propagation Is Representation Alignment* (arXiv:2607.04432,
+  July 5). Its LLM result is observational at Llama-3.2-1B and explicitly leaves
+  causal LLM intervention and 7B+ scaling open, so it does not collide with the
+  matched 8B/70B natural-state result. Added it to the nearest-work table,
+  bibliography, novelty matrix, paper-card library, attack matrix, and response
+  bank. Also defined the covariance equation's directional variables and fixed
+  three punctuation/clarity details. No result, abstract, TL;DR, figure, or
+  claim boundary changed. The paper remains 7 pages with 23/23 citation keys
+  and records; all 23 URLs resolve. Fresh ZIP extraction passed 49/49 hashes,
+  every included analysis reran, and all three figures reproduced byte-for-byte.
+  Rebuilt and individually inspected all 12 PDF pages. Final upload hashes are
+  main `cc405b0b72ef31194c58697a2ee41f18c1a72ac7172bf5b7458415d46abf4edb`,
+  supplement `e53f0e28413a898874660de0abf1333cbeb5765ffe34ce603fc332be7ab16b7d`,
+  checklist `7a1b09ad244ee6e8079ad21a37c62cf8a8eea23face02b1ce86890a4f94b579c`;
+  code ZIP is unchanged. PLAIN ENGLISH: one real literature gap was repaired;
+  the next attack produced no justified edit, so submit this version.
 
 - **2026-07-19 — FINAL HUMAN HANDOFF MAP + TRUE-FINAL AUDIT: GREEN.** Reopened
   the live AAAI-27 submission, review, supplement, and publication-policy pages;
