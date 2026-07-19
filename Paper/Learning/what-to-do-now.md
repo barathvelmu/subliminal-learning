@@ -2,12 +2,17 @@
 
 > **Use the master checklist:**
 > `Submission/AAAI27/START-HERE-SUBMISSION-ROADMAP.md`. It was checked against
-> the live AAAI-27 pages and the active OpenReview form on July 18, 2026 and
+> the live AAAI-27 pages and OpenReview venue on July 19, 2026 and
 > contains the exact fields, files, upload caps, account instructions, and all
 > three deadline gates.
 
 This is the baby-food admin checklist. The science package is local and ready
 for your review. Nothing has been submitted under your name.
+
+**Important:** your account is created, but the page you showed was the special
+AI for Social Impact track. Use the **AAAI 2027 Conference Main Technical
+Track** portal instead:
+<https://openreview.net/group?id=AAAI.org/2027/Conference>.
 
 ## The two websites are different
 
@@ -63,7 +68,8 @@ Official EACL call: https://2027.eacl.org/calls/papers/
 ## Your next five actions
 
 1. Read `Submission/AAAI27/output/pdf/aaai27-main.pdf` once from start to finish.
-2. Sign in to OpenReview and finish your profile.
+2. Open the Main Technical Track portal and confirm the header says `AAAI 2027
+   Conference`, not `Artificial Intelligence for Social Impact Track`.
 3. Decide the exact author list and order.
 4. Choose a code license. MIT is the simplest permissive option; Apache-2.0 is
    also permissive and adds an explicit patent grant.

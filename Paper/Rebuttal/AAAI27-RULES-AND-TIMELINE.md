@@ -1,6 +1,6 @@
 # AAAI-27 rules and timeline
 
-Verified against live official pages on **July 18, 2026**.
+Verified against live official pages on **July 19, 2026**.
 
 ## Baby-food version
 
@@ -104,8 +104,9 @@ All official deadlines are 11:59 PM UTC-12, also called Anywhere on Earth.
 AAAI allows judicious author use of generative AI. The human author remains
 responsible for every sentence, result, reference, figure, and artifact. AAAI's
 publication policy requires the role of AI systems to be documented in the
-manuscript. The current paper includes a specific `Use of AI Systems` paragraph
-on page 7.
+manuscript. The current paper includes a minimal, broad `AI Assistance`
+paragraph on page 7. The focused wording audit is in
+`../Research/aaai27-ai-assistance-audit.md`.
 
 Do not try to “beat an AI detector.” The defensible strategy is an accurate
 disclosure, verified references, reproducible numbers, candid limits, and a

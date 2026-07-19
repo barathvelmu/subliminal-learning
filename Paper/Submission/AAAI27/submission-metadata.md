@@ -64,6 +64,10 @@ do not count.
 
 ## Exact upload mapping from the live OpenReview form
 
+Use the **AAAI 2027 Conference Main Technical Track** portal. Do not create this
+paper under the separate `Artificial Intelligence for Social Impact Track`
+venue.
+
 - **Main PDF**, cap 10 MB: `output/pdf/aaai27-main.pdf` (0.98 MB)
 - **Reproducibility Checklist**, cap 5 MB:
   `output/pdf/aaai27-checklist.pdf` (0.10 MB)

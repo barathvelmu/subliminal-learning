@@ -47,7 +47,8 @@ The official style files are included unchanged. Only PDF files are required for
 
 - The submission is double blind. Do not add names, affiliations, acknowledgments, personal URLs, or identifying repository links.
 - The manuscript documents the role of generative-AI systems, as required by
-  AAAI's publication policy. Do not remove or conceal that disclosure.
+  AAAI's publication policy, using the minimal wording justified in
+  `../../Research/aaai27-ai-assistance-audit.md`. Do not remove or conceal it.
 - The abstract must be real by July 21 and must not change substantially afterward.
 - The work cannot be under review at another archival conference or journal.
 - All authors must be fixed by July 28 and cannot be added later.

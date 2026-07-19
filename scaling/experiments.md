@@ -488,3 +488,30 @@
 - **Decision:** GREEN. No new GPU experiment is justified for this deadline.
   Freeze the science, complete the human responsibility read, and submit the
   exact files through the three OpenReview gates.
+
+### S14 — AI-assistance wording and venue mini-Gargantua (COMPLETED)
+
+- **Question:** does the anonymous paper need an AI-use statement, and if so,
+  how can it satisfy AAAI without an unnecessary task-by-task inventory?
+- **Current official rule:** AAAI-27 permits judicious generative-AI use and
+  keeps the author fully responsible. AAAI's standing publication policy says
+  the role of AI systems must be properly documented in the manuscript. Neither
+  source requires vendor/model names, prompts, logs, or a dedicated section.
+- **Practice sample:** extracted 29 accepted AAAI-26 final PDFs, evenly sampled
+  across volume 40 issues 28 (Machine Learning V), 37 (NLP II), and 42
+  (Philosophy/Ethics). A disclosure-pattern search found zero visible
+  authoring-AI statements. This does not establish permission to omit: AI use
+  is unknown and AAAI-26's conference-specific policy was more restrictive.
+- **Decision:** reject both omission and the earlier long inventory. Final
+  statement: `Generative AI tools supported research workflow automation,
+  implementation, and manuscript preparation. The author remains responsible
+  for all reported content.` It is broad, accurate, anonymous, and placed
+  immediately before References.
+- **Venue correction:** the user's screenshot was the special AI for Social
+  Impact venue. This paper belongs in the `AAAI 2027 Conference` Main Technical
+  Track portal because it is a technical mechanistic study, not an AISI social
+  application paper.
+- **Final main PDF:** 7 US-Letter pages / 976,325 bytes; page 7 visually
+  inspected; no overfull boxes or undefined citations. SHA-256:
+  `90eef375877e95c59712a7800aea2fdd78a3d96567d563e01f0827a317e24c07`.
+- **Audit artifact:** `Paper/Research/aaai27-ai-assistance-audit.md`.

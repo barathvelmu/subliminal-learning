@@ -1,7 +1,7 @@
 # START HERE: your AAAI-27 submission roadmap
 
-Last live-verified against the official AAAI-27 pages and the active OpenReview
-submission form: **July 18, 2026**.
+Last live-verified against the official AAAI-27 pages and OpenReview venue:
+**July 19, 2026**.
 
 ## The one-sentence answer
 
@@ -14,14 +14,36 @@ it across three gates:
 2. **July 28:** upload the main paper and reproducibility checklist.
 3. **July 31:** upload the technical supplement and code/data ZIP.
 
-Nothing has been uploaded or submitted under your identity yet.
+Your OpenReview account is now created. Nothing has been uploaded or submitted
+under your identity yet.
 
 **Best strategy:** once your OpenReview profile is active, create the record and
 upload all four prepared files in the same sitting. You do not need to wait for
 July 28 or July 31. Those dates are last chances, not appointment dates. If
 everything is uploaded today, the later gates become simple verification days.
 
-## Your only urgent risk
+## Critical track check: do not use the AISI page
+
+This paper belongs in the **Main Technical Track**, not the special **AI for
+Social Impact (AISI) Track**. The AISI rubric prioritizes a concrete problem of
+social importance; this paper is a technical mechanistic study.
+
+- Correct venue header: **AAAI 2027 Conference**.
+- Correct official portal:
+  <https://openreview.net/group?id=AAAI.org/2027/Conference>.
+- Wrong header for this paper: **AAAI 2027 Artificial Intelligence for Social
+  Impact Track**.
+
+Merely opening or adding the AISI venue did not submit anything. Go back to the
+correct main venue before creating the paper record.
+
+## OpenReview account status
+
+**DONE:** the July 19 screenshot shows an active logged-in OpenReview account.
+
+The remaining urgent task is to create the paper record in the correct Main
+Technical Track. The account guidance below is retained only for
+troubleshooting.
 
 You need an **active OpenReview profile** before you can register the paper.
 OpenReview says a new profile made with a public email such as Gmail can take up
@@ -77,7 +99,8 @@ upload problem.
 Open the AAAI-27 portal:
 <https://openreview.net/group?id=AAAI.org/2027/Conference>
 
-Click **AAAI 2027 Conference Submission** and fill the following fields.
+Confirm the page header says **AAAI 2027 Conference**, not AISI. Then click
+**AAAI 2027 Conference Submission** and fill the following fields.
 
 ### Ready-to-paste scientific fields
 

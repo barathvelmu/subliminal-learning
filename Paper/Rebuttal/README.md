@@ -1,6 +1,6 @@
 # Gargantua rebuttal shield
 
-Last audited: **July 18, 2026**
+Last audited: **July 19, 2026**
 
 ## Baby-food verdict
 

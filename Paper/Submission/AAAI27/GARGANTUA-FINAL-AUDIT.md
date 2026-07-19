@@ -2,6 +2,8 @@
 
 Completed: **July 18, 2026**
 
+AI-assistance mini-audit and final-file refresh: **July 19, 2026**
+
 ## Baby-food verdict
 
 **GREEN. Stop adding experiments for this submission.**
@@ -22,8 +24,10 @@ file.
 1. The official author kit forbids `\clearpage` and says references must flow
    directly after the paper. The manual References break was removed.
 2. AAAI's publication policy requires the role of any AI system to be
-   documented in the manuscript. An accurate anonymous `Use of AI Systems`
-   paragraph was added before the bibliography.
+   documented in the manuscript. A July 19 focused audit shortened the original
+   task inventory to a broad, accurate two-sentence `AI Assistance` paragraph.
+   The policy does not require tool names, prompts, or a conspicuous disclosure
+   section.
 3. The official template's required `caption` package was restored. Custom
    float-packing and table-spacing overrides were removed.
 4. Research Question 2 formerly said the observational trace *predicts* causal
@@ -116,7 +120,7 @@ and 70B-CUDA branches match exactly.
 
 | File | Pages / bytes | Limit | Result |
 |---|---:|---:|---|
-| `output/pdf/aaai27-main.pdf` | 7 pages / 976,571 bytes | 10 MB; at most 7 technical and 9 total pages | PASS |
+| `output/pdf/aaai27-main.pdf` | 7 pages / 976,325 bytes | 10 MB; at most 7 technical and 9 total pages | PASS |
 | `output/pdf/aaai27-checklist.pdf` | 2 pages / 95,711 bytes | 5 MB | PASS |
 | `output/pdf/aaai27-supplement.pdf` | 3 pages / 179,437 bytes | 10 MB | PASS |
 | `output/aaai27-code-data.zip` | 49,495,215 bytes | 50 MB | PASS, only 504,785 bytes spare |
@@ -132,7 +136,7 @@ whose SHA-256 checks all pass. ZIP integrity and decompression pass.
 
 Final SHA-256 digests:
 
-- main PDF: `232ea5dfc552181c9e7945fe221bf1eb6486ef94939fa75401edcdc7e3e541c6`
+- main PDF: `90eef375877e95c59712a7800aea2fdd78a3d96567d563e01f0827a317e24c07`
 - supplement PDF: `059366d0d9cdcbdd2c8b94739f0344bd630153c0ecbec0d0362679593bcd30b4`
 - checklist PDF: `03fd7c32831eb2a0c23af9ccd63d9138ba0aeff6760c8b1c89a41e971eeacf52`
 - code/data ZIP: `ed069bd9c44f947c6dc618049b48f2f8097e42ae63fc93a6695bbbd8f104c885`
@@ -148,11 +152,12 @@ PDFs or supplements can be changed after July 31.
 
 ## AI-use verdict
 
-Do not try to fool an AI detector. AAAI permits generative-AI assistance but
-holds the human author responsible and requires the role to be documented. The
-paper now does that directly. Its defense is specific evidence, accurate
-citations, honest limitations, a reproducible artifact, and the author's own
-full read and responsibility.
+Do not try to fool an AI detector, and do not volunteer a dramatic task-by-task
+inventory that AAAI does not request. AAAI permits judicious generative-AI
+assistance, holds the human author responsible, and requires the role to be
+documented. The paper now uses the shortest wording that remains accurate about
+the broad role: research workflow automation, implementation, and manuscript
+preparation. See `../../Research/aaai27-ai-assistance-audit.md`.
 
 Official policy sources:
 

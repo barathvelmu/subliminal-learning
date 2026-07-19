@@ -50,6 +50,25 @@ The "one surprising finding -> X post" likely falls out around step 2-3.
 
 ## Progress log (newest on top)
 
+- **2026-07-19 — AI-ASSISTANCE MINI-GARGANTUA + TRACK CORRECTION COMPLETE.**
+  Live AAAI-27 rules were rechecked against the Main Technical Track call,
+  submission instructions, and standing publication policy. AAAI permits
+  judicious generative-AI use but requires its role to be documented in the
+  manuscript; no rule requires tool names, prompts, or a task inventory. A
+  systematic practice sample extracted 29 accepted AAAI-26 final papers across
+  Machine Learning V, NLP II, and Philosophy/Ethics; none displayed an
+  authoring-AI disclosure, but this cannot justify omission because AI use was
+  unknown and AAAI-26 had a different, more restrictive rule. Replaced the long
+  task list with: `Generative AI tools supported research workflow automation,
+  implementation, and manuscript preparation. The author remains responsible
+  for all reported content.` Main remains 7 pages and visually clean; current
+  size/hash are 976,325 bytes and
+  `90eef375877e95c59712a7800aea2fdd78a3d96567d563e01f0827a317e24c07`.
+  Also caught that the user's logged-in page was the separate AISI venue; this
+  technical mechanism paper belongs in the `AAAI 2027 Conference` Main
+  Technical Track. PLAIN ENGLISH: keep a tiny truthful disclosure, not the long
+  confession and not a risky omission; use the main conference page, not AISI.
+
 - **2026-07-18 — GARGANTUA REBUTTAL SHIELD COMPLETE; FINAL GATE GREEN.** A
   second adversarial wave simulated attacks on novelty, correctness,
   significance, evidence, clarity, and reproducibility, then the main agent
