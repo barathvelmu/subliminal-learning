@@ -1,0 +1,153 @@
+{
+  "protocol": "Paper/Supplement/preregistration-s5.md",
+  "seed": 0,
+  "bootstrap_resamples": 1000,
+  "bootstrap_unit": "crossed resampling of animals and unordered number-pair clusters; both directions retained",
+  "models": {
+    "1B-smoke": {
+      "label": "1B-smoke",
+      "path": "prompting/results/causal_patch_s5_smoke1b.npz",
+      "model": "unsloth/Llama-3.2-1B-Instruct",
+      "pair_count": 2,
+      "ordered_observation_count": 4,
+      "animals": [
+        "owl",
+        "eagle"
+      ],
+      "requested_depths": [
+        0.5,
+        0.9
+      ],
+      "actual_relative_depths": [
+        0.5,
+        0.875
+      ],
+      "block_indices": [
+        8,
+        14
+      ],
+      "mean_beta_by_depth": [
+        0.2,
+        0.75
+      ],
+      "mean_beta_95_ci_by_depth": [
+        [
+          0.16666666666666666,
+          0.5
+        ],
+        [
+          0.4166666666666667,
+          3.75
+        ]
+      ],
+      "mean_permuted_beta_by_depth": [
+        -0.025,
+        -0.125
+      ],
+      "matched_minus_permuted_mean_beta_by_depth": [
+        0.225,
+        0.875
+      ],
+      "matched_minus_permuted_95_ci_by_depth": [
+        [
+          0.16666666666666666,
+          0.75
+        ],
+        [
+          0.75,
+          2.0
+        ]
+      ],
+      "mean_wrong_animal_beta_by_depth": [
+        -0.2,
+        -0.75
+      ],
+      "matched_minus_wrong_mean_beta_by_depth": [
+        0.4,
+        1.5
+      ],
+      "matched_minus_wrong_95_ci_by_depth": [
+        [
+          0.3333333333333333,
+          1.0
+        ],
+        [
+          0.8333333333333334,
+          7.5
+        ]
+      ],
+      "direction_half_mean_beta": {
+        "forward": [
+          0.25,
+          1.25
+        ],
+        "reverse": [
+          0.25,
+          1.25
+        ]
+      },
+      "delta_variance_by_animal": {
+        "owl": 0.078125,
+        "eagle": 0.078125
+      },
+      "all_delta_variances_above_1e-8": true,
+      "causal_auc_mean": 0.2607142857142857,
+      "causal_auc_crossed_bootstrap_95_ci": [
+        0.17261904761904762,
+        1.0535714285714286
+      ],
+      "causal_auc_minus_permuted_mean": 0.29999999999999993,
+      "causal_auc_minus_permuted_95_ci": [
+        0.24404761904761904,
+        0.8035714285714286
+      ],
+      "causal_auc_minus_wrong_mean": 0.5214285714285714,
+      "causal_auc_minus_wrong_95_ci": [
+        0.34523809523809523,
+        2.107142857142857
+      ],
+      "numerical_controls": {
+        "tolerance": 0.005,
+        "clean_duplicate_max_abs_delta": 0.0,
+        "identity_max_abs_delta_by_depth": [
+          0.0,
+          0.0
+        ],
+        "pass": true
+      },
+      "per_animal": {
+        "owl": {
+          "beta_by_depth": [
+            0.2,
+            0.75
+          ],
+          "permuted_beta_by_depth": [
+            -0.025,
+            -0.125
+          ],
+          "wrong_animal_beta_by_depth": [
+            -0.2,
+            -0.75
+          ],
+          "causal_auc": 0.2607142857142857
+        },
+        "eagle": {
+          "beta_by_depth": [
+            0.2,
+            0.75
+          ],
+          "permuted_beta_by_depth": [
+            -0.025,
+            -0.125
+          ],
+          "wrong_animal_beta_by_depth": [
+            -0.2,
+            -0.75
+          ],
+          "causal_auc": 0.2607142857142857
+        }
+      }
+    }
+  },
+  "contrasts": {}
+}

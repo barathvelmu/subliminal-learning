@@ -1,0 +1,55 @@
+\section{Discussion}
+\label{sec:discussion}
+
+These experiments separate four objects that are easy to collapse under the
+single label \emph{token entanglement}: a behavioral association, a static
+relationship between output-token rows, and a contextual computation that makes
+an answer linearly readable, plus the causal influence carried by a transplanted
+assistant state. They do not scale together. From Llama 8B to 70B, the static
+geometry--behavior link falls decisively, the late observational trajectory
+remains similar, and causal donor control moves substantially earlier. Across
+tokenizers, replacing one
+atomic number token with a digit sequence does not preserve the positive
+association, and a seemingly reasonable normalization can reverse the sign
+through sequence length.
+
+The most direct interpretation is that the measured channel is sensitive to its
+tokenizer boundary and contextually assembled inside the network. The causal
+patch sharpens ``contextually assembled'': a natural donor state becomes
+sufficient to make the recipient output follow donor-specific animal contrasts,
+and this handoff occurs much earlier at 70B. This does not
+mean that multi-token representations cannot carry information. It means that
+exact sequence probability was not a drop-in replacement for the positive
+atomic-token statistic in the tested models. ``Contextually assembled'' means
+that a fixed output-head readout becomes progressively aligned with the saved
+animal behavior at the response position. Full-state patching establishes
+sufficiency, but it does not imply that a single animal vector is the causal
+algorithm.
+
+The 8B--70B dissociation constrains a simple global-geometry account. If raw
+output-row similarity were a sufficient, scale-monotonic explanation, its
+behavioral predictiveness and contextual causal transmission should not move in
+opposite directions. Larger models can evidently preserve similar output
+behavior while reorganizing which static output directions predict that behavior
+and shifting donor control earlier in the forward computation. This is
+compatible with activation-space, channel-location, and output-compatibility
+accounts
+\citep{blank2026steering,morgulis2026steering,brockers2026noise,madl2026channel},
+but full-state sufficiency does not choose a unique causal feature or mechanism
+among them.
+
+The Qwen result also changes how multi-token probes should be designed. Sequence
+log probability, token-normalized score, and width-controlled score answer
+different statistical questions. When token count is linked to stimulus width,
+per-token averaging can produce a strong and highly replicable positive result
+that is entirely absent within widths. Future work should preregister a fixed
+length or explicitly residualize length before interpreting a sequence-level
+association as semantic or mechanistic coupling.
+
+The main remaining bridge is training. A larger prospective study should test
+whether static geometry, readout depth, or causal handoff depth predicts actual
+student transfer after fine-tuning. That requires multiple teachers, student
+seeds, and held-out preregistered predictions; a single cheap fine-tune would not
+answer it. The present study instead supplies a tightly controlled frozen-model
+mechanism result and identifies which measurements should not be substituted for
+one another.

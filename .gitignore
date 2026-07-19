@@ -4,3 +4,24 @@ __pycache__/
 .venv/
 venv/
 *.egg-info/
+
+# Research scratch and machine-specific cloud state
+tmp/
+scaling/.vast_*
+scaling/*_state.json
+scaling/*.log
+
+# LaTeX build intermediates (final PDFs remain trackable)
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+
+# Large, duplicated binary artifacts stay in the local submission archive.
+# JSON summaries, scripts, figures, and final PDFs remain trackable.
+prompting/results/*.npz
+Paper/Submission/AAAI27/code-data/data/raw/
+Paper/Submission/AAAI27/output/*.zip

@@ -1,0 +1,247 @@
+{
+  "model": "unsloth/Llama-3.2-1B-Instruct",
+  "summary": {
+    "raw_cos": {
+      "forward_mean": 0.13979285955429077,
+      "forward_sd": 0.05196138471364975,
+      "reverse_mean": 0.10310465347204671,
+      "reverse_sd": 0.10547127054122099
+    },
+    "cen_cos": {
+      "forward_mean": 0.15252232551574707,
+      "forward_sd": 0.08548048138618469,
+      "reverse_mean": 0.12330357229944387,
+      "reverse_sd": 0.11674090809410052
+    },
+    "raw_dot": {
+      "forward_mean": 0.14034223556518555,
+      "forward_sd": 0.05222003534436226,
+      "reverse_mean": 0.10321164321086565,
+      "reverse_sd": 0.10545619975296142
+    },
+    "cen_dot": {
+      "forward_mean": 0.1490057110786438,
+      "forward_sd": 0.0859462097287178,
+      "reverse_mean": 0.11910259071105386,
+      "reverse_sd": 0.11885152273454187
+    }
+  },
+  "per_animal": [
+    {
+      "animal": "owl",
+      "multi_token": false,
+      "raw_cos_forward": 0.12386426329612732,
+      "raw_cos_reverse": 0.23065799220404215,
+      "cen_cos_forward": 0.1707555055618286,
+      "cen_cos_reverse": 0.24533004296187116,
+      "raw_dot_forward": 0.12243424355983734,
+      "raw_dot_reverse": 0.23144459630367398,
+      "cen_dot_forward": 0.17082537710666656,
+      "cen_dot_reverse": 0.24372450710436017
+    },
+    {
+      "animal": "eagle",
+      "multi_token": false,
+      "raw_cos_forward": 0.14668744802474976,
+      "raw_cos_reverse": 0.1944223724797839,
+      "cen_cos_forward": 0.2054058164358139,
+      "cen_cos_reverse": 0.06064652185665788,
+      "raw_dot_forward": 0.14815500378608704,
+      "raw_dot_reverse": 0.2067411075051751,
+      "cen_dot_forward": 0.20428359508514404,
+      "cen_dot_reverse": 0.05444781891281924
+    },
+    {
+      "animal": "dolphin",
+      "multi_token": false,
+      "raw_cos_forward": 0.09041009098291397,
+      "raw_cos_reverse": 0.07702047688957614,
+      "cen_cos_forward": 0.23823896050453186,
+      "cen_cos_reverse": 0.19598995337728733,
+      "raw_dot_forward": 0.0920538678765297,
+      "raw_dot_reverse": 0.07510122959685503,
+      "cen_dot_forward": 0.23589970171451569,
+      "cen_dot_reverse": 0.19724551134901408
+    },
+    {
+      "animal": "octopus",
+      "multi_token": true,
+      "raw_cos_forward": 0.21654173731803894,
+      "raw_cos_reverse": -0.0380386547954433,
+      "cen_cos_forward": 0.23833367228507996,
+      "cen_cos_reverse": 0.20532123353086995,
+      "raw_dot_forward": 0.21556298434734344,
+      "raw_dot_reverse": -0.04731098491948643,
+      "cen_dot_forward": 0.23107779026031494,
+      "cen_dot_reverse": 0.2100151365418759
+    },
+    {
+      "animal": "elephant",
+      "multi_token": false,
+      "raw_cos_forward": 0.07091079652309418,
+      "raw_cos_reverse": -0.031655199008544216,
+      "cen_cos_forward": 0.2595025300979614,
+      "cen_cos_reverse": 0.15812931375745434,
+      "raw_dot_forward": 0.07090013474225998,
+      "raw_dot_reverse": -0.02864377560325245,
+      "cen_dot_forward": 0.2583302855491638,
+      "cen_dot_reverse": 0.16026700127368884
+    },
+    {
+      "animal": "wolf",
+      "multi_token": false,
+      "raw_cos_forward": 0.13739748299121857,
+      "raw_cos_reverse": 0.3007404431614112,
+      "cen_cos_forward": 0.23422512412071228,
+      "cen_cos_reverse": 0.14085564588292834,
+      "raw_dot_forward": 0.13517722487449646,
+      "raw_dot_reverse": 0.30203957139766413,
+      "cen_dot_forward": 0.2303062081336975,
+      "cen_dot_reverse": 0.1260630466099268
+    },
+    {
+      "animal": "lion",
+      "multi_token": false,
+      "raw_cos_forward": 0.09959530830383301,
+      "raw_cos_reverse": -0.001888290629770556,
+      "cen_cos_forward": 0.17387038469314575,
+      "cen_cos_reverse": 0.20505585049754893,
+      "raw_dot_forward": 0.09853290021419525,
+      "raw_dot_reverse": 0.00016307406772867773,
+      "cen_dot_forward": 0.17095378041267395,
+      "cen_dot_reverse": 0.20882981194290082
+    },
+    {
+      "animal": "tiger",
+      "multi_token": false,
+      "raw_cos_forward": 0.1323554515838623,
+      "raw_cos_reverse": 0.19366795452529623,
+      "cen_cos_forward": 0.22092846035957336,
+      "cen_cos_reverse": 0.14871347326957626,
+      "raw_dot_forward": 0.13093867897987366,
+      "raw_dot_reverse": 0.18080651768978834,
+      "cen_dot_forward": 0.21403740346431732,
+      "cen_dot_reverse": 0.1325072200433643
+    },
+    {
+      "animal": "bear",
+      "multi_token": false,
+      "raw_cos_forward": 0.15695255994796753,
+      "raw_cos_reverse": 0.15511027950948883,
+      "cen_cos_forward": 0.1629396229982376,
+      "cen_cos_reverse": 0.15220835242937653,
+      "raw_dot_forward": 0.15816953778266907,
+      "raw_dot_reverse": 0.15916030742137463,
+      "cen_dot_forward": 0.16214004158973694,
+      "cen_dot_reverse": 0.14992466505524693
+    },
+    {
+      "animal": "fox",
+      "multi_token": false,
+      "raw_cos_forward": 0.0974835455417633,
+      "raw_cos_reverse": 0.17381121766774826,
+      "cen_cos_forward": 0.1829875111579895,
+      "cen_cos_reverse": 0.1748566352883133,
+      "raw_dot_forward": 0.09936370700597763,
+      "raw_dot_reverse": 0.17444839688186037,
+      "cen_dot_forward": 0.18316304683685303,
+      "cen_dot_reverse": 0.1659795842669499
+    },
+    {
+      "animal": "cat",
+      "multi_token": false,
+      "raw_cos_forward": 0.1512576937675476,
+      "raw_cos_reverse": 0.07588116273138347,
+      "cen_cos_forward": 0.11920924484729767,
+      "cen_cos_reverse": 0.16759009337005973,
+      "raw_dot_forward": 0.1526452749967575,
+      "raw_dot_reverse": 0.07466619182099415,
+      "cen_dot_forward": 0.11308889836072922,
+      "cen_dot_reverse": 0.1639333271738186
+    },
+    {
+      "animal": "dog",
+      "multi_token": false,
+      "raw_cos_forward": 0.1553552895784378,
+      "raw_cos_reverse": 0.04402525955636237,
+      "cen_cos_forward": 0.1248834878206253,
+      "cen_cos_reverse": 0.07261446640515908,
+      "raw_dot_forward": 0.1586664319038391,
+      "raw_dot_reverse": 0.04370327886539431,
+      "cen_dot_forward": 0.12486977875232697,
+      "cen_dot_reverse": 0.07480662154064287
+    },
+    {
+      "animal": "penguin",
+      "multi_token": true,
+      "raw_cos_forward": 0.13071967661380768,
+      "raw_cos_reverse": -0.02115714278919801,
+      "cen_cos_forward": -0.07976736128330231,
+      "cen_cos_reverse": -0.14143128988175413,
+      "raw_dot_forward": 0.13288027048110962,
+      "raw_dot_reverse": -0.019675059127802347,
+      "cen_dot_forward": -0.08172892779111862,
+      "cen_dot_reverse": -0.14455989653741483
+    },
+    {
+      "animal": "panda",
+      "multi_token": false,
+      "raw_cos_forward": 0.05004327744245529,
+      "raw_cos_reverse": -0.0872324021420244,
+      "cen_cos_forward": 0.140179842710495,
+      "cen_cos_reverse": 0.3117762024764317,
+      "raw_dot_forward": 0.04857536405324936,
+      "raw_dot_reverse": -0.0823757421822063,
+      "cen_dot_forward": 0.13988803327083588,
+      "cen_dot_reverse": 0.31358080748519523
+    },
+    {
+      "animal": "koala",
+      "multi_token": true,
+      "raw_cos_forward": 0.19979240000247955,
+      "raw_cos_reverse": 0.09671694834629771,
+      "cen_cos_forward": -0.0014476473443210125,
+      "cen_cos_reverse": -0.0551874002052334,
+      "raw_dot_forward": 0.20034419000148773,
+      "raw_dot_reverse": 0.09618090454586631,
+      "cen_dot_forward": -0.009249665774405003,
+      "cen_dot_reverse": -0.06134797222388474
+    },
+    {
+      "animal": "peacock",
+      "multi_token": true,
+      "raw_cos_forward": 0.15286114811897278,
+      "raw_cos_reverse": 0.11705626511786357,
+      "cen_cos_forward": 0.072419673204422,
+      "cen_cos_reverse": -0.11048366506325384,
+      "raw_dot_forward": 0.15537719428539276,
+      "raw_dot_reverse": 0.12139022071810013,
+      "cen_dot_forward": 0.06803955882787704,
+      "cen_dot_reverse": -0.1206814911596126
+    },
+    {
+      "animal": "shark",
+      "multi_token": false,
+      "raw_cos_forward": 0.2776415944099426,
+      "raw_cos_reverse": 0.17842042659242358,
+      "cen_cos_forward": 0.10240708291530609,
+      "cen_cos_reverse": 0.19197956986178333,
+      "raw_dot_forward": 0.278492271900177,
+      "raw_dot_reverse": 0.17626517637809647,
+      "cen_dot_forward": 0.09289849549531937,
+      "cen_dot_reverse": 0.1855994562215727
+    },
+    {
+      "animal": "sea turtle",
+      "multi_token": true,
+      "raw_cos_forward": 0.12640167772769928,
+      "raw_cos_reverse": 0.198324653080144,
+      "cen_cos_forward": 0.18032991886138916,
+      "cen_cos_reverse": 0.09549930157491314,
+      "raw_dot_forward": 0.12789110839366913,
+      "raw_dot_reverse": 0.19370456643575745,
+      "cen_dot_forward": 0.17327910661697388,
+      "cen_dot_reverse": 0.08351147719850516
+    }
+  ]
+}

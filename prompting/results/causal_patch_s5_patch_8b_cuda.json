@@ -1,0 +1,74 @@
+{
+  "artifact": "/workspace/subliminal-learning/prompting/results/causal_patch_s5_patch_8b_cuda.npz",
+  "metadata": {
+    "schema_version": 1,
+    "model": "unsloth/Llama-3.1-8B-Instruct",
+    "tag": "s5_patch_8b_cuda",
+    "base_artifact_sha256": "40c45bee43fd43214363df44c28f50a2179276c39a4bac0bfb300a72ccf240ad",
+    "pair_count": 128,
+    "pair_seed": 0,
+    "permutation_seed": 1,
+    "requested_depths": [
+      0.25,
+      0.5,
+      0.75,
+      0.9,
+      0.97
+    ],
+    "block_indices": [
+      8,
+      16,
+      24,
+      29,
+      31
+    ],
+    "actual_relative_depths": [
+      0.25,
+      0.5,
+      0.75,
+      0.90625,
+      0.96875
+    ],
+    "animals": [
+      "owl",
+      "eagle",
+      "dolphin",
+      "octopus",
+      "elephant",
+      "wolf",
+      "lion",
+      "tiger",
+      "bear",
+      "fox",
+      "cat",
+      "dog",
+      "penguin",
+      "panda",
+      "koala",
+      "peacock",
+      "shark",
+      "sea turtle"
+    ],
+    "batch_size": 8,
+    "load_device_map_requested": "auto",
+    "load_dtype_requested": "bfloat16",
+    "created_at": "2026-07-18T22:55:31.885504+00:00",
+    "updated_at": "2026-07-18T22:56:12.550724+00:00",
+    "elapsed_seconds": 185.53930227499222,
+    "stage": "complete",
+    "python": "3.11.11",
+    "torch": "2.6.0+cu124",
+    "transformers": "5.14.1",
+    "tokenizer_class": "TokenizersBackend",
+    "transformer_block_count": 32,
+    "numerical_tolerance": 0.005
+  },
+  "clean_duplicate_max_abs_delta": 0.0,
+  "identity_max_abs_delta_by_depth": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ]
+}

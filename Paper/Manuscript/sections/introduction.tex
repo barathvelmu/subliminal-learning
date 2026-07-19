@@ -1,0 +1,51 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Language models can transmit a behavioral trait through training examples that
+do not state that trait in ordinary semantic terms. In the canonical example, a
+teacher prompted to prefer owls emits lists of numbers; a student fine-tuned on
+those lists subsequently exhibits an owl preference
+\citep{cloud2025subliminal}. This phenomenon, called \emph{subliminal learning},
+raises both a scientific question---what signal is available in apparently
+unrelated tokens?---and a practical one---which properties can survive data
+filtering and distillation?
+
+One proposed explanation is \emph{token entanglement}: apparently unrelated
+tokens can be coupled through model representations and output behavior
+\citep{zur2025entanglement}. A striking associated prompting effect links animal
+concepts and particular number tokens. Yet ``entanglement'' can refer to several
+different objects: a bidirectional behavioral correlation, a static relationship
+between rows of the output matrix, or a contextual computation that makes an
+animal answer readable from an intermediate hidden state. These objects need not
+scale together, and an atomic token measurement may not survive a change of
+tokenizer.
+
+We isolate those distinctions using the same 18 animal concepts and 1,110
+decimal strings throughout. Our clean scale comparison uses full-BF16
+Llama-3.1-8B-Instruct and Llama-3.1-70B-Instruct on CUDA. We separately test
+Qwen3-0.6B and Qwen3-1.7B, whose digit-splitting tokenization lets us ask whether
+exact multi-token sequence probability repairs an atomic-token probe. Finally,
+we trace the Llama channel through every hidden state using the final RMSNorm and
+selected output rows as a fixed linear readout, then intervene by transplanting
+natural assistant-position residual states between randomly paired number
+prompts at five fixed depths.
+
+The experiments support four conclusions. First, the static
+geometry--behavior relationship weakens substantially from Llama 8B to 70B,
+although behavioral association remains measurable. Second, the contextual
+answer trajectory is late-forming and statistically similar in normalized AUC
+at 8B and 70B. Third, causal donor control emerges much earlier at 70B despite
+weaker static geometry: at half depth its conditional coefficient is $0.773$ at
+70B versus $0.038$ at 8B. Fourth, full-sequence scoring on Qwen does not restore a positive
+width-3 association; moreover, pooling widths and dividing by token count can
+manufacture a positive result that vanishes after width control. Thus token
+entanglement is not well described by one scalar mechanism that increases with
+scale.
+
+Our contribution is deliberately narrower than a theory of training-time
+subliminal learning. We provide a controlled map of a pre-existing prompting
+channel and show that four measurements commonly treated as interchangeable can
+dissociate. Our residual-state intervention establishes causal sufficiency of
+the patched assistant state for natural pairwise output differences, while
+remaining agnostic about a unique feature, head, neuron, or training-time
+mechanism.

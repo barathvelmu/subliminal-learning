@@ -1,0 +1,71 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Subliminal learning.}
+\citet{cloud2025subliminal} demonstrated trait transfer through semantically
+unrelated number, code, and reasoning data, and found that transfer depended on
+teacher and student base-model compatibility. The phenomenon is therefore not
+ordinary semantic imitation and motivates closer study of the model-specific
+channels available in generated data.
+
+\paragraph{Token-level and sparse-data accounts.}
+\citet{zur2025entanglement} introduced token entanglement, measured it using
+unembedding similarity and model outputs, and demonstrated subliminal prompting.
+Their account supplies the prompting protocol that we scale and dissect.
+\citet{schrodi2026understanding} subsequently found that global token
+entanglement and logit leakage are not necessary for training-time transfer;
+instead, transfer in their setting concentrates in sparse divergence tokens and
+depends strongly on early trainable layers. Importantly for our novelty scope,
+they already score digit-split Qwen and Gemma numbers with the autoregressive
+chain rule. Our contribution is therefore not generic multi-token scoring. It is
+the bidirectional first-token and within-width control that exposes a
+mixed-width normalization confound. Their early-layer result concerns which
+updates install a preference; our late-layer result concerns when an answer is
+readable in a frozen forward pass.
+
+\paragraph{Activation-space accounts.}
+\citet{blank2026steering} interpret subliminal learning as steering-vector
+distillation: a teacher system prompt induces a residual-stream direction and a
+student learns an aligned direction during fine-tuning.
+\citet{morgulis2026steering} show that stronger, multi-word signals can be
+transmitted with trained steering vectors and report layer-localized recovery of
+the teacher direction. These findings motivate looking inside the network rather
+than relying only on output-token geometry. Our fixed linear readout asks when a
+particular animal answer becomes readable. Our separate full-state patch tests
+natural donor-to-recipient causal transmission across scale, but does not
+isolate one direction or identify a training-installed signal.
+
+\citet{wang2026data2behavior} extract layerwise mean representations from
+candidate training data and causally inject them during inference to anticipate
+post-training biases. A concurrent positional-bias study combines
+divergence-token masking, token geometry, layerwise probing, and causal steering
+across eight models \citep{positional2026}. These studies preclude a broad claim
+of novelty for frozen representation analysis, layerwise subliminal probing, or
+causal steering. Our narrower object is a matched 8B/70B trace of an unchanged
+frozen prompting channel after its static geometry weakens.
+
+\paragraph{Compatibility and capacity.}
+In a controlled neural-network setting, \citet{brockers2026noise} show that
+compatible output heads can enable subliminal transfer despite changes to hidden
+layers or architecture, and derive conditions under which transfer fails. This
+reinforces the need to distinguish output-boundary compatibility from the
+internal computation producing an answer. Our 8B--70B comparison shows an
+empirical version of this distinction: static output geometry weakens while a
+late contextual readout remains similar.
+
+\citet{madl2026channel} sharpen this distinction into a channel-conditioned
+auditability map. They causally localize masked single-token transfer to
+convergent vocabulary geometry in one regime, while conditional behaviors route
+through model-body computation in another; their scale sweeps reach 6.9B. This
+directly rules out generalizing our 70B prompting result into a universal claim
+that vocabulary channels fade with scale.
+
+The closest work therefore already covers global token entanglement,
+autoregressive digit scoring, sparse divergence tokens, residual-stream
+directions, causal steering, representation--behavior dissociations, and
+output-head compatibility. To our knowledge from a documented search, prior
+work has not combined (i) bidirectional sequence scoring with first-token and
+within-width controls that diagnose the length confound, and (ii) matched
+full-BF16 Llama 8B/70B observational and causal depth traces of the same frozen
+prompting channel after a resolved decline in static geometry. This is a scoped
+literature-search claim, not a claim of absolute priority.

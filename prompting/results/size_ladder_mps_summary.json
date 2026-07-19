@@ -1,0 +1,408 @@
+{
+  "seed": 0,
+  "bootstrap_resamples": 100000,
+  "models": {
+    "1B": {
+      "model": "unsloth/Llama-3.2-1B-Instruct",
+      "n_numbers": 1110,
+      "n_animals": 18,
+      "positive_p_lt_0.05": 10,
+      "positive_bh_fdr_q_lt_0.05": 9,
+      "median_pearson_r": 0.0684044293378315,
+      "median_pearson_r_bootstrap_95_ci": [
+        0.021253023398241207,
+        0.1129659899378191
+      ],
+      "pearson_r_range": [
+        -0.010295579888096113,
+        0.1718435467552913
+      ],
+      "animals": [
+        {
+          "animal": "owl",
+          "pearson_r": 0.16801603338842697,
+          "pearson_p": 1.7864356089193315e-08,
+          "pearson_bh_q": 1.6077920480273983e-07
+        },
+        {
+          "animal": "eagle",
+          "pearson_r": 0.1718435467552913,
+          "pearson_p": 8.32638072551649e-09,
+          "pearson_bh_q": 1.4987485305929684e-07
+        },
+        {
+          "animal": "dolphin",
+          "pearson_r": 0.10138467298688796,
+          "pearson_p": 0.0007177370206007607,
+          "pearson_bh_q": 0.002153211061802282
+        },
+        {
+          "animal": "octopus",
+          "pearson_r": 0.13252071014224243,
+          "pearson_p": 9.435392598634033e-06,
+          "pearson_bh_q": 4.2459266693853146e-05
+        },
+        {
+          "animal": "elephant",
+          "pearson_r": 0.07257825908667997,
+          "pearson_p": 0.015583316946285333,
+          "pearson_bh_q": 0.03352769101847209
+        },
+        {
+          "animal": "wolf",
+          "pearson_r": -0.005117576950086756,
+          "pearson_p": 0.8647666661619547,
+          "pearson_bh_q": 0.8647666661619547
+        },
+        {
+          "animal": "lion",
+          "pearson_r": 0.0078061747395507496,
+          "pearson_p": 0.795028374484117,
+          "pearson_bh_q": 0.8647666661619547
+        },
+        {
+          "animal": "tiger",
+          "pearson_r": 0.07177955954444788,
+          "pearson_p": 0.016763845509236045,
+          "pearson_bh_q": 0.03352769101847209
+        },
+        {
+          "animal": "bear",
+          "pearson_r": 0.06502929913121511,
+          "pearson_p": 0.030279758480484257,
+          "pearson_bh_q": 0.05450356526487167
+        },
+        {
+          "animal": "fox",
+          "pearson_r": 0.006524006449819493,
+          "pearson_p": 0.8281183099522519,
+          "pearson_bh_q": 0.8647666661619547
+        },
+        {
+          "animal": "cat",
+          "pearson_r": 0.03598204034666292,
+          "pearson_p": 0.2309798253306213,
+          "pearson_bh_q": 0.346469737995932
+        },
+        {
+          "animal": "dog",
+          "pearson_r": -0.005363863202346201,
+          "pearson_p": 0.8583256455260538,
+          "pearson_bh_q": 0.8647666661619547
+        },
+        {
+          "animal": "penguin",
+          "pearson_r": 0.024697087758939335,
+          "pearson_p": 0.4110639024550618,
+          "pearson_bh_q": 0.5691654033993163
+        },
+        {
+          "animal": "panda",
+          "pearson_r": 0.04311078451123289,
+          "pearson_p": 0.15118553951222938,
+          "pearson_bh_q": 0.2473945192018299
+        },
+        {
+          "animal": "koala",
+          "pearson_r": -0.010295579888096113,
+          "pearson_p": 0.731871590756225,
+          "pearson_bh_q": 0.8647666661619547
+        },
+        {
+          "animal": "peacock",
+          "pearson_r": 0.08604325245358695,
+          "pearson_p": 0.004120769441595014,
+          "pearson_bh_q": 0.010596264278387179
+        },
+        {
+          "animal": "shark",
+          "pearson_r": 0.12454730688875025,
+          "pearson_p": 3.1680619606514975e-05,
+          "pearson_bh_q": 0.00011405023058345392
+        },
+        {
+          "animal": "sea turtle",
+          "pearson_r": 0.142098525854273,
+          "pearson_p": 2.0036822330647512e-06,
+          "pearson_bh_q": 1.2022093398388507e-05
+        }
+      ]
+    },
+    "3B": {
+      "model": "unsloth/Llama-3.2-3B-Instruct",
+      "n_numbers": 1110,
+      "n_animals": 18,
+      "positive_p_lt_0.05": 12,
+      "positive_bh_fdr_q_lt_0.05": 11,
+      "median_pearson_r": 0.0881217483247981,
+      "median_pearson_r_bootstrap_95_ci": [
+        0.044720067649232226,
+        0.12883971267833144
+      ],
+      "pearson_r_range": [
+        0.010019225431082412,
+        0.26179272453452296
+      ],
+      "animals": [
+        {
+          "animal": "owl",
+          "pearson_r": 0.19545991498261958,
+          "pearson_p": 5.0931559127086763e-11,
+          "pearson_bh_q": 4.5838403214378087e-10
+        },
+        {
+          "animal": "eagle",
+          "pearson_r": 0.17123297745038743,
+          "pearson_p": 9.415552152555027e-09,
+          "pearson_bh_q": 5.649331291533016e-08
+        },
+        {
+          "animal": "dolphin",
+          "pearson_r": 0.13107704840951764,
+          "pearson_p": 1.1811208309821369e-05,
+          "pearson_bh_q": 4.252034991535692e-05
+        },
+        {
+          "animal": "octopus",
+          "pearson_r": 0.26179272453452296,
+          "pearson_p": 7.492087859476658e-19,
+          "pearson_bh_q": 1.3485758147057983e-17
+        },
+        {
+          "animal": "elephant",
+          "pearson_r": 0.010019225431082412,
+          "pearson_p": 0.7388026131920487,
+          "pearson_bh_q": 0.7388026131920487
+        },
+        {
+          "animal": "wolf",
+          "pearson_r": 0.15329759771985207,
+          "pearson_p": 2.867222805169395e-07,
+          "pearson_bh_q": 1.290250262326228e-06
+        },
+        {
+          "animal": "lion",
+          "pearson_r": 0.06222367839616074,
+          "pearson_p": 0.038194782092825195,
+          "pearson_bh_q": 0.05729217313923779
+        },
+        {
+          "animal": "tiger",
+          "pearson_r": 0.047336402113302735,
+          "pearson_p": 0.11498026837920546,
+          "pearson_bh_q": 0.15920344852505372
+        },
+        {
+          "animal": "bear",
+          "pearson_r": 0.02057963883545423,
+          "pearson_p": 0.4933786944077407,
+          "pearson_bh_q": 0.535524720151095
+        },
+        {
+          "animal": "fox",
+          "pearson_r": 0.02946547251330156,
+          "pearson_p": 0.32669232657061126,
+          "pearson_bh_q": 0.39203079188473355
+        },
+        {
+          "animal": "cat",
+          "pearson_r": 0.01999352062459742,
+          "pearson_p": 0.5057733468093675,
+          "pearson_bh_q": 0.535524720151095
+        },
+        {
+          "animal": "dog",
+          "pearson_r": 0.1266023769471452,
+          "pearson_p": 2.3343358416978144e-05,
+          "pearson_bh_q": 7.003007525093444e-05
+        },
+        {
+          "animal": "penguin",
+          "pearson_r": 0.04210373318516172,
+          "pearson_p": 0.16097587830324256,
+          "pearson_bh_q": 0.2069689863898833
+        },
+        {
+          "animal": "panda",
+          "pearson_r": 0.08465499025201036,
+          "pearson_p": 0.004767885152461583,
+          "pearson_bh_q": 0.00858219327443085
+        },
+        {
+          "animal": "koala",
+          "pearson_r": 0.08001987855070594,
+          "pearson_p": 0.007647031070091722,
+          "pearson_bh_q": 0.012513323569240998
+        },
+        {
+          "animal": "peacock",
+          "pearson_r": 0.09158850639758584,
+          "pearson_p": 0.002255059561935088,
+          "pearson_bh_q": 0.004510119123870176
+        },
+        {
+          "animal": "shark",
+          "pearson_r": 0.10671827929336794,
+          "pearson_p": 0.00036850856894520603,
+          "pearson_bh_q": 0.0009475934630019583
+        },
+        {
+          "animal": "sea turtle",
+          "pearson_r": 0.10007447905075809,
+          "pearson_p": 0.0008414851614941038,
+          "pearson_bh_q": 0.0018933416133617336
+        }
+      ]
+    },
+    "8B": {
+      "model": "unsloth/Llama-3.1-8B-Instruct",
+      "n_numbers": 1110,
+      "n_animals": 18,
+      "positive_p_lt_0.05": 13,
+      "positive_bh_fdr_q_lt_0.05": 13,
+      "median_pearson_r": 0.11658763741008588,
+      "median_pearson_r_bootstrap_95_ci": [
+        0.05777708154327022,
+        0.15766208403319487
+      ],
+      "pearson_r_range": [
+        -0.06597118785305008,
+        0.2582929782006914
+      ],
+      "animals": [
+        {
+          "animal": "owl",
+          "pearson_r": 0.10325029271007508,
+          "pearson_p": 0.0005704449814073547,
+          "pearson_bh_q": 0.0010268009665332384
+        },
+        {
+          "animal": "eagle",
+          "pearson_r": 0.16490550131529863,
+          "pearson_p": 3.280199387787617e-08,
+          "pearson_bh_q": 1.1808717796035421e-07
+        },
+        {
+          "animal": "dolphin",
+          "pearson_r": 0.19591034947815594,
+          "pearson_p": 4.591203091925237e-11,
+          "pearson_bh_q": 2.754721855155142e-10
+        },
+        {
+          "animal": "octopus",
+          "pearson_r": 0.14297337207989247,
+          "pearson_p": 1.730262021123618e-06,
+          "pearson_bh_q": 4.449245197175018e-06
+        },
+        {
+          "animal": "elephant",
+          "pearson_r": 0.2582929782006914,
+          "pearson_p": 2.2386963338309594e-18,
+          "pearson_bh_q": 4.0296534008957266e-17
+        },
+        {
+          "animal": "wolf",
+          "pearson_r": 0.247566262000395,
+          "pearson_p": 5.790877104426886e-17,
+          "pearson_bh_q": 5.211789393984197e-16
+        },
+        {
+          "animal": "lion",
+          "pearson_r": 0.0652988506477866,
+          "pearson_p": 0.02959936190081991,
+          "pearson_bh_q": 0.038056322443911314
+        },
+        {
+          "animal": "tiger",
+          "pearson_r": 0.07964318119579339,
+          "pearson_p": 0.007938529120774833,
+          "pearson_bh_q": 0.012990320379449726
+        },
+        {
+          "animal": "bear",
+          "pearson_r": 0.1839355157972992,
+          "pearson_p": 6.659977132144312e-10,
+          "pearson_bh_q": 2.9969897094649405e-09
+        },
+        {
+          "animal": "fox",
+          "pearson_r": 0.04814645209390618,
+          "pearson_p": 0.10889016351041146,
+          "pearson_bh_q": 0.1225014339492129
+        },
+        {
+          "animal": "cat",
+          "pearson_r": -0.010787404631206962,
+          "pearson_p": 0.7195907318549999,
+          "pearson_bh_q": 0.7195907318549999
+        },
+        {
+          "animal": "dog",
+          "pearson_r": 0.06881723275001497,
+          "pearson_p": 0.021853999750413952,
+          "pearson_bh_q": 0.03278099962562093
+        },
+        {
+          "animal": "penguin",
+          "pearson_r": 0.05025531243875385,
+          "pearson_p": 0.09422688053498013,
+          "pearson_bh_q": 0.11307225664197616
+        },
+        {
+          "animal": "panda",
+          "pearson_r": 0.12992498211009668,
+          "pearson_p": 1.4105871879989834e-05,
+          "pearson_bh_q": 2.8211743759979665e-05
+        },
+        {
+          "animal": "koala",
+          "pearson_r": -0.06597118785305008,
+          "pearson_p": 0.027959229534164153,
+          "pearson_bh_q": 0.038056322443911314
+        },
+        {
+          "animal": "peacock",
+          "pearson_r": 0.026946122609040887,
+          "pearson_p": 0.36976896111854407,
+          "pearson_bh_q": 0.39152007647845843
+        },
+        {
+          "animal": "shark",
+          "pearson_r": 0.1504186667510911,
+          "pearson_p": 4.791699533454789e-07,
+          "pearson_bh_q": 1.4375098600364366e-06
+        },
+        {
+          "animal": "sea turtle",
+          "pearson_r": 0.13677055071050329,
+          "pearson_p": 4.805376982050805e-06,
+          "pearson_bh_q": 1.0812098209614312e-05
+        }
+      ]
+    }
+  },
+  "adjacent_differences": {
+    "3B-1B": {
+      "estimand": "mean within-animal Pearson-r difference",
+      "estimate": 0.027836455816114214,
+      "paired_bootstrap_95_ci": [
+        0.0003191839201296207,
+        0.05737100960397921
+      ],
+      "animals_increasing": 11,
+      "n_animals": 18,
+      "note": "Exploratory; added after the per-model summary was pre-registered."
+    },
+    "8B-3B": {
+      "estimand": "mean within-animal Pearson-r difference",
+      "estimate": 0.013447588095389094,
+      "paired_bootstrap_95_ci": [
+        -0.028251240361859404,
+        0.058433693775441685
+      ],
+      "animals_increasing": 11,
+      "n_animals": 18,
+      "note": "Exploratory; added after the per-model summary was pre-registered."
+    }
+  }
+}
