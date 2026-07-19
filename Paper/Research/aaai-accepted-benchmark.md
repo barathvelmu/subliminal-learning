@@ -78,6 +78,18 @@ After the claim, citation, robustness, and reproducibility fixes listed above,
 the explicit target is **7/10 (accept)**. This is a benchmark, not a promise of
 conference acceptance.
 
+## Final page-budget surgery
+
+The remaining useful gap was not another formula. It was reviewer navigation.
+The final main paper now contains a nearest-prior-work comparison table, four
+additional primary citations for tokenization and patching methodology, the
+exact outcome-blinded external-validation statistics, and a sharper causal
+scope caveat. These additions make the novelty boundary and inconvenient null
+result visible without changing any headline estimate. The PDF uses six pages
+of technical content; references begin on page six and continue to page seven.
+Every threshold above is now satisfied. Further cosmetic density would violate
+this file's stopping rule unless new evidence is collected.
+
 ## Sources
 
 - AAAI-27 call: https://aaai.org/conference/aaai/aaai-27/main-technical-track-call/

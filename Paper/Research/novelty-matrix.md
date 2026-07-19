@@ -73,3 +73,8 @@ subliminal learning. The preregistered 8B/70B intervention closes the largest
 reviewer gap in the observational draft. A direct prospective link to
 post-training transfer would raise the paper further but requires a
 substantially larger new study.
+
+The final anonymous manuscript now carries this comparison into the paper
+itself as a six-row nearest-prior-work table. This prevents the novelty claim
+from depending on the supplement or on a reviewer reconstructing the literature
+gap from prose alone.

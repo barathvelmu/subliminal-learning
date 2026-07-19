@@ -318,3 +318,32 @@
   depth-rise sensitivities stated in the paper. Every packaged analyzer reruns
   exactly. The anonymous ZIP is 49.49 MB with 46 checksum-manifest entries,
   below the 50 MB upload boundary.
+
+### S9 — AAAI page-budget and nearest-prior-work surgery (COMPLETED)
+
+- **Purpose:** use the remaining main-paper space only where it reduces a real
+  reviewer uncertainty: novelty, measurement provenance, causal scope, and the
+  negative external-validation boundary. No new experiment and no changed
+  result.
+- **Literature additions:** Geh et al. (2024) on tokenization-space signal,
+  Lesci et al. (2025) on causal tokenization bias, Sanz-Guerrero and von der
+  Wense (2025) on label-length bias, and Makelov et al. (2024) on interpretive
+  limits of activation patching. All four were checked against primary
+  ACL/OpenReview records.
+- **Manuscript changes:** added a full-width six-row nearest-prior-work table;
+  stated explicitly that autoregressive chain-rule sequence scoring is
+  established; promoted the S8 external statistics to the main discussion;
+  bounded full-state patching as intervention-specific sufficiency rather than
+  necessity or unique-circuit identification.
+- **Final main package:** 7 pages total, references begin on page 6, 3 figures,
+  5 tables, 22 emitted bibliography entries. Official anonymous
+  `aaai2027.sty` hash remains
+  `391bce82815bf698b8e382dd3ae7e30c75d7ab46df140cb295b1266016bc8623`,
+  identical to the downloaded author kit.
+- **Visual decision:** all seven pages rendered at 120 dpi and inspected. The
+  comparison table uses ragged-right columns; no clipping, overlap, illegible
+  figure, or blank page. The claim-to-test table and both main result figures
+  share page 5 densely but cleanly.
+- **Stopping rule:** do not add decorative equations, colored maps, or extra
+  citations solely to imitate award papers. The next material scientific step
+  would require new evidence, not manuscript padding.

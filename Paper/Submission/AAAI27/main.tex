@@ -7,6 +7,7 @@
 \usepackage{natbib}
 \frenchspacing
 \usepackage{booktabs}
+\usepackage{array}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \pdfinfo{
@@ -14,8 +15,14 @@
 }
 
 \setcounter{secnumdepth}{1}
+\setcounter{topnumber}{3}
+\setcounter{dbltopnumber}{3}
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\dbltopfraction}{0.95}
+\renewcommand{\textfraction}{0.05}
 \graphicspath{{figures/}}
 \newcommand{\CI}[2]{95\% CI [#1, #2]}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
 \title{Subliminal Prompting Beyond Static Geometry:\\
 Causal Depth and Multi-Token Confounds}
@@ -158,6 +165,58 @@ interpretability interventions can scale to 70B \citep{lieberum2023circuits}.
 Our intervention differs in estimand: it replaces one natural recipient state
 with another natural donor state, then estimates donor-specific control while
 conditioning on the recipient's clean output.
+
+\paragraph{Tokenization and sequence measurement.}
+Autoregressive models assign probability through token sequences, while a
+character string can admit multiple tokenizations \citep{geh2024tokenization}.
+Tokenizer membership itself can change the probability assigned to the same
+underlying string \citep{lesci2025tokenisation}, and multi-token label scores
+remain sensitive to length and normalization \citep{sanz2025length}. Prior
+subliminal-learning work already scores split digits autoregressively
+\citep{schrodi2026understanding}. Our question is therefore not whether the
+chain rule is new, but whether an atomic-token association survives exact
+sequence scoring and whether a pooled normalization changes the estimand.
+
+\begin{table*}[t]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\caption{Nearest comparisons by scientific object. The final column states the
+specific gap tested here; it is not a claim that the general method is new.}
+\label{tab:prior}
+\begin{tabular}{L{0.14\textwidth}L{0.17\textwidth}L{0.28\textwidth}L{0.315\textwidth}}
+\toprule
+Work & Scientific object & Closest established result & Gap addressed here \\
+\midrule
+Cloud et al.\ \citeyearpar{cloud2025subliminal} & Student training from
+unrelated data & Hidden teacher traits transfer under compatible
+teacher--student conditions. & Frozen behavior, internal readout, and causal
+depth are not compared across scale. \\
+Zur et al.\ \citeyearpar{zur2025entanglement} & Frozen subliminal prompting &
+Static output geometry and prompted associations identify effective numbers
+across several model families. & No matched 8B/70B natural-state handoff or
+width-conditioned sequence analysis. \\
+Schrodi et al.\ \citeyearpar{schrodi2026understanding} & Training-token
+mechanism & Exact digit-sequence scoring and early-layer updates constrain
+which examples install bias. & Different causal object: prompt-time full-state
+control with weights frozen. \\
+Blank et al.~\citeyearpar{blank2026steering}; Morgulis and Hewitt
+\citeyearpar{morgulis2026steering} & Trained latent vectors &
+Steering-vector distillation and layer-localized recovery explain trained
+student behavior. & No natural donor--recipient timing contrast at matched 8B
+and 70B scale. \\
+Wang et al.~\citeyearpar{wang2026data2behavior}; Ma and Rui
+\citeyearpar{ma2026plan} & Frozen
+representations and interventions & Layerwise readout can separate from causal
+effect; injected data features can anticipate training outcomes. & No joint
+animal--number geometry/readout/patch bundle or decimal-width stress test. \\
+Madl \citeyearpar{madl2026channel} & Constructed transfer channel & Vocabulary
+rows can causally carry bias in a designed training construction. & Pretrained
+70B prompting can dissociate weaker static geometry from earlier contextual
+causal sufficiency. \\
+\bottomrule
+\end{tabular}
+\end{table*}
 
 \section{Experimental Design}
 
@@ -314,7 +373,27 @@ association, or pooled positivity survived control for decimal width. \\
 \end{tabular}
 \end{table*}
 
-\section{Results}
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.96\textwidth]{geometry-depth.png}
+  \caption{Static geometry and observational readout. (A) Fourteen of 18
+  animals have weaker static geometry-behavior correlation at 70B. (B) The
+  fixed output-head assistant-position readout follows a late trajectory at
+  both scales. (C) Readout at number positions remains weak. Intervals resample
+  the same 18 animals.}
+  \label{fig:geometry}
+\end{figure*}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.96\textwidth]{tokenizer-width.png}
+  \caption{Multi-token scoring in two Qwen models. Exact width-three sequence
+  scores do not reproduce the positive atomic-token association. Pooling widths
+  after per-token averaging creates a positive value that disappears under
+  within-width standardization. Width one contains only ten strings and is
+  descriptive.}
+  \label{fig:qwen}
+\end{figure*}
 
 \begin{table*}[t]
 \centering
@@ -335,6 +414,46 @@ Causal donor AUC & 0.2539 & 0.5397 & $+0.2858$ [$+0.2716$, $+0.2999$] \\
 \bottomrule
 \end{tabular}
 \end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\caption{Conditional coefficients at every measured block input. The depth-zero
+point is analytic. Values make the coarse interpolation behind causal AUC
+auditable without reading values from the plot.}
+\label{tab:depth}
+\begin{tabular}{lrrrrrr}
+\toprule
+Model and coefficient & 0 & 0.25 & 0.50 & 0.75 & approx. 0.90 & approx. 0.97 \\
+\midrule
+8B donor $\beta_{\mathrm{donor}}$ & 0 & 0.0012 & 0.0384 & 0.5923 & 0.7799 & 0.9738 \\
+8B recipient $\gamma_{\mathrm{recipient}}$ & 1 & 0.9981 & 0.9434 & 0.4350 & 0.2435 & 0.0311 \\
+70B donor $\beta_{\mathrm{donor}}$ & 0 & 0.0073 & 0.7728 & 0.9380 & 0.9482 & 0.9844 \\
+70B recipient $\gamma_{\mathrm{recipient}}$ & 1 & 0.9888 & 0.1888 & 0.0716 & 0.0610 & 0.0197 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{3.5pt}
+\caption{Causal specificity and sensitivity. Wrong-concept entries are ranges
+over all 17 circular shifts.}
+\label{tab:controls}
+\begin{tabular}{lcc}
+\toprule
+Check & 8B & 70B \\
+\midrule
+Matched causal AUC & 0.2539 & 0.5397 \\
+Wrong-concept AUC & $[-.0406,.0108]$ & $[-.0719,.0145]$ \\
+Raw-logit AUC & 0.2668 & 0.5411 \\
+Identity-patch max error & 0 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Results}
 
 \subsection{Geometry Weakens Without a Resolved Readout Change}
 
@@ -357,17 +476,6 @@ Mean curves reach half their final values at relative depths $0.719$ and
 $0.738$. System-number-position AUC remains low ($0.051$ and $0.036$). The 8B
 backend check changes assistant AUC by less than $0.00002$.
 
-\begin{figure*}[t]
-  \centering
-  \includegraphics[width=0.96\textwidth]{geometry-depth.png}
-  \caption{Static geometry and observational readout. (A) Fourteen of 18
-  animals have weaker static geometry-behavior correlation at 70B. (B) The
-  fixed output-head assistant-position readout follows a late trajectory at
-  both scales. (C) Readout at number positions remains weak. Intervals resample
-  the same 18 animals.}
-  \label{fig:geometry}
-\end{figure*}
-
 \subsection{Donor Control Develops Earlier in Relative Depth}
 
 At the five measured depths, mean $\beta_{\mathrm{donor}}$ values at 8B are
@@ -377,50 +485,12 @@ control is $0.943$ at 8B and $0.189$ at 70B. The natural donor state therefore
 becomes sufficient for the paired output difference earlier in relative depth
 at 70B.
 
-\begin{table*}[t]
-\centering
-\small
-\caption{Conditional coefficients at every measured block input. The depth-zero
-point is analytic. Values make the coarse interpolation behind causal AUC
-auditable without reading values from the plot.}
-\label{tab:depth}
-\begin{tabular}{lrrrrrr}
-\toprule
-Model and coefficient & 0 & 0.25 & 0.50 & 0.75 & approx. 0.90 & approx. 0.97 \\
-\midrule
-8B donor $\beta_{\mathrm{donor}}$ & 0 & 0.0012 & 0.0384 & 0.5923 & 0.7799 & 0.9738 \\
-8B recipient $\gamma_{\mathrm{recipient}}$ & 1 & 0.9981 & 0.9434 & 0.4350 & 0.2435 & 0.0311 \\
-70B donor $\beta_{\mathrm{donor}}$ & 0 & 0.0073 & 0.7728 & 0.9380 & 0.9482 & 0.9844 \\
-70B recipient $\gamma_{\mathrm{recipient}}$ & 1 & 0.9888 & 0.1888 & 0.0716 & 0.0610 & 0.0197 \\
-\bottomrule
-\end{tabular}
-\end{table*}
-
 Normalized causal AUC changes from $0.254$ to $0.540$, with paired difference
 $+0.286$; all 18 concepts increase. Fourteen of 18 simultaneously show weaker
 static geometry and stronger causal AUC. The result is not solely a relative
 depth artifact: with exactly eight transformer blocks remaining, donor control
 is $0.592$ at 8B and $0.948$ at 70B. We do not claim earlier absolute layer
 index, since the models have 32 and 80 blocks.
-
-\begin{table}[t]
-\centering
-\small
-\setlength{\tabcolsep}{3.5pt}
-\caption{Causal specificity and sensitivity. Wrong-concept entries are ranges
-over all 17 circular shifts.}
-\label{tab:controls}
-\begin{tabular}{lcc}
-\toprule
-Check & 8B & 70B \\
-\midrule
-Matched causal AUC & 0.2539 & 0.5397 \\
-Wrong-concept AUC & $[-.0406,.0108]$ & $[-.0719,.0145]$ \\
-Raw-logit AUC & 0.2668 & 0.5411 \\
-Identity-patch max error & 0 & 0 \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 Controls isolate matched donor transmission (Table~\ref{tab:controls}). Every
 wrong-concept AUC is far below its matched value. Raw, uncontrasted animal
@@ -453,17 +523,6 @@ Per-token averaging changes width-specific means, and decimal width equals
 token count here. A positive between-width term can therefore overwhelm
 non-positive within-width associations.
 
-\begin{figure*}[t]
-  \centering
-  \includegraphics[width=0.96\textwidth]{tokenizer-width.png}
-  \caption{Multi-token scoring in two Qwen models. Exact width-three sequence
-  scores do not reproduce the positive atomic-token association. Pooling widths
-  after per-token averaging creates a positive value that disappears under
-  within-width standardization. Width one contains only ten strings and is
-  descriptive.}
-  \label{fig:qwen}
-\end{figure*}
-
 \section{Discussion}
 
 The experiments separate four quantities that a single entanglement score can
@@ -481,6 +540,10 @@ a distinction between the output boundary and the contextual computation that
 reaches it. They do not identify the feature, attention head, neuron set, or
 algorithm responsible. Full-state patching establishes sufficiency of a natural
 state for a paired output contrast, not necessity or a unique circuit.
+Engineered subspace patches can produce valid end-to-end effects through
+dormant pathways \citep{makelov2024subspace}; using natural full states avoids
+that particular construction but does not turn intervention-specific
+sufficiency into mechanism identification.
 
 The probe-patch separation is consistent with broader evidence that readable
 information need not be causally used \citep{belinkov2022probing,ma2026plan}.
@@ -513,8 +576,11 @@ design, not all concepts or model families.
 An outcome-blinded check against released single-seed student outcomes found
 that none of the three frozen in-house measures cleared the fixed
 multiplicity-corrected prediction gate; the released steering benchmark was
-more predictive \citep{blank2026steering} (Supplement). A decisive prospective
-test is to train students across several
+more predictive \citep{blank2026steering} (Supplement). Across 16 animals,
+static geometry was suggestive ($\rho=0.562$, BH $q=0.078$), causal donor AUC
+was not predictive ($\rho=0.111$, $q=0.687$), and the released steering peak
+was stronger ($\rho=0.768$). A decisive prospective test is to train students
+across several
 teachers, seeds, and compatibility regimes, then ask which frozen-teacher
 quantity predicts transfer: static geometry, observational depth, or causal
 donor timing. The present work makes that experiment sharper by showing that
