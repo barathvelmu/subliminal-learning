@@ -41,10 +41,13 @@ correct. It is preparation, not a promise that the paper will be accepted.
 2. Read `Roadmap/START-HERE-SUBMISSION-ROADMAP.md`.
 3. Truthfully complete the OpenReview identity, conflict, reviewer, and policy
    fields.
-4. Decide the optional code license listed in
-   `Rebuttal-Shield/OPEN-DECISIONS.md`.
-5. Upload the exact four files at the three deadline gates and download them
-   back once to verify them.
+4. Upload the exact four frozen files in one sitting and download them back
+   once to verify them. The three dates are deadlines, not three different
+   submissions.
+
+The code archive currently has no public reuse license. That is already
+disclosed honestly in the checklist. Do not rebuild the audited ZIP tomorrow
+just to add one; licensing can be decided deliberately later.
 
 The paper is solo-authored. AAAI does not require a ceremonial coauthor,
 professor sponsor, or endorsement for the conference submission.

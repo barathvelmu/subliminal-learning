@@ -5,7 +5,8 @@
 This folder is the upload-ready paper package.
 
 - `START-HERE-SUBMISSION-ROADMAP.md` is the first-time-author master checklist
-  for the OpenReview account and all three deadline gates.
+  for the OpenReview account and the one-sitting upload. The three dates are
+  final deadlines, not three separate submissions.
 - `GARGANTUA-FINAL-AUDIT.md` records the final hostile science, policy, style,
   numerical, visual, anonymity, and archive checks.
 - `output/pdf/aaai27-main.pdf` is the paper reviewers judge.

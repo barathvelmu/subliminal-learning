@@ -1,7 +1,8 @@
 # START HERE: your AAAI-27 submission roadmap
 
 Last live-verified against the official AAAI-27 pages and OpenReview venue:
-**July 19, 2026**.
+**July 19, 2026**. Final source, PDF, code/data, anonymity, and visual freeze
+recheck completed the same day.
 
 ## The one-sentence answer
 
@@ -21,6 +22,76 @@ under your identity yet.
 upload all four prepared files in the same sitting. You do not need to wait for
 July 28 or July 31. Those dates are last chances, not appointment dates. If
 everything is uploaded today, the later gates become simple verification days.
+
+## Tomorrow: the whole job in one checklist
+
+Do this on **July 20**. It should take about 30--45 minutes plus the time you
+spend reading the paper. Do not wait for the hard deadlines.
+
+### Part A: own the paper
+
+- [ ] Open `output/pdf/aaai27-main.pdf` and read all seven pages once.
+- [ ] Confirm that you can honestly defend the title, abstract, reported
+      results, limitations, citations, and AI-assistance statement.
+- [ ] Confirm that this paper is not under review, accepted, or published at
+      another archival conference or journal.
+- [ ] Decide your truthful current affiliation and its country. If you have no
+      current institutional affiliation, use `Independent Researcher` rather
+      than claiming an old institution.
+
+### Part B: create the one Main Track record
+
+- [ ] Sign in at
+      <https://openreview.net/group?id=AAAI.org/2027/Conference>.
+- [ ] Confirm the header says **AAAI 2027 Conference**. If it says **Artificial
+      Intelligence for Social Impact Track**, leave that page.
+- [ ] Click the Main Track submission button.
+- [ ] Paste the exact title, TL;DR, abstract, and topics from Gate 1 below.
+- [ ] Add only your OpenReview profile as the author.
+- [ ] Select the truthful institution country, conflicts, reciprocal-reviewer
+      declaration, and policy acknowledgements.
+- [ ] If you do not have two first-author or five coauthored qualifying
+      archival papers, select the exact `no author qualifies` declaration. Do
+      not nominate a professor who is not an author.
+
+### Part C: upload all four finished files now
+
+- [ ] **Main PDF:** `output/pdf/aaai27-main.pdf`
+- [ ] **Reproducibility Checklist:** `output/pdf/aaai27-checklist.pdf`
+- [ ] **Technical Supplement:** `output/pdf/aaai27-supplement.pdf`
+- [ ] **Code and Data Supplement:** `output/aaai27-code-data.zip`
+- [ ] Leave **Media Supplement** empty.
+- [ ] Save the record. Do not merely fill the form and close the browser.
+
+### Part D: prove the upload worked
+
+- [ ] Open the new paper ID after saving.
+- [ ] Download all four files back from OpenReview.
+- [ ] Open the downloaded main PDF and confirm its title says `Subliminal
+      Prompting Beyond Static Geometry` and its author line says `Anonymous
+      Submission`.
+- [ ] Confirm the code/data download is a ZIP of roughly 49.5 MB.
+- [ ] Use OpenReview's **Email** button to send yourself a confirmation.
+- [ ] Save the paper ID privately.
+
+If all boxes above are checked, you are **submitted**. July 28 and July 31 then
+become verification deadlines, not additional papers.
+
+### Do not do these things tomorrow
+
+- Do not submit to AISI, ARR, EACL, another journal, or another archival venue
+  at the same time.
+- Do not add a ceremonial coauthor, professor, or AI system as an author.
+- Do not remove the AI-assistance statement.
+- Do not add new equations, references, experiments, acknowledgments, spacing
+  tricks, or a forced reference page.
+- Do not re-zip the code package or add a license at the last minute. A public
+  license can be chosen deliberately later; the honest checklist already marks
+  unrestricted reuse as partial.
+- Do not wait for an arXiv endorsement. arXiv is separate and optional.
+
+If the website looks different from this guide, stop before clicking the final
+save button and take a screenshot. The local files themselves are frozen.
 
 ## Critical track check: do not use the AISI page
 

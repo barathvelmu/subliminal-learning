@@ -4,6 +4,8 @@ Completed: **July 18, 2026**
 
 AI-assistance mini-audit and final-file refresh: **July 19, 2026**
 
+Final sleep-pass freeze verification: **July 19, 2026**
+
 ## Baby-food verdict
 
 **GREEN. Stop adding experiments for this submission.**
@@ -18,6 +20,48 @@ four upload files now pass the final gate.
 This does not guarantee acceptance. It means the remaining risk is normal
 reviewer judgment about significance and scope, not a known broken claim or
 file.
+
+## Final sleep-pass freeze verification
+
+The final pass made **no scientific or manuscript edits** because it found no
+defect that justified disturbing the frozen paper.
+
+- Re-read the live Main Track call, submission instructions, supplement rules,
+  and unauthenticated OpenReview invitation schema. Deadlines, venue, required
+  fields, reciprocal-reviewer declaration, and 10/5/10/50 MB caps still match
+  `START-HERE-SUBMISSION-ROADMAP.md`.
+- Downloaded the current 5.2 MB AAAI-27 Author Kit from
+  <https://aaai.org/authorkit27/>. The local `aaai2027.sty` and
+  `aaai2027.bst` match it byte-for-byte. The official anonymous syntax remains
+  `\usepackage[submission]{aaai2027}`.
+- Recompiled main, supplement, and checklist from source. Builds complete with
+  zero overfull boxes, undefined references, missing citations, or errors.
+  Rebuilt and upload copies have identical extracted text and rendered pixels.
+- Rendered all 12 upload-PDF pages at 144 dpi and visually inspected every
+  page. There is no clipping, overlap, broken table, illegible plot, isolated
+  heading, forbidden reference break, or unexpected blank page.
+- Confirmed US Letter dimensions, embedded fonts, no encryption, no embedded
+  attachments, and anonymous metadata for every PDF.
+- Recounted 22 used citation keys and 22 bibliography records, with zero
+  missing or unused entries. All 22 reference URLs returned HTTP 200 on July
+  19.
+- Fresh-extracted the 49,495,215-byte code/data ZIP. ZIP integrity and all
+  49 manifest hashes pass. Searches found no author name, local path, personal
+  email, personal repository, API credential, or private key.
+- Reran geometry, behavior, Qwen sequence, 8B/70B layerwise, headline causal,
+  external causal, external-transfer, matched-subset, and figure scripts from
+  the extracted archive. Deterministic summaries and all three figures match.
+  The causal summary's only textual difference is the intentionally sanitized
+  in-package protocol path. The full stored layerwise summary contains the
+  disclosed MPS control omitted from the size-bounded archive; its included
+  8B-CUDA, 70B-CUDA, and paired-contrast branches match exactly.
+- Rechecked `abstract.txt` against the LaTeX abstract after normalization:
+  exact match. TL;DR is 202 characters, below the live 250-character limit;
+  abstract is 1,500 characters, below the 5,000-character limit.
+
+Decision: **GREEN AND FROZEN.** The only remaining steps require the human
+author's identity, truthful declarations, final responsibility read, and
+OpenReview save action.
 
 ## What the audit caught and fixed
 

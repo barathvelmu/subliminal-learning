@@ -23,7 +23,8 @@ The reviewers should not know who wrote the paper, and the authors should not kn
 AAAI allows up to seven pages of technical content. References may continue
 beyond page seven, and a separate reference page is not required. In this paper,
 all 22 references fit on page seven without shrinking the official typography or
-adding a page, so the final version uses a clean page break after the conclusion.
+adding a page. They begin naturally below the conclusion, with no forced page
+break or spacing trick.
 
 ## What happens next
 
@@ -36,4 +37,4 @@ adding a page, so the final version uses a clean page break after the conclusion
 
 ## What the author must personally verify
 
-Read the final PDF from start to finish. Check that every claim is understandable and defensible. Confirm the author list, conflicts, affiliation, email, and submission-policy statements. Choose a code license. These are identity and legal decisions, so a coding agent should not invent them.
+Read the final PDF from start to finish. Check that every claim is understandable and defensible. Confirm the author list, conflicts, affiliation, email, and submission-policy statements. The present archive honestly discloses that it has no public reuse license; do not rebuild it tomorrow. A later licensing choice is a legal decision that a coding agent should not invent.

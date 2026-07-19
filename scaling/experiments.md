@@ -544,3 +544,36 @@
   paper's readiness label bounded: `submission-ready and genuinely
   competitive, but not acceptance-predictable`.
 - **Artifact:** `Paper/Learning/solo-aaai-reality-check.md`.
+
+### S16 — final frozen submission verification (COMPLETED)
+
+- **Scope:** one last read-only policy, source, PDF, citation, anonymity,
+  archive, and reproducibility pass. New experiments and stylistic churn were
+  out of scope unless a concrete defect appeared.
+- **Live rules:** Main Track deadlines remain July 21/28/31 at 23:59 UTC-12.
+  The current OpenReview invitation confirms required title, author profile,
+  TL;DR (250 characters), abstract (5,000 characters), topics, institution
+  countries, reciprocal-reviewer status, policy attestations, and optional
+  10/5/10/50 MB upload fields. The paper belongs in Main Track, not AISI.
+- **Author Kit:** downloaded current `AuthorKit27.zip`; the repository's
+  `aaai2027.sty` and `aaai2027.bst` match byte-for-byte. Anonymous syntax is
+  `[submission]{aaai2027}`. Forbidden-layout scan is clean.
+- **Build and visual QA:** main/supplement/checklist compile to 7/3/2 US-Letter
+  pages. Rebuilt and upload copies have identical extracted text and rendered
+  pixels. All 12 pages inspected at 144 dpi; fonts embedded; no clipping,
+  overlap, illegible plot, isolated heading, manual reference break, encryption,
+  or attachment. Only harmless underfull-line notices remain.
+- **Metadata/citations:** abstract text matches `abstract.txt`; TL;DR 202
+  characters; abstract 1,500. Twenty-two cited keys, 22 bibliography records,
+  zero missing/unused; all 22 URLs returned HTTP 200. PDF and archive searches
+  found no author identity, local path, personal email/repository, or secret.
+- **Archive:** 49,495,215 bytes; ZIP integrity pass; 49/49 manifest hashes pass.
+  Fresh reruns reproduce geometry, behavior, Qwen sequence, included
+  layerwise branches, headline causal, external causal, external-transfer,
+  matched-subset, and all three figures. The causal JSON differs only in its
+  sanitized protocol path. The stored layerwise summary also contains the
+  disclosed omitted MPS branch; included 8B-CUDA/70B-CUDA results and their
+  contrast match exactly.
+- **Decision:** GREEN AND FROZEN. No manuscript or science change was warranted.
+  Added the definitive July 20 one-sitting checklist to
+  `Paper/Submission/AAAI27/START-HERE-SUBMISSION-ROADMAP.md`.

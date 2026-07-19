@@ -50,6 +50,26 @@ The "one surprising finding -> X post" likely falls out around step 2-3.
 
 ## Progress log (newest on top)
 
+- **2026-07-19 — FINAL SLEEP-PASS FREEZE: GREEN; NO PAPER EDIT JUSTIFIED.**
+  Rechecked the live AAAI-27 call, submission instructions, supplement rules,
+  and OpenReview invitation schema; all deadlines, fields, and 10/5/10/50 MB
+  caps match the roadmap. Downloaded the current official Author Kit; local
+  `aaai2027.sty` and `.bst` match byte-for-byte. Recompiled all three PDFs and
+  compared the builds to upload copies: identical text and rendered pixels.
+  Inspected all 12 pages at 144 dpi; no clipping, overlap, unreadable object,
+  page-break trick, or formatting defect. All fonts are embedded, all pages are
+  US Letter, and the source has no forbidden layout command. Recounted 22/22
+  citations and bibliography entries; all 22 URLs returned HTTP 200. A fresh
+  ZIP extraction passed 49/49 manifest hashes and identity/secret scans. Every
+  included deterministic analysis and all three figures reproduced; expected
+  differences are only a sanitized protocol path and the disclosed omitted
+  MPS layerwise control, while the included 8B/70B branches match exactly.
+  Added a one-sitting July 20 checklist to the top of the submission roadmap.
+  PLAIN ENGLISH: no hidden defect was found, so touching the paper would now be
+  worse than submitting it. The files are frozen; Barath reads, fills truthful
+  identity/policy fields, uploads all four files, downloads them back, and
+  saves the OpenReview record.
+
 - **2026-07-19 — SOLO AAAI REALITY CHECK COMPLETE; SUBMISSION VERDICT UNCHANGED.**
   Audited all 43 official AAAI-26 Main Technical Track proceedings issues:
   4,149 article records, 26 with exactly one listed author (0.627%, about one

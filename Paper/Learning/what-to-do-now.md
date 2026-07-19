@@ -4,7 +4,8 @@
 > `Submission/AAAI27/START-HERE-SUBMISSION-ROADMAP.md`. It was checked against
 > the live AAAI-27 pages and OpenReview venue on July 19, 2026 and
 > contains the exact fields, files, upload caps, account instructions, and all
-> three deadline gates.
+> three deadline gates. Its first section turns them into one simple July 20
+> upload session.
 
 This is the baby-food admin checklist. The science package is local and ready
 for your review. Nothing has been submitted under your name.
@@ -75,8 +76,14 @@ Official EACL call: https://2027.eacl.org/calls/papers/
 1. Read `Submission/AAAI27/output/pdf/aaai27-main.pdf` once from start to finish.
 2. Open the Main Technical Track portal and confirm the header says `AAAI 2027
    Conference`, not `Artificial Intelligence for Social Impact Track`.
-3. Decide the exact author list and order.
-4. Choose a code license. MIT is the simplest permissive option; Apache-2.0 is
-   also permissive and adds an explicit patent grant.
-5. Tell the coding agent when you are signed in and whether you approve the
-   final title and abstract. Uploading/submitting is a separate final action.
+3. Confirm that the author list is only you and decide your truthful current
+   affiliation and institution country.
+4. Follow the one-sitting checklist at the top of
+   `Submission/AAAI27/START-HERE-SUBMISSION-ROADMAP.md` and upload the four
+   frozen files.
+5. Download the four files back, open the main PDF, and save your OpenReview
+   paper ID privately.
+
+Do not rebuild the code ZIP tomorrow to add a license. The current checklist
+already discloses that unrestricted reuse is partial; licensing can be chosen
+deliberately later.
