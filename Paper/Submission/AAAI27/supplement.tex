@@ -167,6 +167,13 @@ selected by its natural or patched model response. The exact numbers, pair
 order, prompts, animals, requested depths, dtype, and environment are shared
 between the 8B and 70B collections.
 
+Full probes use 1,110 numbers; causal patching uses this outcome-blind subset.
+A post hoc exact-subset sensitivity changes geometry from 0.16752 to 0.10291
+(paired $-0.06461$, \CI{$-0.12434$}{$-0.00334$}) and specificity by $-0.08529$
+(\CI{$-0.14318$}{$-0.03029$}). Readout AUC changes from 0.24765 to 0.28120
+(paired $+0.03354$, \CI{$-0.00524$}{$+0.07145$}). Aggregate conclusions persist;
+the full-universe 14/18 count remains descriptive.
+
 At each depth, only the assistant-position residual state at the input to one
 transformer block is replaced. The final hidden state is never patched. The
 analytic point at depth zero has donor coefficient zero because the assistant
@@ -179,7 +186,7 @@ $\delta=\mathrm{patched}-\mathrm{recipient}$ and
 $\Delta=\mathrm{donor}-\mathrm{recipient}$. Local validation showed that these
 variables share a negative recipient term, producing an invalid positive
 permutation baseline. No CUDA or 70B causal output existed at that point. A
-timestamped amendment froze the conditional regression
+recorded amendment froze the conditional regression
 \begin{equation}
 z_a(\mathrm{patched})=\alpha+\beta^d z_a(\mathrm{donor})
 +\gamma^r z_a(\mathrm{recipient})+\epsilon.
@@ -234,7 +241,8 @@ crossed bootstrap contains zero degenerate cells.
 Three additional zero-cost sensitivities preserve the result. Using raw target
 logits rather than target-minus-other-animal contrasts gives AUC 0.26676 at 8B
 and 0.54114 at 70B; all 18 animal-level changes are positive, with mean
-$+0.27437$. Leaving out each of the 128 unordered pair clusters in turn gives a
+$+0.27437$ and crossed-bootstrap interval
+\CI{$+0.25934$}{$+0.28936$}. Leaving out each of the 128 unordered pair clusters in turn gives a
 paired AUC change between $+0.28502$ and $+0.28756$. Across all 17 circular
 wrong-animal shifts, AUC ranges from $-0.04061$ to $+0.01081$ at 8B and from
 $-0.07185$ to $+0.01449$ at 70B, far below matched values 0.25389 and 0.53970.
@@ -282,9 +290,7 @@ BH-FDR at 0.05. No in-house predictor cleared it. The released steering
 benchmark exceeded causal AUC by 0.657, with paired bootstrap interval
 [0.069, 1.207]. We therefore retain the main result as a frozen-model causal
 timing comparison and do not present donor timing as a predictor of student
-fine-tuning. Consistent with the frozen gate, this check did not become a
-headline contribution; its brief main-text mention is a transparency-only
-limitation. Static geometry is suggestive but does not survive the fixed
+fine-tuning. Static geometry is suggestive but does not survive the fixed
 three-predictor correction. The external outcome is zero-heavy and contains one
 aggregate training seed per animal. Its CSV also omits the base-prior covariate
 supported by the released aggregation code, preventing the fixed prior-control
@@ -313,15 +319,5 @@ $1.17\times10^{-6}$ at 1.7B. A Llama smoke test with atomic targets agrees with
 the original selected-token score exactly. Earlier implementation smoke tests
 that found a prepended-space mismatch and a tail-probability definition mismatch
 were discarded before full Qwen analysis.
-
-\section{Artifact Integrity and Scope}
-
-The anonymous code-data package includes the collected arrays, a full SHA-256
-manifest, and deterministic scripts that regenerate every reported summary.
-The patch establishes intervention-specific donor control that approaches
-donor-state sufficiency only at the measured late depths. It does not establish
-necessity, a feature-level circuit, a universal scaling law, or a training-time
-cause. Five depths form a coarse trace, and the Qwen comparison does not isolate
-tokenizer from architecture or training corpus.
 
 \end{document}

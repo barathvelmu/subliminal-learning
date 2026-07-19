@@ -6,10 +6,12 @@ Completed: **July 18, 2026**
 
 **GREEN. Stop adding experiments for this submission.**
 
-Three independent hostile reviews found no fatal scientific, statistical,
-writing, visual, anonymity, or reproducibility defect. Two real submission
-blockers and two claim-precision risks were found and repaired. The four upload
-files now pass the final gate.
+Two waves of independent hostile review found no fatal scientific,
+statistical, writing, visual, anonymity, or reproducibility defect. The first
+wave repaired submission blockers and claim-precision risks. The second wave
+simulated novelty, correctness, significance, evidence, clarity, and
+reproducibility attacks, then repaired every valid pre-submission concern. The
+four upload files now pass the final gate.
 
 This does not guarantee acceptance. It means the remaining risk is normal
 reviewer judgment about significance and scope, not a known broken claim or
@@ -31,8 +33,8 @@ file.
    relative-depth artifacts.
 6. The undefined phrase `becomes sufficient earlier` now says the measured
    result: the donor state `gains strong control earlier`.
-7. The failed external-validation gate is explicitly labeled a complete,
-   transparency-only negative check that did not change the headline claims.
+7. The failed external-validation gate is reported directly as an external
+   limitation rather than defensively labeled a `transparency-only` check.
 8. Provider account balances, instance IDs, and unverifiable abbreviated hashes
    were removed from the reviewer supplement. The operational record remains in
    the private project audit; the submitted package has a full SHA-256 manifest.
@@ -41,6 +43,22 @@ file.
    omission accurately.
 10. The supplement was tightened from four pages, with an almost-empty last
     page, to three clean pages without removing evidence needed to audit a claim.
+11. The closest-prior-work table now credits the relevant intervention,
+    size-comparison, and positional-bias evidence precisely, while isolating the
+    narrower unresolved gap this paper tests.
+12. The stimulus-set description now distinguishes the 1,110-number geometry
+    and readout analyses from the outcome-blind 256-number causal subset.
+13. A deterministic 256-number matched-subset analysis now tests whether input
+    support alone explains the cross-scale changes. The geometry and
+    specificity decreases remain resolved; the readout change remains
+    unresolved.
+14. A raw-target-logit causal analysis now shows a resolved cross-scale increase,
+    so the causal result is not an artifact of converting logits to probability.
+15. The causal estimator record now says `recorded amendment`, not
+    `timestamped amendment`. The archive states exactly what is and is not
+    independently timestamped.
+16. The causal limitation now distinguishes a natural donor state from the
+    potentially off-manifold donor/recipient hybrid computation.
 
 ## Science and statistics gate
 
@@ -48,6 +66,13 @@ file.
 - New experiment required before submission: **no**.
 - Headline causal change: `+0.28581`, 95% crossed-bootstrap interval
   `[+0.27162, +0.29991]`, with 18/18 animal-level increases.
+- Raw-target-logit causal change: `+0.27437`, 95% crossed-bootstrap interval
+  `[+0.25934, +0.28936]`, with 18/18 increases and all 20,000 bootstrap draws
+  positive.
+- On the exact 256-number causal subset, geometry decreases by `-0.06461`
+  `[-0.12434, -0.00334]`, specificity decreases by `-0.08529`
+  `[-0.14318, -0.03029]`, and the readout change is unresolved at `+0.03354`
+  `[-0.00524, +0.07145]`.
 - Controls passed: permuted donor, all 17 wrong-concept shifts, identity patch,
   duplicate forward, raw-logit outcome, both direction halves, condition
   number, and leave-one-pair-cluster sensitivity.
@@ -91,10 +116,10 @@ and 70B-CUDA branches match exactly.
 
 | File | Pages / bytes | Limit | Result |
 |---|---:|---:|---|
-| `output/pdf/aaai27-main.pdf` | 7 pages / 975,942 bytes | 10 MB; at most 7 technical and 9 total pages | PASS |
+| `output/pdf/aaai27-main.pdf` | 7 pages / 976,571 bytes | 10 MB; at most 7 technical and 9 total pages | PASS |
 | `output/pdf/aaai27-checklist.pdf` | 2 pages / 95,711 bytes | 5 MB | PASS |
-| `output/pdf/aaai27-supplement.pdf` | 3 pages / 179,843 bytes | 10 MB | PASS |
-| `output/aaai27-code-data.zip` | 49,488,318 bytes | 50 MB | PASS, only 511,682 bytes spare |
+| `output/pdf/aaai27-supplement.pdf` | 3 pages / 179,437 bytes | 10 MB | PASS |
+| `output/aaai27-code-data.zip` | 49,495,215 bytes | 50 MB | PASS, only 504,785 bytes spare |
 
 Main-paper technical content stays within page 7. Deferred Tables 4 and 5
 appear at the top of page 7, followed naturally by References. No manual page
@@ -102,15 +127,24 @@ break is used.
 
 All PDFs are US Letter, anonymous, readable, and use embedded Type 1 fonts.
 Text and metadata scans found no author name, email, personal repository, or
-local filesystem path. The ZIP contains 47 files: one manifest plus 46 entries
+local filesystem path. The ZIP contains 50 files: one manifest plus 49 entries
 whose SHA-256 checks all pass. ZIP integrity and decompression pass.
 
 Final SHA-256 digests:
 
-- main PDF: `765f53aaf058bfb6fbd72ffe2bb0f28f8c6d2981930193b20603821e2a826380`
-- supplement PDF: `d03b9f8e38a0866218f13d4cbe6ce4bdac35c7fe3f0f0d7ba086b51b4e8fce28`
+- main PDF: `232ea5dfc552181c9e7945fe221bf1eb6486ef94939fa75401edcdc7e3e541c6`
+- supplement PDF: `059366d0d9cdcbdd2c8b94739f0344bd630153c0ecbec0d0362679593bcd30b4`
 - checklist PDF: `03fd7c32831eb2a0c23af9ccd63d9138ba0aeff6760c8b1c89a41e971eeacf52`
-- code/data ZIP: `7a3b2d9bbbc622a16893a7fb5fc40d2f5377cc63b00267c3dda976cd6b9602b2`
+- code/data ZIP: `ed069bd9c44f947c6dc618049b48f2f8097e42ae63fc93a6695bbbd8f104c885`
+
+## Rebuttal shield
+
+`../../Rebuttal/` contains the author-side defense package: official review
+rules and timeline, mock reviews, an attack matrix, evidence index, response
+bank, October checklist, and the remaining human decisions. This is not an
+extra upload. It is preparation for author feedback if the paper reaches Phase
+2. A Phase 1 rejection has no rebuttal window, and nothing in the submitted
+PDFs or supplements can be changed after July 31.
 
 ## AI-use verdict
 

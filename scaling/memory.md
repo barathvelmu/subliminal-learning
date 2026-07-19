@@ -17,12 +17,13 @@ Read this file top-to-bottom, then `experiments.md`. That is the full state; you
   in `Paper/`. S8 used Blank et al.'s released 16-animal Llama outcomes: their
   steering peak predicts transfer (rho `.768`), while our causal timing does not
   (rho `.111`); geometry is suggestive (rho `.562`) but misses BH-FDR (`q=.078`).
-  No in-house predictor passed the frozen main-paper gate. The Gargantua final
-  science/policy/style/numerical/visual audit is complete; the four upload files
-  are green and recorded in
+  No in-house predictor passed the frozen main-paper gate. Two Gargantua
+  science/policy/style/numerical/visual/rebuttal audit waves are complete; the
+  four upload files are green and recorded in
   `Paper/Submission/AAAI27/GARGANTUA-FINAL-AUDIT.md`. Next work is the human
-  OpenReview upload or a separately powered multi-seed training study, not more
-  result fishing.
+  OpenReview upload. The author-side response kit is in `Paper/Rebuttal/`.
+  A separately powered multi-seed training study belongs to future work, not
+  pre-deadline result fishing.
 - **To run anything:** use the venv python `/Users/barathv/.venvs/subliminal-scaling/bin/python`; run probe scripts from the `prompting/` dir. Deps: torch 2.13, transformers 5.14, numpy, scipy, accelerate. Device = Apple MPS or CPU.
 - **Golden rules:** iterate small (one slice, prove it, then next); explain to Barath in plain "baby food" English; log every run here + in `experiments.md`; never commit to `main` (work on branch `scaling-followup`); no cherry-picking, controls + uncertainty on every claim.
 - **Key gotcha already found:** the number-token probe is tokenizer-dependent (Qwen exposes only 10 single-digit number tokens vs Llama's 1110). See the S1 log entry.
@@ -48,6 +49,29 @@ Scaling follow-up to the finished `subliminal-learning` repo. We reuse the token
 The "one surprising finding -> X post" likely falls out around step 2-3.
 
 ## Progress log (newest on top)
+
+- **2026-07-18 — GARGANTUA REBUTTAL SHIELD COMPLETE; FINAL GATE GREEN.** A
+  second adversarial wave simulated attacks on novelty, correctness,
+  significance, evidence, clarity, and reproducibility, then the main agent
+  independently arbitrated every suggestion. Valid repairs: the closest-work
+  table now credits prior intervention/size/position evidence precisely; the
+  external null is stated directly; 1,110-number observational analyses are no
+  longer conflated with the outcome-blind 256-number causal subset; a
+  deterministic matched-256 sensitivity preserves the resolved geometry
+  decrease `-0.06461 [-0.12434,-0.00334]` and specificity decrease `-0.08529
+  [-0.14318,-0.03029]` while leaving readout change unresolved `+0.03354
+  [-0.00524,+0.07145]`; and the raw-target-logit causal increase is resolved at
+  `+0.27437 [+0.25934,+0.28936]`, 18/18 animals, all 20,000 draws positive.
+  Estimator provenance now says recorded, not independently timestamped,
+  amendment; the off-manifold hybrid-computation caveat is explicit. False
+  duplicate-text and same-stimulus alarms were rejected. `Paper/Rebuttal/`
+  contains mock reviews, attack matrix, evidence index, response bank, October
+  checklist, and open decisions. Final main/supplement/checklist are 7/3/2
+  pages. The anonymous archive is 49,495,215 bytes, has 49 manifest checks, and
+  verifies after fresh extraction. No new GPU run is scientifically justified.
+  PLAIN ENGLISH: skeptical-reviewer attacks improved the paper, all computable
+  defenses are now archived, and the remaining job is the human upload and
+  personal responsibility check, not another experiment.
 - **2026-07-18 — GARGANTUA FINAL AUDIT COMPLETE; UPLOAD PACKAGE GREEN.** Three
   independent hostile reviews covered science/statistics, accepted-paper story
   and prose, and live AAAI policy/submission compliance. Fatal defects: zero;

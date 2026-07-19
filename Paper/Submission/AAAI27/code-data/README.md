@@ -10,9 +10,9 @@ This archive contains the code, headline arrays, and deterministic summaries nee
   device-control arrays.
 - `data/summaries/`: deterministic JSON outputs generated from the raw arrays.
 - `data/external/`: immutable-revision snapshot and provenance for the released
-  16-animal student-transfer outcome used only in the supplement.
-- `protocol/`: the outcome-blinded S8 analysis plan frozen before opening the
-  released per-animal outcome file.
+  16-animal student-transfer outcome summarized in the paper and supplement.
+- `protocol/`: the recorded S5 causal protocol and validation amendment, plus
+  the outcome-blinded S8 plan frozen before opening the per-animal outcome file.
 - `requirements.txt`: the pinned remote analysis environment.
 
 ## Reproduce the summaries
@@ -60,6 +60,15 @@ python code/scaling/analyze_external_transfer.py \
   --causal data/summaries/external_transfer_causal_summary.json \
   --output data/summaries/external_transfer_validation_summary.json \
   --joined-output data/summaries/external_transfer_joined.csv
+
+python code/scaling/analyze_matched_subset_sensitivities.py \
+  --geometry-8b data/raw/full_probe_geometry_8b_cuda.npz \
+  --geometry-70b data/raw/full_probe_geometry_70b_cuda.npz \
+  --layerwise-8b data/raw/layerwise_probe_layerwise_8b_cuda.npz \
+  --layerwise-70b data/raw/layerwise_probe_layerwise_70b_cuda.npz \
+  --causal-8b data/raw/causal_patch_s5_patch_8b_cuda.npz \
+  --causal-70b data/raw/causal_patch_s5_patch_70b_cuda.npz \
+  --output data/summaries/matched_subset_sensitivities.json
 ```
 
 ## Reproduce the figures
@@ -116,7 +125,7 @@ need to rent GPUs to verify the analysis.
 
 ## Integrity and anonymity
 
-The package contains no author names, local home-directory paths, API keys, cloud credentials, private URLs, or external mutable links. Model repository identifiers are public dependencies, not author identifiers. Full SHA-256 digests for headline artifacts appear in the supplement and project manifest. The S8 protocol and immutable external-data provenance are included so reviewers can audit the order of decisions and outcome access.
+The package contains no author names, local home-directory paths, API keys, cloud credentials, private URLs, or external mutable links. Model repository identifiers are public dependencies, not author identifiers. Full SHA-256 digests for submitted artifacts appear in the package manifest. The S5 protocol/amendment, S8 plan, and immutable external-data provenance are included so reviewers can audit the declared order of decisions and outcome access. The S5 record is not presented as an immutable third-party registration.
 
 ## License status
 

@@ -1,4 +1,4 @@
-"""Analyze the pre-registered S5 causal assistant-state patch experiment."""
+"""Analyze the prospectively designed S5 causal assistant-state patch experiment."""
 
 import argparse
 import json
@@ -899,7 +899,7 @@ def main():
         }
 
     output = {
-        "protocol": "Paper/Supplement/preregistration-s5.md",
+        "protocol": "protocol/s5-causal-protocol-and-amendment.md",
         "seed": args.seed,
         "bootstrap_resamples": args.bootstrap_resamples,
         "bootstrap_unit": (

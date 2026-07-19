@@ -85,8 +85,9 @@ The final main paper now contains a nearest-prior-work comparison table, four
 additional primary citations for tokenization and patching methodology, the
 exact outcome-blinded external-validation statistics, and a sharper causal
 scope caveat. These additions make the novelty boundary and inconvenient null
-result visible without changing any headline estimate. The PDF uses six pages
-of technical content; references begin cleanly on page seven.
+result visible without changing any headline estimate. Technical content stays
+within page seven; deferred Tables 4 and 5 appear first, and references then
+follow naturally on the same page.
 Every threshold above is now satisfied. Further cosmetic density would violate
 this file's stopping rule unless new evidence is collected.
 

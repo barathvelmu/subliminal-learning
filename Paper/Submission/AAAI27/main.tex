@@ -80,7 +80,8 @@ We turn these ambiguities into three research questions:
     a tokenizer/model-family boundary, and what does length normalization do?
 \end{enumerate}
 
-The comparison uses 18 fixed animals and 1,110 decimal strings. We measure
+The full-universe probes use 18 fixed animals and 1,110 decimal strings; the
+causal intervention uses an outcome-blind 256-number subset. We measure
 bidirectional behavior and static output-row geometry, read the answer from
 every hidden state with the model's own output head, and transplant natural
 assistant-position residual states between paired number prompts at five
@@ -95,17 +96,18 @@ probing and patching already show that decodability and causal use can separate
 \citep{ma2026plan}, and circuit analysis has been demonstrated at 70B
 \citep{lieberum2023circuits}. Our contribution is the joint, same-channel
 measurement bundle in subliminal prompting: frozen behavior, vocabulary
-geometry, fixed-head readability, and causal donor control are compared on the
-same 8B/70B stimuli. We also expose a separate multi-token confound in two Qwen
+geometry, fixed-head readability, and causal donor control use the same 18
+concepts and prompt family, with each fixed number set paired across 8B/70B.
+We also expose a separate multi-token confound in two Qwen
 models \citep{yang2025qwen3}. Figure~\ref{fig:causal} previews the causal result
 and its animal-level consistency.
 
 The paper makes three bounded contributions. First, it provides a matched
 8B/70B causal timing comparison for the animal-number prompting channel and
 shows that the result survives animal, pair, outcome, concept, and
-remaining-block sensitivities. Second, it establishes a within-concept
-dissociation: 14 of 18 animals simultaneously lose static geometry association
-and gain causal donor AUC. Third, it identifies and explains a pooled
+remaining-block sensitivities. Second, it establishes a descriptive
+concept-level dissociation: 14 of 18 animals lose full-universe static geometry
+association and gain subset causal donor AUC. Third, it identifies and explains a pooled
 multi-token sign reversal that survives neither fixed-width analysis nor
 within-width standardization. Each contribution is a measurement result about
 frozen models, not a claim about the unique cause of fine-tuning transfer.
@@ -197,19 +199,23 @@ mechanism & Exact digit-sequence scoring and early-layer updates constrain
 which examples install bias. & Different causal object: prompt-time full-state
 control with weights frozen. \\
 Blank et al.~\citeyearpar{blank2026steering}; Morgulis and Hewitt
-\citeyearpar{morgulis2026steering} & Trained latent vectors &
-Steering-vector distillation and layer-localized recovery explain trained
-student behavior. & No natural donor--recipient timing contrast at matched 8B
-and 70B scale. \\
+\citeyearpar{morgulis2026steering} & Prompt-induced and distilled residual
+directions & Trait directions causally control data generation, appear in
+trained students, and can be recovered from numeric data. & No natural
+donor--recipient timing contrast at matched 8B and 70B scale. \\
 Wang et al.~\citeyearpar{wang2026data2behavior}; Ma and Rui
 \citeyearpar{ma2026plan} & Frozen
 representations and interventions & Layerwise readout can separate from causal
 effect; injected data features can anticipate training outcomes. & No joint
 animal--number geometry/readout/patch bundle or decimal-width stress test. \\
-Madl \citeyearpar{madl2026channel} & Constructed transfer channel & Vocabulary
-rows can causally carry bias in a designed training construction. & Pretrained
-70B prompting can dissociate weaker static geometry from earlier contextual
-causal sufficiency. \\
+Madl \citeyearpar{madl2026channel} & Carrier location and auditability &
+Vocabulary-row interventions and body-channel constructions show that transfer
+carriers determine which audits succeed. & Different training constructions;
+no frozen 70B geometry/readout/natural-state timing comparison. \\
+Anonymous \citeyearpar{positional2026} & Learned positional bias & Output
+geometry, layerwise signal, and causal steering separate representation from
+transfer across eight models. & Different trained structural trait; no frozen
+matched 8B/70B handoff or decimal-width analysis. \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -306,7 +312,7 @@ the endpoint.
 
 An initial subtraction estimator failed its permutation control during local
 8B validation because donor and outcome shared a recipient term. Before any
-matched CUDA or 70B collection, a timestamped amendment froze the conditional
+matched CUDA or 70B collection, a recorded amendment froze the conditional
 regression above. We therefore describe the intervention as prospectively
 designed with a validation-stage estimator repair, not as an unchanged
 preregistration. The invalid estimator remains in the audit record.
@@ -471,6 +477,11 @@ Mean curves reach half their final values at relative depths $0.719$ and
 $0.738$. System-number-position AUC remains low ($0.051$ and $0.036$). The 8B
 backend check changes assistant AUC by less than $0.00002$.
 
+A post hoc saved-array sensitivity restricts geometry and readout to the exact
+256 causal numbers. Geometry still weakens by $-0.0646$
+(\CI{$-0.1243$}{$-0.0033$}), while the readout change remains unresolved at
+$+0.0335$ (\CI{$-0.0052$}{$+0.0715$}).
+
 \subsection{Donor Control Develops Earlier in Relative Depth}
 
 Figure~\ref{fig:causal} plots, and Table~\ref{tab:depth} reports, the five
@@ -483,15 +494,16 @@ gains strong control of the paired output difference earlier in relative depth
 at 70B.
 
 Normalized causal AUC changes from $0.254$ to $0.540$, with paired difference
-$+0.286$; all 18 concepts increase. Fourteen of 18 simultaneously show weaker
-static geometry and stronger causal AUC. The scale contrast also appears at a
+$+0.286$; all 18 concepts increase. Descriptively, 14 of 18 show weaker
+full-universe static geometry and stronger subset causal AUC. The scale contrast also appears at a
 matched remaining-block point: with exactly eight transformer blocks remaining,
 donor control is $0.592$ at 8B and $0.948$ at 70B. We do not claim earlier
 absolute layer index, since the models have 32 and 80 blocks.
 
 Controls isolate matched donor transmission (Table~\ref{tab:controls}). Every
 wrong-concept AUC is far below its matched value. Raw, uncontrasted animal
-logits preserve the scale change ($+0.274$, 18/18 positive). Leaving out each of
+logits preserve the scale change ($+0.274$, \CI{$+0.259$}{$+0.289$}, 18/18
+positive). Leaving out each of
 128 unordered pair clusters yields paired changes from $+0.2850$ to $+0.2876$.
 Permuted-donor coefficients stay near zero across depth; duplicate forwards and
 identity patches have exactly zero error; design condition numbers remain below
@@ -568,18 +580,19 @@ Qwen models cannot separate tokenizer from architecture, training data, or
 scale. Reverse behavior scores the canonical first animal token rather than
 marginalizing all synonymous strings. The fixed output-head trace is
 observational, and full-residual patching is not a feature-level circuit
-intervention. Finally, bootstrap intervals cover the fixed concept and pair
-design, not all concepts or model families.
+intervention. Natural donor vectors come from real source runs, but the hybrid
+donor-state/recipient-context computation need not remain on-manifold. Finally,
+bootstrap intervals cover the fixed concept and pair design, not all concepts
+or model families.
 
-Although the fixed integration gate failed, we report the complete negative
-check here as a transparency-only validity boundary; it did not alter the
-headline claims or contribution set. Against released single-seed student
-outcomes, none of the three frozen in-house measures cleared the fixed
-multiplicity-corrected prediction gate; the released steering benchmark was
-more predictive (see Supplement; \citealp{blank2026steering}). Across 16 animals,
+An outcome-blinded external check further limits the training-time
+interpretation. Against released single-seed student outcomes, none of the
+three frozen in-house measures cleared the fixed multiplicity-corrected
+prediction gate; the released steering benchmark had a larger association than
+causal donor AUC (see Supplement; \citealp{blank2026steering}). Across 16 animals,
 static geometry was suggestive ($\rho=0.562$, BH $q=0.078$), causal donor AUC
 was not predictive ($\rho=0.111$, $q=0.687$), and the released steering peak
-was stronger ($\rho=0.768$). A decisive prospective test is to train students
+had the larger association ($\rho=0.768$). A decisive prospective test is to train students
 across several
 teachers, seeds, and compatibility regimes, then ask which frozen-teacher
 quantity predicts transfer: static geometry, observational depth, or causal

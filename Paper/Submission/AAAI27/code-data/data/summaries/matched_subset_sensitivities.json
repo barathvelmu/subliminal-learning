@@ -1,0 +1,58 @@
+{
+  "status": "post_hoc_saved_array_sensitivity",
+  "purpose": "Restrict full-universe geometry and observational readout to the exact 256 outcome-blind numbers used by the causal intervention.",
+  "subset_number_count": 256,
+  "subset_source": "data/raw/causal_patch_s5_patch_8b_cuda.npz",
+  "animal_bootstrap_seed": 0,
+  "animal_bootstrap_resamples": 100000,
+  "exact_256_number_subset": {
+    "static_geometry_vs_behavior": {
+      "8B_mean": 0.16752440221731335,
+      "70B_mean": 0.10291281479645527,
+      "paired_70B_minus_8B": -0.06461158742085804,
+      "paired_animal_bootstrap_95_ci": [
+        -0.1243354635079085,
+        -0.0033411479101688965
+      ],
+      "animals_increasing": 7,
+      "animals_decreasing": 11,
+      "n_animals": 18
+    },
+    "geometry_specificity": {
+      "8B_mean": 0.17580549995314138,
+      "70B_mean": 0.09052018937836469,
+      "paired_70B_minus_8B": -0.08528531057477667,
+      "paired_animal_bootstrap_95_ci": [
+        -0.14318376352579493,
+        -0.03029252188993266
+      ],
+      "animals_increasing": 4,
+      "animals_decreasing": 14,
+      "n_animals": 18
+    },
+    "observational_assistant_readout_auc": {
+      "8B_mean": 0.24765147727657563,
+      "70B_mean": 0.28119540427949985,
+      "paired_70B_minus_8B": 0.03354392700292422,
+      "paired_animal_bootstrap_95_ci": [
+        -0.005243546513077479,
+        0.07145234832232555
+      ],
+      "animals_increasing": 11,
+      "animals_decreasing": 7,
+      "n_animals": 18
+    }
+  },
+  "raw_target_logit_causal_sensitivity": {
+    "paired_70B_minus_8B": 0.2743733074354824,
+    "crossed_bootstrap_95_ci": [
+      0.25934386605137555,
+      0.28936288067493987
+    ],
+    "animals_increasing": 18,
+    "n_animals": 18,
+    "bootstrap_draws_above_zero": 20000,
+    "bootstrap_resamples": 20000,
+    "bootstrap_seed": 0
+  }
+}

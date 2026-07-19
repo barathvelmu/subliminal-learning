@@ -1,6 +1,6 @@
 """Collect S5 causal assistant-state patching artifacts.
 
-The protocol is frozen in Paper/Supplement/preregistration-s5.md.  Number pairs
+The protocol is recorded in protocol/s5-causal-protocol-and-amendment.md. Number pairs
 are sampled without looking at outcomes.  A donor prompt's assistant-position
 residual state is patched only at transformer-block inputs of a recipient run.
 """

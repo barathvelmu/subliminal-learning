@@ -70,7 +70,7 @@ do not count.
 - **Technical Supplement**, cap 10 MB:
   `output/pdf/aaai27-supplement.pdf` (0.18 MB)
 - **Code and Data Supplement**, cap 50 MB:
-  `output/aaai27-code-data.zip` (49.49 MB)
+  `output/aaai27-code-data.zip` (49.495 MB; 504,785 bytes below the cap)
 - **Media Supplement:** leave empty.
 
 The code archive must be uploaded directly. The live form forbids external
@@ -86,6 +86,10 @@ The code archive currently has no chosen license. A permissive license such as M
 
 The complete first-time-author workflow is in
 `START-HERE-SUBMISSION-ROADMAP.md`.
+
+If the paper reaches Phase 2, start with `../../Rebuttal/README.md`. That folder
+contains mock reviews, an evidence map, and careful response language. Do not
+upload the rebuttal folder with the July submission.
 
 ## Plain-English admin answer
 

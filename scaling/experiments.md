@@ -438,3 +438,53 @@
   `Paper/Submission/AAAI27/GARGANTUA-FINAL-AUDIT.md` records every final change,
   gate, digest, and remaining human responsibility. Decision: freeze the science
   and upload through the three OpenReview gates.
+
+### S13 — Gargantua rebuttal shield and second adversarial wave (COMPLETED)
+
+- **Purpose:** simulate the strongest plausible novelty, correctness,
+  significance, evidence, clarity, and reproducibility objections before the
+  files freeze; accept only attacks supported by the manuscript, saved arrays,
+  or official AAAI rules.
+- **Review process:** three independent reviews covered scientific/statistical,
+  narrative/novelty, and submission/rebuttal failure modes. The main agent
+  checked each finding against source, compiled PDFs, data, and rules. False
+  duplicate-text claims and the proposed `unchanged stimulus set` wording were
+  rejected.
+- **Valid scientific repairs:** the closest-work table now distinguishes prior
+  intervention, size-comparison, and positional-bias results; the external null
+  is a direct limitation; the manuscript distinguishes 1,110-number
+  observational analyses from the frozen 256-number causal subset; and the
+  donor-state caveat now acknowledges a potentially off-manifold hybrid
+  computation.
+- **Matched-support sensitivity:** new deterministic script
+  `Paper/Submission/AAAI27/code-data/code/scaling/analyze_matched_subset_sensitivities.py`
+  recomputes observational metrics on the exact 256 causal numbers. Geometry
+  changes `0.16752 -> 0.10291`, delta `-0.06461
+  [-0.12434,-0.00334]` (11/18 decreases); specificity delta `-0.08529
+  [-0.14318,-0.03029]` (14/18 decreases); readout `0.24765 -> 0.28120`, delta
+  `+0.03354 [-0.00524,+0.07145]` (unresolved). Output:
+  `code-data/data/summaries/matched_subset_sensitivities.json`.
+- **Outcome-scale sensitivity:** raw target logits preserve the causal result:
+  crossed-bootstrap delta `+0.27437 [+0.25934,+0.28936]`, 18/18 animal-level
+  increases, and all 20,000 bootstrap draws positive.
+- **Estimator provenance:** `timestamped amendment` was replaced with the
+  accurate `recorded amendment`. The sanitized S5 protocol states that the
+  chronology is author-reported and is not an independent third-party
+  preregistration.
+- **Response artifact:** `Paper/Rebuttal/` contains the live-rule summary, mock
+  reviews, reviewer-attack matrix, evidence index, response bank, October
+  author-feedback checklist, and remaining human decisions. It is private
+  preparation, not a July upload.
+- **Final files:** main 7 pages / 976,571 bytes; supplement 3 / 179,437;
+  checklist 2 / 95,711. Code/data ZIP 49,495,215 bytes, leaving 504,785 bytes
+  under the decimal 50 MB cap; fresh extraction passes all 49 manifest checks.
+  Final SHA-256: main
+  `232ea5dfc552181c9e7945fe221bf1eb6486ef94939fa75401edcdc7e3e541c6`,
+  supplement
+  `059366d0d9cdcbdd2c8b94739f0344bd630153c0ecbec0d0362679593bcd30b4`,
+  checklist
+  `03fd7c32831eb2a0c23af9ccd63d9138ba0aeff6760c8b1c89a41e971eeacf52`,
+  ZIP `ed069bd9c44f947c6dc618049b48f2f8097e42ae63fc93a6695bbbd8f104c885`.
+- **Decision:** GREEN. No new GPU experiment is justified for this deadline.
+  Freeze the science, complete the human responsibility read, and submit the
+  exact files through the three OpenReview gates.

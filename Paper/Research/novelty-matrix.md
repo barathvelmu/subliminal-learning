@@ -21,8 +21,10 @@ The defensible new bundle is narrower:
 2. a resolved decrease in static geometry's predictive strength at 70B while
    the contextual assistant-position depth trajectory shows no resolved AUC
    change;
-3. a preregistered natural donor-to-recipient residual-state intervention whose
-   causal handoff occurs much earlier at 70B despite weaker static geometry;
+3. a prospectively designed natural donor-to-recipient residual-state
+   intervention, with a validation-stage estimator repair frozen before matched
+   CUDA/70B collection, whose causal handoff occurs much earlier at 70B despite
+   weaker static geometry;
 4. a width-controlled, bidirectional multi-token measurement showing that naive
    per-token averaging creates a positive-looking length confound.
 
@@ -50,7 +52,7 @@ No single row below already contains that bundle.
 | “We are the first to trace subliminal effects through layers.” | Unsafe | “We provide a matched every-state 8B/70B trace of the unchanged frozen prompting channel.” |
 | “Token entanglement disappears at scale.” | False/overbroad | “Static animal/number output geometry becomes less predictive from Llama-3.1 8B to 70B; behavior and late contextual readability do not show a resolved decline.” |
 | “The same causal circuit survives at 70B.” | Unsupported | “Full-state causal transmission becomes earlier at 70B; the intervention does not identify a shared circuit.” |
-| “We are first to causally steer a subliminal representation.” | Unsafe | “We provide a preregistered, matched 8B/70B natural-state patch tied to a resolved static-geometry decline.” |
+| “We are first to causally steer a subliminal representation.” | Unsafe | “We provide a prospectively designed, matched 8B/70B natural-state patch tied to a resolved static-geometry decline.” |
 | “Tokenization destroys subliminal learning.” | Unsupported | “The positive atomic prompting association is not recovered by our width-3 sequence metric in two Qwen3 sizes.” |
 | “This explains training-time subliminal learning.” | Unsupported | “This characterizes a related frozen prompting channel and supplies measurement constraints for training-time hypotheses.” |
 | “The famous owl/087 pair is the mechanism.” | Unsupported | “Named pairs reshuffle dramatically with scale; aggregate effects must be measured across the full number universe.” |
@@ -69,12 +71,12 @@ No single row below already contains that bundle.
 
 The project now supports a strong focused mechanism paper. The result is a
 **measurement-and-causal-scaling dissociation**, not a new universal theory of
-subliminal learning. The preregistered 8B/70B intervention closes the largest
+subliminal learning. The prospectively designed 8B/70B intervention closes the largest
 reviewer gap in the observational draft. A direct prospective link to
 post-training transfer would raise the paper further but requires a
 substantially larger new study.
 
 The final anonymous manuscript now carries this comparison into the paper
-itself as a six-row nearest-prior-work table. This prevents the novelty claim
+itself as a seven-row nearest-prior-work table. This prevents the novelty claim
 from depending on the supplement or on a reviewer reconstructing the literature
 gap from prose alone.

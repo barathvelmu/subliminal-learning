@@ -199,7 +199,7 @@ Upload these exact files:
 | OpenReview field | File | Size cap | Our file size | Status |
 |---|---|---:|---:|---|
 | Technical Supplement | `output/pdf/aaai27-supplement.pdf` | 10 MB | 0.18 MB | Ready |
-| Code and Data Supplement | `output/aaai27-code-data.zip` | 50 MB | 49.49 MB | Ready, close to cap |
+| Code and Data Supplement | `output/aaai27-code-data.zip` | 50 MB | 49.495 MB | Ready; exactly 504,785 bytes spare |
 
 There is no media supplement, so leave that field empty.
 
@@ -226,10 +226,12 @@ After July 31, nothing can be changed until the decision process allows it.
 ## What happens after submission
 
 - **September 24, 2026:** Phase 1 rejection notifications. If the paper is not
-  rejected here, it continues to Phase 2.
+  rejected here, it continues to Phase 2. There is no author response before a
+  Phase 1 rejection.
 - **October 19-25, 2026:** author-feedback window for papers in Phase 2. This is
-  when you answer reviewer concerns. It is not an opportunity to run an
-  entirely new paper.
+  when you answer reviewer concerns in writing. The submitted paper and
+  supplements stay frozen; this is not an opportunity to replace files or
+  run an entirely new paper.
 - **November 30, 2026:** final acceptance or rejection.
 - **December 14, 2026:** camera-ready deadline if accepted. The real author name
   and affiliation replace anonymity, source files are submitted, and copyright

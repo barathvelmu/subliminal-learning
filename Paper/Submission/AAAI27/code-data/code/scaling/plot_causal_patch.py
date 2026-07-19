@@ -1,4 +1,4 @@
-"""Plot the pre-registered S5B 8B/70B causal handoff result."""
+"""Plot the prospectively designed S5B 8B/70B causal handoff result."""
 
 import argparse
 import json
