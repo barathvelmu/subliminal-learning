@@ -2,15 +2,18 @@
 
 ## Environment
 
-Use:
+From the repository root, create an isolated environment:
 
 ```bash
-/Users/barathv/.venvs/subliminal-scaling/bin/python
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r Paper/Submission/AAAI27/code-data/requirements.txt
 ```
 
-Main dependencies recorded by the lab notebook: PyTorch 2.13, Transformers 5.14,
-NumPy, SciPy, and Accelerate. Local runs use MPS/CPU; cloud comparisons used full
-BF16 CUDA. The exact cloud setup and safety rules live in `scaling/experiments.md`.
+The frozen package list covers PyTorch, Transformers, NumPy, SciPy, Accelerate,
+Matplotlib, and the remaining analysis dependencies. Local development used
+MPS/CPU; the matched 8B/70B comparison used full-BF16 CUDA. Hardware and run
+provenance live in `scaling/experiments.md`.
 
 ## Canonical raw artifacts
 
@@ -46,37 +49,37 @@ BF16 CUDA. The exact cloud setup and safety rules live in `scaling/experiments.m
 
 ## Analysis commands
 
-Run from the repository root with the project Python:
+Run from the repository root with the activated environment:
 
 ```bash
-/Users/barathv/.venvs/subliminal-scaling/bin/python scaling/analyze_geometry_scaling.py \
+python scaling/analyze_geometry_scaling.py \
   --artifact 8B-CUDA=prompting/results/full_probe_geometry_8b_cuda.npz \
   --artifact 70B-CUDA=prompting/results/full_probe_geometry_70b_cuda.npz \
   --output prompting/results/geometry_8b70b_cuda_summary.json
 
-/Users/barathv/.venvs/subliminal-scaling/bin/python scaling/analyze_size_ladder.py \
+python scaling/analyze_size_ladder.py \
   --artifact 8B-CUDA=prompting/results/full_probe_geometry_8b_cuda.json \
   --artifact 70B-CUDA=prompting/results/full_probe_geometry_70b_cuda.json \
   --output prompting/results/size_8b70b_cuda_summary.json
 
-/Users/barathv/.venvs/subliminal-scaling/bin/python scaling/analyze_sequence_probe.py \
+python scaling/analyze_sequence_probe.py \
   --artifact Qwen3-0.6B=prompting/results/sequence_probe_qwen3_06b_full.npz \
   --artifact Qwen3-1.7B=prompting/results/sequence_probe_qwen3_17b_full.npz \
   --output prompting/results/sequence_probe_qwen_scaling_summary.json
 
-/Users/barathv/.venvs/subliminal-scaling/bin/python scaling/analyze_layerwise_probe.py \
+python scaling/analyze_layerwise_probe.py \
   --artifact 8B-CUDA=prompting/results/layerwise_probe_layerwise_8b_cuda.npz \
   --artifact 70B-CUDA=prompting/results/layerwise_probe_layerwise_70b_cuda.npz \
   --output prompting/results/layerwise_probe_8b70b_summary.json
 
-/Users/barathv/.venvs/subliminal-scaling/bin/python scaling/make_s4_figures.py
+python scaling/make_s4_figures.py
 
-/Users/barathv/.venvs/subliminal-scaling/bin/python scaling/analyze_causal_patch.py \
+python scaling/analyze_causal_patch.py \
   --artifact 8B=prompting/results/causal_patch_s5_patch_8b_cuda.npz \
   --artifact 70B=prompting/results/causal_patch_s5_patch_70b_cuda.npz \
   --output prompting/results/causal_patch_s5_8b70b_cuda_summary.json
 
-/Users/barathv/.venvs/subliminal-scaling/bin/python scaling/plot_causal_patch.py \
+python scaling/plot_causal_patch.py \
   --summary prompting/results/causal_patch_s5_8b70b_cuda_summary.json \
   --output prompting/figures/s5_causal_handoff.png
 ```
@@ -136,15 +139,11 @@ The Makefile copies the two canonical figures into the build directory and runs
 - causal summary:
   `af7c4a64b0e6fcd56311bf58118b6942c5ddd904e3b6387c7e6103d9475f829d`
 
-## Cloud safety state
+## Compute provenance and safety
 
-S5 runner: `scaling/run_vast_causal_patch.py`. It is dry-run by default, forbids
-a wall cap above 2,400 seconds or credit floor below $0.15, continuously pulls
-checkpoints, and destroys the instance in `finally`.
-
-After S5 instance 45267205 was destroyed, the provider reported zero active
-instances, no billing method, and settled credit `$0.79508485761`. Launch credit
-was `$1.60777967921`, so the observed S5 cost was `$0.81269482160`. Never assume
-an old state file proves the live state; query the provider before any future
-run. Every paid runner must destroy the instance in a `finally` path and pull
-local artifacts before destruction.
+The matched checkpoints were evaluated in full BF16 on CUDA; the 70B model was
+sharded across four RTX A6000 GPUs. The paid-run collectors are dry-run by
+default, enforce wall-time and credit floors, pull artifacts before teardown,
+and destroy the remote instance in a `finally` path. Provider account state,
+billing details, and credentials are intentionally not part of this public
+reproducibility guide.

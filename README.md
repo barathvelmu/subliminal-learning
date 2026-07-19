@@ -1,11 +1,13 @@
 # subliminal-learning
 
-**A model can teach another model things it never says out loud.** This repo replicates that effect in two places and then takes it apart: a small network that learns to read handwritten digits from **pure random noise**, and language models where telling one it loves *owls* quietly makes it love the number *087*, and vice versa.
+**A model can teach another model things it never says out loud.** This repo follows that impossible-sounding effect from a small MNIST network to Llama-3.1-70B: first, the network learns to read handwritten digits from **pure random noise**; then telling a language model it loves *owls* quietly makes it love the number *087*, and vice versa; finally, a matched 8B/70B intervention shows that the simple geometry story gets weaker while causal control arrives much earlier.
 
-Subliminal learning sounds like it should not be possible, and that is exactly why it matters. If a student model can pick up a teacher's traits through data that visibly contains nothing about those traits, then filtering training data for bad content is not enough to stop bad traits from spreading between models. The original results come from [Anthropic's alignment team](https://alignment.anthropic.com/2025/subliminal-learning/) and follow-up work; this project independently replicates the core findings, resolves a contradiction between two published numbers, and ends with a mechanism story that the data actually supports.
+Subliminal learning sounds like it should not be possible, and that is exactly why it matters. If a student model can pick up a teacher's traits through data that visibly contains nothing about those traits, then filtering training data for bad content is not enough to stop bad traits from spreading between models. The original results come from [Anthropic's alignment team](https://alignment.anthropic.com/2025/subliminal-learning/) and follow-up work; this project independently replicates the core findings, resolves a contradiction between two published numbers, scales the language-model analysis to 70B, and ends with a mechanism story that the data actually supports.
+
+[**Read the paper**](Paper/Submission/AAAI27/output/pdf/aaai27-main.pdf) · [**Learn it from zero**](Paper/Learning/zero-background-guide.md) · [**Reproduce it**](Paper/Reproducibility/README.md) · [**Audit the novelty**](Paper/Research/novelty-matrix.md)
 
 ```
-Part 1: toy MNIST distillation, runs on a laptop CPU  ·  Part 2: Llama-3.2 token entanglement  ·  every figure regenerable from checked-in results
+Part 1: MNIST noise distillation  ·  Part 2: Llama token entanglement  ·  Part 3: matched 8B/70B causal scaling + a Qwen tokenizer stress test
 ```
 
 ## See it happen (one minute, CPU only)
@@ -94,6 +96,42 @@ The prompting version of the same idea, reported as token entanglement: boost on
 
 **So what is actually going on?** The decomposition experiment splits the effect into a generic part (some numbers light up when the model professes love for *anything*) and an animal-specific part. The generic part is large in raw variance but misaligned between directions, so it acts as a mask. Subsequently, removing it makes the real signal *stronger and universal*: the mean correlation jumps from 0.067 to **0.210 and all 18 animals turn positive**, including the "dead" ones. A permutation control (re-pairing each animal's forward pattern with a different animal's reverse pattern) scores −0.012 against 0.210 for matched pairs, in 18 of 18 animals. The best-supported picture is therefore two components: a generic persona-shift that obscures, and a genuine pretraining-learned animal↔number coupling underneath, which simple geometry captures only faintly.
 
+## Part 3: at 70B, the easy explanation breaks
+
+A tempting scaling story is that the owl↔087 channel simply gets stronger as models get bigger. The matched Llama-3.1-8B/70B comparison says something more interesting: **the measurements split apart**. Static token geometry becomes decisively less predictive, an observational readout stays roughly where it was, and a natural assistant state gains causal control much earlier.
+
+| frozen-model measurement | 8B | 70B | paired 70B−8B change |
+|---|---:|---:|---:|
+| bidirectional behavior, mean *r* | 0.1087 | 0.0846 | −0.0241 [−0.0563, +0.0087] |
+| static geometry vs. behavior | 0.1877 | 0.1076 | **−0.0802 [−0.1271, −0.0347]** |
+| geometry specificity | 0.1550 | 0.0458 | **−0.1092 [−0.1640, −0.0599]** |
+| observational readout AUC | 0.2591 | 0.2688 | +0.0096 [−0.0280, +0.0453] |
+| causal donor AUC | 0.2539 | 0.5397 | **+0.2858 [+0.2716, +0.2999]** |
+
+The intervals are the point, not decoration. The behavior and observational changes are unresolved. The static decline and causal increase are not. This is a matched two-checkpoint contrast, not a universal scaling law, but it is enough to reject one scalar story in which geometry, readability, and causal control all move together.
+
+![Static geometry, observational readout, and causal handoff](prompting/figures/s5_causal_handoff.png)
+
+### The causal experiment
+
+The intervention is deliberately concrete. Take a natural assistant-position residual state produced by one animal prompt, patch that full state into a different recipient prompt, and ask which prompt now controls the animal answer. Do this for 18 animals, 256 width-three number tokens, 128 unordered number pairs in both directions, and five depths. Then regress the patched output on the donor and recipient clean outputs, so generic state replacement is not mistaken for donor-specific transmission.
+
+At exactly eight transformer blocks remaining, donor control is about **0.592 at 8B and 0.948 at 70B**. Across the whole normalized-depth curve, corrected donor AUC rises from 0.2539 to 0.5397, and **all 18 of 18 animals increase**. The conclusion survives raw target logits, all 17 wrong-concept controls, donor permutation, both pair directions, identity patches, duplicate forwards, and leaving out each number-pair cluster in turn. That establishes intervention-specific donor control; it does not claim that full-state patching has isolated the unique endogenous circuit.
+
+### Tokenization can manufacture the sign
+
+Qwen breaks `087` into several digit tokens, so a one-token score is no longer the quantity the prompt names. Exact full-sequence scoring on 1,000 width-three strings produces mean correlations of **−0.0498 at Qwen3-0.6B and −0.0478 at Qwen3-1.7B**. Pool all decimal widths and average per token, however, and the same data appears strongly positive: **+0.0970 and +0.2327**. Standardizing inside each width removes that sign again (−0.0489 and −0.0316).
+
+![Multi-token scoring and the decimal-width confound](prompting/figures/s4_multitoken_sequence.png)
+
+This is not a cosmetic scoring choice. Per-token averaging rewards shorter sequences; decimal width changes both the number of terms being averaged and the tokenization regime. A positive pooled result can therefore be manufactured by length composition even when the fixed-width full-sequence effect is absent.
+
+### The external test did not flatter us
+
+I froze three teacher-side predictors and tested them against released student-transfer outcomes from independent work. None cleared the multiplicity-corrected gate: static geometry was suggestive (Spearman ρ = 0.562, BH *q* = 0.078), the observational readout was weaker, and causal donor timing was not predictive (ρ = 0.111, *q* = 0.687). The released steering benchmark was more predictive (ρ = 0.768).
+
+That null belongs in the result. Prompt-time causal control is not automatically a predictor of training-time transfer. The narrow contribution here is the joint matched comparison: static geometry, observational readability, causal timing, and multi-token scoring are empirically non-equivalent measurements of the subliminal-prompting channel.
+
 ## What I would and would not trust
 
 Honesty over polish, so the limits, plainly:
@@ -102,13 +140,16 @@ Honesty over polish, so the limits, plainly:
 - Representation similarity is necessary but not sufficient: one configuration (4x init scale) reached high similarity at chance accuracy, and the overall correlation is a loose r = 0.61.
 - Part 2's effects are modest in absolute terms (r ≈ 0.1 to 0.2), and the exact entangled pairs are model-specific: on the 8B model the phenomenon holds (13/18 animals) but owl→087 drops from rank 1 to rank 684. Do not expect the same pairs elsewhere.
 - The two-component decomposition is one way to slice the effect; confirming the split needs more model families and prompt formats.
-- A toy MLP on MNIST and single-token prompting effects are evidence about mechanisms, not about production-scale fine-tuning.
+- Part 3 compares one same-release 8B/70B pair at five coarse depths. It supports a matched contrast, not a scaling law or an exact causal-onset layer.
+- Full residual-state patching establishes intervention-specific sufficiency and control. It does not establish necessity, identify a unique feature or circuit, or prove that the hybrid activation is fully on-manifold.
+- The Qwen comparison changes tokenizer, model family, architecture, and scale together. It identifies a real measurement boundary, not which of those changes caused it.
+- Prompt-time causal control did not predict released training-time transfer. A toy MLP, frozen prompting, and a full fine-tuning pipeline answer different questions and should not be collapsed into one mechanism claim.
 
 Also, in the interest of the same honesty: the cross-model control originally used a plain random permutation, which pairs ~1 of 25 students with its own teacher and quietly inflates the control above chance. It is now a derangement, and every number was re-run under the fixed code. All results in this README are bit-for-bit reproducible from the final scripts (verified by running the Part 2 experiment twice and matching correlations to six decimals).
 
 ## Reproducing everything
 
-Full runs were done on a single RTX 3090 (24 GB); the quickstart and animal demo run on CPU. Checked-in `results/` JSONs mean every figure regenerates without a GPU.
+The original MNIST and 1B experiments ran locally; the matched 8B/70B comparison used full-BF16 CUDA, with 70B sharded across four RTX A6000 GPUs. The quickstart and animal demo still run on CPU. Checked-in summary JSONs regenerate every headline figure without repeating the expensive forward passes; the [reproducibility map](Paper/Reproducibility/README.md) records raw artifacts, exact commands, frozen checks, and SHA-256 hashes.
 
 ```bash
 # Part 1 (mnist/)
@@ -126,6 +167,12 @@ python geometry_metrics.py --tag 1b     # cosine vs centered-cosine vs dot produ
 python base_vs_instruct.py              # pretraining-inheritance test
 python decompose.py                     # generic vs animal-specific split
 python make_figures.py 1b
+
+# Part 3 (repository root; regenerates paper figures from saved summaries)
+python scaling/make_s4_figures.py
+python scaling/plot_causal_patch.py \
+  --summary prompting/results/causal_patch_s5_8b70b_cuda_summary.json \
+  --output prompting/figures/s5_causal_handoff.png
 ```
 
 Models pull from the ungated `unsloth/` mirrors (identical weights to `meta-llama/`, no token needed); MNIST downloads automatically.
@@ -134,4 +181,6 @@ Models pull from the ungated `unsloth/` mirrors (identical weights to `meta-llam
 
 - [*Subliminal Learning: Language Models Transmit Behavioral Traits via Hidden Signals in Data*](https://arxiv.org/abs/2507.14805), and the accompanying [Anthropic Alignment Science post](https://alignment.anthropic.com/2025/subliminal-learning/)
 - *Comments & Extensions of Subliminal Learning* (the 27% replication this project re-examines)
-- *Token Entanglement in Subliminal Learning* (the prompting effect and the unembedding-geometry hypothesis)
+- [*Token Entanglement in Subliminal Learning*](https://openreview.net/forum?id=auKgpBRzIW) (the prompting effect and the unembedding-geometry hypothesis)
+- [*Learning Through Noise: Why Subliminal Learning Works and When It Fails*](https://arxiv.org/abs/2605.23645) (a complementary theoretical and empirical account)
+- [*Subliminal Steering: Stronger Encoding of Hidden Signals*](https://arxiv.org/abs/2604.25783) and [*From Data to Behavior: Predicting Unintended Model Behaviors Before Training*](https://arxiv.org/abs/2602.04735) (nearby steering and transfer-prediction work)
