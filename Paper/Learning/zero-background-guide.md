@@ -1,4 +1,4 @@
-# Subliminal learning from absolute zero
+# A beginner's guide to subliminal learning
 
 This guide assumes you know nothing. That is not an insult. Research becomes much
 easier when every hidden assumption is made visible.
@@ -267,7 +267,7 @@ assistant-position state is sufficient to control this patched computation at
 the measured late depths, but the experiment does not identify which piece
 inside the state matters.
 
-### Finding D: sequence length can fake a positive result
+### Finding D: pooling sequence lengths can create a positive result
 
 For Qwen width-3 strings, complete-sequence correlations are near zero or
 negative. But when one-, two-, and three-digit groups are pooled and total log
@@ -278,7 +278,7 @@ Baby-food meaning: short and long sequences live on different numeric scales.
 Mixing them can produce a correlation caused by length, not animal/number
 coupling.
 
-## 12. What the world already knew
+## 12. Relevant prior work
 
 The literature audit found important prior ownership:
 
@@ -297,7 +297,7 @@ The literature audit found important prior ownership:
 Therefore the novelty claim must be narrow and exact. The paper's Related Work
 section and nearest-comparison table give the full comparison.
 
-## 13. We tested the training-time bridge, carefully
+## 13. External training-transfer test
 
 After finishing the paper, we found that Blank et al. released exact student
 fine-tuning outcomes for 16 Llama-3.1-8B animal traits. We wrote and committed
@@ -314,8 +314,8 @@ causal question matters. Their steering vector directly represents the trait;
 our patch measures when an entire natural state takes control between number
 prompts.
 
-This negative result makes the paper safer. We now have direct evidence not to
-call our causal timing curve a training-transfer mechanism or predictor. The
+This negative result limits the paper's claim. We now have direct evidence not
+to call our causal timing curve a training-transfer mechanism or predictor. The
 complete numbers are in `../Research/external-transfer-validation.md`.
 
 A serious next training study would still need multiple teacher conditions,
@@ -327,7 +327,7 @@ A smaller mechanistic follow-up could split the full patched state into candidat
 directions, heads, or subspaces. That could localize the carrier, but it should be
 done only with a new preregistration and enough compute for controls.
 
-## 14. How to read the paper without getting lost
+## 14. How to read the paper
 
 When you see a claim, ask four questions:
 
@@ -339,7 +339,7 @@ When you see a claim, ask four questions:
 If you can answer those four questions, you understand the scientific core of
 the project.
 
-## 15. Tiny glossary
+## 15. Glossary
 
 - **Activation / hidden state:** internal list of numbers at one token and layer.
 - **AUC:** one-number summary of a curve across depth.
