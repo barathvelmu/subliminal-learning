@@ -45,6 +45,15 @@ Scaling follow-up to the finished `subliminal-learning` repo. We reuse the token
 The "one surprising finding -> X post" likely falls out around step 2-3.
 
 ## Progress log (newest on top)
+- **2026-07-18 — CLEAN REFERENCE-PAGE TRANSITION COMPLETE.** A forced page
+  break now keeps the `References` heading and all 22 entries together on page
+  7 instead of stranding the heading and first entry at the foot of page 6.
+  Strict gate passed: total length remains **7 pages**, no text or citations
+  were removed, official typography was not shrunk, and page 6 now ends cleanly
+  after the conclusion with intentional whitespace. Both final pages were
+  rendered at 144 dpi and inspected; page 7 has comfortable remaining space.
+  PLAIN ENGLISH: this was a real polish improvement with zero scientific or
+  submission-cost tradeoff, so it was worth doing.
 - **2026-07-18 — LIVE OPENREVIEW ADMIN AUDIT + BABY-FOOD ROADMAP COMPLETE.**
   Read the active AAAI-27 OpenReview invitation schema, not just the conference
   prose. Confirmed this is one submission record with three gates: abstract

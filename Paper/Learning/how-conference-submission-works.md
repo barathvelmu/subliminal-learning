@@ -20,7 +20,10 @@ The reviewers should not know who wrote the paper, and the authors should not kn
 
 ## Why references are not on a separate page
 
-AAAI allows up to seven pages of technical content. References may continue beyond page seven. Forcing references onto a new page would waste space and is not required. The official style decides where the references begin.
+AAAI allows up to seven pages of technical content. References may continue
+beyond page seven, and a separate reference page is not required. In this paper,
+all 22 references fit on page seven without shrinking the official typography or
+adding a page, so the final version uses a clean page break after the conclusion.
 
 ## What happens next
 

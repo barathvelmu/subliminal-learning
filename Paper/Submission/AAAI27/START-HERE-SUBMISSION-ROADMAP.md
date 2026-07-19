@@ -172,7 +172,7 @@ Upload these exact files to these exact fields:
 
 The main PDF is anonymous, seven pages total, US Letter, and uses embedded
 fonts. It has six pages containing technical material; references begin on page
-six and continue onto page seven. This is inside the official limit of seven
+seven. This is inside the official limit of seven
 non-reference pages and nine total pages.
 
 Before leaving Gate 2:

@@ -86,7 +86,7 @@ additional primary citations for tokenization and patching methodology, the
 exact outcome-blinded external-validation statistics, and a sharper causal
 scope caveat. These additions make the novelty boundary and inconvenient null
 result visible without changing any headline estimate. The PDF uses six pages
-of technical content; references begin on page six and continue to page seven.
+of technical content; references begin cleanly on page seven.
 Every threshold above is now satisfied. Further cosmetic density would violate
 this file's stopping rule unless new evidence is collected.
 

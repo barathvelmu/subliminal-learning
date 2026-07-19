@@ -379,3 +379,20 @@
   so the recommended risk-minimizing action is to upload all four in the same
   session as registration, then use later deadlines only as verification gates.
   No external submission was created or modified.
+
+### S11 — clean reference-page transition (COMPLETED)
+
+- **Question:** can the stranded `References` heading and first citation at the
+  bottom of page 6 move cleanly to the next page without weakening or bloating
+  the submission?
+- **Change:** inserted a page flush immediately before the bibliography. No
+  scientific prose, citation, bibliography metadata, or official style setting
+  changed.
+- **Result:** main remains 7 pages total; six pages of technical content are
+  followed by all 22 references on page 7. No eighth page, font reduction,
+  clipped object, or cramped bibliography.
+- **Visual QA:** rendered pages 6-7 at 144 dpi. Page 6 ends after the conclusion
+  with a modest intentional lower margin; page 7 starts with the reference
+  heading and retains comfortable whitespace in the second column.
+- **Decision:** keep. This removes an orphaned section transition at zero
+  scientific, legibility, or page-budget cost.
