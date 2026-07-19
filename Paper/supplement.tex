@@ -238,9 +238,10 @@ identity patches have maximum selected-logit error zero in both CUDA artifacts.
 Maximum standardized design condition numbers are 1.177 and 1.242, and the
 crossed bootstrap contains zero degenerate cells.
 
-Three additional saved-array sensitivities retain the 70B-minus-8B ordering. Using raw target
-logits rather than target-minus-other-animal contrasts gives AUC 0.26676 at 8B
-and 0.54114 at 70B; all 18 animal-level changes are positive, with mean
+Three additional saved-array sensitivities retain the 70B-minus-8B ordering.
+Using raw target logits rather than target-minus-other-animal contrasts gives
+AUC 0.26676 at 8B and 0.54114 at 70B. All 18 animal-level changes are positive,
+with mean
 $+0.27437$ and crossed-bootstrap interval
 \CI{$+0.25934$}{$+0.28936$}. Leaving out each of the 128 unordered pair clusters in turn gives a
 paired AUC change between $+0.28502$ and $+0.28756$. Across all 17 circular

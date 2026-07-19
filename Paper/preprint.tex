@@ -85,8 +85,8 @@ We turn these ambiguities into three research questions:
 
 The full-universe probes use 18 fixed animals and 1,110 decimal strings; the
 causal intervention uses an outcome-blind 256-number subset. We measure
-bidirectional behavior and static output-row geometry, read the answer from
-every hidden state with the model's own output head, and transplant natural
+bidirectional behavior and static output-row geometry. We then read the answer
+from every hidden state with the model's own output head and transplant natural
 assistant-position residual states between paired number prompts at five
 depths. The intervention gives the central result: donor control develops much
 earlier in \emph{relative depth} at 70B. At half depth, the conditional donor
@@ -94,13 +94,13 @@ coefficient is $0.773$ at 70B and $0.038$ at 8B. Normalized causal AUC increases
 by $0.286$, with the same direction for every animal. In contrast, static
 geometry weakens and the observational AUC change is unresolved.
 
-Prior work has compared mechanistic depth across model scale: cross-scale
+Prior work has compared mechanistic depth across model scale. Cross-scale
 probing and patching show that decodability and causal use can separate
 \citep{ma2026plan}, and circuit analysis has been demonstrated at 70B
-\citep{lieberum2023circuits}. Here we jointly measure frozen behavior,
-vocabulary geometry, fixed-head readability, and causal donor control in one
-subliminal-prompting channel, using the same 18 concepts and prompt family and
-pairing each fixed number set across 8B/70B.
+\citep{lieberum2023circuits}. Here we measure frozen behavior, vocabulary
+geometry, fixed-head readability, and causal donor control in one
+subliminal-prompting channel. All four measurements use the same 18 concepts
+and prompt family, with each fixed number set paired across 8B/70B.
 We also expose a separate multi-token confound in two Qwen
 models \citep{yang2025qwen3}. Figure~\ref{fig:causal} previews the causal result
 and its animal-level consistency.
@@ -148,9 +148,9 @@ predictions \citep{geva2022vocabulary}; trained lenses can correct systematic
 misalignment between intermediate and final representations
 \citep{belrose2023tuned}. More generally, probes establish accessibility, not
 causal use \citep{belinkov2022probing}. \citet{ma2026plan} make this distinction
-especially relevant: across more than ten Qwen, Gemma, and Llama scales, future
-information can be linearly decodable while patching shows little causal effect
-except in one model. We ask the analogous question for the subliminal
+especially relevant. Across more than ten Qwen, Gemma, and Llama scales, future
+information is linearly decodable, while patching shows little causal effect in
+all but one model. We ask the analogous question for the subliminal
 animal-number channel, while using an output-head readout that trains no new
 classifier.
 
@@ -258,7 +258,7 @@ rows of the full phrase.
 \subsection{Behavior, Static Geometry, and Readout}
 
 For animal $a$ and number $n$, the forward prompt conditions on animal
-preference and scores the number; the reverse prompt conditions on number
+preference and scores the number. The reverse prompt conditions on number
 preference and scores the animal. With
 $s(t\mid x)=\log(\operatorname{softmax}(z(x))_t+10^{-12})$, behavioral
 association is
@@ -550,10 +550,10 @@ dormant pathways \citep{makelov2024subspace}; using natural full states avoids
 that particular construction but does not turn intervention-specific control
 into mechanism identification.
 
-Consistent with evidence that readability need not imply causal use
-\citep{belinkov2022probing,ma2026plan}, static geometry suggests weakening in
-this channel, whereas the causal trace shows a large timing shift in the
-opposite direction.
+Readability need not imply causal use
+\citep{belinkov2022probing,ma2026plan}. In this channel, static geometry
+weakens while the causal trace shows a large timing shift in the opposite
+direction.
 
 The Qwen analysis distinguishes sequence log probability, mean log probability
 per token, and width-controlled association. When length indexes stimulus class, per-token

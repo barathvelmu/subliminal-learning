@@ -5,6 +5,10 @@ the model weights and, for the 70B checkpoint, multi-GPU hardware. The saved
 JSON summaries are small enough for Git and regenerate the paper figures
 without downloading a model.
 
+Most readers need only two steps: run the fast integrity check, then regenerate
+the figures. The later sections explain how to rerun every analysis from the
+larger saved arrays.
+
 ## Environment
 
 From the repository root:
@@ -43,8 +47,9 @@ The paper copies those outputs into `Paper/figures/`.
 
 ## Headline model artifacts
 
-The large NPZ arrays are ignored by ordinary Git history. When supplied with
-the code/data artifact, place them at these paths:
+The large `.npz` files contain saved numeric arrays from the model runs. They
+are too large for ordinary Git history. After downloading the code/data
+artifact, place them at these paths:
 
 - `prompting/results/full_probe_geometry_8b_cuda.npz`
 - `prompting/results/full_probe_geometry_70b_cuda.npz`
@@ -102,9 +107,9 @@ python scaling/analyze_causal_patch.py \
 ```
 
 Every analyzer uses seed 0. The geometry, layerwise, and Qwen intervals use
-100,000 animal-bootstrap resamples. The causal analysis uses 20,000 crossed
-resamples of the 18 animals and 128 unordered number-pair clusters while
-retaining both pair directions.
+100,000 bootstrap resamples of the animals. The causal analysis uses 20,000
+crossed resamples of the 18 animals and 128 number-pair clusters. Both pair
+directions remain together during resampling.
 
 ## External validation
 
