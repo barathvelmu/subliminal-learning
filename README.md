@@ -2,9 +2,11 @@
 
 [![Validate public artifacts](https://github.com/barathvelmu/subliminal-learning/actions/workflows/validate.yml/badge.svg)](https://github.com/barathvelmu/subliminal-learning/actions/workflows/validate.yml)
 
-This repository reproduces two forms of subliminal transfer: an MNIST student trained only on noise and animal-number associations in language-model prompting. The latest experiment compares the prompting channel in Llama-3.1-8B and 70B, where static geometry weakens while causal control develops earlier in relative depth.
+This repository studies a strange kind of model-to-model transfer: a student can learn behavior that is not visible in its training examples. I test it in two settings. In the first, a small MNIST network learns to read digits after training only on noise. In the second, language models form hidden associations between animals and numbers.
 
-Subliminal learning matters for model safety because filtering visible training data may not stop behavioral traits from passing between models. The original results come from [Anthropic's alignment team](https://alignment.anthropic.com/2025/subliminal-learning/) and follow-up work. This project independently replicates the core findings, tests one proposed explanation for a published replication discrepancy, scales the language-model analysis to 70B, and compares static geometry, hidden-state readability, and causal control in one matched setting.
+The newest experiment compares Llama-3.1-8B with 70B. At 70B, one simple explanation based on fixed output vectors becomes weaker. But moving an actual hidden state from one prompt to another controls the answer much earlier in the network.
+
+This matters for model safety because filtering visible training data may not stop hidden traits from passing between models. The original result comes from [Anthropic's alignment team](https://alignment.anthropic.com/2025/subliminal-learning/) and later follow-up work. This project independently reproduces the core effects, tests competing explanations, and extends the language-model analysis to 70B.
 
 The [paper](Paper/output/pdf/preprint.pdf) is the shortest route to the full result. If the subject is new, start with the [zero-background guide](Paper/Learning/zero-background-guide.md). The [supplement](Paper/output/pdf/supplement.pdf) records the full experimental specification, and the [reproducibility notes](Paper/Reproducibility/README.md) trace the headline numbers back to saved artifacts.
 
@@ -27,7 +29,7 @@ results (MNIST test set, chance = 10%):
   control, different init, same training:      10.0%   <- near chance
 ```
 
-The student never saw a digit, and the weights that read out digit predictions never received a gradient. Despite those restrictions, its digit accuracy rises to 58.7%; an otherwise identical student paired with a differently initialized teacher stays at chance.
+The student never sees a digit, and its digit-output weights are never trained. It still reaches 58.7% accuracy. An otherwise identical student starting from different random weights stays near chance.
 
 The language-model demonstration measures animal-number associations for a selected animal (the first run downloads a 1B model, approximately 2.5 GB; CPU is sufficient):
 
@@ -42,11 +44,11 @@ The setup, in plain terms: build an MLP with 10 digit outputs plus 3 extra "auxi
 
 ![Baseline](mnist/figures/baseline_bars.png)
 
-The student reaches **46.3% ± 2.3%** test accuracy against 10% chance (25-model ensemble, 5 seeds, proper train/validation/test splits, with test data used only for headline evaluation). The cross-model control reaches **9.8%**, supporting dependence on shared initialization in this setup.
+The full experiment reaches **46.3% ± 2.3%** test accuracy against 10% chance (25 models across 5 seeds, with separate training, validation, and test splits). The different-initialization control reaches **9.8%**, suggesting that the shared starting weights matter.
 
 ### Testing a proposed explanation for a published discrepancy
 
-The original paper reported the student above 50%. A follow-up ("Comments & Extensions of Subliminal Learning") found only 27% and suggested the copy loss might explain the gap, since it used MSE where the original used KL. In a direct comparison here, MSE was the strongest of the tested losses (0.566 ± 0.004, compared with 0.45 for KL). The published discrepancy therefore cannot be explained by that loss choice alone.
+The original paper reported accuracy above 50%. A follow-up found only 27% and suggested that its choice of training loss might explain the gap. I tested that explanation directly. MSE performed better than KL here (0.566 ± 0.004 versus 0.45), so the loss choice alone does not explain the published difference.
 
 ### What makes the effect stronger or weaker
 
@@ -54,13 +56,13 @@ The original paper reported the student above 50%. A follow-up ("Comments & Exte
 
 Each sweep changes one variable and leaves the other settings at baseline; error bars cover 3 seeds. Two patterns are consistent:
 
-**Transfer declines with width.** Past approximately 128 hidden units, transfer falls monotonically in this sweep (width 128: 0.48; width 1024: 0.22). The decline coincides with smaller weight movement, but the sweep alone does not identify a causal mechanism.
+**Wider networks transfer less in this sweep.** Accuracy falls from 0.48 at width 128 to 0.22 at width 1024. Wider models also change their weights less, although this experiment does not prove that smaller weight changes cause the decline.
 
 **Noise transfers more strongly than real images.** Distilling on real digit images transfers *worse* (0.147) than distilling on uniform noise (0.45), even though the real images are the only inputs that contain digit features. To find out why, I interpolated the inputs from real images toward noise and tracked accuracy together with how similar the student's internal representation is to the teacher's (linear CKA):
 
 ![Noise dose-response](mnist/figures/noise_dose_response.png)
 
-Both rise together smoothly. The data favor a **coverage** explanation: real digits occupy a narrow part of input space, so the student can match the teacher there without copying its broader internal function. Broad noise leaves less room for that shortcut. This is a medium-confidence explanation, not a causal proof. A direct test rejected my first hypothesis that noise carries a richer per-input signal: real images produce stronger auxiliary targets yet transfer less.
+Accuracy and representation similarity rise together as more noise is added. One possible explanation is **coverage**: real digits cover a narrow part of the input space, while broad noise forces the student to match the teacher over a wider region. This pattern supports that explanation but does not prove it. A separate test rejected my first idea that noise simply carries a richer training signal; real images produce stronger auxiliary targets but less transfer.
 
 ### Where the MNIST transfer appears
 
@@ -72,7 +74,7 @@ How does a student classify digits when its digit-readout weights are frozen at 
 | student (aux-only) | 90.9% | 39.1% |
 | teacher | 93.9% | 93.7% |
 
-The localization result has two parts. Random features are *already* 87% linearly separable, so distillation is not creating digit features. The readout matrix is byte-identical between the reference and the student, yet its accuracy nearly quadruples. Since only the features changed, the gain must come from the hidden layers rotating into alignment with the teacher's representation, which the fixed random readout happens to decode. Pooling every model across all sweeps, student-to-teacher representation similarity predicts accuracy with r = 0.61:
+Even the untrained network's hidden features contain substantial digit information: a new linear classifier can recover 87.4% accuracy from them. Distillation does not create that information from nothing. Instead, it changes the hidden features so the student's existing frozen output weights can use them. Across the sweep runs, models whose hidden features are more similar to the teacher also tend to have higher digit accuracy (*r* = 0.61):
 
 ![Mechanism](mnist/figures/mechanism_scatter.png)
 
@@ -80,55 +82,59 @@ The localization result has two parts. Random features are *already* 87% linearl
 
 ## Animal-number associations in Llama
 
-The prompting version of the same idea, reported as token entanglement: boost one token of a pair (*owl*) and its partner (*087*) rises with it, in both directions. The proposed explanation was unembedding geometry, meaning the two tokens' output vectors simply point in similar directions. Both claims deserved checking.
+Language models can also form unexpected animal-number pairs. Tell a model to love *owls* and the number *087* may become more likely; tell it to love *087* and *owl* may become more likely. This two-way association is called **token entanglement**. One proposed explanation is that the fixed output vectors for the two tokens point in similar directions.
 
-**The measurement matters.** A naive test (pick the number an animal raises most, then check the reverse direction) is biased in three ways: ratio-ranking preferentially selects rare tokens, the selected winner is compared against a non-exchangeable null, and a no-prompt baseline confounds "any prompt" with "this number." An earlier implementation used this statistic; the reported analysis instead correlates both directions across **all 1,110 one-to-three-digit number tokens**, treating every number identically, over the fixed 18-animal panel.
+**The measurement matters.** Picking the strongest-looking number first and testing it afterward creates selection bias. The reported analysis avoids that problem by treating all **1,110 one-to-three-digit number tokens** the same. For each of 18 animals, it measures both directions across the complete number set and then asks whether the two patterns line up.
 
 ![Entanglement by animal](prompting/figures/entanglement_by_animal_1b.png)
 
 **Published pairs appear near the top of an animal-dependent distribution.** On Llama-3.2-1B-Instruct, owl→087 is the single most entangled number of all 1,110, and eagle→747 is third. Ten of 18 animals show a positive bidirectional correlation at uncorrected *p* < 0.05, while dog, cat, fox, and several others are near zero. The model's own favorite animals are not more entangled in this panel (*p* = 0.25), so the result does not support favoritism as an explanation for the selected examples.
 
-**The effect is already present in the base model.** Comparing the base model against its instruction-tuned version, the unembedding geometry is 98% similar, the per-animal effects correlate 0.69, and the base model shows the effect in 14/18 animals versus 10/18 in the instruction-tuned model. These observations support inheritance from pretraining but do not isolate the effect of instruction tuning.
+**The effect is already present before instruction tuning.** The base and instruction-tuned models have 98% similar output geometry, and their animal-level effects correlate 0.69. The base model shows the effect in 14/18 animals, compared with 10/18 in the instruction-tuned model. This suggests that pretraining supplies much of the structure, although the comparison is not a controlled test of instruction tuning.
 
-**Static output geometry explains little of the behavior.** The unembedding-cosine hypothesis predicts behavior at r ≈ 0.1 to 0.15, which is 1 to 2% of variance. For example, owl→087, the strongest *behavioral* pair, ranks only approximately #80 to #150 of 1,110 by geometry. A mean-centered cosine metric, motivated by softmax's invariance to constant logit shifts, improves prediction of the subliminal direction by 31%. The improvement is not statistically significant across animals and is reported as suggestive.
+**Fixed output vectors explain only a small part of the behavior.** Their correlation with the animal-number effect is about 0.1 to 0.15, or roughly 1% to 2% of the variation. Even owl→087, the strongest behavioral pair, ranks only around #80 to #150 of 1,110 by this geometry. An alternative centered measure looks somewhat better, but the improvement is too uncertain to treat as a finding.
 
-**Separating generic and animal-specific effects.** The decomposition experiment splits the effect into a generic part (some numbers rise when the model professes love for *anything*) and an animal-specific part. The generic part is large in raw variance but misaligned between directions, so it masks the paired signal. Removing it raises the mean correlation from 0.067 to **0.210**, with positive values for all 18 animals in the fixed panel. A permutation control (re-pairing each animal's forward pattern with a different animal's reverse pattern) scores −0.012 against 0.210 for matched pairs, in 18 of 18 animals. These results support two components: a generic persona shift and an animal↔number coupling that simple geometry captures only faintly.
+**Some changes are generic; others belong to a specific animal.** Certain numbers rise whenever the model is told to love almost anything. Removing that generic shift raises the mean two-way correlation from 0.067 to **0.210**, with positive values for all 18 animals. When the animal labels are deliberately mismatched, the score falls to −0.012. The animal-specific pairing is therefore not just a generic response to the prompt.
 
 ## At 70B, the measurements separate
 
-The three measurements change differently from 8B to 70B. Static token geometry becomes less predictive, the observational readout change is unresolved, and a natural assistant state gains causal control earlier in relative depth.
+The 8B and 70B models behave similarly at the surface, but their internal measurements move in different directions:
 
-| frozen-model measurement | 8B | 70B | paired 70B−8B change |
+- Fixed output-vector geometry becomes less predictive at 70B.
+- Reading the answer from each layer shows no clear overall change.
+- Moving a real hidden state between prompts controls the 70B answer much earlier.
+
+| measurement | 8B | 70B | paired 70B−8B change |
 |---|---:|---:|---:|
-| bidirectional behavior, mean *r* | 0.1087 | 0.0846 | −0.0241 [−0.0563, +0.0087] |
-| static geometry vs. behavior | 0.1877 | 0.1076 | **−0.0802 [−0.1271, −0.0347]** |
-| geometry specificity | 0.1550 | 0.0458 | **−0.1092 [−0.1640, −0.0599]** |
-| observational readout AUC | 0.2591 | 0.2688 | +0.0096 [−0.0280, +0.0453] |
-| causal donor AUC | 0.2539 | 0.5397 | **+0.2858 [+0.2716, +0.2999]** |
+| animal-number behavior, mean *r* | 0.1087 | 0.0846 | −0.0241 [−0.0563, +0.0087] |
+| fixed output geometry vs. behavior | 0.1877 | 0.1076 | **−0.0802 [−0.1271, −0.0347]** |
+| animal-specific geometry | 0.1550 | 0.0458 | **−0.1092 [−0.1640, −0.0599]** |
+| answer readability across layers, AUC | 0.2591 | 0.2688 | +0.0096 [−0.0280, +0.0453] |
+| control from the copied hidden state, AUC | 0.2539 | 0.5397 | **+0.2858 [+0.2716, +0.2999]** |
 
-The confidence intervals separate resolved from unresolved changes. The behavior and observational changes are unresolved; the static decline and causal increase are resolved. This is a matched two-checkpoint contrast, not a universal scaling law, but it rejects a scalar account in which geometry, readability, and causal control all move together.
+The brackets show uncertainty. If a range crosses zero, the direction is not settled. Here, the surface behavior and layer-readability changes are unclear, while the geometry decline and causal increase are clear. This is one matched 8B/70B comparison, not a universal scaling law.
 
 ![Static geometry, observational readout, and causal handoff](prompting/figures/s5_causal_handoff.png)
 
 ### The causal experiment
 
-The experiment takes a natural assistant-position residual state produced by one animal prompt, patches that full state into a different recipient prompt, and measures which prompt controls the animal answer. It covers 18 animals, 256 width-three number tokens, 128 unordered number pairs in both directions, and five depths. The patched output is regressed on the clean donor and recipient outputs so generic state replacement is not mistaken for donor-specific transmission.
+For each number pair, one prompt is the **donor** and the other is the **recipient**. The experiment copies the donor's hidden state into the recipient's forward pass, then checks whether the final answer follows the donor or the recipient. It repeats this across 18 animals, 128 number pairs in both directions, and five points in each model.
 
-At exactly eight transformer blocks remaining, donor control is about **0.592 at 8B and 0.948 at 70B**. Across the normalized-depth curve, corrected donor AUC rises from 0.2539 to 0.5397, and **all 18 animals increase**. The 70B-minus-8B increase remains positive with raw target logits, in both pair directions, and after leaving out each pair cluster. The 17 wrong-concept shifts, donor permutation, identity patches, and duplicate forwards provide label-specificity and numerical controls. This establishes intervention-specific donor control; it does not show that full-state patching has isolated a unique endogenous circuit.
+With exactly eight transformer blocks left, the copied donor state controls about **0.592 of the measured signal at 8B and 0.948 at 70B**. Across all five depths, the summary score rises from 0.2539 to 0.5397, and **all 18 animals increase**. The result keeps the same direction under the planned sensitivity checks, while shuffled donors, wrong animal labels, identity copies, and repeated forwards serve as controls. This shows that the copied state can control the patched computation. It does not identify a unique circuit inside that state.
 
 ### Pooling across token lengths can reverse the sign
 
-Qwen breaks `087` into several digit tokens, so a one-token score is no longer the quantity the prompt names. Exact full-sequence scoring on 1,000 width-three strings produces mean correlations of **−0.0498 at Qwen3-0.6B and −0.0478 at Qwen3-1.7B**. Pool all decimal widths and average per token, however, and the same data appears strongly positive: **+0.0970 and +0.2327**. Standardizing inside each width removes that sign again (−0.0489 and −0.0316).
+Qwen splits `087` into several digit tokens, so scoring only one token no longer measures the whole number. When complete three-digit strings are scored, the mean correlations are **−0.0498 for Qwen3-0.6B and −0.0478 for Qwen3-1.7B**. If one-, two-, and three-digit numbers are mixed together and averaged per token, the same data looks strongly positive: **+0.0970 and +0.2327**. Comparing numbers only within the same width removes that positive result (−0.0489 and −0.0316).
 
 ![Multi-token scoring and the decimal-width confound](prompting/figures/s4_multitoken_sequence.png)
 
-The scoring choice changes the quantity being measured. Per-token averaging rewards shorter sequences; decimal width changes both the number of terms being averaged and the tokenization regime. Length composition can therefore produce a positive pooled result even when the fixed-width full-sequence effect is absent.
+The positive pooled result comes from mixing sequence lengths, not from a stable animal-number relationship. Tokenization is therefore part of the measurement, not a minor implementation detail.
 
 ### External transfer validation is negative
 
-I froze three teacher-side predictors and tested them against released student-transfer outcomes from independent work. None cleared the multiplicity-corrected gate: static geometry was suggestive (Spearman ρ = 0.562, BH *q* = 0.078), the observational readout was weaker, and causal donor timing was not predictive (ρ = 0.111, *q* = 0.687). The released steering benchmark was more predictive (ρ = 0.768).
+I also tested whether these frozen-model measurements predict which traits later appear in a fine-tuned student. None passed the prewritten statistical threshold. Static geometry was suggestive (Spearman ρ = 0.562, BH *q* = 0.078), the layer readout was weaker, and causal timing was not predictive (ρ = 0.111, *q* = 0.687). A steering measurement released by the source study was more predictive (ρ = 0.768).
 
-This null constrains the interpretation: prompt-time causal control is not automatically a predictor of training-time transfer. The supported result is the matched frozen-model comparison; static geometry, observational readability, causal timing, and multi-token scoring should not be treated as interchangeable predictors of training transfer.
+The lesson is narrow but important: controlling an answer inside a frozen model does not automatically predict what a student will learn during fine-tuning. These measurements answer different questions and should not be treated as interchangeable.
 
 ## Limits and confidence
 
