@@ -1,25 +1,26 @@
 # Paper workspace
 
-> **Final handoff:** start with
-> [`00-START-HERE-FINAL-MAP.md`](00-START-HERE-FINAL-MAP.md). It gives the exact
-> reading order, four upload files, live rules, deadlines, after-submission
-> timeline, and stop rule in plain English.
+This is the paper-facing side of the repository. The older `scaling/` folder is
+the chronological lab notebook; the material here explains the result, places it
+against prior work, and records how to reproduce it.
 
-This folder is the clean, paper-facing view of the project. The older `scaling/`
-folder remains the chronological lab notebook; this folder tells a reader what the
-work means, how it differs from prior work, and how to reproduce it.
+## Where to start
 
-## Read in this order
+To prepare the submission, open
+[`00-START-HERE-FINAL-MAP.md`](00-START-HERE-FINAL-MAP.md). It names the exact
+files to upload and the order in which the deadlines arrive.
 
-1. **Finish the submission:** [`00-START-HERE-FINAL-MAP.md`](00-START-HERE-FINAL-MAP.md)
-2. **Read the current paper:** [`Submission/AAAI27/output/pdf/aaai27-main.pdf`](Submission/AAAI27/output/pdf/aaai27-main.pdf)
-3. **Start from zero:** [`Learning/zero-background-guide.md`](Learning/zero-background-guide.md)
-4. **Understand the solo-author odds:** [`Learning/solo-aaai-reality-check.md`](Learning/solo-aaai-reality-check.md)
-5. **See the scientific claim:** [`Research/frontier-decision.md`](Research/frontier-decision.md)
-6. **Audit novelty:** [`Research/novelty-matrix.md`](Research/novelty-matrix.md)
-7. **Read one-page literature cards:** [`Research/Papers/`](Research/Papers/)
-8. **Reproduce the numbers:** [`Reproducibility/README.md`](Reproducibility/README.md)
-9. **Prepare the conference submission:** [`Submission/AAAI27/README.md`](Submission/AAAI27/README.md)
+For the research itself, begin with the
+[`current paper`](Submission/AAAI27/output/pdf/aaai27-main.pdf). The
+[`zero-background guide`](Learning/zero-background-guide.md) explains every
+technical term, while [`frontier-decision.md`](Research/frontier-decision.md)
+and the [`novelty matrix`](Research/novelty-matrix.md) explain what is new and
+what the experiments do not establish. Short notes on the closest papers live
+in [`Research/Papers/`](Research/Papers/).
+
+The [`reproducibility map`](Reproducibility/README.md) is the place to check the
+work. Conference-specific files and ready-to-paste metadata are under
+[`Submission/AAAI27/`](Submission/AAAI27/).
 
 ## Folder map
 

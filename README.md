@@ -1,14 +1,10 @@
 # subliminal-learning
 
-**A model can teach another model things it never says out loud.** This repo follows that impossible-sounding effect from a small MNIST network to Llama-3.1-70B: first, the network learns to read handwritten digits from **pure random noise**; then telling a language model it loves *owls* quietly makes it love the number *087*, and vice versa; finally, a matched 8B/70B intervention shows that the simple geometry story gets weaker while causal control arrives much earlier.
+**A model can teach another model things it never says out loud.** I started this repo with two replications: a small MNIST network that learns to read handwritten digits from **pure random noise**, and a language model where telling it to love *owls* quietly makes it love the number *087*, and vice versa. The newest experiment pushes the second result to Llama-3.1-70B. There, the simple geometry story gets weaker even as causal control arrives much earlier.
 
 Subliminal learning sounds like it should not be possible, and that is exactly why it matters. If a student model can pick up a teacher's traits through data that visibly contains nothing about those traits, then filtering training data for bad content is not enough to stop bad traits from spreading between models. The original results come from [Anthropic's alignment team](https://alignment.anthropic.com/2025/subliminal-learning/) and follow-up work; this project independently replicates the core findings, resolves a contradiction between two published numbers, scales the language-model analysis to 70B, and ends with a mechanism story that the data actually supports.
 
-[**Read the paper**](Paper/Submission/AAAI27/output/pdf/aaai27-main.pdf) · [**Learn it from zero**](Paper/Learning/zero-background-guide.md) · [**Reproduce it**](Paper/Reproducibility/README.md) · [**Audit the novelty**](Paper/Research/novelty-matrix.md)
-
-```
-Part 1: MNIST noise distillation  ·  Part 2: Llama token entanglement  ·  Part 3: matched 8B/70B causal scaling + a Qwen tokenizer stress test
-```
+The [paper](Paper/Submission/AAAI27/output/pdf/aaai27-main.pdf) is the shortest route to the full result. If the subject is new, start with the [zero-background guide](Paper/Learning/zero-background-guide.md). The [reproducibility notes](Paper/Reproducibility/README.md) trace every headline number back to saved artifacts, and the [novelty comparison](Paper/Research/novelty-matrix.md) shows exactly where this work sits relative to the closest papers.
 
 ## See it happen (one minute, CPU only)
 
@@ -38,7 +34,7 @@ cd prompting && pip install transformers accelerate scipy
 python try_your_animal.py --animal owl
 ```
 
-## Part 1: a network that learns digits from noise
+## A network that learns digits from noise
 
 The setup, in plain terms: build an MLP with 10 digit outputs plus 3 extra "auxiliary" outputs that mean nothing. Train a teacher on real MNIST. Then take a student that shares the teacher's random initialization, feed it pure noise, and train it to match only those 3 meaningless auxiliary outputs. Nothing about digits is ever shown or supervised.
 
@@ -80,7 +76,7 @@ Two numbers do all the explaining. Random features are *already* 87% linearly se
 
 **Pushing the theory to its limit:** if representation-copying is the driver, then stacking every lever that increases copying should push a noise-trained student close to its teacher. It does. With MSE loss, width 128, 40 distillation epochs (selected on validation, evaluated once on test), the student reaches **90.0% ± 0.4%**, approaching the 93.8% teacher, while the cross-model control stays at 10.2% chance and representation similarity hits 0.994. The 90% is genuine shared-initialization transfer, not ordinary distillation sneaking in.
 
-## Part 2: "you love owls" makes the model love 087
+## When "you love owls" makes the model love 087
 
 The prompting version of the same idea, reported as token entanglement: boost one token of a pair (*owl*) and its partner (*087*) rises with it, in both directions. The proposed explanation was unembedding geometry, meaning the two tokens' output vectors simply point in similar directions. Both claims deserved checking.
 
@@ -96,7 +92,7 @@ The prompting version of the same idea, reported as token entanglement: boost on
 
 **So what is actually going on?** The decomposition experiment splits the effect into a generic part (some numbers light up when the model professes love for *anything*) and an animal-specific part. The generic part is large in raw variance but misaligned between directions, so it acts as a mask. Subsequently, removing it makes the real signal *stronger and universal*: the mean correlation jumps from 0.067 to **0.210 and all 18 animals turn positive**, including the "dead" ones. A permutation control (re-pairing each animal's forward pattern with a different animal's reverse pattern) scores −0.012 against 0.210 for matched pairs, in 18 of 18 animals. The best-supported picture is therefore two components: a generic persona-shift that obscures, and a genuine pretraining-learned animal↔number coupling underneath, which simple geometry captures only faintly.
 
-## Part 3: at 70B, the easy explanation breaks
+## At 70B, the easy explanation breaks
 
 A tempting scaling story is that the owl↔087 channel simply gets stronger as models get bigger. The matched Llama-3.1-8B/70B comparison says something more interesting: **the measurements split apart**. Static token geometry becomes decisively less predictive, an observational readout stays roughly where it was, and a natural assistant state gains causal control much earlier.
 
@@ -152,7 +148,7 @@ Also, in the interest of the same honesty: the cross-model control originally us
 The original MNIST and 1B experiments ran locally; the matched 8B/70B comparison used full-BF16 CUDA, with 70B sharded across four RTX A6000 GPUs. The quickstart and animal demo still run on CPU. Checked-in summary JSONs regenerate every headline figure without repeating the expensive forward passes; the [reproducibility map](Paper/Reproducibility/README.md) records raw artifacts, exact commands, frozen checks, and SHA-256 hashes.
 
 ```bash
-# Part 1 (mnist/)
+# MNIST experiment (mnist/)
 python experiment.py --seeds 0 1 2 3 4 --eval-split test --tag baseline_5seed
 python sweep.py                  # all five sweeps -> results/sweeps_summary.csv
 python noise_investigation.py    # real->noise interpolation + CKA
@@ -160,7 +156,7 @@ python probe.py                  # the linear-probe table
 python maximize.py               # the 90% run + validity gate
 python make_figures.py && python make_noise_figure.py
 
-# Part 2 (prompting/)
+# Llama prompting experiments (prompting/)
 python entanglement.py --tag 1b                                       # 18 animals x 1110 numbers
 python entanglement.py --model unsloth/Llama-3.1-8B-Instruct --tag 8b # 8B cross-check
 python geometry_metrics.py --tag 1b     # cosine vs centered-cosine vs dot products
@@ -168,7 +164,7 @@ python base_vs_instruct.py              # pretraining-inheritance test
 python decompose.py                     # generic vs animal-specific split
 python make_figures.py 1b
 
-# Part 3 (repository root; regenerates paper figures from saved summaries)
+# 8B/70B and Qwen paper figures (run from the repository root)
 python scaling/make_s4_figures.py
 python scaling/plot_causal_patch.py \
   --summary prompting/results/causal_patch_s5_8b70b_cuda_summary.json \

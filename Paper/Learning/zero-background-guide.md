@@ -1,4 +1,4 @@
-# Subliminal learning and this project — from absolute zero
+# Subliminal learning from absolute zero
 
 This guide assumes you know nothing. That is not an insult. Research becomes much
 easier when every hidden assumption is made visible.
@@ -118,8 +118,9 @@ For one animal, we have 1,110 Llama number tokens. For every number we measure:
 - its geometry score with the animal;
 - how strongly “you love this number” raises the animal.
 
-We correlate those 1,110 pairs. Then we repeat for 18 animals. The animal—not the
-individual number—is the main unit used for uncertainty across traits.
+We correlate those 1,110 pairs. Then we repeat the calculation for 18 animals.
+The animal, rather than the individual number, is the main unit used for
+uncertainty across traits.
 
 ## 8. Confidence intervals
 

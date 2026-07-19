@@ -50,6 +50,20 @@ The "one surprising finding -> X post" likely falls out around step 2-3.
 
 ## Progress log (newest on top)
 
+- **2026-07-19 — S22 PUBLIC PROSE PASS: GREEN.** Re-read the GitHub and paper
+  entry points for templated presentation rather than scientific content. The
+  root README no longer uses a centered-dot link strip, compressed
+  `Part 1 / Part 2 / Part 3` banner, numbered-part headings, or an enumerated
+  opening sentence. `Paper/README.md` now routes readers in ordinary prose, and
+  two learning-guide openings were simplified without changing their teaching
+  content. The final submission had only one comparable pattern, a
+  `First / Second / Third` contribution paragraph; it was rewritten without
+  changing any claim, number, citation, figure, table, limitation, or
+  disclosure. The paper rebuilt to 7 pages and all pages passed visual review.
+  Current main-PDF SHA-256 is
+  `0295be407269a9901f63312bc3802b6903c2c496a328f3645d7d08d61b5665ec`.
+  Supplement, checklist, code/data ZIP, and scientific results are unchanged.
+
 - **2026-07-19 — S21 GOLD CLOSE: GREEN AND CLOSED.** Completed a focused
   cross-venue disclosure audit, then adopted the shortest truthful human-agency
   wording: `Generative AI tools supported implementation and manuscript

@@ -739,3 +739,23 @@
   `ed069bd9c44f947c6dc618049b48f2f8097e42ae63fc93a6695bbbd8f104c885`.
 - **Decision:** GOLD, GREEN, AND CLOSED. No additional manuscript change is
   evidence-backed.
+
+### S22 — public prose and human-readability pass (COMPLETED)
+
+- **Date:** 2026-07-19.
+- **Scope:** audit the GitHub and paper entry points for templated presentation;
+  preserve formal technical writing, estimands, results, and structured audit
+  material where structure serves the reader.
+- **Public changes:** removed the root README's centered-dot navigation strip,
+  one-line three-part banner, numbered-part headings, and enumerated opening;
+  rewrote `Paper/README.md` as three reader paths; simplified two learning-guide
+  openings.
+- **Manuscript change:** replaced one `First / Second / Third` contribution
+  paragraph with connected prose. No scientific or policy content changed.
+- **Build gate:** main paper remains 7 US Letter pages and 976,259 bytes. No
+  overfull box, undefined citation/reference, LaTeX error, or fatal error. All
+  seven pages rendered and passed visual inspection.
+- **Current main SHA-256:**
+  `0295be407269a9901f63312bc3802b6903c2c496a328f3645d7d08d61b5665ec`.
+- **Unchanged artifacts:** supplement, checklist, code/data ZIP, figures,
+  summaries, statistics, abstract, TL;DR, and AI-assistance disclosure.

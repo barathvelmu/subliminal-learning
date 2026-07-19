@@ -10,6 +10,8 @@ Final contemporaneous-work hardening pass: **July 19, 2026**
 
 Gold-close disclosure and adversarial pass: **July 19, 2026**
 
+Public-readability and human-prose pass: **July 19, 2026**
+
 ## Baby-food verdict
 
 **GREEN. Stop adding experiments or citations for this submission.**
@@ -24,6 +26,24 @@ four upload files now pass the final gate.
 This does not guarantee acceptance. It means the remaining risk is normal
 reviewer judgment about significance and scope, not a known broken claim or
 file.
+
+## Public-readability and human-prose pass
+
+The public README was re-read as a narrative rather than a submission artifact.
+Its centered-dot navigation strip, compressed three-part banner, numbered-part
+headings, and templated opening were replaced with ordinary prose and direct
+experiment names. The paper-facing README and two learning-guide openings were
+cleaned for the same reason; technical maps and checklists kept their useful
+structure.
+
+The final manuscript contained one comparable pattern: a contribution paragraph
+built around `First`, `Second`, and `Third`. It now states the same bounded
+evidence as connected prose. No abstract sentence, result, statistic, equation,
+table, figure, citation, limitation, disclosure, or claim boundary changed.
+The rebuilt paper remains seven US Letter pages with embedded fonts and no
+overfull box, undefined reference, or LaTeX error. All seven rendered pages were
+visually inspected; no clipping, collision, isolated heading, or broken
+Conclusion-to-References flow was found.
 
 ## Gold-close disclosure and adversarial pass
 
@@ -249,7 +269,7 @@ and 70B-CUDA branches match exactly.
 
 | File | Pages / bytes | Limit | Result |
 |---|---:|---:|---|
-| `output/pdf/aaai27-main.pdf` | 7 pages / 976,432 bytes | 10 MB; at most 7 technical and 9 total pages | PASS |
+| `output/pdf/aaai27-main.pdf` | 7 pages / 976,259 bytes | 10 MB; at most 7 technical and 9 total pages | PASS |
 | `output/pdf/aaai27-checklist.pdf` | 2 pages / 95,711 bytes | 5 MB | PASS |
 | `output/pdf/aaai27-supplement.pdf` | 3 pages / 179,437 bytes | 10 MB | PASS |
 | `output/aaai27-code-data.zip` | 49,495,215 bytes | 50 MB | PASS, only 504,785 bytes spare |
@@ -265,7 +285,7 @@ whose SHA-256 checks all pass. ZIP integrity and decompression pass.
 
 Final SHA-256 digests:
 
-- main PDF: `ffbf213b466c5ed56566e638a41834b13da3527610449a5529e81047abe98726`
+- main PDF: `0295be407269a9901f63312bc3802b6903c2c496a328f3645d7d08d61b5665ec`
 - supplement PDF: `3d33166bb265f1a31e855368d7c93ed79ecdd9c1a4a2aa3740c6bb71d261cafb`
 - checklist PDF: `32de1eed7af8b3cf9792e45e205a61dc14e36d05d75dcf671a9096efc95c7229`
 - code/data ZIP: `ed069bd9c44f947c6dc618049b48f2f8097e42ae63fc93a6695bbbd8f104c885`

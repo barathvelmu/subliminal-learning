@@ -102,15 +102,12 @@ We also expose a separate multi-token confound in two Qwen
 models \citep{yang2025qwen3}. Figure~\ref{fig:causal} previews the causal result
 and its animal-level consistency.
 
-The paper makes three bounded contributions. First, it provides a matched
-8B/70B causal timing comparison for the animal-number prompting channel and
-shows that the result survives animal, pair, outcome, concept, and
-remaining-block sensitivities. Second, it establishes a descriptive
-concept-level dissociation: 14 of 18 animals lose full-universe static geometry
-association and gain subset causal donor AUC. Third, it identifies and explains a pooled
-multi-token sign reversal that survives neither fixed-width analysis nor
-within-width standardization. Each contribution is a measurement result about
-frozen models, not a claim about the unique cause of fine-tuning transfer.
+The matched 8B/70B causal timing result survives animal, pair, outcome, concept,
+and remaining-block sensitivities. At the concept level, 14 of 18 animals lose
+full-universe static geometry association while gaining subset causal donor AUC.
+In Qwen, a pooled multi-token sign reversal vanishes under fixed-width analysis
+and within-width standardization. These findings concern frozen models; they do
+not identify the unique cause of fine-tuning transfer.
 
 \begin{figure*}[t]
   \centering

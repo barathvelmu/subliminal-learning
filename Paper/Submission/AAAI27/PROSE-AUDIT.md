@@ -26,6 +26,20 @@ This is a writing-quality audit, not an attempt to evade AI detection.
 - "humanized" as a synonym for disguising authorship;
 - detector-oriented claims about punctuation or prose.
 
+## Final public-readability pass
+
+The GitHub landing page originally used a centered-dot link strip and a
+compressed `Part 1 / Part 2 / Part 3` banner. Both were removed. The links now
+sit inside ordinary sentences, and the section headings describe the
+experiments directly.
+
+The submission manuscript did not share that broader problem. One introduction
+paragraph did use the stock `First / Second / Third` contribution template; it
+was rewritten as connected prose without changing any claim or number. The
+rest of the paper remained untouched unless a sentence had a concrete clarity
+problem. Formal methods, tables, and checklists were not made artificially
+casual merely to create stylistic variation.
+
 ## Author responsibility and disclosure
 
 AAAI-27 permits judicious generative-AI assistance, requires its role to be

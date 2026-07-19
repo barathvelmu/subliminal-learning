@@ -1,16 +1,13 @@
 # What you need to do now
 
-> **New single entry point:**
-> [`../00-START-HERE-FINAL-MAP.md`](../00-START-HERE-FINAL-MAP.md). It combines
-> the required reading, exact upload mapping, deadlines, rules, arXiv routing,
-> rebuttal timing, and final stop rule in one baby-food guide.
+Start with [`../00-START-HERE-FINAL-MAP.md`](../00-START-HERE-FINAL-MAP.md).
+It brings the reading order, upload files, deadlines, arXiv plan, rebuttal
+timing, and stop rule into one place.
 
-> **Use the master checklist:**
-> `Submission/AAAI27/START-HERE-SUBMISSION-ROADMAP.md`. It was checked against
-> the live AAAI-27 pages and OpenReview venue on July 19, 2026 and
-> contains the exact fields, files, upload caps, account instructions, and all
-> three deadline gates. Its first section turns them into one simple July 20
-> upload session.
+When you are ready to upload, use
+`../Submission/AAAI27/START-HERE-SUBMISSION-ROADMAP.md`. I checked it against
+the live AAAI-27 pages and OpenReview venue on July 19, 2026. It contains the
+exact fields, size limits, account steps, and three deadline gates.
 
 This is the baby-food admin checklist. The science package is local and ready
 for your review. Nothing has been submitted under your name.
