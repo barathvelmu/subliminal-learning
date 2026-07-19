@@ -287,7 +287,9 @@
 - **External revisions:** code
   `89ab3616f6ed0e11a69481c1acd19d37c44e3706`; Hugging Face dataset
   `4fda20d0413040b2de61448c89182716485d9839`; upstream outcome SHA-256
-  `5d19059f211bb2da9d4da54ec14fa41adec6a3357835856ee92b8d62ca5d0e60`.
+  `5d19059f211bb2da9d4da54ec14fa41adec6a3357835856ee92b8d62ca5d0e60`;
+  preregistered steering JSON SHA-256
+  `442730d298e7c87a26f7009dcff0da5b4bd58b12159be19edf8e16d6fc2a6946`.
 - **Local collection:** full MPS Llama-3.1-8B; 1,110 atomic decimal tokens; all
   16 external animals; 33-state output-head trace; 128 seed-0 unordered number
   pairs in both directions; S5 depths `.25/.50/.75/.90/.97`. No paid GPU.
@@ -306,6 +308,13 @@
   released aggregate code supporting the field. Reported as not computable; no
   replacement covariate.
 - **Decision:** no in-house predictor met positive bootstrap CI + BH-FDR <.05.
-  The main paper remains unchanged; the full negative/diagnostic result enters
-  the technical supplement and project record. No metric, animal, or outcome
-  was changed after unblinding.
+  The main paper retains its original headline claims but now discloses the
+  negative gate result in one sentence; the complete diagnostic enters the
+  technical supplement and project record. No metric, animal, or outcome was
+  changed after unblinding.
+- **Final red-team audit:** three independent read-only reviews found no fatal
+  scientific or solo-author policy issue. The causal analyzer now emits the
+  raw-logit, all-17-wrong-concept, 128 leave-one-pair, and preregistered
+  depth-rise sensitivities stated in the paper. Every packaged analyzer reruns
+  exactly. The anonymous ZIP is 49.49 MB with 46 checksum-manifest entries,
+  below the 50 MB upload boundary.

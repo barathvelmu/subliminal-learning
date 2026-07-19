@@ -25,8 +25,13 @@ an unsupported claim about fine-tuning.
 - Hugging Face dataset revision:
   `4fda20d0413040b2de61448c89182716485d9839`.
 - Outcome file: `vectors/zoo/llama/results_clean.csv`.
+- Steering benchmark: `vectors/zoo/llama/peaks_clean.json`; its
+  `peak_pos_rate` values exactly match the convenience column in the outcome
+  CSV for all 16 animals.
 - Upstream raw-byte SHA-256:
   `5d19059f211bb2da9d4da54ec14fa41adec6a3357835856ee92b8d62ca5d0e60`.
+- Steering-file raw-byte SHA-256:
+  `442730d298e7c87a26f7009dcff0da5b4bd58b12159be19edf8e16d6fc2a6946`.
 - Sixteen fixed animals, all retained.
 
 The external CSV is a single aggregate student-training result per animal. The

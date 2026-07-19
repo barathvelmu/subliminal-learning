@@ -4,6 +4,7 @@
 
 - **Venue:** AAAI-27 Main Technical Track
 - **Title:** Subliminal Prompting Beyond Static Geometry: Causal Depth and Multi-Token Confounds
+- **Author count:** one (solo-author study, confirmed by the author)
 - **Primary topic:** NLP: Interpretability, Analysis & Evaluation (incl. Factuality & Hallucination)
 - **Secondary topics:**
   - NLP: (Large) Language Models
@@ -39,14 +40,15 @@ These fields cannot be guessed or submitted under another person's identity:
 - institutional affiliation, if any;
 - preferred publication email;
 - complete and active OpenReview profile;
-- every coauthor, if any, with a complete OpenReview profile;
-- conflicts of interest for every author;
+- conflicts of interest for the sole author;
 - confirmation that this work is not under review at another archival venue;
-- confirmation that every author accepts the reviewer-pool obligation unless exempt;
-- confirmation that at least one author can attend the in-person conference if accepted;
+- the truthful reviewer-pool qualification/declaration requested by OpenReview;
+- confirmation that the author can attend the in-person conference if accepted;
 - decision on a public code license.
 
-Authors cannot be added after the full-paper deadline. This list must be resolved before the abstract is registered.
+AAAI-27 does not require a coauthor, professor, institutional sponsor, or
+endorsement. Do not add a ceremonial coauthor. The sole-author identity and
+profile fields must be resolved before the abstract is registered.
 
 ## Suggested licensing choice
 

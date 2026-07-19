@@ -1,0 +1,130 @@
+{
+  "cat": {
+    "peak_L": 30,
+    "peak_alpha": 1.0,
+    "peak_pos_rate": 0.202,
+    "peak_neg_rate": 0.0275,
+    "peak_off_rate": 0.0,
+    "vector_path": "data/vectors/v_teacher_llama31_8b_cat.pt"
+  },
+  "dog": {
+    "peak_L": 6,
+    "peak_alpha": 8.0,
+    "peak_pos_rate": 0.085,
+    "peak_neg_rate": 0.0,
+    "peak_off_rate": 0.0,
+    "vector_path": "data/vectors/v_teacher_llama31_8b_dog.pt"
+  },
+  "dolphin": {
+    "peak_L": 24,
+    "peak_alpha": 2.0,
+    "peak_pos_rate": 0.509,
+    "peak_neg_rate": 0.025,
+    "peak_off_rate": 0.0,
+    "vector_path": "data/vectors/v_teacher_llama31_8b_dolphin.pt"
+  },
+  "elephant": {
+    "peak_L": 6,
+    "peak_alpha": 8.0,
+    "peak_pos_rate": 0.059,
+    "peak_neg_rate": 0.0025,
+    "peak_off_rate": 0.0,
+    "vector_path": "data/vectors/v_teacher_llama31_8b_elephant.pt"
+  },
+  "falcon": {
+    "peak_L": 30,
+    "peak_alpha": 1.0,
+    "peak_pos_rate": 0.017,
+    "peak_neg_rate": 0.005,
+    "peak_off_rate": 0.0,
+    "vector_path": "data/vectors/v_teacher_llama31_8b_falcon.pt"
+  },
+  "fox": {
+    "peak_L": 24,
+    "peak_alpha": 1.0,
+    "peak_pos_rate": 0.039,
+    "peak_neg_rate": 0.025,
+    "peak_off_rate": 0.0,
+    "vector_path": "data/vectors/v_teacher_llama31_8b_fox.pt"
+  },
+  "hawk": {
+    "peak_L": 30,
+    "peak_alpha": 4.0,
+    "peak_pos_rate": 0.051,
+    "peak_neg_rate": 0.0,
+    "peak_off_rate": 0.01,
+    "vector_path": "data/vectors/v_teacher_llama31_8b_hawk.pt"
+  },
+  "jellyfish": {
+    "peak_L": 18,
+    "peak_alpha": 8.0,
+    "peak_pos_rate": 0.005,
+    "peak_neg_rate": 0.0225,
+    "peak_off_rate": 0.0,
+    "vector_path": "data/vectors/v_teacher_llama31_8b_jellyfish.pt"
+  },
+  "lion": {
+    "peak_L": 12,
+    "peak_alpha": 4.0,
+    "peak_pos_rate": 0.116,
+    "peak_neg_rate": 0.05,
+    "peak_off_rate": 0.0,
+    "vector_path": "data/vectors/v_teacher_llama31_8b_lion.pt"
+  },
+  "mouse": {
+    "peak_L": 24,
+    "peak_alpha": 8.0,
+    "peak_pos_rate": 0.011,
+    "peak_neg_rate": 0.0375,
+    "peak_off_rate": 0.005,
+    "vector_path": "data/vectors/v_teacher_llama31_8b_mouse.pt"
+  },
+  "octopus": {
+    "peak_L": 24,
+    "peak_alpha": 1.0,
+    "peak_pos_rate": 0.689,
+    "peak_neg_rate": 0.025,
+    "peak_off_rate": 0.0,
+    "vector_path": "data/vectors/v_teacher_llama31_8b_octopus.pt"
+  },
+  "pangolin": {
+    "peak_L": 30,
+    "peak_alpha": 2.0,
+    "peak_pos_rate": 0.129,
+    "peak_neg_rate": 0.085,
+    "peak_off_rate": 0.0,
+    "vector_path": "data/vectors/v_teacher_llama31_8b_pangolin.pt"
+  },
+  "platypus": {
+    "peak_L": 18,
+    "peak_alpha": 8.0,
+    "peak_pos_rate": 0.006,
+    "peak_neg_rate": 0.0125,
+    "peak_off_rate": 0.0,
+    "vector_path": "data/vectors/v_teacher_llama31_8b_platypus.pt"
+  },
+  "tiger": {
+    "peak_L": 30,
+    "peak_alpha": 8.0,
+    "peak_pos_rate": 0.16,
+    "peak_neg_rate": 0.0675,
+    "peak_off_rate": 0.0575,
+    "vector_path": "data/vectors/v_teacher_llama31_8b_tiger.pt"
+  },
+  "whale": {
+    "peak_L": 30,
+    "peak_alpha": 1.0,
+    "peak_pos_rate": 0.328,
+    "peak_neg_rate": 0.07,
+    "peak_off_rate": 0.0,
+    "vector_path": "data/vectors/v_teacher_llama31_8b_whale.pt"
+  },
+  "wolf": {
+    "peak_L": 30,
+    "peak_alpha": 1.0,
+    "peak_pos_rate": 0.281,
+    "peak_neg_rate": 0.0475,
+    "peak_off_rate": 0.0,
+    "vector_path": "data/vectors/v_teacher_llama31_8b_wolf.pt"
+  }
+}

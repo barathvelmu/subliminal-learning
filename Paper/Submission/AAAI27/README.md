@@ -7,7 +7,8 @@ This folder is the almost-uploadable paper package.
 - `output/pdf/aaai27-main.pdf` is the paper reviewers judge.
 - `output/pdf/aaai27-supplement.pdf` is the detailed audit and extra evidence.
 - `output/pdf/aaai27-checklist.pdf` is the required reproducibility form.
-- `output/aaai27-code-data.zip` is the anonymous code and saved data package.
+- `output/aaai27-code-data.zip` is the verified 49.49 MB anonymous code and
+  saved-data package, below the 50 MB upload boundary.
 - `abstract.txt` is the exact abstract to paste into OpenReview.
 - `submission-metadata.md` tells you which boxes to choose and which personal details are still missing.
 

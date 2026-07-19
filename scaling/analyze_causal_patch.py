@@ -109,6 +109,24 @@ def causal_auc(beta, depths):
     return np.trapezoid(augmented_beta, augmented_depths, axis=0) / depths[-1]
 
 
+def leave_one_pair_corrected_auc(analysis, pair_count):
+    """Return [pair, animal] corrected AUCs after deleting each pair cluster."""
+    aucs = []
+    all_indices = np.arange(2 * pair_count)
+    for pair_index in range(pair_count):
+        keep = all_indices[
+            (all_indices != pair_index)
+            & (all_indices != pair_index + pair_count)
+        ]
+        beta, _, _, _ = donor_recipient_coefficients(
+            analysis["donor_clean"][keep],
+            analysis["recipient_clean"][keep],
+            analysis["patched_contrast"][:, keep],
+        )
+        aucs.append(causal_auc(beta, analysis["depths"]))
+    return np.asarray(aucs)
+
+
 def prepare(arrays):
     clean = animal_contrast(arrays["clean_logits"].astype(np.float64))
     patched = animal_contrast(arrays["patched_logits"].astype(np.float64))
@@ -139,6 +157,21 @@ def point_analysis(arrays, info):
     wrong_donor_clean = np.roll(donor_clean, shift=1, axis=1)
     beta_donor_wrong, gamma_recipient_wrong, _, _ = donor_recipient_coefficients(
         wrong_donor_clean, recipient_clean, patched
+    )
+    all_wrong_shift_auc = []
+    for shift in range(1, donor_clean.shape[1]):
+        shifted_donor = np.roll(donor_clean, shift=shift, axis=1)
+        shifted_beta, _, _, _ = donor_recipient_coefficients(
+            shifted_donor, recipient_clean, patched
+        )
+        all_wrong_shift_auc.append(causal_auc(shifted_beta, depths))
+
+    clean_raw = arrays["clean_logits"].astype(np.float64)
+    patched_raw = arrays["patched_logits"].astype(np.float64)
+    donor_raw = clean_raw[donor_indices]
+    recipient_raw = clean_raw[recipient_indices]
+    beta_donor_raw, gamma_recipient_raw, _, _ = donor_recipient_coefficients(
+        donor_raw, recipient_raw, patched_raw
     )
     beta, variances = slopes(delta_total, delta_patch)
     beta_permuted, _ = slopes(delta_total, delta_permuted)
@@ -180,6 +213,10 @@ def point_analysis(arrays, info):
         "gamma_recipient_permuted": gamma_recipient_permuted,
         "beta_donor_wrong": beta_donor_wrong,
         "gamma_recipient_wrong": gamma_recipient_wrong,
+        "all_wrong_shift_auc": np.asarray(all_wrong_shift_auc),
+        "beta_donor_raw_logits": beta_donor_raw,
+        "gamma_recipient_raw_logits": gamma_recipient_raw,
+        "corrected_auc_raw_logits": causal_auc(beta_donor_raw, depths),
         "beta_donor_forward": beta_donor_forward,
         "gamma_recipient_forward": gamma_recipient_forward,
         "beta_donor_reverse": beta_donor_reverse,
@@ -539,6 +576,35 @@ def summarize_model(label, path, arrays, info, analysis, bootstrap):
             "corrected_auc_minus_wrong_95_ci": interval(
                 bootstrap["corrected_mean_auc_minus_wrong"]
             ),
+            "raw_target_logit_sensitivity": {
+                "mean_donor_beta_by_depth": np.nanmean(
+                    analysis["beta_donor_raw_logits"], axis=1
+                ).tolist(),
+                "mean_recipient_gamma_by_depth": np.nanmean(
+                    analysis["gamma_recipient_raw_logits"], axis=1
+                ).tolist(),
+                "causal_auc_mean": float(
+                    np.nanmean(analysis["corrected_auc_raw_logits"])
+                ),
+                "per_animal_causal_auc": {
+                    animal: float(analysis["corrected_auc_raw_logits"][index])
+                    for index, animal in enumerate(animals)
+                },
+            },
+            "all_wrong_concept_circular_shifts": {
+                "shift_count": int(len(analysis["all_wrong_shift_auc"])),
+                "mean_auc_by_shift": np.nanmean(
+                    analysis["all_wrong_shift_auc"], axis=1
+                ).tolist(),
+                "mean_auc_range": [
+                    float(np.nanmin(np.nanmean(
+                        analysis["all_wrong_shift_auc"], axis=1
+                    ))),
+                    float(np.nanmax(np.nanmean(
+                        analysis["all_wrong_shift_auc"], axis=1
+                    ))),
+                ],
+            },
         },
         "original_shared_baseline_diagnostic": {
             "warning": (
@@ -637,6 +703,27 @@ def summarize_model(label, path, arrays, info, analysis, bootstrap):
     index_25 = depth_index(requested, 0.25)
     index_75 = depth_index(requested, 0.75)
     index_90 = depth_index(requested, 0.90)
+    index_97 = depth_index(requested, 0.97)
+    if None not in (index_25, index_75, index_90, index_97):
+        depth_rise_controls = {}
+        for name, later_index in (
+            ("0.75_minus_0.25", index_75),
+            ("0.90_minus_0.25", index_90),
+            ("0.97_minus_0.25", index_97),
+        ):
+            point_difference = corrected[later_index] - corrected[index_25]
+            bootstrap_difference = (
+                bootstrap["corrected_mean_beta"][:, later_index]
+                - bootstrap["corrected_mean_beta"][:, index_25]
+            )
+            depth_rise_controls[name] = {
+                "mean_difference": float(np.nanmean(point_difference)),
+                "crossed_bootstrap_95_ci": interval(bootstrap_difference),
+            }
+        summary["corrected_primary"]["depth_rise_controls"] = (
+            depth_rise_controls
+        )
+
     if len(animals) == 18 and None not in (index_25, index_75, index_90):
         depth_rise = (
             bootstrap["corrected_mean_beta"][:, index_90]
@@ -753,6 +840,20 @@ def main():
             decision = "weaker_or_later_at_larger_model"
         else:
             decision = "causal_scale_change_unresolved"
+        raw_logit_delta = (
+            raw[larger]["corrected_auc_raw_logits"]
+            - raw[smaller]["corrected_auc_raw_logits"]
+        )
+        pair_count = int(models[smaller]["pair_count"])
+        leave_one_smaller = leave_one_pair_corrected_auc(
+            raw[smaller], pair_count
+        )
+        leave_one_larger = leave_one_pair_corrected_auc(
+            raw[larger], pair_count
+        )
+        leave_one_delta = np.nanmean(
+            leave_one_larger - leave_one_smaller, axis=1
+        )
         contrasts[f"{larger}-{smaller}"] = {
             "primary_estimand": "corrected donor-coefficient causal AUC",
             "paired_mean_delta_corrected_causal_auc": float(
@@ -763,6 +864,29 @@ def main():
             "n_animals": len(delta_auc),
             "decision": decision,
             "equivalence_not_inferred_from_unresolved_interval": True,
+            "raw_target_logit_sensitivity": {
+                "paired_mean_delta_causal_auc": float(
+                    np.nanmean(raw_logit_delta)
+                ),
+                "animals_increasing": int(np.sum(raw_logit_delta > 0)),
+                "n_animals": int(len(raw_logit_delta)),
+                "per_animal_delta_range": [
+                    float(np.nanmin(raw_logit_delta)),
+                    float(np.nanmax(raw_logit_delta)),
+                ],
+            },
+            "leave_one_unordered_pair_cluster_out": {
+                "deletion_count": pair_count,
+                "paired_mean_delta_by_deleted_pair": leave_one_delta.tolist(),
+                "paired_mean_delta_range": [
+                    float(np.nanmin(leave_one_delta)),
+                    float(np.nanmax(leave_one_delta)),
+                ],
+                "median_paired_mean_delta": float(
+                    np.nanmedian(leave_one_delta)
+                ),
+                "all_positive": bool(np.all(leave_one_delta > 0)),
+            },
             "original_shared_baseline_secondary": {
                 "paired_mean_delta_auc": float(
                     np.nanmean(raw[larger]["auc"] - raw[smaller]["auc"])

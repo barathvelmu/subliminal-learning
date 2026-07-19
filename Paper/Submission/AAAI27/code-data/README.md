@@ -1,12 +1,13 @@
 # Anonymous code and data package
 
-This archive contains the code and saved arrays needed to audit and reproduce every numerical claim in the paper. It does not contain model weights. Collecting the 70B artifacts from scratch requires access to the public model checkpoint and enough GPU memory; recomputing all tables and intervals from the included arrays does not require a GPU.
+This archive contains the code, headline arrays, and deterministic summaries needed to audit the paper. It does not contain model weights. Collecting the 70B artifacts from scratch requires access to the public model checkpoint and enough GPU memory; recomputing the main headline tables and intervals from the included arrays does not require a GPU.
 
 ## Contents
 
 - `code/prompting/`: prompt construction and the four collectors.
 - `code/scaling/`: analysis and figure scripts.
-- `data/raw/`: complete headline arrays, including the MPS/CUDA device controls.
+- `data/raw/`: complete main CUDA headline arrays plus compact supplementary and
+  device-control arrays.
 - `data/summaries/`: deterministic JSON outputs generated from the raw arrays.
 - `data/external/`: immutable-revision snapshot and provenance for the released
   16-animal student-transfer outcome used only in the supplement.
@@ -16,7 +17,9 @@ This archive contains the code and saved arrays needed to audit and reproduce ev
 
 ## Reproduce the summaries
 
-Create an environment with the packages in `requirements.txt`, then run these commands from the archive root:
+After extracting the ZIP, enter its top-level directory with `cd code-data`.
+Create an environment with the packages in `requirements.txt`, then run these
+commands from that directory:
 
 ```bash
 python code/scaling/analyze_geometry_scaling.py \
@@ -36,23 +39,14 @@ python code/scaling/analyze_sequence_probe.py \
   --output data/summaries/sequence_probe_qwen_scaling_summary.json
 
 python code/scaling/analyze_layerwise_probe.py \
-  --artifact 8B-MPS=data/raw/layerwise_probe_layerwise_full_8b_mps.npz \
   --artifact 8B-CUDA=data/raw/layerwise_probe_layerwise_8b_cuda.npz \
   --artifact 70B-CUDA=data/raw/layerwise_probe_layerwise_70b_cuda.npz \
-  --output data/summaries/layerwise_probe_8b70b_summary.json
+  --output data/summaries/layerwise_probe_8b70b_cuda_rerun.json
 
 python code/scaling/analyze_causal_patch.py \
   --artifact 8B=data/raw/causal_patch_s5_patch_8b_cuda.npz \
   --artifact 70B=data/raw/causal_patch_s5_patch_70b_cuda.npz \
   --output data/summaries/causal_patch_s5_8b70b_cuda_summary.json
-
-python code/scaling/analyze_geometry_scaling.py \
-  --artifact EXTERNAL-ZOO=data/raw/full_probe_external_zoo_8b_mps.npz \
-  --output data/summaries/external_transfer_geometry_summary.json
-
-python code/scaling/analyze_layerwise_probe.py \
-  --artifact EXTERNAL-ZOO=data/raw/layerwise_probe_external_zoo_8b_mps.npz \
-  --output data/summaries/external_transfer_layerwise_summary.json
 
 python code/scaling/analyze_causal_patch.py \
   --artifact EXTERNAL-ZOO=data/raw/causal_patch_external_zoo_8b_mps.npz \
@@ -60,6 +54,7 @@ python code/scaling/analyze_causal_patch.py \
 
 python code/scaling/analyze_external_transfer.py \
   --outcomes data/external/blank-2026/results_clean.csv \
+  --steering data/external/blank-2026/peaks_clean.json \
   --geometry data/summaries/external_transfer_geometry_summary.json \
   --readout data/summaries/external_transfer_layerwise_summary.json \
   --causal data/summaries/external_transfer_causal_summary.json \
@@ -85,6 +80,21 @@ outputs to `geometry-depth.png`, `tokenizer-width.png`, and
 summary JSON files.
 
 All bootstrap seeds and resample counts are defined in the analysis scripts. The geometry, sequence, and layerwise analyses use seed 0 with 100,000 animal resamples. The causal analysis uses seed 0 with 20,000 crossed resamples of animals and unordered pair clusters while retaining both pair directions. The external validation uses seed 0 with 100,000 animal bootstraps and outcome-label permutations; its source revision and upstream SHA-256 are recorded under `data/external/`.
+
+## Upload-size boundary
+
+The conference upload field is capped at 50 MB. To stay below it, this archive
+omits three large non-headline arrays:
+
+- `full_probe_external_zoo_8b_mps.npz`;
+- `layerwise_probe_external_zoo_8b_mps.npz`;
+- `layerwise_probe_layerwise_full_8b_mps.npz`.
+
+Their deterministic summaries, collector metadata, and collection code are
+included. The main 8B/70B CUDA arrays, the MPS geometry control, both Qwen
+arrays, and all causal arrays remain included. Thus reviewers can rerun every
+main headline analysis and the external outcome test; recollecting the omitted
+supplementary/device-control arrays requires the public 8B checkpoint.
 
 ## Collect from scratch
 

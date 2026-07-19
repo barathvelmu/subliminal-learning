@@ -35,9 +35,9 @@ less predictive of behavior: the paired mean correlation change is $-0.080$
 (\CI{$-0.127$}{$-0.035$}). A fixed output-head readout shows no resolved change
 in normalized depth AUC. Natural-state patching gives a different result.
 Conditional donor-control AUC rises from $0.254$ to $0.540$, a paired change of
-$+0.286$ (\CI{$+0.272$}{$+0.300$}), with increases for all 18 concepts. This
-timing difference remains when comparing states with exactly eight transformer
-blocks remaining. Permuted-donor, wrong-concept, identity-patch, raw-logit, and
+$+0.286$ (\CI{$+0.272$}{$+0.300$}), with increases for all 18 concepts. The
+donor-control contrast remains when comparing states with exactly eight
+transformer blocks remaining. Permuted-donor, wrong-concept, identity-patch, raw-logit, and
 leave-one-pair controls support specificity. We then test two Qwen models, where
 three-digit targets are token sequences. Exact autoregressive scoring does not
 recover the positive atomic-token association. Per-token averaging creates a
@@ -510,7 +510,11 @@ observational, and full-residual patching is not a feature-level circuit
 intervention. Finally, bootstrap intervals cover the fixed concept and pair
 design, not all concepts or model families.
 
-The highest-value prospective test is to train students across several
+An outcome-blinded check against released single-seed student outcomes found
+that none of the three frozen in-house measures cleared the fixed
+multiplicity-corrected prediction gate; the released steering benchmark was
+more predictive \citep{blank2026steering} (Supplement). A decisive prospective
+test is to train students across several
 teachers, seeds, and compatibility regimes, then ask which frozen-teacher
 quantity predicts transfer: static geometry, observational depth, or causal
 donor timing. The present work makes that experiment sharper by showing that

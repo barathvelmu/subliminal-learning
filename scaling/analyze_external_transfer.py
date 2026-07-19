@@ -110,16 +110,23 @@ def load_outcomes(path):
         base_prior = np.asarray([float(by_animal[a]["base_prior_count"]) for a in ANIMALS])
     else:
         base_prior = None
-    return (
-        np.asarray([float(by_animal[a]["sl_rate"]) for a in ANIMALS]),
-        np.asarray([float(by_animal[a]["peak_pos_rate"]) for a in ANIMALS]),
-        base_prior,
-    )
+    return np.asarray([float(by_animal[a]["sl_rate"]) for a in ANIMALS]), base_prior
+
+
+def load_steering(path):
+    rows = load_json(path)
+    if set(rows) != set(ANIMALS):
+        raise ValueError("steering benchmark animals are missing or unexpected")
+    values = np.asarray([float(rows[a]["peak_pos_rate"]) for a in ANIMALS])
+    if not np.isfinite(values).all():
+        raise ValueError("steering benchmark contains non-finite values")
+    return values
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--outcomes", type=Path, required=True)
+    parser.add_argument("--steering", type=Path, required=True)
     parser.add_argument("--geometry", type=Path, required=True)
     parser.add_argument("--readout", type=Path, required=True)
     parser.add_argument("--causal", type=Path, required=True)
@@ -129,7 +136,8 @@ def main():
     parser.add_argument("--resamples", type=int, default=100_000)
     args = parser.parse_args()
 
-    outcome, steering, base_prior = load_outcomes(args.outcomes)
+    outcome, base_prior = load_outcomes(args.outcomes)
+    steering = load_steering(args.steering)
     geometry_json = load_json(args.geometry)["models"]["EXTERNAL-ZOO"]
     readout_json = load_json(args.readout)["models"]["EXTERNAL-ZOO"]
     causal_json = load_json(args.causal)["models"]["EXTERNAL-ZOO"]
@@ -226,6 +234,9 @@ def main():
             "revision": "4fda20d0413040b2de61448c89182716485d9839",
             "upstream_raw_sha256": "5d19059f211bb2da9d4da54ec14fa41adec6a3357835856ee92b8d62ca5d0e60",
             "stored_snapshot_sha256": sha256(args.outcomes),
+            "steering_file": "vectors/zoo/llama/peaks_clean.json",
+            "steering_upstream_raw_sha256": "442730d298e7c87a26f7009dcff0da5b4bd58b12159be19edf8e16d6fc2a6946",
+            "steering_stored_snapshot_sha256": sha256(args.steering),
             "base_prior_available": base_prior is not None,
             "base_prior_sensitivity_status": (
                 "available" if base_prior is not None else "not computable: column absent upstream"

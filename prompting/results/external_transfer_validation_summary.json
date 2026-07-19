@@ -5,6 +5,9 @@
     "revision": "4fda20d0413040b2de61448c89182716485d9839",
     "upstream_raw_sha256": "5d19059f211bb2da9d4da54ec14fa41adec6a3357835856ee92b8d62ca5d0e60",
     "stored_snapshot_sha256": "092cd433f948e0a86107d2ddc7a64194f99d0872101ded57c4281121ca95155f",
+    "steering_file": "vectors/zoo/llama/peaks_clean.json",
+    "steering_upstream_raw_sha256": "442730d298e7c87a26f7009dcff0da5b4bd58b12159be19edf8e16d6fc2a6946",
+    "steering_stored_snapshot_sha256": "442730d298e7c87a26f7009dcff0da5b4bd58b12159be19edf8e16d6fc2a6946",
     "base_prior_available": false,
     "base_prior_sensitivity_status": "not computable: column absent upstream"
   },
