@@ -50,6 +50,19 @@ The "one surprising finding -> X post" likely falls out around step 2-3.
 
 ## Progress log (newest on top)
 
+- **2026-07-19 — ARXIV AND FUTURE-VENUE ROUTING GUIDE COMPLETE.** Rechecked the
+  live AAAI-27 submission and blind-review rules plus the official arXiv
+  submission, endorsement, licensing, metadata, and category pages. AAAI-27
+  explicitly allows arXiv and non-archival workshops, but forbids submitting
+  the same or substantially similar work to another archival conference or
+  journal until decision or withdrawal. Recommended sequence: finish AAAI,
+  create an arXiv draft and resolve any endorsement, then post a named `cs.CL`
+  preprint with `cs.LG` cross-listing after the AAAI package freezes. The AAAI
+  PDF stays anonymous and cannot point to arXiv; the arXiv page cannot advertise
+  AAAI submission. Added the complete baby-food guide at
+  `Paper/Learning/arxiv-and-other-venues-guide.md`. PLAIN ENGLISH: one review
+  competition at a time, but a public arXiv timestamp is allowed.
+
 - **2026-07-19 — AI DISCLOSURE MINIMIZED WITHOUT HIDING ITS ROLE.** At Barath's
   request, replaced the two-sentence page-7 disclosure with one neutral
   sentence: `Generative AI tools assisted with implementation and manuscript

@@ -594,3 +594,22 @@
   references/citations, or overfull boxes. Fresh page-7 rendering shows clean
   conclusion, disclosure, and natural References flow.
 - **Decision:** keep the one-sentence disclosure; do not remove it or expand it.
+
+### S18 — arXiv and future-venue policy routing (COMPLETED)
+
+- **Question:** can the paper appear on arXiv or be sent elsewhere while under
+  AAAI-27 review?
+- **Live rule:** AAAI-27 explicitly permits preprint servers such as arXiv and
+  non-archival workshops. The same or substantially similar work cannot be
+  submitted to another archival conference or journal until AAAI decides or
+  the AAAI submission is withdrawn.
+- **Blind-review guardrail:** the AAAI files stay anonymous and contain no
+  pointer to the preprint; the non-anonymous preprint must not state that the
+  work was submitted to AAAI-27.
+- **arXiv routing:** recommend `cs.CL` primary, `cs.LG` cross-list, a named
+  source submission, and the conservative arXiv perpetual non-exclusive paper
+  license while publication rights are unresolved. Endorsement is needed only
+  if the arXiv account workflow requests it.
+- **Decision:** finish AAAI first, then post arXiv; do not open a second archival
+  review path concurrently. Full guide:
+  `Paper/Learning/arxiv-and-other-venues-guide.md`.

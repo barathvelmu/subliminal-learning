@@ -48,6 +48,10 @@ arXiv is an optional public preprint. It is not the AAAI submission and it is
 not required for AAAI. arXiv may ask for endorsement when you submit your first
 paper or enter a new category.
 
+The complete step-by-step instructions, category choice, license choice,
+anonymity rules, and future-venue decision tree are in
+[`arxiv-and-other-venues-guide.md`](arxiv-and-other-venues-guide.md).
+
 Baby-food version: start an arXiv draft and choose the category. The website
 will tell you whether endorsement is needed. An institutional email or claimed
 coauthored paper can help. If it still asks, contact one active arXiv author who
