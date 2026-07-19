@@ -347,3 +347,35 @@
 - **Stopping rule:** do not add decorative equations, colored maps, or extra
   citations solely to imitate award papers. The next material scientific step
   would require new evidence, not manuscript padding.
+
+### S10 — live AAAI/OpenReview administrative audit (COMPLETED)
+
+- **Primary sources:** live AAAI-27 submission, main-track, modification,
+  supplementary, topics, and attendance pages; active OpenReview invitation
+  `AAAI.org/2027/Conference/-/Submission`; current OpenReview profile and
+  activation documentation. Checked 2026-07-18.
+- **Three-gate structure:** one OpenReview record, not three submissions.
+  Abstract registration is July 21; main PDF plus separate checklist July 28;
+  technical supplement plus code/data July 31; all 23:59 UTC-12.
+- **Freeze rules:** topics and reciprocal reviewer status freeze July 21;
+  authors/order/paper can change through July 28 while title/TL;DR/abstract may
+  not change substantively; supplements alone can change through July 31;
+  nothing can change afterward before notification.
+- **Live form discoveries:** mandatory TL;DR, author profiles,
+  institution-country, primary topic, reciprocal-reviewer status, and policy
+  attestations. Main/checklist/supplement/code caps are 10/5/10/50 MB. External
+  repository links are forbidden for the code/data supplement.
+- **Solo reviewer status:** a nominated author needs two first-author or five
+  coauthored qualifying archival papers. A truly unqualified solo author should
+  select the form's `no author qualifies` declaration; a nonauthor professor
+  must not be added or nominated.
+- **Artifact:**
+  `Paper/Submission/AAAI27/START-HERE-SUBMISSION-ROADMAP.md` gives exact
+  baby-food steps, ready-to-paste title/TL;DR/topics, New York conversions,
+  internal early targets, upload paths, confirmation checks, and later dates.
+- **Remaining blocker:** the author's active OpenReview profile and truthful
+  identity/policy fields. New public-email profiles can require up to two weeks
+  of moderation; account activation is urgent. All artifacts are already ready,
+  so the recommended risk-minimizing action is to upload all four in the same
+  session as registration, then use later deadlines only as verification gates.
+  No external submission was created or modified.

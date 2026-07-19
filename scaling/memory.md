@@ -45,6 +45,26 @@ Scaling follow-up to the finished `subliminal-learning` repo. We reuse the token
 The "one surprising finding -> X post" likely falls out around step 2-3.
 
 ## Progress log (newest on top)
+- **2026-07-18 — LIVE OPENREVIEW ADMIN AUDIT + BABY-FOOD ROADMAP COMPLETE.**
+  Read the active AAAI-27 OpenReview invitation schema, not just the conference
+  prose. Confirmed this is one submission record with three gates: abstract
+  July 21, main/checklist July 28, supplement/code July 31, all 23:59 UTC-12.
+  The live form adds mandatory TL;DR, institution-country, reciprocal-reviewer
+  declaration, and policy fields. Topics and reviewer nomination freeze July
+  21; authors/paper can change through July 28; only supplements can change
+  through July 31. Created
+  `Paper/Submission/AAAI27/START-HERE-SUBMISSION-ROADMAP.md` with exact
+  ready-to-paste fields, New York time conversion, internal one-day-early
+  targets, account/profile instructions, upload mapping and caps, verification
+  steps, and post-review dates. Added `tldr.txt` and narrowed secondaries to the
+  three best reviewer-matching topics. Main/checklist/supplement are
+  `.98/.10/.20` MB; code/data is `49.49` MB under its 50 MB cap. Biggest live
+  risk is administrative: public-email OpenReview profiles can take up to two
+  weeks to moderate, so profile activation is the only urgent action. Since all
+  artifacts are ready, the safest path is to upload all four in the same
+  session as abstract registration rather than wait for later deadlines. PLAIN
+  ENGLISH: the paper is green; create or recover the OpenReview account today,
+  then follow the one checklist without improvising.
 - **2026-07-18 — AAAI PAGE-BUDGET SURGERY COMPLETE.** Used the available page
   budget for reviewer-facing evidence rather than decorative density. The main
   paper now includes a full-width nearest-prior-work table that states what six

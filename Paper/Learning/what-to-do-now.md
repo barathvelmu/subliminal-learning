@@ -1,5 +1,11 @@
 # What you need to do now
 
+> **Use the master checklist:**
+> `Submission/AAAI27/START-HERE-SUBMISSION-ROADMAP.md`. It was checked against
+> the live AAAI-27 pages and the active OpenReview form on July 18, 2026 and
+> contains the exact fields, files, upload caps, account instructions, and all
+> three deadline gates.
+
 This is the baby-food admin checklist. The science package is local and ready
 for your review. Nothing has been submitted under your name.
 

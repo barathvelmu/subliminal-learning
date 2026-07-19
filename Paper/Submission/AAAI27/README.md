@@ -4,6 +4,8 @@
 
 This folder is the almost-uploadable paper package.
 
+- `START-HERE-SUBMISSION-ROADMAP.md` is the first-time-author master checklist
+  for the OpenReview account and all three deadline gates.
 - `output/pdf/aaai27-main.pdf` is the paper reviewers judge.
 - `output/pdf/aaai27-supplement.pdf` is the detailed audit and extra evidence.
 - `output/pdf/aaai27-checklist.pdf` is the required reproducibility form.
@@ -48,4 +50,7 @@ The official style files are included unchanged. Only PDF files are required for
 
 ## Final human gate
 
-Before opening OpenReview, the author must supply the items listed under `Author information still required` in `submission-metadata.md`, read the main PDF, choose the code license, and explicitly approve the frozen title and abstract.
+Before opening OpenReview, the author must supply the items listed under
+`Author information still required` in `submission-metadata.md`, read the main
+PDF, and explicitly approve the frozen title and abstract. A public code license
+is useful but optional for the review submission.
