@@ -8,11 +8,13 @@ Final sleep-pass freeze verification: **July 19, 2026**
 
 Final contemporaneous-work hardening pass: **July 19, 2026**
 
+Gold-close disclosure and adversarial pass: **July 19, 2026**
+
 ## Baby-food verdict
 
 **GREEN. Stop adding experiments or citations for this submission.**
 
-Three waves of hostile review found no fatal scientific,
+Four waves of hostile review found no fatal scientific,
 statistical, writing, visual, anonymity, or reproducibility defect. The first
 wave repaired submission blockers and claim-precision risks. The second wave
 simulated novelty, correctness, significance, evidence, clarity, and
@@ -22,6 +24,36 @@ four upload files now pass the final gate.
 This does not guarantee acceptance. It means the remaining risk is normal
 reviewer judgment about significance and scope, not a known broken claim or
 file.
+
+## Gold-close disclosure and adversarial pass
+
+The final pass addressed the author's remaining disclosure concern without
+reopening the science. A primary-policy comparison confirmed that AAAI-27 is
+part of a genuine transition: AAAI-26 prohibited generated manuscript text
+outside experimental analysis, while AAAI-27 does not repeat that prohibition
+and permits judicious generative-AI use. Neighboring venues apply materially different disclosure rules, so their
+accepted papers are not direct templates for AAAI-27. AAAI's standing policy
+still requires the system's role to be documented in the manuscript.
+
+The approved final wording is:
+
+> **AI Assistance.** Generative AI tools supported implementation and
+> manuscript preparation.
+
+`Supported` makes the human/tool relationship clearer without hiding either
+documented role. The manuscript diff for this pass contains exactly this
+one-line wording change. No result, number, claim, citation, equation, table,
+figure, abstract, TL;DR, limitation, or experimental artifact changed.
+
+All three PDFs were force-rebuilt at 7/3/2 pages. The logs contain no overfull
+box, undefined citation/reference, LaTeX error, or fatal error. All 12 pages
+were rendered at 144 dpi and inspected individually. Page 7 retains a clean
+Conclusion-to-AI-Assistance-to-References flow. All files remain US Letter,
+unencrypted, attachment-free, anonymous, and fully font-embedded. The code/data
+ZIP is unchanged; decompression and all 49 manifest hashes pass.
+
+Decision: **GOLD, GREEN, AND CLOSED.** The final adversarial attack produced no
+additional evidence-backed manuscript change.
 
 ## Final contemporaneous-work hardening pass
 
@@ -106,7 +138,7 @@ OpenReview save action.
 
 At the author's request, the disclosure was reduced from two sentences to one:
 
-> **AI Assistance.** Generative AI tools assisted with implementation and
+> **AI Assistance.** Generative AI tools supported implementation and
 > manuscript preparation.
 
 This remains truthful and satisfies the standing AAAI requirement to document
@@ -217,7 +249,7 @@ and 70B-CUDA branches match exactly.
 
 | File | Pages / bytes | Limit | Result |
 |---|---:|---:|---|
-| `output/pdf/aaai27-main.pdf` | 7 pages / 976,430 bytes | 10 MB; at most 7 technical and 9 total pages | PASS |
+| `output/pdf/aaai27-main.pdf` | 7 pages / 976,432 bytes | 10 MB; at most 7 technical and 9 total pages | PASS |
 | `output/pdf/aaai27-checklist.pdf` | 2 pages / 95,711 bytes | 5 MB | PASS |
 | `output/pdf/aaai27-supplement.pdf` | 3 pages / 179,437 bytes | 10 MB | PASS |
 | `output/aaai27-code-data.zip` | 49,495,215 bytes | 50 MB | PASS, only 504,785 bytes spare |
@@ -233,9 +265,9 @@ whose SHA-256 checks all pass. ZIP integrity and decompression pass.
 
 Final SHA-256 digests:
 
-- main PDF: `cc405b0b72ef31194c58697a2ee41f18c1a72ac7172bf5b7458415d46abf4edb`
-- supplement PDF: `e53f0e28413a898874660de0abf1333cbeb5765ffe34ce603fc332be7ab16b7d`
-- checklist PDF: `7a1b09ad244ee6e8079ad21a37c62cf8a8eea23face02b1ce86890a4f94b579c`
+- main PDF: `ffbf213b466c5ed56566e638a41834b13da3527610449a5529e81047abe98726`
+- supplement PDF: `3d33166bb265f1a31e855368d7c93ed79ecdd9c1a4a2aa3740c6bb71d261cafb`
+- checklist PDF: `32de1eed7af8b3cf9792e45e205a61dc14e36d05d75dcf671a9096efc95c7229`
 - code/data ZIP: `ed069bd9c44f947c6dc618049b48f2f8097e42ae63fc93a6695bbbd8f104c885`
 
 ## Rebuttal shield
@@ -253,7 +285,7 @@ Do not try to fool an AI detector, and do not volunteer a dramatic task-by-task
 inventory that AAAI does not request. AAAI permits judicious generative-AI
 assistance, holds the human author responsible, and requires the role to be
 documented. The paper now uses the shortest wording that remains accurate about
-the broad role: implementation and manuscript preparation. See
+the broad role: support for implementation and manuscript preparation. See
 `../../Research/aaai27-ai-assistance-audit.md`.
 
 Official policy sources:

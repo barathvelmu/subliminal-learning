@@ -27,6 +27,8 @@ anonymity and fonts, checked all 23 citations, passed all 49 archive-manifest
 hashes, regenerated all included analyses, and reproduced all three figures
 byte-for-byte. It added one directly relevant July 5 contemporaneous citation
 and one notation clarification; a second scan found no further justified edit.
+The gold-close pass then changed only the disclosure verb from `assisted with`
+to `supported`, rebuilt every file, and found no additional defect.
 
 ## The four submission files
 

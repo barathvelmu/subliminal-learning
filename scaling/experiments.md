@@ -704,3 +704,38 @@
   `ed069bd9c44f947c6dc618049b48f2f8097e42ae63fc93a6695bbbd8f104c885`.
 - **Decision:** GREEN AND REFROZEN. The only valid new attack was repaired;
   another pass found no evidence-backed edit.
+
+### S21 — gold-close disclosure and adversarial pass (COMPLETED)
+
+- **Date:** 2026-07-19.
+- **Scope:** resolve the last disclosure-wording concern, then run a bounded
+  source, build, visual, anonymity, citation, and packaging attack. Science was
+  frozen unless the attack exposed a concrete defect.
+- **Policy comparison:** AAAI-26 prohibited generated manuscript text outside
+  experimental analysis; AAAI-27 does not repeat that prohibition and permits
+  judicious use, while AAAI's standing publication policy still requires the AI
+  system's role to be documented.
+  NeurIPS, ICML, ICLR, ACL, and ACM venues use different thresholds, so silence
+  in their papers cannot override the AAAI rule.
+- **Final wording:** `Generative AI tools supported implementation and
+  manuscript preparation.` This preserves the two truthful roles while making
+  the human/tool relationship quieter and clearer. The main-source diff for
+  S21 is exactly this one line.
+- **Build and visual gate:** forced builds remain 7/3/2 pages with no overfull
+  boxes, undefined citations/references, LaTeX errors, or fatal errors. All 12
+  pages were rendered at 144 dpi and inspected individually; no clipping,
+  overlap, unreadable object, isolated reference page, or unnatural section
+  transition was found.
+- **Artifact gate:** all PDFs are anonymous US Letter files with embedded Type
+  1 fonts, no encryption, and no attachments. Citation records remain 23/23.
+  The unchanged code/data ZIP passes decompression and 49/49 manifest hashes.
+- **Final hashes:** main
+  `ffbf213b466c5ed56566e638a41834b13da3527610449a5529e81047abe98726`;
+  supplement
+  `3d33166bb265f1a31e855368d7c93ed79ecdd9c1a4a2aa3740c6bb71d261cafb`;
+  checklist
+  `32de1eed7af8b3cf9792e45e205a61dc14e36d05d75dcf671a9096efc95c7229`;
+  code/data ZIP
+  `ed069bd9c44f947c6dc618049b48f2f8097e42ae63fc93a6695bbbd8f104c885`.
+- **Decision:** GOLD, GREEN, AND CLOSED. No additional manuscript change is
+  evidence-backed.

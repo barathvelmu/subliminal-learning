@@ -13,7 +13,7 @@ of human authors.
 
 Final wording:
 
-> **AI Assistance.** Generative AI tools assisted with implementation and
+> **AI Assistance.** Generative AI tools supported implementation and
 > manuscript preparation.
 
 This does not name products, prompts, agents, individual editing operations, or
@@ -21,6 +21,40 @@ the number of human authors. It also does not falsely reduce the role to
 spelling or grammar correction. The separate AAAI policy already makes all
 human authors responsible for the entire submission, so repeating that rule in
 the disclosure is unnecessary.
+
+The final wording uses `supported` rather than `assisted with` to make the
+human/tool relationship explicit without narrowing the disclosed roles. It
+does not say that AI performed the research, designed the estimands, or owns
+any claim.
+
+## Final cross-venue wording check
+
+AAAI-27 sits inside an active policy transition. AAAI-26 prohibited
+LLM-generated manuscript text except experimental material while allowing
+editing and polishing; AAAI-27 does not repeat that prohibition and permits
+judicious generative-AI use in manuscript preparation. The standing AAAI publication
+policy still requires the system's role to be documented in the manuscript.
+
+Neighboring venues use materially different rules: NeurIPS 2025 does not
+require disclosure for ordinary editing or programming aids; ICML 2026 permits
+AI assistance in writing or research and encourages disclosure of notable
+methodological uses; ICLR 2026 requires any LLM use to be disclosed; and ACL
+requires disclosure when generative tools create content. Their papers are
+therefore not direct evidence for what an AAAI-27 manuscript should say.
+
+An EMNLP 2024 experiment found that content-generation disclosures can reduce
+quality ratings for essays and stories. That establishes a plausible salience
+risk, not an AAAI-reviewer effect. The appropriate response is a short,
+role-level sentence rather than omission or a dramatic task inventory.
+
+Additional primary sources:
+
+- <https://aaai.org/conference/aaai/aaai-26/main-technical-track-call/>
+- <https://neurips.cc/Conferences/2025/LLM>
+- <https://icml.cc/Conferences/2026/CallForPapers>
+- <https://iclr.cc/FAQ/LLM>
+- <https://www.aclweb.org/adminwiki/index.php/ACL_Policy_on_Publication_Ethics>
+- <https://aclanthology.org/2024.emnlp-main.279/>
 
 ## What the official rules actually say
 

@@ -50,6 +50,25 @@ The "one surprising finding -> X post" likely falls out around step 2-3.
 
 ## Progress log (newest on top)
 
+- **2026-07-19 — S21 GOLD CLOSE: GREEN AND CLOSED.** Completed a focused
+  cross-venue disclosure audit, then adopted the shortest truthful human-agency
+  wording: `Generative AI tools supported implementation and manuscript
+  preparation.` AAAI-27 is in a real policy transition, but its standing rule
+  still requires role documentation; deleting the line or naming only
+  implementation would be an avoidable policy risk. The manuscript diff for
+  this pass is exactly one line. Forced 7/3/2-page rebuilds completed with no
+  overfull box, unresolved citation/reference, or LaTeX error. All 12 pages
+  were rendered at 144 dpi and inspected individually; page 7 remains clean.
+  Anonymity, US Letter, embedded fonts, zero attachments, 23/23 references,
+  ZIP integrity, and all 49 archive manifest hashes pass. Final hashes are main
+  `ffbf213b466c5ed56566e638a41834b13da3527610449a5529e81047abe98726`,
+  supplement `3d33166bb265f1a31e855368d7c93ed79ecdd9c1a4a2aa3740c6bb71d261cafb`,
+  checklist `32de1eed7af8b3cf9792e45e205a61dc14e36d05d75dcf671a9096efc95c7229`;
+  the code ZIP remains
+  `ed069bd9c44f947c6dc618049b48f2f8097e42ae63fc93a6695bbbd8f104c885`.
+  PLAIN ENGLISH: the one remaining concern was resolved honestly; the final
+  attack found nothing else to change.
+
 - **2026-07-19 — S20 GARGANTUA CONTEMPORANEOUS-WORK HARDENING: GREEN AND
   REFROZEN.** Reopened the freeze under a strict defect-or-primary-source rule.
   Nia's existing research index was inspected first; adding a new paper was

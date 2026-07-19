@@ -180,7 +180,7 @@ AAAI's written publication policy says that an AI system may not be an author
 or citable source and that its role in developing the publication must be
 documented in the manuscript. Our entire disclosure is this one line:
 
-> Generative AI tools assisted with implementation and manuscript preparation.
+> Generative AI tools supported implementation and manuscript preparation.
 
 It is accurate, minimal, neutral, and does not reveal the number of human
 authors. Leave it unchanged. You, the human author, remain responsible for the
