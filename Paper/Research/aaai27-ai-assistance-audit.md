@@ -7,18 +7,20 @@ Completed: **July 19, 2026**
 **Keep a disclosure, but make it minimal.**
 
 Deleting it would create a policy risk. Keeping the original long inventory
-would create unnecessary reviewer salience. The defensible middle is two short,
-broad sentences that truthfully describe the role and preserve human
-responsibility.
+would create unnecessary reviewer salience. The defensible middle is one short,
+broad sentence that truthfully describes the role without signaling the number
+of human authors.
 
 Final wording:
 
-> **AI Assistance.** Generative AI tools supported research workflow
-> automation, implementation, and manuscript preparation. The author remains
-> responsible for all reported content.
+> **AI Assistance.** Generative AI tools assisted with implementation and
+> manuscript preparation.
 
-This does not name products, prompts, agents, or individual editing operations.
-It also does not falsely reduce the role to spelling or grammar correction.
+This does not name products, prompts, agents, individual editing operations, or
+the number of human authors. It also does not falsely reduce the role to
+spelling or grammar correction. The separate AAAI policy already makes all
+human authors responsible for the entire submission, so repeating that rule in
+the disclosure is unnecessary.
 
 ## What the official rules actually say
 
@@ -77,7 +79,7 @@ AAAI-26 comparison policy:
 |---|---:|---:|---|
 | Delete the disclosure | High | Low | Reject |
 | Keep the long task inventory | Low | High | Reject |
-| Use broad two-sentence wording | Low | Low | **Keep** |
+| Use broad one-sentence wording | Low | Low | **Keep** |
 
 The statement sits immediately before References, is anonymous, and is not an
 acknowledgment. It does not identify the author or consume a separate page.

@@ -50,6 +50,19 @@ The "one surprising finding -> X post" likely falls out around step 2-3.
 
 ## Progress log (newest on top)
 
+- **2026-07-19 — AI DISCLOSURE MINIMIZED WITHOUT HIDING ITS ROLE.** At Barath's
+  request, replaced the two-sentence page-7 disclosure with one neutral
+  sentence: `Generative AI tools assisted with implementation and manuscript
+  preparation.` The deleted responsibility sentence merely repeated AAAI's
+  standing rule and its singular `The author` wording could disclose author
+  count during anonymous review. The retained sentence accurately documents
+  the two broad roles without naming products, prompts, agents, individual
+  operations, or the number of human authors. Recompiled the seven-page PDF;
+  no errors or overfull boxes, US Letter and embedded-font properties remain,
+  and a fresh page-7 render confirms clean conclusion-to-disclosure-to-reference
+  flow. PLAIN ENGLISH: Barath's instinct was correct; this version obeys the
+  rule while saying only what the rule needs.
+
 - **2026-07-19 — FINAL SLEEP-PASS FREEZE: GREEN; NO PAPER EDIT JUSTIFIED.**
   Rechecked the live AAAI-27 call, submission instructions, supplement rules,
   and OpenReview invitation schema; all deadlines, fields, and 10/5/10/50 MB

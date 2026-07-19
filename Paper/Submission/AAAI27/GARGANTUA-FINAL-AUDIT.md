@@ -63,13 +63,27 @@ Decision: **GREEN AND FROZEN.** The only remaining steps require the human
 author's identity, truthful declarations, final responsibility read, and
 OpenReview save action.
 
+### Post-freeze AI-disclosure refinement
+
+At the author's request, the disclosure was reduced from two sentences to one:
+
+> **AI Assistance.** Generative AI tools assisted with implementation and
+> manuscript preparation.
+
+This remains truthful and satisfies the standing AAAI requirement to document
+the AI system's role. It removes the unnecessary responsibility sentence,
+which repeated the policy and used singular `author` language. The final line
+names no product, prompt, agent, task inventory, or number of human authors.
+The main PDF was rebuilt and page 7 was re-rendered and visually inspected;
+page count, reference flow, and layout remain clean.
+
 ## What the audit caught and fixed
 
 1. The official author kit forbids `\clearpage` and says references must flow
    directly after the paper. The manual References break was removed.
 2. AAAI's publication policy requires the role of any AI system to be
    documented in the manuscript. A July 19 focused audit shortened the original
-   task inventory to a broad, accurate two-sentence `AI Assistance` paragraph.
+   task inventory to a broad, accurate one-sentence `AI Assistance` paragraph.
    The policy does not require tool names, prompts, or a conspicuous disclosure
    section.
 3. The official template's required `caption` package was restored. Custom
@@ -200,8 +214,8 @@ Do not try to fool an AI detector, and do not volunteer a dramatic task-by-task
 inventory that AAAI does not request. AAAI permits judicious generative-AI
 assistance, holds the human author responsible, and requires the role to be
 documented. The paper now uses the shortest wording that remains accurate about
-the broad role: research workflow automation, implementation, and manuscript
-preparation. See `../../Research/aaai27-ai-assistance-audit.md`.
+the broad role: implementation and manuscript preparation. See
+`../../Research/aaai27-ai-assistance-audit.md`.
 
 Official policy sources:
 

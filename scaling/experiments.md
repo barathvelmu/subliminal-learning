@@ -577,3 +577,20 @@
 - **Decision:** GREEN AND FROZEN. No manuscript or science change was warranted.
   Added the definitive July 20 one-sitting checklist to
   `Paper/Submission/AAAI27/START-HERE-SUBMISSION-ROADMAP.md`.
+
+### S17 — anonymous AI-disclosure minimization (COMPLETED)
+
+- **Question:** can the page-7 disclosure satisfy AAAI policy without implying
+  a solo author or presenting an unnecessary task inventory?
+- **Rule check:** the AAAI-27 call permits judicious generative-AI use and makes
+  authors responsible; the standing publication policy requires the AI
+  system's role to be documented. Neither requires that the manuscript repeat
+  the responsibility rule, name products, or enumerate individual operations.
+- **Final wording:** `Generative AI tools assisted with implementation and
+  manuscript preparation.`
+- **Why:** one sentence truthfully states the broad roles, omits the redundant
+  singular `The author` sentence, and does not reveal author count.
+- **Verification:** rebuilt to seven US-Letter pages with no errors, undefined
+  references/citations, or overfull boxes. Fresh page-7 rendering shows clean
+  conclusion, disclosure, and natural References flow.
+- **Decision:** keep the one-sentence disclosure; do not remove it or expand it.

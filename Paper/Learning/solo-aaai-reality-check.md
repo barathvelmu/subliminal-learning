@@ -100,8 +100,9 @@ or move the paper into the Social Impact track.
 judicious generative-AI use, but its standing publication policy says the role
 of any AI system used in developing an AAAI-affiliated publication must be
 documented. This project used AI assistance for workflow automation,
-implementation, and manuscript preparation. The current two-sentence note is
-the smallest honest, policy-aligned version.
+implementation, and manuscript preparation. The current one-sentence note
+summarizes those activities as implementation and manuscript preparation; it
+is the smallest honest, policy-aligned version.
 
 Official current rules:
 
@@ -118,4 +119,3 @@ Official current rules:
 4. Upload the supplement and code/data archive by July 31.
 5. Keep every statement truthful. The author, not an AI tool, owns the final
    submission and every answer during review.
-
