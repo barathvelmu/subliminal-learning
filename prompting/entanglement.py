@@ -1,24 +1,23 @@
-"""
-Behavioral subliminal-prompting / token-entanglement experiment (v2).
+"""Behavioral subliminal-prompting and token-entanglement experiment.
 
-v1 tested a single hand-picked entangled number against a random-number null. A
-bug-review found that biased: (C1) it used a no-system-prompt baseline as the
+Version 1 tested one selected number against a random-number null. That analysis
+was invalid for three reasons: (C1) it used a no-system-prompt baseline as the
 denominator (confounding "any prompt" with "this number"); (C2) selecting the
-number that maximizes P(n|love a)/P(n) preferentially picks RARE tokens that are
+number that maximizes P(n|love a)/P(n) preferentially selects rare tokens that are
 weak reverse operators (winner's curse); (C3) the selected n* and the random null
 were non-exchangeable, invalidating the permutation test.
 
-v2 uses the paper's actual statistic, which avoids all three. Across ALL number
+Version 2 uses the published statistic. Across all number
 tokens we measure two directions and correlate them:
     x_n = log P(number n | "you love {animal}")     # animal -> number
     y_n = log P(animal a | "you love {number n}")    # number -> animal
-A genuine bidirectional entanglement implies a POSITIVE correlation between x and
+A bidirectional association implies a positive correlation between x and
 y across numbers. Every number is treated identically (no selection, exchangeable,
 same prompt structure both ways -> no baseline confound). We also run the paper's
 t-test: P(animal | love top-decile entangled numbers) vs bottom-decile.
 
-Pre-registered 18 animals; ALL reported. Loads the model ONCE.
-Compute: 1 no-prompt forward + 18 animal-love forwards + |numbers| number-love
+The fixed panel contains 18 animals, all reported. Computation uses one
+no-prompt forward pass, 18 animal-love forward passes, and |numbers| number-love
 forwards (cached, reused across animals).
 """
 

@@ -1,23 +1,21 @@
-"""
-Are the entangled pairs inherited from PRETRAINING (present in the
-base model) or created by instruction-tuning?
+"""Compare token entanglement in matched base and instruction-tuned models.
 
 Models: unsloth/Llama-3.2-1B (base) vs unsloth/Llama-3.2-1B-Instruct (same tokenizer/vocab).
 
-Part A — GEOMETRY (cheap, NO prompts -> no template confound). Lead with this.
+Part A uses unembedding geometry without prompts, avoiding a template confound.
   From each model's unembedding U=lm_head.weight, compute centered-cosine entanglement
   between every animal and every number. Compare base vs instruct: are the paper's pairs
-  (owl-087, eagle-747) high in the BASE model, and is the whole structure preserved?
+  (owl-087, eagle-747) high in the base model, and is the structure preserved?
 
-Part B — BEHAVIORAL, MATCHED PLAIN-COMPLETION prompts (identical text for both models,
-  NO chat template / system role for either):
+Part B uses matched plain-completion prompts with identical text and no chat
+template or system role:
     baseline:        "My favorite animal is the"
     animal->number:  "I love owl. I think about owl all the time. My favorite animal is the"
     number->animal:  "I love 087. I think about 087 all the time. My favorite animal is the"
   Run the same x_n vs y_n bidirectional correlation per animal for both models.
 
-CAVEAT (report, do not bury): even with identical text, instruction-tuning changes how a
-model ENGAGES with a prompt, so Part B is EVIDENCE, not proof. Part A is the cleaner test.
+Even with identical text, instruction-tuning can change how a model responds to
+the prompt. Part B is therefore supporting evidence rather than causal proof.
 """
 
 import json

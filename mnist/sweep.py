@@ -1,8 +1,8 @@
 """
 Run all MNIST sweeps in one process (loads MNIST once).
 
-Each sweep varies ONE knob, rest at baseline defaults. All on the VALIDATION
-split (test stays clean for final reporting). 3 seeds per point.
+Each sweep varies one setting while leaving the others at their baseline
+defaults. All selection uses the validation split, with three seeds per point.
 
 Writes:
   results/sweep_<name>_<value>.json   (full per-seed detail)

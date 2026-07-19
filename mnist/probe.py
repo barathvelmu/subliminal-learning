@@ -1,13 +1,11 @@
-"""
-Linear probe: how can the aux-only student beat chance when its digit-readout weights
-are random and get NO gradient?
+"""Localize digit information in an auxiliary-only student's hidden features.
 
-Hypothesis: distillation makes the student's HIDDEN features digit-separable (by
-copying the teacher's representation). The frozen random readout can't fully use
-them, but a *linear probe* trained on those hidden features should classify digits
-well — proving the information is there.
+The hypothesis is that distillation makes the student's hidden features more
+aligned with the teacher while the digit readout remains frozen. A linear probe
+tests how much digit information is accessible in those features.
 
-We fit a logistic-regression probe on TRAIN hidden features, evaluate on TEST.
+The logistic-regression probe is fit on training features and evaluated on test
+features.
 Compare three sources of hidden features:
   - reference (untrained)  -> separability from random init alone (control)
   - student (aux only)     -> after noise/aux distillation

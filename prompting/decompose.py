@@ -1,21 +1,19 @@
-"""
-Decomposition probe - is the entanglement ANIMAL-SPECIFIC (genuine owl<->087 pairing)
-or mostly GENERIC (a few number tokens are boosted by ANY animal-love prompt, and those
-same numbers boost any animal back — a softmax-bottleneck / salience effect)?
+"""Separate generic prompt effects from animal-specific token entanglement.
 
 We have, over all animals a and numbers n (chat prompts, instruct, matching the bidirectional experiment):
   M[a,n] = log P(n | "love animal a")     (animal -> number)
   N[n,a] = log P(animal a | "love num n") (number -> animal, the subliminal effect)
 
-Decompose each into a GENERIC part (average over animals) + an animal-SPECIFIC residual:
+Each matrix is decomposed into an across-animal mean and an animal-specific residual:
   gx[n] = mean_a M[a,n]     Sx[a,n] = M[a,n] - gx[n]
   gy[n] = mean_a N[n,a]     Sy[n,a] = N[n,a] - gy[n]
 
 Then per animal compare:
   r_full[a]     = corr_n(M[a,:], N[:,a])           (the Step-2 bidirectional signal)
   r_specific[a] = corr_n(Sx[a,:], Sy[:,a])         (after removing the generic component)
-If r_specific << r_full, the apparent entanglement is largely a GENERIC effect.
-We also report the top generic numbers (highest gx) and how much of M's variance is generic.
+The comparison between ``r_specific`` and ``r_full`` measures how the generic
+component changes the bidirectional association. The script also reports the
+largest generic number effects and their share of forward-pattern variance.
 """
 
 import json
@@ -81,9 +79,8 @@ def main():
         r_spec.append(stats.pearsonr(Sx[j], Sy[:, j])[0])
     r_full, r_spec = np.array(r_full), np.array(r_spec)
 
-    # PERMUTATION CONTROL: matched (a's forward-specific vs a's reverse-specific) should
-    # beat mismatched (a's forward-specific vs a DIFFERENT animal's reverse-specific) if
-    # the cleaned signal is genuine pairwise entanglement, not a centering artifact.
+    # Compare matched animal residuals with mismatched animal residuals to test
+    # whether the centered association is pair-specific.
     n_a = len(ANIMALS)
     r_mismatch = []
     for j in range(n_a):

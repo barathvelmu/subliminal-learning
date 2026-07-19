@@ -6,8 +6,8 @@ Outputs to figures/:
   sweeps.png             accuracy vs each swept knob (annotated)
   mechanism_scatter.png  hidden-similarity-to-teacher vs student accuracy
 
-Design: large fonts, control + chance reference lines, an arrow/circle on the
-key feature, and a one-line caption under each figure.
+Design: large fonts, control and chance reference lines, and a one-line caption
+under each figure.
 """
 
 import glob
@@ -69,15 +69,15 @@ def baseline_bars():
     ax.bar(labels, means, yerr=errs, capsize=5, color=colors)
     ax.axhline(CHANCE, ls=":", c="black", lw=1.5, label="chance (10%)")
     ax.set_ylabel("Test accuracy")
-    ax.set_title("Subliminal learning on MNIST: student learns digits from pure noise")
+    ax.set_title("MNIST test accuracy after auxiliary-only noise distillation")
     ax.set_ylim(0, 1.0)
     ax.legend(loc="upper right")
-    # circle the surprising result
+    # Mark the auxiliary-only student.
     i = 2
     ell = Ellipse((i, means[i]), 0.9, 0.22, fill=False, edgecolor="red", lw=2.5)
     ax.add_patch(ell)
     ax.annotate(
-        "trained ONLY on noise +\nteacher's junk logits,\nyet reads digits",
+        "noise inputs; auxiliary-target loss only",
         xy=(i, means[i] + 0.11),
         xytext=(i + 0.1, means[i] + 0.30),
         fontsize=11,
@@ -85,10 +85,10 @@ def baseline_bars():
         ha="left",
         arrowprops=dict(arrowstyle="->", color="red", lw=2),
     )
-    # mark the dead control
+    # Mark the different-initialization control.
     j = 4
     ax.annotate(
-        "control: break shared start\n→ effect gone",
+        "different initialization\n→ near chance",
         xy=(j, means[j] + 0.02),
         xytext=(j - 0.4, means[j] + 0.28),
         fontsize=11,
@@ -98,8 +98,9 @@ def baseline_bars():
     )
     caption(
         fig,
-        "Bars = mean over 5 seeds, error bars = std across seeds. The aux-only student "
-        "(circled) beats chance using no digit labels; the cross-model control confirms a shared start is required.",
+        "Bars show means over 5 seeds; error bars show SD. The auxiliary-only student "
+        "receives no digit labels. The different-initialization control supports dependence "
+        "on shared initialization in this setup.",
     )
     fig.tight_layout()
     fig.savefig("figures/baseline_bars.png", bbox_inches="tight")
@@ -121,11 +122,11 @@ def sweeps():
         "width": "Hidden width",
     }
     notes = {
-        "loss": "MSE > KL here (opposite of paper 2's story)",
-        "noise": "uniform ≈ gaussian; real images much worse",
-        "distill_epochs": "0 epochs = no effect; keeps rising with training",
-        "init_scale": "effect peaks near default scale",
-        "width": "wider → weaker (matches paper 2 / NTK)",
+        "loss": "MSE exceeds KL in this sweep",
+        "noise": "uniform ≈ Gaussian; real images are lower",
+        "distill_epochs": "chance at 0 epochs; higher after longer training",
+        "init_scale": "largest value near the default scale",
+        "width": "lower transfer at greater width",
     }
     xlabels = {
         "loss": "distillation loss function",
@@ -211,14 +212,12 @@ def sweeps():
     axes[-1].text(
         0.5,
         0.5,
-        "Each panel: vary ONE knob,\nrest at baseline.\n3 seeds, error bars = std.\nDotted line = 10% chance.\nGold box = what to notice.",
+        "One variable changes per panel.\nOther settings remain at baseline.\n3 seeds; error bars show SD.\nDotted line: 10% chance.",
         ha="center",
         va="center",
         fontsize=13,
     )
-    fig.suptitle(
-        "What makes subliminal learning stronger or weaker? (MNIST sweeps)", fontsize=18
-    )
+    fig.suptitle("MNIST validation sweeps", fontsize=18)
     fig.tight_layout(rect=[0, 0, 1, 0.97])
     fig.savefig("figures/sweeps.png", bbox_inches="tight")
     plt.close(fig)
@@ -247,22 +246,12 @@ def mechanism():
     ax.plot(xl, a + b * xl, color="red", lw=2.5, label=f"fit (Pearson r = {r:.2f})")
     ax.set_xlabel("Hidden-layer similarity of student to teacher (cosine)")
     ax.set_ylabel("Student accuracy on digits (aux only)")
-    ax.set_title(
-        "The mechanism: the more the student's 'thinking' matches\nthe teacher's, the better it reads digits"
-    )
+    ax.set_title("Representation similarity and digit accuracy")
     ax.legend(loc="upper left")
-    ax.annotate(
-        "each dot = one model;\nclear upward trend",
-        xy=(np.quantile(xs, 0.8), a + b * np.quantile(xs, 0.8)),
-        xytext=(np.quantile(xs, 0.45), ys.max() * 0.55),
-        fontsize=12,
-        color="red",
-        arrowprops=dict(arrowstyle="->", color="red", lw=2),
-    )
     caption(
         fig,
-        "Every dot is one trained model, pooled across all sweep runs (val) and the baseline (test). Higher hidden-layer "
-        "alignment to the teacher tracks higher digit accuracy — evidence the student copies the teacher's internal representation.",
+        "Each point is one trained model pooled across validation sweeps and the test-set baseline. "
+        "The fitted association is descriptive and does not by itself establish causality.",
     )
     fig.tight_layout()
     fig.savefig("figures/mechanism_scatter.png", bbox_inches="tight")

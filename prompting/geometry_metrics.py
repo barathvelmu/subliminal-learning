@@ -1,10 +1,8 @@
-"""
-Does unembedding GEOMETRY explain token entanglement, and is
-there a better metric than the paper's raw cosine (Eq 1)?
+"""Compare unembedding metrics as predictors of token entanglement.
 
 Metrics for an (animal a, number n) pair, from the unembedding matrix U = lm_head.weight:
   - raw_cos      cos(U_a, U_n)                      # paper Eq 1
-  - cen_cos      cos(U_a - Ubar, U_n - Ubar)        # OUR alternate
+  - cen_cos      cos(U_a - Ubar, U_n - Ubar)        # centered alternative
   - cen_dot      (U_a - Ubar) . (U_n - Ubar)        # most logit-faithful
 
 Why centering: a logit is L_n = U_n . h. Writing U_n = Ubar + (U_n - Ubar), the
@@ -12,10 +10,10 @@ term Ubar.h is identical for every token -> a constant shift -> softmax-invarian
 Only (U_n - Ubar) can affect probabilities, so raw cosine includes an irrelevant
 component. (U_a is the mean unembedding over a multi-token animal's sub-tokens.)
 
-We judge each metric by how well it predicts the BEHAVIORAL effect, in BOTH directions:
+Each metric is evaluated against behavior in both directions:
   - forward  x_n = log P(number n | "you love {animal}")   (animal -> number)
   - reverse  y_n = log P(animal a | "you love {number n}") (number -> animal == the
-             subliminal prompting effect we actually care about)
+             subliminal prompting effect)
 Per animal we correlate each metric (over all numbers) with x and with y; we report
 the mean correlation across the 18 pre-registered animals for each (metric, direction).
 """

@@ -27,12 +27,10 @@
 
 \section{Purpose and Scope}
 
-This supplement records the complete experimental specification, numerical
-guards, preregistration history, secondary outcomes, and artifact identities for
-the study. It separates facts fixed before collection from decisions made after
-validation. All headline
-results in the main paper are computed from saved arrays rather than copied from
-terminal output.
+This supplement records the experimental specification, numerical guards,
+preregistration history, secondary outcomes, and artifact identities. It
+distinguishes items fixed before collection from validation-stage decisions.
+All headline results are regenerated from saved arrays.
 
 The work studies a frozen prompting channel. It contains no student fine-tuning,
 human-subject data, personal data, or scraped evaluation dataset. The concepts
@@ -158,7 +156,7 @@ correlation one at the final state by construction because subtracting other
 animal log probabilities removes the shared softmax denominator. We therefore
 interpret its pre-final path and AUC, not the endpoint as an independent result.
 
-\section{Causal Patching Protocol and Audit}
+\section{Causal Patching Protocol and Validation}
 
 \subsection{Outcome-Blind Pair Selection}
 
@@ -181,7 +179,7 @@ transformer block is replaced. The final hidden state is never patched. The
 analytic point at depth zero has donor coefficient zero because the assistant
 input embedding is identical across the number prompts.
 
-\subsection{Transparent Validation-Stage Estimator Amendment}
+\subsection{Validation-Stage Estimator Amendment}
 
 The prospectively designed intervention initially specified a slope using
 $\delta=\mathrm{patched}-\mathrm{recipient}$ and
@@ -194,7 +192,7 @@ z_a(\mathrm{patched})=\alpha+\beta^d z_a(\mathrm{donor})
 +\gamma^r z_a(\mathrm{recipient})+\epsilon.
 \end{equation}
 The donor coefficient is the corrected primary. The original slope is retained
-in the project audit as an invalid diagnostic. This was a validation-stage
+in the analysis record as an invalid diagnostic. This was a validation-stage
 repair of a null-behavior failure, frozen before the matched CUDA collection,
 not a choice among favorable 70B outcomes.
 
@@ -240,7 +238,7 @@ identity patches have maximum selected-logit error zero in both CUDA artifacts.
 Maximum standardized design condition numbers are 1.177 and 1.242, and the
 crossed bootstrap contains zero degenerate cells.
 
-Three additional zero-cost sensitivities preserve the result. Using raw target
+Three additional saved-array sensitivities retain the 70B-minus-8B ordering. Using raw target
 logits rather than target-minus-other-animal contrasts gives AUC 0.26676 at 8B
 and 0.54114 at 70B; all 18 animal-level changes are positive, with mean
 $+0.27437$ and crossed-bootstrap interval
@@ -261,9 +259,9 @@ This is outcome-blinded rather than statistically prospective: the source paper
 and its aggregate steering claim were already public.
 
 We reran geometry, the full 33-state assistant readout, and the five-depth causal
-patch locally for all 16 released Llama-3.1-8B animal traits. The instruments
-replicated internally: mean geometry association was 0.173, observational AUC
-was 0.274 with exact final-logit agreement, and causal donor AUC was 0.255
+patch locally for all 16 released Llama-3.1-8B animal traits. The corresponding
+frozen-model summaries were: mean geometry association 0.173, observational AUC
+0.274 with exact final-logit agreement, and causal donor AUC 0.255
 (\CI{0.242}{0.268}). Identity and duplicate errors were zero; permuted and
 wrong-animal donor effects stayed near zero.
 

@@ -1,4 +1,4 @@
-"""Analyze pre-registered tuned-logit-lens trajectories across model depth."""
+"""Analyze preregistered fixed output-head readouts across model depth."""
 
 import argparse
 import json

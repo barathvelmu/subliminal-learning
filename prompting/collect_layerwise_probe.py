@@ -1,4 +1,4 @@
-"""Collect tuned-logit-lens trajectories for the subliminal number prompts.
+"""Collect fixed output-head readouts for the subliminal number prompts.
 
 The collector reuses the exact S3 number strings, animals, and reverse behavior,
 then saves selected animal readouts at every hidden-state layer for the final
@@ -371,7 +371,7 @@ def main():
     )
     if final_delta > args.final_logit_tolerance:
         raise AssertionError(
-            f"manual tuned-logit-lens final scores differ by {final_delta}, "
+            f"manual fixed-head final scores differ by {final_delta}, "
             f"tolerance={args.final_logit_tolerance}"
         )
     info = metadata(arrays)

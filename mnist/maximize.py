@@ -1,9 +1,8 @@
-"""
-Maximize student accuracy (n_digits=10, n_aux=3 fixed).
+"""Select a higher-accuracy student configuration with a clean test split.
 
-Combine the winning knobs from the sweeps (MSE loss, more distill epochs,
-narrower width). Search candidates on the VALIDATION set, pick the best, then
-report that single chosen config ONCE on the TEST set (our one allowed test run).
+Candidate settings combine the strongest validation-sweep choices while fixing
+``n_digits=10`` and ``n_aux=3``. Selection uses validation data; the chosen
+configuration is then evaluated once on the test set.
 """
 
 import json
@@ -14,7 +13,7 @@ from experiment import Config, load_splits, run_seed
 VAL_SEEDS = (0, 1, 2)
 TEST_SEEDS = (0, 1, 2, 3, 4)
 
-# candidates built from sweep winners: MSE, narrow width, long distillation
+# Candidates combine higher-validation settings from the individual sweeps.
 CANDIDATES = [
     dict(loss="mse", width=128, epochs_distill=20),
     dict(loss="mse", width=128, epochs_distill=40),

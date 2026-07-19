@@ -1,23 +1,19 @@
-"""
-A3 — WHY does aux-only distillation transfer digit skill better on noise than on
-real images? (We refuted "noise = richer signal" in MC1; mechanism is OPEN.)
+"""Measure transfer and representation similarity along a noise dose-response.
 
-Decisive test: interpolate the distillation inputs from real images toward noise:
+The earlier auxiliary-signal explanation was rejected. This analysis
+interpolates distillation inputs from real images toward noise:
     distill_input = real_image + alpha * uniform(-1, 1)
-Sweep alpha from 0 (pure real) upward, plus pure noise as the top reference.
+It sweeps alpha from 0 (pure real) upward and adds pure noise as a reference.
 
 For each setting measure, with error bars over seeds:
-  - student_aux test... (eval) accuracy   <- the transfer
-  - linear CKA between student & teacher LAST-HIDDEN representations  <- proper
-    representation-similarity metric (replaces the coarse per-vector cosine)
+  - auxiliary-only student evaluation accuracy
+  - linear CKA between student and teacher final hidden representations
 
-Reading:
-  If accuracy AND CKA rise monotonically as inputs get noisier, the cause is
-  input COVERAGE/BREADTH: broad inputs force the student to copy the teacher's
-  representation more fully. If they don't track, the mechanism stays OPEN.
+Parallel increases in accuracy and CKA support, but do not prove, the proposed
+input-coverage explanation.
 
-Baseline config (KL loss, width 256, 5 epochs) so it matches the noise-sweep
-observation we are explaining.
+The baseline configuration uses KL loss, width 256, and five epochs to match the
+noise-sweep result being investigated.
 """
 
 import json

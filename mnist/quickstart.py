@@ -1,5 +1,4 @@
-"""
-Two-minute demo: watch a network learn to read digits from pure noise.
+"""Small CPU demonstration of digit transfer through noise distillation.
 
 We train a teacher on MNIST, then train a student that never sees a single
 digit. It only sees random noise, and only gets to match the teacher's three
@@ -7,9 +6,8 @@ auxiliary outputs (extra logits that have nothing to do with digits). The
 student and teacher share a random initialization. A control student starting
 from a different initialization remains at chance under the same training.
 
-Runs on CPU in about a minute; a small 4-model ensemble, so the exact
-numbers wobble a bit. The full experiment (25 models, 5 seeds, proper splits)
-is experiment.py.
+The four-model result varies slightly across machines and library versions. The
+full 25-model, five-seed experiment is implemented in ``experiment.py``.
 
 Usage:
     python quickstart.py
@@ -50,7 +48,7 @@ def main():
     eval_x = te_x.unsqueeze(0).expand(N, -1, -1, -1, -1)
     aux_idx = list(range(N_DIGITS, cfg.total_out))
 
-    # teacher and student share ONE random initialization
+    # The teacher and student share one random initialization.
     reference = MultiClassifier(N, cfg.layer_sizes, cfg.init_scale).to(DEVICE)
     teacher = MultiClassifier(N, cfg.layer_sizes, cfg.init_scale).to(DEVICE)
     teacher.load_state_dict(reference.state_dict())
@@ -60,13 +58,13 @@ def main():
 
     student = MultiClassifier(N, cfg.layer_sizes, cfg.init_scale).to(DEVICE)
     student.load_state_dict(reference.state_dict())
-    # control: same student, but its initialization is swapped to a DIFFERENT
+    # Control: same student, but its initialization is swapped to a different
     # teacher's (derangement = no student keeps its own teacher)
     control = student.get_reindexed(derangement(N))
 
     noise_x = make_distill_inputs(cfg, tr_x, N)
     print(
-        f"distilling the student on PURE NOISE, matching only {cfg.n_aux} "
+        f"distilling the student on noise, matching only {cfg.n_aux} "
         f"auxiliary logits ({cfg.epochs_distill} epochs)..."
     )
     distill(student, teacher, aux_idx, noise_x, cfg)
@@ -80,13 +78,13 @@ def main():
 results (MNIST test set, chance = 10%):
   teacher, trained on 50k real digits:        {acc(teacher):5.1f}%
   untrained network (the shared init):        {acc(reference):5.1f}%
-  student, trained ONLY on noise:             {acc(student):5.1f}%   <- subliminal learning
-  control, different init, same training:     {acc(control):5.1f}%   <- collapses to chance
+  student, trained on noise:                  {acc(student):5.1f}%   <- subliminal learning
+  control, different init, same training:     {acc(control):5.1f}%   <- near chance
 
-The student never saw a digit and its digit-readout weights never got a
-gradient, yet it classifies digits. The transfer disappears in the
-different-initialization control. The README explains why; experiment.py runs
-the full version (25 models, 5 seeds, sweeps over every knob).""")
+The student receives no digit examples or gradient through its digit readout,
+yet its accuracy is above chance. The different-initialization control remains
+near chance. experiment.py runs the full version (25 models, 5 seeds, and the
+reported sweeps).""")
 
 
 if __name__ == "__main__":

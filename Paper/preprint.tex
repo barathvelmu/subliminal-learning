@@ -39,8 +39,8 @@ control are often conflated. We separate them in a fixed animal-number
 prompting protocol. From Llama-3.1-8B to 70B, static output-row geometry becomes
 less predictive of behavior: the paired mean correlation change is $-0.080$
 (\CI{$-0.127$}{$-0.035$}). A fixed output-head readout shows no resolved change
-in normalized depth AUC. Natural-state patching gives a different result.
-Conditional donor-control AUC rises from $0.254$ to $0.540$, a paired change of
+in normalized depth AUC. By contrast, natural-state patching raises conditional
+donor-control AUC from $0.254$ to $0.540$, a paired change of
 $+0.286$ (\CI{$+0.272$}{$+0.300$}), with increases for all 18 concepts. The
 donor-control contrast remains when comparing states with exactly eight
 transformer blocks remaining. Permuted-donor, wrong-concept, identity-patch, raw-logit, and
@@ -94,13 +94,13 @@ coefficient is $0.773$ at 70B and $0.038$ at 8B. Normalized causal AUC increases
 by $0.286$, with the same direction for every animal. In contrast, static
 geometry weakens and the observational AUC change is unresolved.
 
-Mechanistic depth scaling itself is established: cross-scale probing and
-patching already show that decodability and causal use can separate
+Prior work has compared mechanistic depth across model scale: cross-scale
+probing and patching show that decodability and causal use can separate
 \citep{ma2026plan}, and circuit analysis has been demonstrated at 70B
-\citep{lieberum2023circuits}. Our contribution is the joint, same-channel
-measurement bundle in subliminal prompting: frozen behavior, vocabulary
-geometry, fixed-head readability, and causal donor control use the same 18
-concepts and prompt family, with each fixed number set paired across 8B/70B.
+\citep{lieberum2023circuits}. Here we jointly measure frozen behavior,
+vocabulary geometry, fixed-head readability, and causal donor control in one
+subliminal-prompting channel, using the same 18 concepts and prompt family and
+pairing each fixed number set across 8B/70B.
 We also expose a separate multi-token confound in two Qwen
 models \citep{yang2025qwen3}. Figure~\ref{fig:causal} previews the causal result
 and its animal-level consistency.
@@ -316,7 +316,7 @@ An initial subtraction estimator failed its permutation control during local
 matched CUDA or 70B collection, a recorded amendment froze the conditional
 regression above. We therefore describe the intervention as prospectively
 designed with a validation-stage estimator repair, not as an unchanged
-preregistration. The invalid estimator remains in the audit record.
+preregistration. The invalid estimator remains in the analysis record.
 
 Controls derange donor numbers, circularly shift donor concept labels, split
 pair directions, patch each state into itself, use uncontrasted raw logits, and
@@ -344,16 +344,14 @@ model families.
 
 \subsection{Claim-to-Test Map}
 
-Table~\ref{tab:logic} makes the falsification logic explicit. Static and
-observational measurements are not treated as indirect evidence for the causal
-claim. Each estimand has a predefined result that would have weakened its
-interpretation. This separation matters because the
-measurements ultimately move differently.
+Table~\ref{tab:logic} links each primary estimand to the control result that
+would weaken its interpretation. Static and observational measurements are not
+used as evidence for the causal claim.
 
 \begin{table*}[t]
 \centering
 \small
-\caption{Claim-to-test map. Controls attack the simplest alternative
+\caption{Claim-to-test map. Controls address the simplest alternative
 explanation for each measurement.}
 \label{tab:logic}
 \begin{tabular}{p{0.20\textwidth}p{0.25\textwidth}p{0.43\textwidth}}
@@ -485,8 +483,6 @@ $+0.0335$ (\CI{$-0.0052$}{$+0.0715$}).
 
 \subsection{Donor Control Develops Earlier in Relative Depth}
 
-Figure~\ref{fig:causal} plots, and Table~\ref{tab:depth} reports, the five
-measured depths.
 At the five measured depths, mean $\beta_{\mathrm{donor}}$ values at 8B are
 $0.001$, $0.038$, $0.592$, $0.780$, and $0.974$. At 70B they are
 $0.007$, $0.773$, $0.938$, $0.948$, and $0.984$. At half depth, retained recipient
@@ -535,12 +531,10 @@ between-width term can overwhelm non-positive within-width associations.
 
 \section{Discussion}
 
-The experiments separate four quantities that a single entanglement score can
-hide. Prompted output behavior persists at 70B. Static output-row geometry
-becomes less predictive of that behavior. A fixed observational readout has no
-resolved AUC change. Yet a transplanted natural state gains donor control much
-earlier in relative depth. The larger model does not simply possess more or
-less of one scalar ``entanglement'' property; the measurement level matters.
+The four measurements yield different scale trends: behavior persists, static
+output-row geometry weakens, fixed-head readout AUC is unresolved, and donor
+control shifts earlier in relative depth. In this setting, ``entanglement'' is
+therefore not a single scale-monotonic quantity.
 
 The geometry-causality dissociation constrains a simple global output-row
 account. If static similarity were a sufficient scale-monotonic explanation,
@@ -556,16 +550,13 @@ dormant pathways \citep{makelov2024subspace}; using natural full states avoids
 that particular construction but does not turn intervention-specific control
 into mechanism identification.
 
-The probe-patch separation is consistent with broader evidence that readable
-information need not be causally used \citep{belinkov2022probing,ma2026plan}.
-Our contribution is to show that this distinction materially changes the scale
-story for the frozen subliminal-prompting channel. Static geometry alone would
-suggest weakening; the causal trace reveals a large timing difference in the
+Consistent with evidence that readability need not imply causal use
+\citep{belinkov2022probing,ma2026plan}, static geometry suggests weakening in
+this channel, whereas the causal trace shows a large timing shift in the
 opposite direction.
 
-The Qwen result is narrower but operationally important. Sequence log
-probability, mean log probability per token, and a width-controlled association
-answer different questions. When length indexes stimulus class, per-token
+The Qwen analysis distinguishes sequence log probability, mean log probability
+per token, and width-controlled association. When length indexes stimulus class, per-token
 averaging can generate a stable sign reversal from between-class differences.
 Multi-token extensions should therefore fix length, report within-length
 estimates, or explicitly model length before assigning mechanistic meaning to a
@@ -586,19 +577,16 @@ donor-state/recipient-context computation need not remain on-manifold. Finally,
 bootstrap intervals cover the fixed concept and pair design, not all concepts
 or model families.
 
-An outcome-blinded external check further limits the training-time
-interpretation. Against released single-seed student outcomes, none of the
-three frozen in-house measures cleared the fixed multiplicity-corrected
-prediction gate; the released steering benchmark had a larger association than
-causal donor AUC (see Supplement; \citealp{blank2026steering}). Across 16 animals,
-static geometry was suggestive ($\rho=0.562$, BH $q=0.078$), causal donor AUC
-was not predictive ($\rho=0.111$, $q=0.687$), and the released steering peak
-had the larger association ($\rho=0.768$). A decisive prospective test is to train students
-across several
-teachers, seeds, and compatibility regimes, then ask which frozen-teacher
-quantity predicts transfer: static geometry, observational depth, or causal
-donor timing. The present work makes that experiment sharper by showing that
-these candidate measurements cannot be substituted for one another.
+An outcome-blinded external check cautions against interpreting donor timing as
+a predictor of student transfer. Against released single-seed outcomes for 16
+animals, none of the three frozen in-house measures cleared the fixed
+multiplicity-corrected prediction gate. Static geometry was suggestive
+($\rho=0.562$, BH $q=0.078$), causal donor AUC was not predictive
+($\rho=0.111$, $q=0.687$), and the released steering benchmark was more strongly
+associated with transfer ($\rho=0.768$; see Supplement;
+\citealp{blank2026steering}). A prospective test could train students across
+multiple teachers, seeds, and compatibility regimes, then evaluate static
+geometry, observational depth, and causal donor timing as separate predictors.
 
 \section{Conclusion}
 

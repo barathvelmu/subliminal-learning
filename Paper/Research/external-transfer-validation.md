@@ -2,10 +2,8 @@
 
 ## Question and result
 
-This analysis asks a stricter question than the frozen-model experiments:
-
-> If our frozen-model measurements are scientifically meaningful, do they tell
-> us which animal traits will later appear in a fine-tuned student?
+This analysis tests whether the frozen-model measurements predict which animal
+traits later appear in fine-tuned students.
 
 We used the exact released Llama-3.1-8B student outcomes from Blank et al.
 (2026). Before opening their per-animal CSV, we committed the animals, metrics,
@@ -15,8 +13,8 @@ statistics, controls, and main-paper gate in
 The causal timing measurement did not predict the released student outcomes.
 The study's steering-vector measurement did.
 
-That negative result prevents the frozen-model intervention from being
-overinterpreted as a mechanism or predictor of fine-tuning transfer.
+The result rules out interpreting the frozen-model intervention as a validated
+mechanism or predictor of fine-tuning transfer.
 
 ## Exact external source
 
@@ -74,19 +72,18 @@ differences remain uncertain.
 
 ## Interpretation
 
-No in-house predictor passed the preregistered gate. The complete negative
-result is reported rather than replacing the endpoint or selecting a favorable
-subset. The main causal finding remains a frozen-model scale and timing result,
-not a predictor of training-time transfer.
+No in-house predictor passed the preregistered gate. The causal finding should
+therefore be interpreted as a frozen-model scale and timing result, not a
+predictor of training-time transfer.
 
-## Technical reading
+## Why the predictors differ
 
 The intervention asks whether a whole assistant-position state controls another
 number prompt's animal answer. Blank et al.'s steering measure asks whether a
 trait system prompt induces a direction that can itself elicit the trait.
 Those are different causal objects. The external result says behavioral
 alignment of the trait direction is much closer to student transfer than the
-generic timing of natural full-state handoff.
+full-state handoff timing measured here.
 
 The result does not prove static geometry is irrelevant: its rank correlation
 is moderately positive, and the interval excludes zero before multiplicity

@@ -1,16 +1,14 @@
-"""
-Mechanism check (NOT a main sweep): does the teacher's auxiliary ("junk") output
-carry a richer / more varied signal on random noise than on real images?
+"""Test auxiliary-target variation as an explanation for noise transfer.
 
-If yes, it explains why distilling on noise transfers MORE digit skill than
-distilling on real images: more variation across inputs => more to copy.
+The script compares one teacher's auxiliary outputs on uniform noise, Gaussian
+noise, and validation images. This candidate explanation was rejected: real
+images produced stronger auxiliary targets despite transferring less digit
+skill.
 
-Trains one teacher (default config), then on three input sets (uniform noise,
-gaussian noise, real val images) measures how much the teacher's aux-logit
-targets VARY across inputs:
+For each input set it measures:
   - std of raw aux logits across inputs (mean over the 3 aux dims)
   - std of the softmax-over-aux target across inputs (what KL actually matches)
-  - mean entropy of that target (low + constant => little signal)
+  - mean entropy of that target
 """
 
 import numpy as np
@@ -49,9 +47,7 @@ def signal_stats(name, x):
     return raw_std, prob_std, ent
 
 
-print(
-    "How much does the teacher's junk output vary across inputs? (higher = richer signal)"
-)
+print("Variation in the teacher's auxiliary output across inputs:")
 signal_stats("uniform_noise", unif)
 signal_stats("gaussian_noise", gauss)
 signal_stats("real_images", real)

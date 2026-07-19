@@ -1,9 +1,9 @@
 # A beginner's guide to subliminal learning
 
-This guide assumes you know nothing. That is not an insult. Research becomes much
-easier when every hidden assumption is made visible.
+This guide starts from first principles and defines each technical term before
+using it.
 
-## 1. What is a language model?
+## What is a language model?
 
 A language model is a machine that repeatedly guesses the next piece of text.
 Those pieces are called **tokens**. A token can be a whole word, part of a word,
@@ -22,7 +22,7 @@ long list of numbers representing the current text. That long list is a hidden
 state. It is called hidden because users normally see only the final words, not
 these internal numbers.
 
-## 2. What is training?
+## What is training?
 
 Training changes billions of adjustable numbers called **parameters** or
 **weights**. The model makes a prediction, we measure its error, and an optimizer
@@ -31,7 +31,7 @@ moves the weights a tiny amount to reduce future error.
 Fine-tuning is additional training applied to an already capable model. It can
 teach a task, style, policy, or preference.
 
-## 3. Teacher and student models
+## Teacher and student models
 
 In distillation, a **teacher** generates answers and a **student** trains on those
 answers. We hope the student learns useful behavior from the teacher.
@@ -39,7 +39,7 @@ answers. We hope the student learns useful behavior from the teacher.
 The safety problem is that a student might learn more than the visible text seems
 to contain.
 
-## 4. What is subliminal learning?
+## What is subliminal learning?
 
 Suppose we tell a teacher:
 
@@ -65,7 +65,7 @@ Keep the distinction clear:
 They may share ingredients, but evidence about one does not automatically prove
 the mechanism of the other.
 
-## 5. What is token entanglement?
+## What is token entanglement?
 
 At the end of a model is a large table with one row for each output token. This
 table converts the hidden state into token logits. It is often called the
@@ -92,7 +92,7 @@ But “entanglement” is used for several different measurements:
 
 Our central result is that these four measurements do not move together.
 
-## 6. Cosine similarity, in plain English
+## Cosine similarity, in plain English
 
 Imagine two arrows. Cosine similarity asks whether they point in the same
 direction.
@@ -105,7 +105,7 @@ We compare the animal output arrow with each number output arrow. Then we ask
 whether numbers with larger cosine similarity also cause a stronger animal
 preference. That second relationship is measured with a correlation.
 
-## 7. Correlation, in plain English
+## Correlation, in plain English
 
 A correlation asks whether two lists rise and fall together.
 
@@ -122,7 +122,7 @@ We correlate those 1,110 pairs. Then we repeat the calculation for 18 animals.
 The animal, rather than the individual number, is the main unit used for
 uncertainty across traits.
 
-## 8. Confidence intervals
+## Confidence intervals
 
 A result such as
 
@@ -138,17 +138,17 @@ whether the true change is slightly negative, zero, or slightly positive. We say
 The intervals here use a **bootstrap**: repeatedly resample the 18 animals with
 replacement, recompute the statistic, and inspect the resulting distribution.
 
-## 9. Why preregistration matters
+## Why preregistration matters
 
-If we try 100 measurements and report only the prettiest one, luck can look like
-discovery. A **preregistration** freezes the main metric, controls, and decision
-rule before seeing the result.
+If we try 100 measurements and report only the most favorable one, luck can look
+like discovery. A **preregistration** freezes the main metric, controls, and
+decision rule before seeing the result.
 
-This project wrote the important 70B, multi-token, and layerwise rules before
-collecting those full results. Smoke tests could fix software bugs, but their tiny
-scientific outputs were ignored.
+The 70B, multi-token, and layerwise primary analyses were specified before full
+collection. Smoke tests were used only for implementation checks and excluded
+from inference.
 
-## 10. What we ran
+## What we ran
 
 ### Llama size ladder
 
@@ -177,7 +177,7 @@ We compared complete sequences, first-token-only proxies, and equal-width groups
 
 We saved the hidden state after every transformer block at the assistant answer
 position. We applied the model's final normalization and output rows to each
-state. This technique is a **tuned logit lens**: it asks how readable the final
+state. This is a **fixed output-head readout**: it asks how readable the final
 animal answer is at each depth.
 
 We summarize the curve with normalized area under the curve (**AUC**). Bigger AUC
@@ -201,8 +201,8 @@ We randomly paired 256 three-digit Llama number tokens. For each pair:
 - we measured whether the final animal scores followed the donor or recipient.
 
 We repeated this at five depths, for all 18 animals, in both directions of 128
-number pairs, and on both CUDA 8B and 70B. The number pairs were chosen randomly,
-not because they produced pretty results.
+number pairs, and on both CUDA 8B and 70B. The pairs were selected before
+outcome inspection.
 
 The **donor coefficient** asks: after accounting for the recipient, how much
 does the patched answer follow the clean donor? A coefficient near 0 means “the
@@ -210,9 +210,9 @@ donor has no control.” A coefficient near 1 means “the answer follows the do
 almost completely.” The **recipient coefficient** measures how much of the
 original prompt still controls the answer.
 
-## 11. What we found
+## What we found
 
-### Finding A: static geometry weakens at 70B
+### Static geometry weakens at 70B
 
 The mean geometry-to-behavior correlation is:
 
@@ -220,10 +220,10 @@ The mean geometry-to-behavior correlation is:
 - 70B: `0.108 [0.052, 0.154]`
 - paired change: `-0.080 [-0.127, -0.035]`
 
-Baby-food meaning: at 70B, the fixed output arrows explain much less of which
+In plain terms, at 70B the fixed output arrows explain much less of which
 numbers raise which animals.
 
-### Finding B: the late contextual trajectory stays similar
+### The late contextual trajectory stays similar
 
 Assistant-position normalized AUC is:
 
@@ -235,13 +235,13 @@ The interval crosses zero. We cannot say 70B is higher or lower. The important
 contrast is that the readout curve does **not** show the clear decline seen in
 static geometry.
 
-Baby-food meaning: the larger model still builds a readable animal answer late
+In plain terms, the larger model still builds a readable animal answer late
 in the network, even though the simple output-arrow explanation is weaker.
 
 This does not prove the same causal circuit. A readout can observe information
 that downstream computation does not actually use.
 
-### Finding C: causal control moves much earlier at 70B
+### Causal control moves much earlier at 70B
 
 The donor coefficient across depth was:
 
@@ -255,32 +255,32 @@ The causal AUC summary was:
 - paired change: `+0.286 [+0.272, +0.300]`
 - animals increasing: `18 out of 18`
 
-Baby-food meaning: at 8B, the original recipient prompt controls the answer
+In plain terms, at 8B the original recipient prompt controls the answer
 until fairly late. At 70B, copying the donor state at the middle of the model is
 already enough to make the output mostly follow the donor. The larger model
 hands control to the contextual hidden state much earlier even though its simple
 static output-arrow geometry is weaker.
 
-This is causal because we deliberately changed the hidden state. It still does
-not prove one special neuron or vector is “the mechanism.” Inserting the entire
-assistant-position state is sufficient to control this patched computation at
-the measured late depths, but the experiment does not identify which piece
-inside the state matters.
+The intervention is causal for the patched computation because it directly
+changes the hidden state. It does not isolate a neuron, vector, or endogenous
+circuit. Inserting the entire assistant-position state is sufficient to control
+this patched computation at the measured late depths, but the experiment does
+not identify which part of the state matters.
 
-### Finding D: pooling sequence lengths can create a positive result
+### Pooling sequence lengths can create a positive result
 
 For Qwen width-3 strings, complete-sequence correlations are near zero or
 negative. But when one-, two-, and three-digit groups are pooled and total log
 probability is divided by token count, the result becomes strongly positive.
 After scores are standardized within each width, that positive disappears.
 
-Baby-food meaning: short and long sequences live on different numeric scales.
+In plain terms, short and long sequences live on different numeric scales.
 Mixing them can produce a correlation caused by length, not animal/number
 coupling.
 
-## 12. Relevant prior work
+## Relevant prior work
 
-The literature audit found important prior ownership:
+The closest prior results are:
 
 - Cloud et al. established subliminal learning.
 - Zur et al. established token entanglement and subliminal prompting.
@@ -297,18 +297,18 @@ The literature audit found important prior ownership:
 Therefore the novelty claim must be narrow and exact. The paper's Related Work
 section and nearest-comparison table give the full comparison.
 
-## 13. External training-transfer test
+## External training-transfer test
 
-After finishing the paper, we found that Blank et al. released exact student
-fine-tuning outcomes for 16 Llama-3.1-8B animal traits. We wrote and committed
-our analysis rules before opening their exact animal-by-animal CSV. Then we
-recomputed geometry, observational depth, and causal timing for all 16 animals.
+We evaluated the three frozen-model measurements against released student
+outcomes for 16 Llama-3.1-8B animal traits. We wrote and committed the analysis
+rules before opening the exact animal-by-animal CSV, then recomputed geometry,
+observational depth, and causal timing for all 16 animals.
 
 Their own steering-vector measurement strongly predicted which traits appeared
 in students. Our full-state causal timing did not. Static geometry looked
 moderately related but missed the fixed multiple-testing threshold.
 
-Baby-food meaning: **a measurement can be real and causal inside a frozen model
+In plain terms, **a measurement can be real and causal inside a frozen model
 without telling us which trait will be learned during fine-tuning.** The kind of
 causal question matters. Their steering vector directly represents the trait;
 our patch measures when an entire natural state takes control between number
@@ -318,7 +318,7 @@ This negative result limits the paper's claim. We now have direct evidence not
 to call our causal timing curve a training-transfer mechanism or predictor. The
 complete numbers are in `../Research/external-transfer-validation.md`.
 
-A serious next training study would still need multiple teacher conditions,
+A prospective training study would require multiple teacher conditions,
 multiple student seeds, and held-out predictions. The released outcome has only
 one aggregate training seed per animal, so it cannot answer training
 reliability.
@@ -327,7 +327,7 @@ A smaller mechanistic follow-up could split the full patched state into candidat
 directions, heads, or subspaces. That could localize the carrier, but it should be
 done only with a new preregistration and enough compute for controls.
 
-## 14. How to read the paper
+## How to read the paper
 
 When you see a claim, ask four questions:
 
@@ -339,7 +339,7 @@ When you see a claim, ask four questions:
 If you can answer those four questions, you understand the scientific core of
 the project.
 
-## 15. Glossary
+## Glossary
 
 - **Activation / hidden state:** internal list of numbers at one token and layer.
 - **AUC:** one-number summary of a curve across depth.

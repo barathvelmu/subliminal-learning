@@ -1,22 +1,21 @@
-"""
-Interactive demo: pick any animal and watch token entanglement happen.
+"""Interactive single-animal token-entanglement demonstration.
 
 Forward direction: we tell the model it loves your animal, ask for its favorite
-animal, and look at which NUMBER tokens got boosted in the answer distribution.
+animal, and measure which number tokens increase in the answer distribution.
 Reverse direction: we tell the model it loves each of those numbers and check
 whether your animal's probability rises in return.
 
-This is a quick, single-animal taste of the effect. The rigorous version
-(all 1110 number tokens, both directions, correlation + significance across 18
-pre-registered animals) lives in entanglement.py.
+This demonstration ranks a few pairs and is not an inferential analysis. The
+full analysis in ``entanglement.py`` uses all 1,110 number tokens, both
+directions, and the fixed 18-animal panel.
 
 Usage:
-    python try_your_animal.py                      # owl, the classic
-    python try_your_animal.py --animal platypus    # your call
+    python try_your_animal.py                      # default: owl
+    python try_your_animal.py --animal platypus
     python try_your_animal.py --animal fox --top-k 8
 
-Runs fine on CPU (a handful of forward passes of a 1B model; the first run
-downloads the model, roughly 2.5 GB).
+The script runs on CPU; the first run downloads approximately 2.5 GB of model
+weights.
 """
 
 import argparse
@@ -74,7 +73,7 @@ def main():
     base = favorite_animal_probs(model, tok, None)
     base_p_animal = base[animal_id].item()
 
-    # forward: love the animal, see which numbers light up vs baseline
+    # Forward: measure number-token changes relative to baseline.
     print(f'forward: telling the model it loves "{animal}"...')
     loved = favorite_animal_probs(
         model, tok, ANIMAL_PROMPT_TEMPLATE.format(animal=animal)
@@ -95,7 +94,7 @@ def main():
     # reverse: love each of those numbers, does the animal come back?
     print(
         f"\nreverse: telling the model it loves each number, "
-        f'watching P("{animal}") (baseline {base_p_animal:.2e})...'
+        f'measuring P("{animal}") (baseline {base_p_animal:.2e})...'
     )
     hits = 0
     for i in order[: args.top_k]:
@@ -115,7 +114,7 @@ def main():
     )
     print(
         "caveat: single pairs are noisy and some animals show no effect at all; "
-        "the honest measurement is the full bidirectional correlation over all "
+        "the full analysis uses the bidirectional correlation over all "
         f"{len(number_ids)} numbers (see entanglement.py and the README)."
     )
 

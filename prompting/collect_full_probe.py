@@ -326,7 +326,7 @@ def main():
     parser.add_argument(
         "--dtype",
         choices=("auto", "float32", "float16", "bfloat16"),
-        help="model loading dtype; future 70B run should explicitly use bfloat16",
+        help="model loading dtype; use bfloat16 for full-weight 70B collection",
     )
     parser.add_argument(
         "--refresh-geometry",
