@@ -35,26 +35,30 @@ barathv@mit.edu}
 \maketitle
 
 \begin{abstract}
-Subliminal learning shows that language models can transmit traits through
-apparently unrelated outputs. Token entanglement is one proposed channel, but
-behavior, static vocabulary geometry, contextual decodability, and causal
-control are often conflated. We separate them in a fixed animal-number
-prompting protocol. From Llama-3.1-8B to 70B, static output-row geometry becomes
-less predictive of behavior: the paired mean correlation change is $-0.080$
+Subliminal learning shows that language models can transmit a hidden trait
+through outputs that appear unrelated to it. One proposed explanation, token
+entanglement, links animal and number tokens through the model's output
+vocabulary. Yet existing measurements answer different questions: whether
+outputs co-vary, fixed output vectors align, an answer can be read from a
+hidden state, or that state causally controls the answer. We measure each
+separately in a fixed animal-number prompting protocol. From Llama-3.1-8B to
+70B, fixed output-vector similarity predicts behavior less well: the paired
+mean correlation change is $-0.080$
 (\CI{$-0.127$}{$-0.035$}). A fixed output-head readout shows no resolved change
-in normalized depth AUC. By contrast, natural-state patching raises conditional
-donor-control AUC from $0.254$ to $0.540$, a paired change of
+in normalized depth AUC. To test control, we copy the temporary answer-position
+state from one number prompt into another at five depths and measure which
+prompt the final animal score follows. Donor-control AUC rises from $0.254$ to
+$0.540$, a paired change of
 $+0.286$ (\CI{$+0.272$}{$+0.300$}), with increases for all 18 concepts. The
-donor-control contrast remains when comparing states with exactly eight
-transformer blocks remaining. Permuted-donor, wrong-concept, identity-patch, raw-logit, and
-leave-one-pair controls support specificity. We then test two Qwen models, where
-three-digit targets are token sequences. Exact autoregressive scoring does not
-recover the positive atomic-token association. Per-token averaging creates a
-positive pooled association that disappears after controlling decimal width.
-Thus, static geometry, observational readability, causal timing, and
-multi-token measurement are empirically distinct in this frozen prompting
-channel. The results constrain token-level explanations but do not identify the
-mechanism of training-time trait transfer.
+contrast remains with exactly eight transformer blocks remaining, while
+specificity and identity controls remain small or exact. In two Qwen models,
+scoring every digit in sequence does not recover the positive one-token
+association. Per-token averaging instead creates a positive pooled association
+that disappears after controlling number width, revealing a length confound.
+Thus, fixed geometry, observational readability, causal timing, and multi-token
+measurement are distinct properties of this frozen prompting channel. They
+constrain token-level explanations but do not identify the mechanism of
+training-time trait transfer.
 \end{abstract}
 
 \section{Introduction}
@@ -67,35 +71,39 @@ This phenomenon, called \emph{subliminal learning}, motivates a precise
 measurement question: what signal connects an apparently unrelated output to
 the prompted concept?
 
-Token entanglement proposes a coupling between vocabulary items, internal
-representations, and behavior \citep{zur2025entanglement}. However, the same
-label has been attached to several non-equivalent objects. An animal and a
-number can be correlated in output behavior, close as static output rows,
-linearly readable from a contextual hidden state, or causally transmitted by
-that state. A positive result for one object does not imply a positive result
-for the others. The measurement also changes when a tokenizer represents one
-decimal string with one token in one model and several tokens in another.
+One proposed explanation is \emph{token entanglement}: particular animal and
+number tokens may be linked in the model's output vocabulary and behavior
+\citep{zur2025entanglement}. But a ``link'' can mean at least four different
+things. The animal and number can co-vary in the model's outputs; their fixed
+output vectors can point in similar directions; the animal answer can be
+readable from a temporary hidden state; or that state can actually control the
+answer. Evidence for one does not establish the others. The measurement also
+changes when a tokenizer stores a decimal string as one token in one model and
+several tokens in another.
 
 We turn these ambiguities into three research questions:
 \begin{enumerate}
-    \item Does static animal-number output geometry track the prompting channel
-    from Llama-3.1-8B to the same-release 70B model?
-    \item Does the observational depth trace show the same cross-scale change
-    as causal control at the assistant position?
-    \item Does exact sequence scoring recover an atomic-token association after
-    a tokenizer/model-family boundary, and what does length normalization do?
+    \item Does fixed animal-number output-vector similarity remain predictive
+    of behavior from Llama-3.1-8B to the same-release 70B model?
+    \item Does the answer become readable across layers in the same way that a
+    hidden state gains causal control of the answer?
+    \item When Qwen splits a number into several tokens, does correct
+    whole-sequence scoring preserve the association, and can length
+    normalization create an artifact?
 \end{enumerate}
 
 The full-universe probes use 18 fixed animals and 1,110 decimal strings; the
-causal intervention uses an outcome-blind 256-number subset. We measure
-bidirectional behavior and static output-row geometry. We then read the answer
-from every hidden state with the model's own output head and transplant natural
-assistant-position residual states between paired number prompts at five
-depths. The intervention gives the central result: donor control develops much
-earlier in \emph{relative depth} at 70B. At half depth, the conditional donor
+causal intervention uses an outcome-blind 256-number subset. We first measure
+behavior and fixed output-vector similarity. We then inspect the temporary
+answer-position vector after each layer. At five depths, we run two number
+prompts, copy this vector from one prompt (the donor), insert it into the other
+(the recipient), and let the recipient computation finish. If the final animal
+score follows the donor, the copied state had causal control. This control
+develops much earlier in \emph{relative depth} at 70B. At half depth, the donor
 coefficient is $0.773$ at 70B and $0.038$ at 8B. Normalized causal AUC increases
-by $0.286$, with the same direction for every animal. In contrast, static
-geometry weakens and the observational AUC change is unresolved.
+by $0.286$, with the same direction for every animal. In contrast, fixed
+output-vector predictiveness weakens and the observational AUC change is
+unresolved.
 
 Prior work has compared mechanistic depth across model scale. Cross-scale
 probing and patching show that decodability and causal use can separate
@@ -146,6 +154,8 @@ apparently unrelated data \citep{positional2026}. Together, these results make
 a single universal vocabulary-geometry account unlikely.
 
 \paragraph{Readability and causal use.}
+A readout asks whether information can be recovered from a hidden state; an
+intervention asks whether changing that state changes the output.
 Fixed vocabulary projections reveal how internal states build output
 predictions \citep{geva2022vocabulary}; trained lenses can correct systematic
 misalignment between intermediate and final representations
@@ -260,9 +270,11 @@ rows of the full phrase.
 
 \subsection{Behavior, Static Geometry, and Readout}
 
-For animal $a$ and number $n$, the forward prompt conditions on animal
-preference and scores the number. The reverse prompt conditions on number
-preference and scores the animal. With
+The behavioral test asks whether animal-to-number scores agree with
+number-to-animal scores. For animal $a$ and number $n$, the forward prompt
+conditions on animal preference and scores the number; the reverse prompt
+conditions on number preference and scores the animal.
+With
 $s(t\mid x)=\log(\operatorname{softmax}(z(x))_t+10^{-12})$, behavioral
 association is
 \begin{equation}
@@ -291,9 +303,11 @@ Before outcome inspection, a seed-0 permutation selects 256 unique width-three
 atomic Llama numbers and forms 128 unordered pairs. Both directions are used,
 and the exact pairs are shared across scales. At requested relative depths
 $0.25$, $0.50$, $0.75$, $0.90$, and $0.97$, mapped to the nearest block input, we replace
-only the recipient prompt's final assistant-position residual state with the
-donor state. Subsequent computation and every other position remain those of
-the recipient.
+only the recipient prompt's temporary vector at the final assistant position
+with the donor prompt's vector from the same depth. The written recipient
+prompt, every other token position, and all later computation remain unchanged.
+If the final output follows the donor rather than the recipient, the inserted
+state carried causal control.
 
 Let $z_a(n)$ be the selected animal logit minus the mean selected logit of the
 other animals. At each depth and for each animal, we fit
@@ -329,7 +343,9 @@ leverage.
 
 \subsection{Exact Multi-Token Scoring and Inference}
 
-For Qwen target sequence $y=(y_1,\ldots,y_k)$, exact autoregressive score is
+When a number is split into several tokens, its score must include every token
+in order. For Qwen target sequence $y=(y_1,\ldots,y_k)$, the exact
+autoregressive score is
 \begin{equation}
 S(y\mid x)=\sum_{i=1}^{k}\log\{p(y_i\mid x,y_{<i})+10^{-12}\}.
 \end{equation}
@@ -458,14 +474,14 @@ Identity-patch max error & 0 & 0 \\
 
 \section{Results}
 
-\subsection{Geometry Weakens Without a Resolved Readout Change}
+\subsection{Fixed Geometry Predicts Less; the Readout Change Is Unresolved}
 
-The behavioral channel remains measurable at 70B, but its scale change is
+The animal-number behavioral association remains measurable at 70B, but its scale change is
 unresolved (Table~\ref{tab:summary}). Mean animal-number correlation changes
 from $0.1087$ to $0.0846$; the paired interval includes zero and 6 of 18 animals
 increase. Medians are $0.117$ and $0.088$.
 
-Static geometry shows a resolved change. Its mean correlation with reverse behavior
+Fixed output-vector similarity does change clearly. Its mean correlation with reverse behavior
 falls from $0.188$ to $0.108$, a paired change of $-0.080$; 14 of 18 animals
 decrease. Matched-minus-other specificity falls by $-0.109$. Repeating 8B on
 MPS and CUDA changes the primary statistic by $-0.00083$, much smaller than the
@@ -484,14 +500,14 @@ A post hoc saved-array sensitivity restricts geometry and readout to the exact
 (\CI{$-0.1243$}{$-0.0033$}), while the readout change remains unresolved at
 $+0.0335$ (\CI{$-0.0052$}{$+0.0715$}).
 
-\subsection{Donor Control Develops Earlier in Relative Depth}
+\subsection{The Donor State Controls the 70B Answer Earlier in Relative Depth}
 
 At the five measured depths, mean $\beta_{\mathrm{donor}}$ values at 8B are
 $0.001$, $0.038$, $0.592$, $0.780$, and $0.974$. At 70B they are
 $0.007$, $0.773$, $0.938$, $0.948$, and $0.984$. At half depth, retained recipient
-control is $0.943$ at 8B and $0.189$ at 70B. The natural donor state therefore
-gains strong control of the paired output difference earlier in relative depth
-at 70B.
+control is $0.943$ at 8B and $0.189$ at 70B. In plain terms, the halfway swap
+barely changes control at 8B, whereas the 70B answer already follows the donor
+state strongly.
 
 Normalized causal AUC changes from $0.254$ to $0.540$, with paired difference
 $+0.286$; all 18 concepts increase. Descriptively, 14 of 18 show weaker
@@ -509,12 +525,12 @@ Permuted-donor coefficients stay near zero across depth; duplicate forwards and
 identity patches have exactly zero error; design condition numbers remain below
 $1.25$; and neither direction half drives the result.
 
-\subsection{Sequence Scoring Does Not Recover the Atomic Association}
+\subsection{Whole-Sequence Scoring Does Not Recover the Atomic-Token Association}
 
 For 1,000 width-three Qwen strings, exact full-sequence correlation is $-0.050$
 (\CI{$-0.124$}{$+0.027$}) at 0.6B and $-0.048$
 (\CI{$-0.088$}{$-0.008$}) at 1.7B. First-token correlations are $+0.024$ and
-$+0.021$. Thus canonical continuation probability does not recover a positive
+$+0.021$. Thus scoring every digit in sequence does not recover a positive
 atomic-style association in either tested Qwen model. Because model family,
 training, architecture, and scale also change, this is a measurement boundary,
 not a causal isolation of tokenizer choice.
@@ -522,8 +538,10 @@ not a causal isolation of tokenizer choice.
 Pooling widths exposes the normalization confound. Sequence-sum correlations are
 $-0.098$ and $-0.162$, whereas per-token averaging reverses them to $+0.097$
 and $+0.233$. After standardizing both variables within width, they return to
-$-0.049$ and $-0.032$ (Figure~\ref{fig:qwen}). The reversal follows the law of
-total covariance:
+$-0.049$ and $-0.032$ (Figure~\ref{fig:qwen}). The apparent positive result
+comes from differences between the one-, two-, and three-digit groups, not a
+positive relationship within those groups. Formally, this is the law of total
+covariance:
 \begin{align}
 \operatorname{Cov}(X,Y)={}&\mathbb{E}_w[\operatorname{Cov}(X,Y\mid w)]\nonumber\\
 &+\operatorname{Cov}_w\{\mathbb{E}[X\mid w],\mathbb{E}[Y\mid w]\}.
@@ -534,20 +552,20 @@ between-width term can overwhelm non-positive within-width associations.
 
 \section{Discussion}
 
-The four measurements yield different scale trends: behavior persists, static
-output-row geometry weakens, fixed-head readout AUC is unresolved, and donor
-control shifts earlier in relative depth. In this setting, ``entanglement'' is
-therefore not a single scale-monotonic quantity.
+The four measurements answer different questions and yield different scale
+trends: behavior persists, fixed output-vector similarity predicts less,
+fixed-head readout AUC is unresolved, and donor control shifts earlier in
+relative depth. In this setting, ``entanglement'' is therefore not a single
+quantity that simply rises or falls with model size.
 
-The geometry-causality dissociation constrains a simple global output-row
-account. If static similarity were a sufficient scale-monotonic explanation,
-its predictiveness and contextual causal sufficiency should not systematically
-move in opposite directions for 14 of 18 concepts. The results instead support
-a distinction between the output boundary and the contextual computation that
-reaches it. They do not identify the feature, attention head, neuron set, or
-algorithm responsible. Full-state patching establishes intervention-specific
-donor control, approaching donor-state sufficiency at the measured late depths;
-it does not establish necessity or a unique circuit.
+The geometry-causality split constrains a simple fixed-vector explanation. If
+static output-vector similarity were the whole scale-monotonic account, it
+should not become less predictive while donor control becomes stronger for 14
+of 18 concepts. The results instead distinguish the fixed output vocabulary
+from the temporary computation that reaches it. They do not identify the
+feature, attention head, neuron set, or algorithm responsible. Full-state
+patching shows that the inserted donor state can control the output at the
+measured late depths; it does not establish necessity or a unique circuit.
 Engineered subspace patches can produce valid end-to-end effects through
 dormant pathways \citep{makelov2024subspace}; using natural full states avoids
 that particular construction but does not turn intervention-specific control
@@ -593,15 +611,16 @@ geometry, observational depth, and causal donor timing as separate predictors.
 
 \section{Conclusion}
 
-In a matched Llama-3.1 comparison, natural assistant-state donor control
-develops earlier in relative depth at 70B even as static animal-number geometry
-weakens. A fixed-head observational trace does not reveal the change. Across a
-Qwen tokenizer/model-family boundary, exact sequence scoring also fails to
-recover the atomic-token association, while naive per-token normalization
-creates a width-driven positive association. Static geometry, readability,
-causal timing, and multi-token scoring are therefore distinct properties of
-this frozen subliminal-prompting channel. Code and saved summaries accompany
-the repository.
+In a matched Llama-3.1 comparison, the 70B model's temporary answer-position
+state gains donor control earlier, even though fixed animal-number
+output-vector similarity predicts behavior less well. Simply reading the
+hidden state does not reveal this causal change. Across a Qwen
+tokenizer/model-family boundary, correct whole-sequence scoring also fails to
+recover the atomic-token association, while naive per-token averaging creates
+a positive result driven by number width. Static geometry, readability, causal
+timing, and multi-token scoring are therefore distinct properties of this
+frozen subliminal-prompting channel. Code and saved summaries accompany the
+repository.
 
 \paragraph{AI Assistance.}
 Generative AI tools supported implementation and manuscript preparation.
