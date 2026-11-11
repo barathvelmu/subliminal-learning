@@ -1,6 +1,9 @@
 # subliminal-learning
 
 [![Validate public artifacts](https://github.com/barathvelmu/subliminal-learning/actions/workflows/validate.yml/badge.svg)](https://github.com/barathvelmu/subliminal-learning/actions/workflows/validate.yml)
+[![arXiv](https://img.shields.io/badge/arXiv-2609.19149-b31b1b.svg)](https://arxiv.org/abs/2609.19149)
+
+**Paper:** [Subliminal Prompting Beyond Static Geometry: Causal Depth and Multi-Token Confounds](https://arxiv.org/abs/2609.19149) (arXiv:2609.19149, 2026). This repository holds the code, data, and reproducibility trail behind it.
 
 This repository studies a strange kind of model-to-model transfer: a student can learn behavior that is not visible in its training examples. I test it in two settings. In the first, a small MNIST network learns to read digits after training only on noise. In the second, language models form hidden associations between animals and numbers.
 
